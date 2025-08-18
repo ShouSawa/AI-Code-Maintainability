@@ -205,14 +205,14 @@ def get_pr_changes(pr):
         author = "unknown"
         date_str = None
         time_str = None
-        blame_line_no = None
+        line_number = None
         if meta:
           try:
             inside = meta[1:-1].strip()  # 括弧の内側
             # 行番号は末尾の数値
             m_lineno = re.search(r'(\d+)\s*$', inside)
             if m_lineno:
-              blame_line_no = int(m_lineno.group(1))
+              line_number = int(m_lineno.group(1))
               inside_no_lineno = inside[:m_lineno.start()].rstrip()
             else:
               inside_no_lineno = inside
@@ -232,15 +232,15 @@ def get_pr_changes(pr):
             author = "unknown"
 
         pr_change_list.append({
-          "pr_id": pr_id,
-          "file": file_path,
-          "author": author,
-          "agent": agent,
-          "commit_sha": commit_sha,
-          "date": date_str,
-          "time": time_str,
-          "blame_line_no": blame_line_no, # 行番号
-          "code": code
+          "pr_id": pr_id, # PRのID
+          "file": file_path, # ファイル名とパス
+          "author": author, # コミットした人（コミットのコードを書いた人）
+          "agent": agent, # PRを作成したエージェント
+          "commit_sha": commit_sha, # コミットのハッシュ値
+          "date": date_str, # その行がコミットされた日付
+          "time": time_str, # その行がコミットされた時刻
+          "line_number": line_number, # 行番号
+          "code": code # コミット時点のコード（PR適用後のコードではない）
         })
 
   return pr_change_list
