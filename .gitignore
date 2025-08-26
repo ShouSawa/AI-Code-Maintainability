@@ -1,1 +1,11 @@
-.env
+# blame_analysis内の.env
+blame_analysis/.env
+
+# data_listの中身をすべて除外
+data_list/
+data_list/*
+
+# PySSZ関連の出力ファイル（追加推奨）
+pyszz_v2/
+
+FirstLook-at-CCS/
