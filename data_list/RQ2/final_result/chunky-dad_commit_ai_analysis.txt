@@ -1,0 +1,56 @@
+================================================================================
+AI vs Human Commit Analysis Report
+================================================================================
+Analysis Date: 2025-08-24 22:57:43
+Source File: chunky-dad_bic_config.json
+
+SUMMARY
+----------------------------------------
+Total Inducing Commits: 260
+Successfully Processed: 260
+Failed to Analyze: 0
+
+COMMIT TYPE DISTRIBUTION
+----------------------------------------
+AI Commits: 213 (81.9%)
+Human Commits: 47 (18.1%)
+
+AI TYPE BREAKDOWN
+----------------------------------------
+Cursor: 213 (100.0% of AI commits)
+
+CODE CHANGE STATISTICS (Lines)
+----------------------------------------
+AI Commits:
+  Count: 213
+  Mean lines changed: 859.19
+  Standard deviation: 1603.78
+  Median: 376
+  Range: 4 - 7891
+
+Human Commits:
+  Count: 47
+  Mean lines changed: 1341.53
+  Standard deviation: 1629.09
+  Median: 454
+  Range: 17 - 4842
+
+FILE CHANGE STATISTICS
+----------------------------------------
+AI Commits:
+  Count: 213
+  Mean files changed: 4.63
+  Standard deviation: 4.49
+  Median: 3
+  Range: 1 - 23
+
+Human Commits:
+  Count: 47
+  Mean files changed: 6.57
+  Standard deviation: 5.61
+  Median: 5
+  Range: 1 - 25
+
+ANALYZED REPOSITORIES
+----------------------------------------
+chunky-dad: 260 commits (AI: 213, Human: 47)

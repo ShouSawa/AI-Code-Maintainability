@@ -1,0 +1,90 @@
+AutoGPT Commit Classification Analysis Results (by Original Commit Type)
+======================================================================
+
+OVERALL STATISTICS
+------------------------------
+Total commits: 170
+AI-originated commits: 34 (20.0%)
+Human-originated commits: 136 (80.0%)
+Total unique files: 14
+
+COMMIT AUTHORSHIP STATISTICS
+------------------------------
+AI-generated commits: 30 (17.6%)
+Human-generated commits: 140 (82.4%)
+
+AI-ORIGINATED COMMITS ANALYSIS
+------------------------------
+1. Commits per file statistics:
+   Average commits per file: 4.86
+   Standard deviation: 3.44
+   Min commits per file: 1
+   Max commits per file: 10
+
+2. Classification label distribution per file:
+   build: 1.6% (average across files)
+   chore: 33.7% (average across files)
+   docs: 10.7% (average across files)
+   feat: 20.2% (average across files)
+   fix: 20.8% (average across files)
+   refactor: 13.0% (average across files)
+
+3. Overall classification label distribution:
+   fix: 12 commits (35.3%)
+   chore: 7 commits (20.6%)
+   refactor: 7 commits (20.6%)
+   feat: 4 commits (11.8%)
+   docs: 3 commits (8.8%)
+   build: 1 commits (2.9%)
+
+4. Commit frequency analysis per file:
+   Average interval between commits: 52.3 days
+   Standard deviation: 35.9 days
+
+5. Commit authorship within build commits:
+   AI-generated commits: 14 (41.2%)
+   Human-generated commits: 20 (58.8%)
+
+
+HUMAN-ORIGINATED COMMITS ANALYSIS
+------------------------------
+1. Commits per file statistics:
+   Average commits per file: 19.43
+   Standard deviation: 35.24
+   Min commits per file: 1
+   Max commits per file: 97
+
+2. Classification label distribution per file:
+   ch: 0.3% (average across files)
+   chore: 2.6% (average across files)
+   feat: 4.6% (average across files)
+   fix: 45.0% (average across files)
+   refactor: 15.4% (average across files)
+   test: 32.1% (average across files)
+
+3. Overall classification label distribution:
+   fix: 94 commits (69.1%)
+   refactor: 15 commits (11.0%)
+   chore: 12 commits (8.8%)
+   feat: 10 commits (7.4%)
+   test: 3 commits (2.2%)
+   ch: 2 commits (1.5%)
+
+4. Commit frequency analysis per file:
+   Average interval between commits: 5.8 days
+   Standard deviation: 2.6 days
+
+5. Commit authorship within ch commits:
+   AI-generated commits: 16 (11.8%)
+   Human-generated commits: 120 (88.2%)
+
+
+COMPARATIVE ANALYSIS
+------------------------------
+Average commits per file comparison:
+   AI-originated: 4.86
+   Human-originated: 19.43
+
+Most active files:
+   AI-originated: src/vs/workbench/contrib/chat/browser/imageUtils.ts (10 commits)
+   Human-originated: src/vs/workbench/contrib/chat/browser/chatStatus.ts (97 commits)

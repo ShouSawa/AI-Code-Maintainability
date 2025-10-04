@@ -1,0 +1,86 @@
+============================================================
+AutoGPT Repository Commit Analysis Results
+============================================================
+
+分析日時: 2025-08-24 21:33:02
+リポジトリパス: C:\Users\Shota\Local_document\AI-Code-Maintainability\src\..\cloned_Repository\chinese-ocaml
+
+========================================
+全体統計
+========================================
+総コミット数: 3,071
+AIコミット数: 1,016
+人間コミット数: 2,055
+
+AIコミット割合: 33.08%
+人間コミット割合: 66.92%
+
+========================================
+AIタイプ別統計
+========================================
+claude_code: 1,014 コミット (99.8%)
+openai_codex: 2 コミット (0.2%)
+
+========================================
+AIコミット詳細 (最新10件)
+========================================
+Hash: f1356bd3
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 06:24:11 -0400
+Message: Fix #2192: 完整实现文件系统模块基础API - 骆言P0关键功能 (#2199)...
+------------------------------
+Hash: 579348df
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 04:07:40 -0400
+Message: Fix #2190: 列表操作尾递归优化和性能提升 - 完整实现 (#2198)...
+------------------------------
+Hash: 02b0e649
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 03:28:17 -0400
+Message: Fix #2189: 数学模块核心功能完善 - 实现20+数学函数增强模块 (#2197)...
+------------------------------
+Hash: a48ffb40
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 01:54:55 -0400
+Message: Fix #2178: Poetry模块性能微优化 - 编译时间提升2.6%...
+------------------------------
+Hash: a1e2043f
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 01:19:35 -0400
+Message: Merge pull request #2187 from UltimatePea/feature/issue-2179-phase2-quality-improvements...
+------------------------------
+Hash: 76cf5214
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-05 00:27:28 -0400
+Message: Fix #2179: Poetry艺术评价模块整合 - 基于PR #2175框架完成模块化重构...
+------------------------------
+Hash: 5c38508a
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-04 22:53:27 -0400
+Message: Fix #2176: Poetry模块冗余文件清理 - 基于PR #2175整合框架减少4个文件 (#2183)...
+------------------------------
+Hash: 75c157e5
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-04 21:11:48 -0400
+Message: Fix #2177: Poetry Interface Analysis Correction - Zero Implementation Required...
+------------------------------
+Hash: 0aa7cd2b
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-04 16:44:35 -0400
+Message: Fix #2174: Poetry数据加载器整合 - P0基础框架建立...
+------------------------------
+Hash: 454ad778
+Author: claudeai-v1[bot]
+Type: claude_code
+Date: 2025-08-04 15:24:57 -0400
+Message: Fix #2161: 完成Poetry模块性能基准建立 - Phase 1优化基线...
+------------------------------

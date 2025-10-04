@@ -1,0 +1,84 @@
+AutoGPT Commit Classification Analysis Results (by Original Commit Type)
+======================================================================
+
+OVERALL STATISTICS
+------------------------------
+Total commits: 39
+AI-originated commits: 19 (48.7%)
+Human-originated commits: 20 (51.3%)
+Total unique files: 14
+
+COMMIT AUTHORSHIP STATISTICS
+------------------------------
+AI-generated commits: 7 (17.9%)
+Human-generated commits: 32 (82.1%)
+
+AI-ORIGINATED COMMITS ANALYSIS
+------------------------------
+1. Commits per file statistics:
+   Average commits per file: 2.71
+   Standard deviation: 1.50
+   Min commits per file: 2
+   Max commits per file: 6
+
+2. Classification label distribution per file:
+   docs: 19.0% (average across files)
+   feat: 21.4% (average across files)
+   fix: 9.5% (average across files)
+   refactor: 50.0% (average across files)
+
+3. Overall classification label distribution:
+   refactor: 9 commits (47.4%)
+   fix: 4 commits (21.1%)
+   docs: 3 commits (15.8%)
+   feat: 3 commits (15.8%)
+
+4. Commit frequency analysis per file:
+   Average interval between commits: 57.6 days
+   Standard deviation: 71.4 days
+
+5. Commit authorship within feat commits:
+   AI-generated commits: 7 (36.8%)
+   Human-generated commits: 12 (63.2%)
+
+
+HUMAN-ORIGINATED COMMITS ANALYSIS
+------------------------------
+1. Commits per file statistics:
+   Average commits per file: 2.86
+   Standard deviation: 0.90
+   Min commits per file: 2
+   Max commits per file: 4
+
+2. Classification label distribution per file:
+   chore: 3.6% (average across files)
+   feat: 27.4% (average across files)
+   fix: 3.6% (average across files)
+   refactor: 45.2% (average across files)
+   style: 20.2% (average across files)
+
+3. Overall classification label distribution:
+   refactor: 8 commits (40.0%)
+   feat: 6 commits (30.0%)
+   style: 4 commits (20.0%)
+   fix: 1 commits (5.0%)
+   chore: 1 commits (5.0%)
+
+4. Commit frequency analysis per file:
+   Average interval between commits: 25.9 days
+   Standard deviation: 7.2 days
+
+5. Commit authorship within chore commits:
+   AI-generated commits: 0 (0.0%)
+   Human-generated commits: 20 (100.0%)
+
+
+COMPARATIVE ANALYSIS
+------------------------------
+Average commits per file comparison:
+   AI-originated: 2.71
+   Human-originated: 2.86
+
+Most active files:
+   AI-originated: azure.yaml.template (6 commits)
+   Human-originated: rnd/autogpt_builder/src/app/marketplace/submit/page.tsx (4 commits)

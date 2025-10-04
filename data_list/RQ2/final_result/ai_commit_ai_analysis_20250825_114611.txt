@@ -1,0 +1,57 @@
+================================================================================
+AI vs Human Commit Analysis Report
+================================================================================
+Analysis Date: 2025-08-25 11:46:11
+Source File: ai_bic_config.json
+
+SUMMARY
+----------------------------------------
+Total Inducing Commits: 94
+Successfully Processed: 94
+Failed to Analyze: 0
+
+COMMIT TYPE DISTRIBUTION
+----------------------------------------
+AI Commits: 44 (46.8%)
+Human Commits: 50 (53.2%)
+
+AI TYPE BREAKDOWN
+----------------------------------------
+Devin: 43 (97.7% of AI commits)
+Opencodex: 1 (2.3% of AI commits)
+
+CODE CHANGE STATISTICS (Lines)
+----------------------------------------
+AI Commits:
+  Count: 44
+  Mean lines changed: 357.14
+  Standard deviation: 719.08
+  Median: 69
+  Range: 2 - 4204
+
+Human Commits:
+  Count: 50
+  Mean lines changed: 17724.74
+  Standard deviation: 43648.04
+  Median: 311
+  Range: 2 - 190759
+
+FILE CHANGE STATISTICS
+----------------------------------------
+AI Commits:
+  Count: 44
+  Mean files changed: 5.16
+  Standard deviation: 5.69
+  Median: 2
+  Range: 1 - 22
+
+Human Commits:
+  Count: 50
+  Mean files changed: 16.76
+  Standard deviation: 20.86
+  Median: 10
+  Range: 1 - 81
+
+ANALYZED REPOSITORIES
+----------------------------------------
+ai: 94 commits (AI: 44, Human: 50)

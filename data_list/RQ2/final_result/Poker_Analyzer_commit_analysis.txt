@@ -1,0 +1,87 @@
+============================================================
+AutoGPT Repository Commit Analysis Results
+============================================================
+
+分析日時: 2025-08-23 12:55:00
+リポジトリパス: C:\Users\Shota\Local_document\AI-Code-Maintainability\src\..\cloned_Repository\Poker_Analyzer
+
+========================================
+全体統計
+========================================
+総コミット数: 13,245
+AIコミット数: 6,376
+人間コミット数: 6,869
+
+AIコミット割合: 48.14%
+人間コミット割合: 51.86%
+
+========================================
+AIタイプ別統計
+========================================
+openai_codex: 6,373 コミット (100.0%)
+general_ai: 2 コミット (0.0%)
+cursor: 1 コミット (0.0%)
+
+========================================
+AIコミット詳細 (最新10件)
+========================================
+Hash: 66d1d430
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-23 02:27:50 +0400
+Message: Merge pull request #6671 from ClubBoss/codex/update-spotkind-enum-in-spot_specs.dart...
+------------------------------
+Hash: 457ea14b
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-23 02:14:02 +0400
+Message: Merge pull request #6670 from ClubBoss/codex/create-tooling/spot_specs.dart-file...
+------------------------------
+Hash: 6a1b619b
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-23 00:11:52 +0400
+Message: Merge pull request #6669 from ClubBoss/codex/update-analysis_options.yaml-for-stable-analysis...
+------------------------------
+Hash: 9a0af7c6
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 03:07:55 +0400
+Message: Merge pull request #6667 from ClubBoss/codex/add-content-next-cli-in-dart...
+------------------------------
+Hash: b5f1cc47
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 02:45:31 +0400
+Message: Merge pull request #6666 from ClubBoss/codex/add-cli-audit-for-skeleton-drift...
+------------------------------
+Hash: 2b958a08
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 02:45:12 +0400
+Message: Merge pull request #6665 from ClubBoss/codex/fix-curriculum_status.json-and-update-tests...
+------------------------------
+Hash: ede24a0d
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 02:09:51 +0400
+Message: Merge pull request #6664 from ClubBoss/codex/add-tests-for-skeleton-completion...
+------------------------------
+Hash: 67ca0ea8
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 02:01:30 +0400
+Message: Merge pull request #6663 from ClubBoss/codex/add-skeleton-loader-for-math_solver_basics...
+------------------------------
+Hash: 05f0a5d3
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 01:51:54 +0400
+Message: Merge pull request #6662 from ClubBoss/codex/add-skeleton-loader-for-math_icm_advanced...
+------------------------------
+Hash: c13357c2
+Author: ClubBoss
+Type: openai_codex
+Date: 2025-08-22 01:47:33 +0400
+Message: Merge pull request #6661 from ClubBoss/codex/add-skeleton-loader-for-math_icm_basics...
+------------------------------

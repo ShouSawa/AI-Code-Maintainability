@@ -1,0 +1,86 @@
+============================================================
+AutoGPT Repository Commit Analysis Results
+============================================================
+
+分析日時: 2025-08-23 12:49:33
+リポジトリパス: C:\Users\Shota\Local_document\AI-Code-Maintainability\src\..\cloned_Repository\mochi
+
+========================================
+全体統計
+========================================
+総コミット数: 19,316
+AIコミット数: 203
+人間コミット数: 19,113
+
+AIコミット割合: 1.05%
+人間コミット割合: 98.95%
+
+========================================
+AIタイプ別統計
+========================================
+openai_codex: 202 コミット (99.5%)
+general_ai: 1 コミット (0.5%)
+
+========================================
+AIコミット詳細 (最新10件)
+========================================
+Hash: 73a6979b
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-07-26 11:17:17 +0700
+Message: Remove auto-generated index updates...
+------------------------------
+Hash: 60dfbd33
+Author: Tam Nguyen Duc
+Type: general_ai
+Date: 2025-07-18 14:10:29 +0700
+Message: Update Java TPCH outputs and machine generated code...
+------------------------------
+Hash: e9d95b35
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-07-12 23:53:49 +0700
+Message: clj: trim trailing spaces in generated code...
+------------------------------
+Hash: a11bbf52
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-30 18:06:54 +0700
+Message: Merge branch 'main' into codex/run-dataset/job-tests-for-all-queries...
+------------------------------
+Hash: 05f07c45
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-10 01:04:51 +0700
+Message: Merge pull request #252 from mochilang/codex/implement-runtime/vector-with-flat-index-and-tests...
+------------------------------
+Hash: 57af0189
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-09 21:42:43 +0700
+Message: Merge pull request #251 from mochilang/codex/write-release-notes-for-version-0.5.1...
+------------------------------
+Hash: 47bc3d94
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-09 21:34:22 +0700
+Message: Merge pull request #250 from mochilang/codex/update-documentation-to-latest-version...
+------------------------------
+Hash: d8157f96
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-09 18:14:45 +0700
+Message: Merge pull request #248 from mochilang/codex/update-mochi-cheatsheet.mochi...
+------------------------------
+Hash: 0e95cbe8
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-09 17:43:20 +0700
+Message: Merge pull request #247 from mochilang/codex/save-and-run-agent-stream-example...
+------------------------------
+Hash: 125c1e82
+Author: Tam Nguyen Duc
+Type: openai_codex
+Date: 2025-06-09 10:38:18 +0700
+Message: Merge pull request #228 from mochilang/codex/enhance-typescript-compiler-with-type-annotator...
+------------------------------

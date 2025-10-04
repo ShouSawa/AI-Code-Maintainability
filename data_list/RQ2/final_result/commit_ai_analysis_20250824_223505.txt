@@ -1,0 +1,11 @@
+================================================================================
+AI vs Human Commit Analysis Report
+================================================================================
+Analysis Date: 2025-08-24 22:35:05
+Source File: chinese-ocaml_bic_config.json
+
+SUMMARY
+----------------------------------------
+Total Inducing Commits: 0
+Successfully Processed: 0
+Failed to Analyze: 0
