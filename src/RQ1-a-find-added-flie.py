@@ -1,3 +1,7 @@
+"""
+AIによって追加されたファイルを特定し、CSVに保存するスクリプト
+"""
+
 import os
 import subprocess
 import pandas as pd

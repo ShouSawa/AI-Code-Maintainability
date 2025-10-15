@@ -1,3 +1,7 @@
+"""
+AIによって生成されたコミットメッセージを分類するスクリプト
+"""
+
 from transformers import pipeline
 import requests
 from github import Github

@@ -35,12 +35,24 @@ def check_parquet(df):
                     # repo_urlからリポジトリ名を抽出
                     repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
                     print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
+                
+                print(f"\n=== {agent} による PRが少ないリポジトリ（下位10件） ===")
+                for i, (repo_url, count) in enumerate(repo_pr_counts.tail(10).items(), 1):
+                    # repo_urlからリポジトリ名を抽出
+                    repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
+                    print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
             
             # 全AI PRを対象にした総合ランキング
             repo_pr_counts = ai_prs['repo_url'].value_counts()
             
             print("\n=== 全AIエージェントによるPRが多いリポジトリ（上位10件） ===")
             for i, (repo_url, count) in enumerate(repo_pr_counts.head(10).items(), 1):
+                # repo_urlからリポジトリ名を抽出
+                repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
+                print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
+            
+            print("\n=== 全AIエージェントによるPRが少ないリポジトリ（下位10件） ===")
+            for i, (repo_url, count) in enumerate(repo_pr_counts.tail(10).items(), 1):
                 # repo_urlからリポジトリ名を抽出
                 repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
                 print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
@@ -56,6 +68,11 @@ def check_parquet(df):
             for i, (repo_url, count) in enumerate(repo_pr_counts.head(10).items(), 1):
                 repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
                 print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
+            
+            print("\n=== PRが少ないリポジトリ（下位10件） ===")
+            for i, (repo_url, count) in enumerate(repo_pr_counts.tail(10).items(), 1):
+                repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
+                print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
     else:
         print("agentカラムが見つかりません。")
         
@@ -66,7 +83,12 @@ def check_parquet(df):
         for i, (repo_url, count) in enumerate(repo_pr_counts.head(10).items(), 1):
             repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
             print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
+        
+        print("\n=== PRが少ないリポジトリ（下位10件） ===")
+        for i, (repo_url, count) in enumerate(repo_pr_counts.tail(10).items(), 1):
+            repo_name = repo_url.split('/')[-1] if repo_url else "Unknown"
+            print(f"{i:2d}. {repo_name} ({count}件) - {repo_url}")
 
 if __name__ == '__main__':
-    df = pd.read_parquet("../data_list/all_pull_request_local.parquet")
+    df = pd.read_parquet("../dataset/all_pull_request_local.parquet")
     check_parquet(df)

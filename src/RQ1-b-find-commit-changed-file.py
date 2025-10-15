@@ -1,3 +1,7 @@
+"""
+AIとHumanのコミットから追加されたファイルのコミット履歴を取得し、CSVに保存するスクリプト
+"""
+
 import pandas as pd
 import subprocess
 import os

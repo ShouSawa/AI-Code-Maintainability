@@ -1,12 +1,13 @@
 # blame_analysis内の.env
 blame_analysis/.env
 
-# data_listの中身をすべて除外
 data_list/RQ1/temporary/**
 data_list/RQ2/temporary/**
 data_list/trash/**
 data_list/all_pull_request_local.parquet
 data_list/all_repository_local.parquet
+
+dataset/**
 
 # PySSZ関連の出力ファイル（追加推奨）
 pyszz_v2/
