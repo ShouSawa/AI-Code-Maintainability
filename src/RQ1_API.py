@@ -1,10 +1,9 @@
 """
-RQ1統合プログラム: AIコミット分析システム（高速化版）
-機能: AI vs Human のファイル追加・コミット履歴・分類・統計分析を一括実行
+RQ1統合プログラム: AIコミット分析システム（GitHub API版）
+機能: リポジトリをクローンせずにGitHub APIで分析
 """
 
 import os
-import subprocess
 import pandas as pd
 from datetime import datetime, timedelta
 import re
@@ -13,14 +12,15 @@ from transformers import pipeline
 import requests
 from github import Github
 from dotenv import load_dotenv
+import time
 
 # srcフォルダ内の.envファイルを読み込む
 script_dir = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(script_dir, '.env')
 load_dotenv(dotenv_path)
 
-class RQ1Analyzer:
-    # AIパターン定義（クラス変数で共有）（これらの文字が含まれていればAIコミットと判定）
+class RQ1AnalyzerAPI:
+    # AIパターン定義（クラス変数で共有）
     AI_PATTERNS = {
         'copilot': [r'github.*copilot', r'copilot', r'co-authored-by:.*github.*copilot'],
         'codex': [r'openai.*codex', r'codex', r'gpt-.*code'],
@@ -30,19 +30,32 @@ class RQ1Analyzer:
         'general': [r'ai.*assisted', r'machine.*generated', r'bot.*commit', r'automated.*commit', r'ai.*commit']
     }
     
-    def __init__(self, repo_name, repo_name_full, github_token=None):
-        self.repo_name = repo_name
+    def __init__(self, repo_name_full, github_token=None):
+        """
+        repo_name_full: 'owner/repo' 形式のリポジトリ名
+        github_token: GitHub Personal Access Token
+        """
         self.repo_name_full = repo_name_full
+        self.repo_name = repo_name_full.split('/')[-1]
         self.github_token = github_token
         
-        # パス設定
+        if not self.github_token:
+            raise ValueError("GitHub tokenが必要です。.envファイルにGITHUB_TOKENを設定してください。")
+        
+        # GitHub API初期化
+        self.g = Github(self.github_token)
+        self.repo = self.g.get_repo(repo_name_full)
+        
+        # 出力ディレクトリ
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.repo_path = os.path.join(script_dir, f"../cloned_Repository/{repo_name}")
         self.final_output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
         os.makedirs(self.final_output_dir, exist_ok=True)
         
         self.pipe = None
         self.tokenizer = None
+        
+        print(f"リポジトリ接続成功: {repo_name_full}")
+        print(f"スター数: {self.repo.stargazers_count}, フォーク数: {self.repo.forks_count}")
 
     def initialize_classification_model(self):
         """コミット分類のモデル初期化"""
@@ -56,7 +69,7 @@ class RQ1Analyzer:
             self.pipe = None
 
     def is_ai_generated_commit(self, commit_message, author_name, author_email):
-        """AIコミット判定（統合パターンマッチング）"""
+        """AIコミット判定"""
         text = f"{commit_message} {author_name} {author_email}".lower()
         
         for ai_type, patterns in self.AI_PATTERNS.items():
@@ -65,7 +78,7 @@ class RQ1Analyzer:
         return False, "human"
 
     def detect_specific_ai_tool(self, commit_message, author_name, author_email):
-        """AIツール特定（簡素化版）"""
+        """AIツール特定"""
         text = f"{commit_message} {author_name} {author_email}".lower()
         
         tool_map = {
@@ -82,126 +95,151 @@ class RQ1Analyzer:
                 return tool
         return 'General AI'
 
-    def get_commits_with_file_additions(self):
-        """90日以前のファイル追加コミット取得（高速化版）"""
-        original_cwd = os.getcwd()
-        try:
-            os.chdir(self.repo_path)
-            cutoff_date = (datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d')
-            
-            # 90日以前のコミットとそのファイルの変更履歴（追加，修正，削除）を取得
-            cmd = ['git', 'log', '--until', cutoff_date, '--name-status','--pretty=format:%H|%an|%ae|%ad|%s', '--date=iso']
-            
-            result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
-
-            return result.stdout if result.returncode == 0 else ""
-        except Exception as e:
-            print(f"Git取得エラー: {e}")
-            return ""
-        finally:
-            os.chdir(original_cwd)
-
-    def parse_commit_data(self, git_output):
-        """Git出力解析（効率化版）
-        cmdで取得したGitログ出力を解析し、
-        各コミットのハッシュ、著者情報、日付、メッセージ、追加されたファイルリストを抽出する
-        """
-        lines = git_output.strip().split('\n')
+    def get_commits_with_file_additions_api(self, max_commits=500):
+        """GitHub APIで90日以前のファイル追加コミット取得"""
+        print("=== GitHub APIでコミット取得中 ===")
+        
+        cutoff_date = datetime.now() - timedelta(days=90)
         commits_data = []
-        current_commit = None
         
-        for line in lines:
-            if '|' in line and not line.startswith(('A\t', 'M\t', 'D\t')):
-                parts = line.split('|', 4)
-                if len(parts) >= 5:
-                    current_commit = {
-                        'hash': parts[0], 'author_name': parts[1], 'author_email': parts[2],
-                        'date': parts[3], 'message': parts[4], 'added_files': []
-                    }
-            # 追加ファイル行の処理
-            elif line.startswith('A\t') and current_commit:
-                current_commit['added_files'].append(line[2:])
-            elif line == '' and current_commit and current_commit['added_files']:
-                commits_data.append(current_commit)
-                current_commit = None
-        
-        # 最後のコミット処理
-        if current_commit and current_commit['added_files']:
-            commits_data.append(current_commit)
-        
-        return commits_data
+        try:
+            # コミット取得（日付でフィルタ）
+            commits = self.repo.get_commits(until=cutoff_date)
+            
+            count = 0
+            for commit in commits:
+                if count >= max_commits:
+                    print(f"最大コミット数({max_commits})に達しました")
+                    break
+                
+                count += 1
+                if count % 50 == 0:
+                    print(f"処理中: {count}件...")
+                
+                try:
+                    # コミット情報取得
+                    commit_sha = commit.sha
+                    author_name = commit.commit.author.name or "Unknown"
+                    author_email = commit.commit.author.email or "unknown@example.com"
+                    commit_date = commit.commit.author.date.isoformat()
+                    message = commit.commit.message
+                    
+                    # 追加されたファイルを検索
+                    added_files = []
+                    for file in commit.files:
+                        if file.status == 'added':
+                            added_files.append(file.filename)
+                    
+                    if added_files:
+                        commits_data.append({
+                            'hash': commit_sha,
+                            'author_name': author_name,
+                            'author_email': author_email,
+                            'date': commit_date,
+                            'message': message,
+                            'added_files': added_files
+                        })
+                    
+                    # API rate limit対策
+                    time.sleep(0.1)
+                    
+                except Exception as e:
+                    print(f"コミット処理エラー {commit.sha[:8]}: {e}")
+                    continue
+            
+            print(f"コミット取得完了: {len(commits_data)}件（ファイル追加あり）")
+            return commits_data
+            
+        except Exception as e:
+            print(f"GitHub API エラー: {e}")
+            return []
 
     def step1_find_added_files(self):
-        """ステップ1: ファイル追加分析（高速版）"""
-        print("=== ステップ1: ファイル追加分析 ===")
+        """ステップ1: ファイル追加分析（API版）"""
+        print("\n=== ステップ1: ファイル追加分析 (API版) ===")
         
-        if not os.path.exists(self.repo_path):
-            print(f"リポジトリ未発見: {self.repo_path}")
-            return None
+        commits_data = self.get_commits_with_file_additions_api()
         
-        # 90日以前のファイル追加コミット取得
-        git_output = self.get_commits_with_file_additions()
-        if not git_output:
-            print("Git出力取得失敗")
-            return None
-        
-        # コミットデータ解析し，追加されたファイル一覧を抽出
-        commits_data = self.parse_commit_data(git_output)
         if not commits_data:
             print("ファイル追加コミット未発見")
             return None
         
-        # データ作成（リスト内包表記で高速化）
+        # データ作成
         csv_data = []
         for commit in commits_data:
-            # コミットがAIかどうか判定
-            is_ai, ai_type = self.is_ai_generated_commit(commit['message'], commit['author_name'], commit['author_email'])
-            # AIだった場合，何のツールか特定
+            is_ai, ai_type = self.is_ai_generated_commit(
+                commit['message'], commit['author_name'], commit['author_email']
+            )
             author_type = "AI" if is_ai else "Human"
-            ai_tool = self.detect_specific_ai_tool(commit['message'], commit['author_name'], commit['author_email']) if is_ai else "N/A"
+            ai_tool = self.detect_specific_ai_tool(
+                commit['message'], commit['author_name'], commit['author_email']
+            ) if is_ai else "N/A"
             
-            csv_data.extend([{
-                'commit_hash': commit['hash'], 'commit_date': commit['date'],
-                'added_file': file_path, 'author_type': author_type,
-                'ai_type': ai_type, 'ai_tool': ai_tool,
-                'author_name': commit['author_name'], 'author_email': commit['author_email'],
-                'commit_message': commit['message']
-            } for file_path in commit['added_files']])
+            for file_path in commit['added_files']:
+                csv_data.append({
+                    'commit_hash': commit['hash'],
+                    'commit_date': commit['date'],
+                    'added_file': file_path,
+                    'author_type': author_type,
+                    'ai_type': ai_type,
+                    'ai_tool': ai_tool,
+                    'author_name': commit['author_name'],
+                    'author_email': commit['author_email'],
+                    'commit_message': commit['message']
+                })
         
         df = pd.DataFrame(csv_data)
         print(f"分析完了 - 総計:{len(df)} AI:{len(df[df['author_type']=='AI'])} Human:{len(df[df['author_type']=='Human'])}")
         return df
 
-    def get_git_log_for_file(self, file_path):
-        """ファイル履歴取得（簡素化版）"""
+    def get_file_commits_api(self, file_path):
+        """GitHub APIで特定ファイルのコミット履歴取得"""
         try:
-            cmd = ['git', 'log', '--follow', '--reverse', '--pretty=format:%H|%ci|%an|%ae|%s', '--', file_path]
-            result = subprocess.run(cmd, cwd=self.repo_path, capture_output=True, 
-                                text=True, encoding='utf-8', errors='replace')
-            return result.stdout.strip().split('\n') if result.returncode == 0 and result.stdout.strip() else []
+            commits = self.repo.get_commits(path=file_path)
+            commit_logs = []
+            
+            for commit in commits:
+                commit_logs.append({
+                    'hash': commit.sha,
+                    'date': commit.commit.author.date.isoformat(),
+                    'author': commit.commit.author.name or "Unknown",
+                    'email': commit.commit.author.email or "unknown@example.com",
+                    'message': commit.commit.message
+                })
+                
+                # 最大100件まで
+                if len(commit_logs) >= 100:
+                    break
+                
+                time.sleep(0.05)  # API rate limit対策
+            
+            return commit_logs
+            
         except Exception as e:
-            print(f"履歴取得エラー {file_path}: {e}")
+            print(f"ファイル履歴取得エラー {file_path}: {e}")
             return []
 
-    # AI/Humanファイル選択（最大10個、同数になるように調整）
     def get_files_by_author_type(self, df, target_ai_count=10, target_human_count=10):
-        """AI/Humanファイル選択（効率化版）
-        AIと人間のファイル数が同じになるように調整する
-        """
+        """AI/Humanファイル選択（同数調整版）"""
         ai_files, human_files = [], []
         
-        # まず全てのファイルを収集
         for _, row in df.iterrows():
             if len(ai_files) >= target_ai_count and len(human_files) >= target_human_count:
                 break
             
-            file_info = {'commit_hash': row['commit_hash'], 'added_file': row['added_file'], 'author_type': row['author_type']}
+            file_info = {
+                'commit_hash': row['commit_hash'],
+                'added_file': row['added_file'],
+                'author_type': row['author_type'],
+                'ai_tool': row['ai_tool']
+            }
+            
             if row['author_type'] == 'AI' and len(ai_files) < target_ai_count:
                 ai_files.append(file_info)
             elif row['author_type'] == 'Human' and len(human_files) < target_human_count:
                 human_files.append(file_info)
         
-        # AIと人間のファイル数を同じにする（少ない方に合わせる）
+        # 同数に調整
         min_count = min(len(ai_files), len(human_files))
         ai_files = ai_files[:min_count]
         human_files = human_files[:min_count]
@@ -211,54 +249,60 @@ class RQ1Analyzer:
         return ai_files + human_files
 
     def step2_find_commit_changed_files(self, df):
-        """ステップ2: コミット履歴分析（高速版）"""
-        print("\n=== ステップ2: コミット履歴分析 ===")
-
-        # AIと人間が作成したファイルを最大10個ずつ選択
+        """ステップ2: コミット履歴分析（API版）"""
+        print("\n=== ステップ2: コミット履歴分析 (API版) ===")
+        
         selected_files = self.get_files_by_author_type(df)
         ai_count = sum(1 for f in selected_files if f['author_type'] == 'AI')
         print(f"選択ファイル: {len(selected_files)} (AI:{ai_count} Human:{len(selected_files)-ai_count})")
         
         results = []
-        for file_info in selected_files:
+        for idx, file_info in enumerate(selected_files):
+            print(f"処理中: {idx+1}/{len(selected_files)} - {file_info['added_file']}")
+            
             file_path = file_info['added_file']
             commit_hash = file_info['commit_hash']
             author_type = file_info['author_type']
-
-            # ファイルのコミット履歴取得
-            commit_logs = self.get_git_log_for_file(file_path)
+            
+            commit_logs = self.get_file_commits_api(file_path)
             
             if not commit_logs:
-                # 履歴なしの場合
                 results.append({
-                    'original_commit_type': author_type, 'original_commit_hash': commit_hash,
-                    'file_path': file_path, 'commit_hash': 'No commits found',
-                    'commit_date': '', 'author': '', 'commit_message': '',
-                    'is_ai_generated': False, 'ai_type': 'N/A', 'ai_tool': 'N/A'
+                    'original_commit_type': author_type,
+                    'original_commit_hash': commit_hash,
+                    'file_path': file_path,
+                    'commit_hash': 'No commits found',
+                    'commit_date': '',
+                    'author': '',
+                    'commit_message': '',
+                    'is_ai_generated': False,
+                    'ai_type': 'N/A',
+                    'ai_tool': 'N/A'
                 })
             else:
-                # 履歴処理（効率化）
-                for log_line in commit_logs:
-                    if not log_line:
-                        continue
-                    try:
-                        parts = log_line.split('|', 4)
-                        if len(parts) >= 5:
-                            is_ai, ai_type = self.is_ai_generated_commit(parts[4], parts[2], parts[3])
-                            results.append({
-                                'original_commit_type': author_type, 'original_commit_hash': commit_hash,
-                                'file_path': file_path, 'commit_hash': parts[0],
-                                'commit_date': parts[1], 'author': parts[2], 'commit_message': parts[4],
-                                'is_ai_generated': is_ai, 'ai_type': ai_type,
-                                'ai_tool': self.detect_specific_ai_tool(parts[4], parts[2], parts[3]) if is_ai else 'N/A'
-                            })
-                    except Exception as e:
-                        print(f"ログ処理エラー: {e}")
-                        continue
+                for log in commit_logs:
+                    is_ai, ai_type = self.is_ai_generated_commit(
+                        log['message'], log['author'], log['email']
+                    )
+                    results.append({
+                        'original_commit_type': author_type,
+                        'original_commit_hash': commit_hash,
+                        'file_path': file_path,
+                        'commit_hash': log['hash'],
+                        'commit_date': log['date'],
+                        'author': log['author'],
+                        'commit_message': log['message'],
+                        'is_ai_generated': is_ai,
+                        'ai_type': ai_type,
+                        'ai_tool': self.detect_specific_ai_tool(
+                            log['message'], log['author'], log['email']
+                        ) if is_ai else 'N/A'
+                    })
         
         return pd.DataFrame(results) if results else None
 
     def prepare_prompt(self, commit_message: str, git_diff: str, context_window: int = 1024):
+        """コミット分類用プロンプト作成"""
         prompt_head = "<s>[INST] <<SYS>>\nYou are a commit classifier based on commit message and code diff.Please classify the given commit into one of the ten categories: docs, perf, style, refactor, feat, fix, test, ci, build, and chore. The definitions of each category are as follows:\n**feat**: Code changes aim to introduce new features to the codebase, encompassing both internal and user-oriented features.\n**fix**: Code changes aim to fix bugs and faults within the codebase.\n**perf**: Code changes aim to improve performance, such as enhancing execution speed or reducing memory consumption.\n**style**: Code changes aim to improve readability without affecting the meaning of the code. This type encompasses aspects like variable naming, indentation, and addressing linting or code analysis warnings.\n**refactor**: Code changes aim to restructure the program without changing its behavior, aiming to improve maintainability. To avoid confusion and overlap, we propose the constraint that this category does not include changes classified as ``perf'' or ``style''. Examples include enhancing modularity, refining exception handling, improving scalability, conducting code cleanup, and removing deprecated code.\n**docs**: Code changes that modify documentation or text, such as correcting typos, modifying comments, or updating documentation.\n**test**: Code changes that modify test files, including the addition or updating of tests.\n**ci**: Code changes to CI (Continuous Integration) configuration files and scripts, such as configuring or updating CI/CD scripts, e.g., ``.travis.yml'' and ``.github/workflows''.\n**build**: Code changes affecting the build system (e.g., Maven, Gradle, Cargo). Change examples include updating dependencies, configuring build configurations, and adding scripts.\n**chore**: Code changes for other miscellaneous tasks that do not neatly fit into any of the above categories.\n<</SYS>>\n\n"
         prompt_head_encoded = self.tokenizer.encode(prompt_head, add_special_tokens=False)
 
@@ -273,12 +317,12 @@ class RQ1Analyzer:
         return self.tokenizer.decode(prompt_head_encoded + prompt_message_encoded + prompt_diff_encoded + prompt_end)
 
     def classify_commit(self, commit_message: str, git_diff: str, context_window: int = 1024):
-        """コミット分類（簡素化版）"""
+        """コミット分類"""
         if not self.pipe or not self.tokenizer:
             return "model_not_available"
 
         try:
-            prompt = self.prepare_prompt(self, commit_message, git_diff, context_window)
+            prompt = self.prepare_prompt(commit_message, git_diff, context_window)
             result = self.pipe(prompt, max_new_tokens=10, pad_token_id=self.pipe.tokenizer.eos_token_id)
             label = result[0]["generated_text"].split()[-1]
             return label
@@ -288,16 +332,12 @@ class RQ1Analyzer:
 
     def fetch_message_and_diff(self, commit_sha):
         """GitHub API経由でコミット情報取得"""
-        if not self.github_token:
-            return None, None
-        
         try:
-            g = Github(self.github_token)
-            repo = g.get_repo(self.repo_name_full)
-            commit = repo.get_commit(commit_sha)
+            commit = self.repo.get_commit(commit_sha)
             
             if commit.parents:
-                diff_url = repo.compare(commit.parents[0].sha, commit_sha).diff_url
+                parent_sha = commit.parents[0].sha
+                diff_url = self.repo.compare(parent_sha, commit_sha).diff_url
                 return commit.commit.message, requests.get(diff_url).text
             return commit.commit.message, ""
         except Exception as e:
@@ -305,22 +345,17 @@ class RQ1Analyzer:
             return None, None
 
     def step3_classify_commits(self, df):
-        """ステップ3: コミット分類（効率化版）"""
+        """ステップ3: コミット分類"""
         print("\n=== ステップ3: コミット分類 ===")
-        
-        if not self.github_token:
-            print("GitHub token未設定 - 分類スキップ")
-            return pd.DataFrame([{
-                'original_commit_type': row['original_commit_type'], 'commit_hash': row['commit_hash'],
-                'file_path': row['file_path'], 'classification_label': 'not_classified',
-                'commit_date': row['commit_date'], 'author': row['author'],
-                'is_ai_generated': row['is_ai_generated'], 'ai_tool': row.get('ai_tool', 'N/A'),
-                'commit_message': row['commit_message']
-            } for _, row in df.iterrows()])
         
         # モデル初期化
         if not self.pipe:
             self.initialize_classification_model()
+        
+        if not self.pipe:
+            print("分類モデル利用不可 - 分類スキップ")
+            df['classification_label'] = 'not_classified'
+            return df
         
         results = []
         total = len(df)
@@ -331,9 +366,12 @@ class RQ1Analyzer:
             
             commit_sha = row['commit_hash']
             base_result = {
-                'original_commit_type': row['original_commit_type'], 'commit_hash': commit_sha,
-                'file_path': row['file_path'], 'commit_date': row['commit_date'],
-                'author': row['author'], 'is_ai_generated': row['is_ai_generated'],
+                'original_commit_type': row['original_commit_type'],
+                'commit_hash': commit_sha,
+                'file_path': row['file_path'],
+                'commit_date': row['commit_date'],
+                'author': row['author'],
+                'is_ai_generated': row['is_ai_generated'],
                 'ai_tool': row.get('ai_tool', 'N/A'),
                 'commit_message': row['commit_message']
             }
@@ -354,7 +392,7 @@ class RQ1Analyzer:
         return pd.DataFrame(results)
 
     def analyze_subset(self, subset_df, label):
-        """サブセット分析（効率化版・日本語出力）"""
+        """サブセット分析（日本語出力）"""
         if len(subset_df) == 0:
             return [f"{label} コミットが見つかりませんでした"]
         
@@ -374,7 +412,7 @@ class RQ1Analyzer:
             analysis.append(f"   {lbl}: {count}件 ({count/len(subset_df)*100:.1f}%)")
         analysis.append("")
         
-        # 3. コミット頻度分析（簡素化）
+        # 3. コミット頻度分析
         analysis.append("3. コミット頻度分析:")
         file_frequencies = []
         for file_path in subset_df['file_path'].unique():
@@ -403,7 +441,6 @@ class RQ1Analyzer:
         # 5. AIツール/モデルの分布（AI起源の場合のみ）
         if label == "AI起源" and 'ai_tool' in subset_df.columns:
             analysis.append("5. 使用されたAIツール/モデルの分布:")
-            # 最初のコミット（ファイル追加時）のAIツールを集計
             first_commits = subset_df.drop_duplicates(subset=['file_path'], keep='first')
             ai_tool_counts = first_commits['ai_tool'].value_counts()
             for tool, count in ai_tool_counts.items():
@@ -414,7 +451,7 @@ class RQ1Analyzer:
         return analysis
 
     def step4_analyze_commit_data(self, df):
-        """ステップ4: データ分析（効率化版・日本語出力）"""
+        """ステップ4: データ分析（日本語出力）"""
         print("\n=== ステップ4: データ分析 ===")
         
         df['commit_date'] = pd.to_datetime(df['commit_date'])
@@ -429,8 +466,8 @@ class RQ1Analyzer:
             f"総コミット数: {len(df)}件",
             f"AI起源: {len(ai_df)}件 ({len(ai_df)/len(df)*100:.1f}%)",
             f"人間起源: {len(human_df)}件 ({len(human_df)/len(df)*100:.1f}%)",
-            f"ユニークファイル数（repoごとのAIと人間の作成したファイルの合計数）: {df['file_path'].nunique()}件",
-            f"AI生成コミット（AIが作成したファイルを追加したコミットをAIが作成した件数）: {ai_generated}件 ({ai_generated/len(df)*100:.1f}%)", ""
+            f"ユニークファイル数: {df['file_path'].nunique()}件",
+            f"AI生成コミット: {ai_generated}件 ({ai_generated/len(df)*100:.1f}%)", ""
         ]
         
         # サブセット分析
@@ -457,21 +494,20 @@ class RQ1Analyzer:
         return results
 
     def run_full_analysis(self):
-        """全分析実行（超高速版）"""
-        print(f"=== RQ1分析開始: {self.repo_name} ===")
+        """全分析実行（API版）"""
+        print(f"=== RQ1分析開始 (API版): {self.repo_name_full} ===")
         
-        # パイプライン実行
-        # step1:ファイル追加分析
+        # step1: ファイル追加分析
         df_additions = self.step1_find_added_files()
         if df_additions is None:
             return print("ステップ1エラー - 終了")
         
-        # step2:コミット履歴分析
+        # step2: コミット履歴分析
         df_history = self.step2_find_commit_changed_files(df_additions)
         if df_history is None:
             return print("ステップ2エラー - 終了")
-
-        # step3:コミット分類        
+        
+        # step3: コミット分類
         df_classified = self.step3_classify_commits(df_history)
         if df_classified is None:
             return print("ステップ3エラー - 終了")
@@ -481,7 +517,7 @@ class RQ1Analyzer:
         current_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
         csv_file = os.path.join(self.final_output_dir, f"{self.repo_name}_commit_classification_results_{current_datetime}.csv")
         
-        # 列順序指定して保存（ai_tool列を追加）
+        # CSV保存
         df_classified[['original_commit_type', 'commit_hash', 'file_path', 'classification_label',
                     'commit_date', 'author', 'is_ai_generated', 'ai_tool', 'commit_message']].to_csv(
                     csv_file, index=False, encoding='utf-8')
@@ -493,21 +529,32 @@ class RQ1Analyzer:
         print(f"CSV: {csv_file}")
         print(f"TXT: {os.path.join(self.final_output_dir, f'{self.repo_name}_commit_analysis_results.txt')}")
 
+
 def main():
-    """メイン実行（超効率化版）"""
+    """メイン実行"""
     # 設定
-    repo_name = "ai"
-    repo_name_full = "drivly/ai"
+    repo_name_full = "TheAlgorithms/Python"  # owner/repo 形式
     github_token = os.getenv("GITHUB_TOKEN")
     
-    print(f"=== RQ1超高速分析 ===")
+    print(f"=== RQ1分析 (GitHub API版) ===")
     print(f"リポジトリ: {repo_name_full}")
-    print(f"GitHub API: {'OK' if github_token else 'NG（分類無効）'}")
+    print(f"GitHub API: {'OK' if github_token else 'NG'}")
+    
+    if not github_token:
+        print("エラー: GitHub tokenが設定されていません")
+        print(".envファイルにGITHUB_TOKENを設定してください")
+        return
     
     start_time = datetime.now()
-    RQ1Analyzer(repo_name, repo_name_full, github_token).run_full_analysis()
+    
+    try:
+        analyzer = RQ1AnalyzerAPI(repo_name_full, github_token)
+        analyzer.run_full_analysis()
+    except Exception as e:
+        print(f"エラー: {e}")
     
     print(f"処理時間: {datetime.now() - start_time}")
+
 
 if __name__ == "__main__":
     main()
