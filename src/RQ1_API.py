@@ -19,6 +19,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(script_dir, '.env')
 load_dotenv(dotenv_path)
 
+pipe = pipeline("text-generation", model="0x404/ccs-code-llama-7b", device_map="auto")
+tokenizer = pipe.tokenizer
+
 class RQ1AnalyzerAPI:
     # AIパターン定義（クラス変数で共有）
     AI_PATTERNS = {
@@ -51,22 +54,8 @@ class RQ1AnalyzerAPI:
         self.final_output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
         os.makedirs(self.final_output_dir, exist_ok=True)
         
-        self.pipe = None
-        self.tokenizer = None
-        
         print(f"リポジトリ接続成功: {repo_name_full}")
         print(f"スター数: {self.repo.stargazers_count}, フォーク数: {self.repo.forks_count}")
-
-    def initialize_classification_model(self):
-        """コミット分類のモデル初期化"""
-        try:
-            print("分類モデル初期化中...")
-            self.pipe = pipeline("text-generation", model="0x404/ccs-code-llama-7b", device_map="auto")
-            self.tokenizer = self.pipe.tokenizer
-            print("分類モデル初期化完了")
-        except Exception as e:
-            print(f"分類モデル初期化失敗: {e}")
-            self.pipe = None
 
     def is_ai_generated_commit(self, commit_message, author_name, author_email):
         """AIコミット判定"""
@@ -304,26 +293,26 @@ class RQ1AnalyzerAPI:
     def prepare_prompt(self, commit_message: str, git_diff: str, context_window: int = 1024):
         """コミット分類用プロンプト作成"""
         prompt_head = "<s>[INST] <<SYS>>\nYou are a commit classifier based on commit message and code diff.Please classify the given commit into one of the ten categories: docs, perf, style, refactor, feat, fix, test, ci, build, and chore. The definitions of each category are as follows:\n**feat**: Code changes aim to introduce new features to the codebase, encompassing both internal and user-oriented features.\n**fix**: Code changes aim to fix bugs and faults within the codebase.\n**perf**: Code changes aim to improve performance, such as enhancing execution speed or reducing memory consumption.\n**style**: Code changes aim to improve readability without affecting the meaning of the code. This type encompasses aspects like variable naming, indentation, and addressing linting or code analysis warnings.\n**refactor**: Code changes aim to restructure the program without changing its behavior, aiming to improve maintainability. To avoid confusion and overlap, we propose the constraint that this category does not include changes classified as ``perf'' or ``style''. Examples include enhancing modularity, refining exception handling, improving scalability, conducting code cleanup, and removing deprecated code.\n**docs**: Code changes that modify documentation or text, such as correcting typos, modifying comments, or updating documentation.\n**test**: Code changes that modify test files, including the addition or updating of tests.\n**ci**: Code changes to CI (Continuous Integration) configuration files and scripts, such as configuring or updating CI/CD scripts, e.g., ``.travis.yml'' and ``.github/workflows''.\n**build**: Code changes affecting the build system (e.g., Maven, Gradle, Cargo). Change examples include updating dependencies, configuring build configurations, and adding scripts.\n**chore**: Code changes for other miscellaneous tasks that do not neatly fit into any of the above categories.\n<</SYS>>\n\n"
-        prompt_head_encoded = self.tokenizer.encode(prompt_head, add_special_tokens=False)
+        prompt_head_encoded = tokenizer.encode(prompt_head, add_special_tokens=False)
 
         prompt_message = f"- given commit message:\n{commit_message}\n"
-        prompt_message_encoded = self.tokenizer.encode(prompt_message, max_length=64, truncation=True, add_special_tokens=False)
+        prompt_message_encoded = tokenizer.encode(prompt_message, max_length=64, truncation=True, add_special_tokens=False)
 
         prompt_diff = f"- given commit diff: \n{git_diff}\n"
         remaining_length = (context_window - len(prompt_head_encoded) - len(prompt_message_encoded) - 6)
-        prompt_diff_encoded = self.tokenizer.encode(prompt_diff, max_length=remaining_length, truncation=True, add_special_tokens=False)
+        prompt_diff_encoded = tokenizer.encode(prompt_diff, max_length=remaining_length, truncation=True, add_special_tokens=False)
 
-        prompt_end = self.tokenizer.encode(" [/INST]", add_special_tokens=False)
-        return self.tokenizer.decode(prompt_head_encoded + prompt_message_encoded + prompt_diff_encoded + prompt_end)
+        prompt_end = tokenizer.encode(" [/INST]", add_special_tokens=False)
+        return tokenizer.decode(prompt_head_encoded + prompt_message_encoded + prompt_diff_encoded + prompt_end)
 
     def classify_commit(self, commit_message: str, git_diff: str, context_window: int = 1024):
         """コミット分類"""
-        if not self.pipe or not self.tokenizer:
+        if not pipe or not tokenizer:
             return "model_not_available"
 
         try:
             prompt = self.prepare_prompt(commit_message, git_diff, context_window)
-            result = self.pipe(prompt, max_new_tokens=10, pad_token_id=self.pipe.tokenizer.eos_token_id)
+            result = pipe(prompt, max_new_tokens=10, pad_token_id=pipe.tokenizer.eos_token_id)
             label = result[0]["generated_text"].split()[-1]
             return label
         except Exception as e:
@@ -348,11 +337,7 @@ class RQ1AnalyzerAPI:
         """ステップ3: コミット分類"""
         print("\n=== ステップ3: コミット分類 ===")
         
-        # モデル初期化
-        if not self.pipe:
-            self.initialize_classification_model()
-        
-        if not self.pipe:
+        if not pipe:
             print("分類モデル利用不可 - 分類スキップ")
             df['classification_label'] = 'not_classified'
             return df
