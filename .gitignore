@@ -12,7 +12,7 @@ dataset/**
 # PySSZ関連の出力ファイル（追加推奨）
 pyszz_v2/
 
-FirstLook-at-CCS/
+FirstLook-at-CCS/**
 
 .idea/
 .vscode/

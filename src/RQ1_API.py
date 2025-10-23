@@ -85,18 +85,19 @@ class RQ1AnalyzerAPI:
         return 'General AI'
 
     def get_commits_with_file_additions_api(self, max_commits=500):
-        """GitHub APIで90日以前のファイル追加コミット取得"""
+        """GitHub APIで180日以前のファイル追加コミット取得（足りない場合は90日以前も取得）"""
         print("=== GitHub APIでコミット取得中 ===")
         
-        cutoff_date = datetime.now() - timedelta(days=90)
         commits_data = []
         
         try:
-            # コミット取得（日付でフィルタ）
-            commits = self.repo.get_commits(until=cutoff_date)
+            # まず180日以前のコミットを取得
+            cutoff_date_180 = datetime.now() - timedelta(days=180)
+            print(f"180日以前のコミットを取得中 (until: {cutoff_date_180.date()})...")
+            commits_180 = self.repo.get_commits(until=cutoff_date_180)
             
             count = 0
-            for commit in commits:
+            for commit in commits_180:
                 if count >= max_commits:
                     print(f"最大コミット数({max_commits})に達しました")
                     break
@@ -136,7 +137,71 @@ class RQ1AnalyzerAPI:
                     print(f"コミット処理エラー {commit.sha[:8]}: {e}")
                     continue
             
-            print(f"コミット取得完了: {len(commits_data)}件（ファイル追加あり）")
+            print(f"180日以前のコミット取得完了: {len(commits_data)}件（ファイル追加あり）")
+            
+            # max_commitsに達していない場合、90日以前のコミットも取得
+            if len(commits_data) < max_commits:
+                remaining = max_commits - len(commits_data)
+                print(f"max_commitsに未達 ({len(commits_data)}/{max_commits})")
+                print(f"90日以前のコミットを追加取得中 (最大{remaining}件)...")
+                
+                cutoff_date_90 = datetime.now() - timedelta(days=90)
+                cutoff_date_180 = datetime.now() - timedelta(days=180)
+                
+                # 90日以前180日より後のコミットを取得
+                commits_90_180 = self.repo.get_commits(until=cutoff_date_90, since=cutoff_date_180)
+                
+                # 既に取得したコミットのハッシュセット
+                existing_hashes = {c['hash'] for c in commits_data}
+                
+                for commit in commits_90_180:
+                    if len(commits_data) >= max_commits:
+                        print(f"最大コミット数({max_commits})に達しました")
+                        break
+                    
+                    # 重複チェック
+                    if commit.sha in existing_hashes:
+                        continue
+                    
+                    count += 1
+                    if count % 50 == 0:
+                        print(f"処理中: {len(commits_data)}件...")
+                    
+                    try:
+                        # コミット情報取得
+                        commit_sha = commit.sha
+                        author_name = commit.commit.author.name or "Unknown"
+                        author_email = commit.commit.author.email or "unknown@example.com"
+                        commit_date = commit.commit.author.date.isoformat()
+                        message = commit.commit.message
+                        
+                        # 追加されたファイルを検索
+                        added_files = []
+                        for file in commit.files:
+                            if file.status == 'added':
+                                added_files.append(file.filename)
+                        
+                        if added_files:
+                            commits_data.append({
+                                'hash': commit_sha,
+                                'author_name': author_name,
+                                'author_email': author_email,
+                                'date': commit_date,
+                                'message': message,
+                                'added_files': added_files
+                            })
+                            existing_hashes.add(commit_sha)
+                        
+                        # API rate limit対策
+                        time.sleep(0.1)
+                        
+                    except Exception as e:
+                        print(f"コミット処理エラー {commit.sha[:8]}: {e}")
+                        continue
+                
+                print(f"90日以前のコミット追加取得完了: +{len(commits_data) - (max_commits - remaining)}件")
+            
+            print(f"コミット取得完了: 合計{len(commits_data)}件（ファイル追加あり）")
             return commits_data
             
         except Exception as e:
@@ -208,7 +273,7 @@ class RQ1AnalyzerAPI:
             print(f"ファイル履歴取得エラー {file_path}: {e}")
             return []
 
-    def get_files_by_author_type(self, df, target_ai_count=10, target_human_count=10):
+    def get_files_by_author_type(self, df, target_ai_count=20, target_human_count=20):
         """AI/Humanファイル選択（同数調整版）"""
         ai_files, human_files = [], []
         
@@ -346,8 +411,7 @@ class RQ1AnalyzerAPI:
         total = len(df)
         
         for idx, row in df.iterrows():
-            if idx % 20 == 0:
-                print(f"進捗: {idx}/{total} ({idx/total*100:.0f}%)")
+            print(f"進捗: {idx}/{total} ({idx/total*100:.0f}%)")
             
             commit_sha = row['commit_hash']
             base_result = {
@@ -477,68 +541,525 @@ class RQ1AnalyzerAPI:
         print(f"分析完了: {output_file}")
         print("\n".join(results[:10]) + "\n...")
         return results
+    
+    def save_individual_analysis(self, df, output_file):
+        """個別リポジトリの詳細分析をTXTファイルに保存"""
+        df['commit_date'] = pd.to_datetime(df['commit_date'])
+        ai_df = df[df['original_commit_type'] == 'AI']
+        human_df = df[df['original_commit_type'] == 'Human']
+        
+        results = [
+            "=" * 80,
+            f"{self.repo_name} - 個別リポジトリ分析結果",
+            "=" * 80,
+            "",
+            f"リポジトリ: {self.repo_name_full}",
+            f"スター数: {self.repo.stargazers_count:,}",
+            f"分析日時: {datetime.now().strftime('%Y年%m月%d日 %H:%M:%S')}",
+            "",
+            "=" * 80,
+            "■ 基本統計",
+            "-" * 40,
+            f"総コミット数: {len(df)}件",
+            f"AI作成ファイルへのコミット: {len(ai_df)}件 ({len(ai_df)/len(df)*100:.1f}%)",
+            f"人間作成ファイルへのコミット: {len(human_df)}件 ({len(human_df)/len(df)*100:.1f}%)",
+            f"ユニークファイル数: {df['file_path'].nunique()}件",
+            "",
+        ]
+        
+        # AI作成ファイルの統計
+        if len(ai_df) > 0:
+            results.extend([
+                "■ AI作成ファイルの統計",
+                "-" * 40,
+                f"ファイル数: {ai_df['file_path'].nunique()}件",
+                f"総コミット数: {len(ai_df)}件",
+                ""
+            ])
+            
+            # コミット作成者の内訳
+            ai_origin_ai = len(ai_df[ai_df['is_ai_generated'] == True])
+            ai_origin_human = len(ai_df[ai_df['is_ai_generated'] == False])
+            results.extend([
+                "コミット作成者:",
+                f"  AI: {ai_origin_ai}件 ({ai_origin_ai/len(ai_df)*100:.1f}%)",
+                f"  人間: {ai_origin_human}件 ({ai_origin_human/len(ai_df)*100:.1f}%)",
+                ""
+            ])
+            
+            # コミット分類
+            results.append("コミット分類:")
+            for label, count in ai_df['classification_label'].value_counts().head(10).items():
+                results.append(f"  {label}: {count}件 ({count/len(ai_df)*100:.1f}%)")
+            results.append("")
+        
+        # 人間作成ファイルの統計
+        if len(human_df) > 0:
+            results.extend([
+                "■ 人間作成ファイルの統計",
+                "-" * 40,
+                f"ファイル数: {human_df['file_path'].nunique()}件",
+                f"総コミット数: {len(human_df)}件",
+                ""
+            ])
+            
+            # コミット作成者の内訳
+            human_origin_ai = len(human_df[human_df['is_ai_generated'] == True])
+            human_origin_human = len(human_df[human_df['is_ai_generated'] == False])
+            results.extend([
+                "コミット作成者:",
+                f"  AI: {human_origin_ai}件 ({human_origin_ai/len(human_df)*100:.1f}%)",
+                f"  人間: {human_origin_human}件 ({human_origin_human/len(human_df)*100:.1f}%)",
+                ""
+            ])
+            
+            # コミット分類
+            results.append("コミット分類:")
+            for label, count in human_df['classification_label'].value_counts().head(10).items():
+                results.append(f"  {label}: {count}件 ({count/len(human_df)*100:.1f}%)")
+            results.append("")
+        
+        # ファイルに保存
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(results))
 
     def run_full_analysis(self):
-        """全分析実行（API版）"""
+        """全分析実行（API版）- エラーハンドリング強化版"""
         print(f"=== RQ1分析開始 (API版): {self.repo_name_full} ===")
         
-        # step1: ファイル追加分析
-        df_additions = self.step1_find_added_files()
-        if df_additions is None:
-            return print("ステップ1エラー - 終了")
-        
-        # step2: コミット履歴分析
-        df_history = self.step2_find_commit_changed_files(df_additions)
-        if df_history is None:
-            return print("ステップ2エラー - 終了")
-        
-        # step3: コミット分類
-        df_classified = self.step3_classify_commits(df_history)
-        if df_classified is None:
-            return print("ステップ3エラー - 終了")
-        
-        # 最終保存
-        print("\n=== 最終結果保存 ===")
-        current_datetime = datetime.now().strftime('%Y%m%d_%H%M%S')
-        csv_file = os.path.join(self.final_output_dir, f"{self.repo_name}_commit_classification_results_{current_datetime}.csv")
-        
-        # CSV保存
-        df_classified[['original_commit_type', 'commit_hash', 'file_path', 'classification_label',
-                    'commit_date', 'author', 'is_ai_generated', 'ai_tool', 'commit_message']].to_csv(
-                    csv_file, index=False, encoding='utf-8')
-        
-        # 分析実行
-        self.step4_analyze_commit_data(df_classified)
-        
-        print(f"\n=== 完了: {self.repo_name} ===")
-        print(f"CSV: {csv_file}")
-        print(f"TXT: {os.path.join(self.final_output_dir, f'{self.repo_name}_commit_analysis_results.txt')}")
+        try:
+            # step1: ファイル追加分析
+            print("\n--- ステップ1: ファイル追加分析 ---")
+            df_additions = self.step1_find_added_files()
+            if df_additions is None or len(df_additions) == 0:
+                print("⚠ ステップ1: ファイル追加コミットが見つかりませんでした")
+                return None
+            
+            print(f"✓ ステップ1完了: {len(df_additions)}件のファイル追加を検出")
+            
+            # step2: コミット履歴分析
+            print("\n--- ステップ2: コミット履歴分析 ---")
+            df_history = self.step2_find_commit_changed_files(df_additions)
+            if df_history is None or len(df_history) == 0:
+                print("⚠ ステップ2: コミット履歴が取得できませんでした")
+                return None
+            
+            print(f"✓ ステップ2完了: {len(df_history)}件のコミット履歴を取得")
+            
+            # step3: コミット分類
+            print("\n--- ステップ3: コミット分類 ---")
+            df_classified = self.step3_classify_commits(df_history)
+            if df_classified is None or len(df_classified) == 0:
+                print("⚠ ステップ3: コミット分類ができませんでした")
+                return None
+            
+            print(f"✓ ステップ3完了: {len(df_classified)}件のコミットを分類")
+            
+            # 個別レポートは出力せず、統合分析でまとめて出力
+            print(f"\n✓✓✓ 完了: {self.repo_name} ✓✓✓")
+            
+            # 結果を返す
+            return {
+                'df_additions': df_additions,
+                'df_history': df_history,
+                'df_classified': df_classified
+            }
+            
+        except Exception as e:
+            print(f"\n✗✗✗ 予期しないエラー発生: {self.repo_name_full} ✗✗✗")
+            print(f"エラー詳細: {type(e).__name__}: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
 
 
-def main():
-    """メイン実行"""
-    # 設定
-    repo_name_full = "TheAlgorithms/Python"  # owner/repo 形式
+def analyze_multiple_repositories(repo_list, num_repos=3):
+    """複数リポジトリの分析を実行 - 完遂保証版"""
     github_token = os.getenv("GITHUB_TOKEN")
-    
-    print(f"=== RQ1分析 (GitHub API版) ===")
-    print(f"リポジトリ: {repo_name_full}")
-    print(f"GitHub API: {'OK' if github_token else 'NG'}")
     
     if not github_token:
         print("エラー: GitHub tokenが設定されていません")
         print(".envファイルにGITHUB_TOKENを設定してください")
         return
     
+    print(f"=" * 80)
+    print(f"RQ1 複数リポジトリ分析 (GitHub API版)")
+    print(f"=" * 80)
+    print(f"分析対象: {num_repos}リポジトリ")
+    print(f"GitHub API: OK")
+    print(f"=" * 80)
+    
     start_time = datetime.now()
+    all_results = []
+    all_classifications = []
+    failed_repos = []
     
-    try:
-        analyzer = RQ1AnalyzerAPI(repo_name_full, github_token)
-        analyzer.run_full_analysis()
-    except Exception as e:
-        print(f"エラー: {e}")
+    # 各リポジトリを分析
+    for idx, repo_info in enumerate(repo_list[:num_repos]):
+        repo_name_full = f"{repo_info['owner']}/{repo_info['repository_name']}"
+        print(f"\n{'='*80}")
+        print(f"[{idx+1}/{num_repos}] {repo_name_full}")
+        print(f"スター数: {repo_info['stars']:,}")
+        print(f"{'='*80}")
+        
+        try:
+            # RQ1Analyzerの初期化
+            print("リポジトリに接続中...")
+            analyzer = RQ1AnalyzerAPI(repo_name_full, github_token)
+            
+            # 分析実行
+            result = analyzer.run_full_analysis()
+            
+            if result is not None:
+                all_results.append({
+                    'repo': repo_name_full,
+                    'stars': repo_info['stars'],
+                    'analyzer': analyzer,
+                    'data': result
+                })
+                all_classifications.append(result['df_classified'])
+                print(f"\n✓✓✓ [{idx+1}/{num_repos}] {repo_name_full} 分析成功 ✓✓✓")
+                
+                # ここまでの全リポジトリの統合分析を出力
+                print(f"\n--- 統合分析レポート更新中 ({len(all_results)}件のリポジトリ) ---")
+                elapsed_time = datetime.now() - start_time
+                generate_combined_analysis(all_results, all_classifications, elapsed_time, failed_repos)
+                print(f"✓ 統合分析レポート更新完了")
+            else:
+                failed_repos.append({
+                    'repo': repo_name_full,
+                    'stars': repo_info['stars'],
+                    'reason': 'データ取得失敗'
+                })
+                print(f"\n✗✗✗ [{idx+1}/{num_repos}] {repo_name_full} 分析失敗（データなし） ✗✗✗")
+                print("→ 次のリポジトリに進みます...")
+                
+        except Exception as e:
+            failed_repos.append({
+                'repo': repo_name_full,
+                'stars': repo_info['stars'],
+                'reason': f'{type(e).__name__}: {str(e)}'
+            })
+            print(f"\n✗✗✗ [{idx+1}/{num_repos}] {repo_name_full} エラー発生 ✗✗✗")
+            print(f"エラー詳細: {type(e).__name__}: {str(e)}")
+            print("→ 次のリポジトリに進みます...")
+            continue
     
-    print(f"処理時間: {datetime.now() - start_time}")
+    # 結果サマリー
+    print(f"\n{'='*80}")
+    print("分析結果サマリー")
+    print(f"{'='*80}")
+    print(f"成功: {len(all_results)}/{num_repos}件")
+    print(f"失敗: {len(failed_repos)}/{num_repos}件")
+    
+    if failed_repos:
+        print(f"\n失敗したリポジトリ:")
+        for failed in failed_repos:
+            print(f"  - {failed['repo']}: {failed['reason']}")
+    
+    total_time = datetime.now() - start_time
+    print(f"\n{'='*80}")
+    print(f"総処理時間: {total_time}")
+    print(f"{'='*80}")
+
+
+def generate_combined_analysis(all_results, all_classifications, elapsed_time, failed_repos=None):
+    """複数リポジトリの統合分析結果を生成（累積更新版）"""
+    print("\n=== 統合分析結果生成中 ===")
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
+    # ファイル名を固定して上書き更新
+    output_file = os.path.join(output_dir, f"multi_repo_analysis_results.txt")
+    
+    # 全データを統合
+    combined_df = pd.concat(all_classifications, ignore_index=True)
+    
+    # 経過時間を文字列に変換
+    hours, remainder = divmod(elapsed_time.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    time_str = f"{hours}時間{minutes}分{seconds}秒" if hours > 0 else f"{minutes}分{seconds}秒"
+    
+    # 総リポジトリ数（成功+失敗）
+    total_repos = len(all_results) + (len(failed_repos) if failed_repos else 0)
+    
+    results = [
+        "=" * 80,
+        "複数リポジトリ統合分析結果",
+        "=" * 80,
+        "",
+        "■ 分析概要",
+        "-" * 40,
+        f"分析日時: {datetime.now().strftime('%Y年%m月%d日 %H:%M:%S')}",
+        f"分析対象リポジトリ数: {total_repos}件",
+        f"分析成功リポジトリ数: {len(all_results)}件",
+        f"分析失敗リポジトリ数: {len(failed_repos) if failed_repos else 0}件",
+        f"総コミット数: {len(combined_df)}件",
+        f"分析所要時間: {time_str}",
+        ""
+    ]
+    
+    # 失敗したリポジトリがある場合は記載
+    if failed_repos and len(failed_repos) > 0:
+        results.extend([
+            "■ 分析失敗リポジトリ",
+            "-" * 40
+        ])
+        for failed in failed_repos:
+            results.append(f"× {failed['repo']}")
+            results.append(f"  理由: {failed['reason']}")
+        results.append("")
+    
+    # 統計サマリー
+    total_ai = len(combined_df[combined_df['original_commit_type'] == 'AI'])
+    total_human = len(combined_df[combined_df['original_commit_type'] == 'Human'])
+    total_ai_generated = len(combined_df[combined_df['is_ai_generated'] == True])
+    
+    # AI/人間別のデータフレーム
+    ai_df = combined_df[combined_df['original_commit_type'] == 'AI'].copy()
+    human_df = combined_df[combined_df['original_commit_type'] == 'Human'].copy()
+    
+    # 日付をdatetime型に変換
+    ai_df['commit_date'] = pd.to_datetime(ai_df['commit_date'])
+    human_df['commit_date'] = pd.to_datetime(human_df['commit_date'])
+    
+    results.extend([
+        "■ 全体統計",
+        "-" * 40,
+        f"総ファイル数: {combined_df['file_path'].nunique()}件",
+        f"AI起源コミット（AI作成ファイルに対するコミット）: {total_ai}件 ({total_ai/len(combined_df)*100:.1f}%)",
+        f"人間起源コミット（人間作成ファイルに対するコミット）: {total_human}件 ({total_human/len(combined_df)*100:.1f}%)",
+        f"AI生成判定コミット: {total_ai_generated}件 ({total_ai_generated/len(combined_df)*100:.1f}%)",
+        ""
+    ])
+    
+    # AI作成ファイルの統計
+    results.extend([
+        "■ AI作成ファイルの統計",
+        "-" * 40
+    ])
+    
+    if len(ai_df) > 0:
+        ai_unique_files = ai_df['file_path'].nunique()
+        ai_commits_per_file = ai_df.groupby('file_path').size()
+        
+        # AI作成ファイルに対するコミットの作成者分析
+        ai_origin_ai_commits = len(ai_df[ai_df['is_ai_generated'] == True])
+        ai_origin_human_commits = len(ai_df[ai_df['is_ai_generated'] == False])
+        
+        results.extend([
+            f"ファイル数: {ai_unique_files}件",
+            f"総コミット数: {len(ai_df)}件",
+            "",
+            "コミット作成者の内訳:",
+            f"  AIによるコミット: {ai_origin_ai_commits}件 ({ai_origin_ai_commits/len(ai_df)*100:.1f}%)",
+            f"  人間によるコミット: {ai_origin_human_commits}件 ({ai_origin_human_commits/len(ai_df)*100:.1f}%)",
+            "",
+            f"1ファイルあたりの平均コミット数: {ai_commits_per_file.mean():.2f}件",
+            f"1ファイルあたりの最小コミット数: {ai_commits_per_file.min()}件",
+            f"1ファイルあたりの最大コミット数: {ai_commits_per_file.max()}件",
+            f"1ファイルあたりの中央値コミット数: {ai_commits_per_file.median():.1f}件",
+            ""
+        ])
+        
+        # コミット頻度分析（AI）
+        ai_frequencies = []
+        for file_path in ai_df['file_path'].unique():
+            file_commits = ai_df[ai_df['file_path'] == file_path].copy()
+            if len(file_commits) > 1:
+                dates = file_commits['commit_date'].sort_values()
+                time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
+                            for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
+                if time_diffs:
+                    ai_frequencies.extend(time_diffs)
+        
+        if ai_frequencies:
+            results.extend([
+                "コミット頻度:",
+                f"  平均間隔: {np.mean(ai_frequencies):.1f}日",
+                f"  中央値間隔: {np.median(ai_frequencies):.1f}日",
+                f"  最短間隔: {np.min(ai_frequencies)}日",
+                f"  最長間隔: {np.max(ai_frequencies)}日",
+                f"  標準偏差: {np.std(ai_frequencies):.1f}日",
+                ""
+            ])
+        else:
+            results.append("コミット頻度: データ不足\n")
+        
+        # AI作成ファイルのコミット分類
+        results.append("コミット分類の分布:")
+        ai_labels = ai_df['classification_label'].value_counts()
+        for label, count in ai_labels.items():
+            results.append(f"  {label}: {count}件 ({count/len(ai_df)*100:.1f}%)")
+        results.append("")
+    else:
+        results.extend(["データなし", ""])
+    
+    # 人間作成ファイルの統計
+    results.extend([
+        "■ 人間作成ファイルの統計",
+        "-" * 40
+    ])
+    
+    if len(human_df) > 0:
+        human_unique_files = human_df['file_path'].nunique()
+        human_commits_per_file = human_df.groupby('file_path').size()
+        
+        # 人間作成ファイルに対するコミットの作成者分析
+        human_origin_ai_commits = len(human_df[human_df['is_ai_generated'] == True])
+        human_origin_human_commits = len(human_df[human_df['is_ai_generated'] == False])
+        
+        results.extend([
+            f"ファイル数: {human_unique_files}件",
+            f"総コミット数: {len(human_df)}件",
+            "",
+            "コミット作成者の内訳:",
+            f"  AIによるコミット: {human_origin_ai_commits}件 ({human_origin_ai_commits/len(human_df)*100:.1f}%)",
+            f"  人間によるコミット: {human_origin_human_commits}件 ({human_origin_human_commits/len(human_df)*100:.1f}%)",
+            "",
+            f"1ファイルあたりの平均コミット数: {human_commits_per_file.mean():.2f}件",
+            f"1ファイルあたりの最小コミット数: {human_commits_per_file.min()}件",
+            f"1ファイルあたりの最大コミット数: {human_commits_per_file.max()}件",
+            f"1ファイルあたりの中央値コミット数: {human_commits_per_file.median():.1f}件",
+            ""
+        ])
+        
+        # コミット頻度分析（人間）
+        human_frequencies = []
+        for file_path in human_df['file_path'].unique():
+            file_commits = human_df[human_df['file_path'] == file_path].copy()
+            if len(file_commits) > 1:
+                dates = file_commits['commit_date'].sort_values()
+                time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
+                            for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
+                if time_diffs:
+                    human_frequencies.extend(time_diffs)
+        
+        if human_frequencies:
+            results.extend([
+                "コミット頻度:",
+                f"  平均間隔: {np.mean(human_frequencies):.1f}日",
+                f"  中央値間隔: {np.median(human_frequencies):.1f}日",
+                f"  最短間隔: {np.min(human_frequencies)}日",
+                f"  最長間隔: {np.max(human_frequencies)}日",
+                f"  標準偏差: {np.std(human_frequencies):.1f}日",
+                ""
+            ])
+        else:
+            results.append("コミット頻度: データ不足\n")
+        
+        # 人間作成ファイルのコミット分類
+        results.append("コミット分類の分布:")
+        human_labels = human_df['classification_label'].value_counts()
+        for label, count in human_labels.items():
+            results.append(f"  {label}: {count}件 ({count/len(human_df)*100:.1f}%)")
+        results.append("")
+    else:
+        results.extend(["データなし", ""])
+    
+    # 全体のコミット分類の統計（参考）
+    results.extend([
+        "■ 全体のコミット分類の統計（参考）",
+        "-" * 40
+    ])
+    label_counts = combined_df['classification_label'].value_counts()
+    for label, count in label_counts.items():
+        results.append(f"{label}: {count}件 ({count/len(combined_df)*100:.1f}%)")
+    results.append("")
+    
+    # AI作成ファイルで使用されたAIツールの分析
+    if len(ai_df) > 0:
+        results.extend([
+            "■ AI作成ファイルで使用されたAIツール",
+            "-" * 40
+        ])
+        
+        # 各ファイルの最初のコミット（ファイル作成時）のAIツールを取得
+        first_commits = ai_df.drop_duplicates(subset=['file_path'], keep='first')
+        tool_counts = first_commits['ai_tool'].value_counts()
+        
+        results.append(f"AI作成ファイル数: {len(first_commits)}件")
+        results.append("")
+        results.append("使用ツールの内訳:")
+        for tool, count in tool_counts.items():
+            if tool != 'N/A':
+                results.append(f"  {tool}: {count}件 ({count/len(first_commits)*100:.1f}%)")
+        results.append("")
+    
+    # リポジトリ別統計
+    results.extend([
+        "■ リポジトリ別サマリー",
+        "-" * 40,
+        ""
+    ])
+    
+    for idx, result_info in enumerate(all_results):
+        repo_name = result_info['repo']
+        stars = result_info['stars']
+        df = result_info['data']['df_classified']
+        
+        ai_count = len(df[df['original_commit_type'] == 'AI'])
+        human_count = len(df[df['original_commit_type'] == 'Human'])
+        ai_gen_count = len(df[df['is_ai_generated'] == True])
+        
+        results.extend([
+            f"【{idx+1}】 {repo_name}",
+            f"  スター数: {stars:,}",
+            f"  総コミット数: {len(df)}件",
+            f"  AI起源: {ai_count}件 ({ai_count/len(df)*100:.1f}%) / 人間起源: {human_count}件 ({human_count/len(df)*100:.1f}%)",
+            f"  AI生成判定: {ai_gen_count}件 ({ai_gen_count/len(df)*100:.1f}%)",
+            f"  ユニークファイル数: {df['file_path'].nunique()}件",
+            ""
+        ])
+        
+        # コミット分類分布
+        results.append("  コミット分類:")
+        repo_labels = df['classification_label'].value_counts().head(5)
+        for label, count in repo_labels.items():
+            results.append(f"    - {label}: {count}件 ({count/len(df)*100:.1f}%)")
+        results.append("")
+    
+    # 比較分析
+    results.extend([
+        "■ リポジトリ間比較",
+        "-" * 40,
+        ""
+    ])
+    
+    # AI率の比較
+    results.append("AI起源コミット率:")
+    for result_info in sorted(all_results, key=lambda x: len(x['data']['df_classified'][x['data']['df_classified']['original_commit_type'] == 'AI']) / len(x['data']['df_classified']), reverse=True):
+        df = result_info['data']['df_classified']
+        ai_rate = len(df[df['original_commit_type'] == 'AI']) / len(df) * 100
+        results.append(f"  {result_info['repo']}: {ai_rate:.1f}%")
+    results.append("")
+    
+    # ファイル保存
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(results))
+    
+    print(f"統合分析結果保存: {output_file}")
+    print("\n".join(results[:30]) + "\n...")
+
+
+def main():
+    """メイン実行"""
+    # CSVからリポジトリリスト読み込み
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(script_dir, "../dataset/repository_list.csv")
+    
+    print(f"リポジトリリスト読み込み: {csv_path}")
+    repo_df = pd.read_csv(csv_path)
+    repo_list = repo_df.to_dict('records')
+
+    # 分析対象リポジトリ数
+    num_repos = 3
+    
+    print(f"総リポジトリ数: {len(repo_list)}件")
+    print(f"分析対象: 上位{num_repos}件")
+    
+    # 複数リポジトリ分析実行
+    analyze_multiple_repositories(repo_list, num_repos)
 
 
 if __name__ == "__main__":

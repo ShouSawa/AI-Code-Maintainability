@@ -1,0 +1,771 @@
+original_commit_type,commit_hash,file_path,classification_label,commit_date,author,is_ai_generated,ai_tool,commit_message
+AI,e2a78d4e76adbce1f6b93f649820982165d6092d,maths/test_factorial.py,test,2025-10-20T00:59:36+00:00,Md Mahiuddin,False,N/A,"Add test for non-integer input to factorial function (#13024)
+
+* Add test for non-integer input to factorial function
+
+* Update test_factorial.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+AI,7665ba5e257a1a42caa36d781925d87968ee1497,maths/test_factorial.py,test,2025-07-05T10:58:45+00:00,Qasim Umar,True,General AI,"Add unit tests for factorial.py (#12815)
+
+* Add unit tests for factorial.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* uvx --python=3.12 unittest2pytest --write test_factorial.py
+
+* Update error message in current_stock_price.py
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Christian Clauss <cclauss@me.com>"
+AI,ca445f52964f74ef5d398fd8dd6561ee198b353a,graphs/bidirectional_search.py,feat,2025-05-22T15:08:37+00:00,Prajwal Choudhari,True,General AI,"Add bidirectional search algorithm implementation (#12649)
+
+* Add bidirectional search algorithm implementation
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Fix style and linting issues in bidirectional search
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Add doctest for main function
+
+* Add doctest for main function
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* fixed deprications
+
+* fixed deprications
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* removed unused import
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update bidirectional_search.py
+
+* Update bidirectional_search.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update bidirectional_search.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+AI,6e4d1b376546cdf347b6513ff5f493510b956309,physics/orbital_transfer_work.py,feat,2025-05-13T09:14:05+00:00,S Sajeev,True,General AI,"Physics orbital_transfer_work (#12728)
+
+* Added iterative solution for power calculation
+
+* Added iterative solution for power calculation
+
+* Added iterative solution for power calculation
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Added iterative solution for power calculation fixes #12709
+
+* Added iterative solution for power calculation  FIXES NUMBER 12709
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Escape velocity is the minimum speed an object must have to break free from a celestial body's gravitational pull without further propulsion.
+Takes input as the Mass of the Celestial body (M) and Radius fron the center of mass (M)
+
+* Fix: added header comment to escape_velocity.py
+
+* Trigger re-PR with a minor change
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Fix: resolve Ruff linter errors and add Wikipedia reference
+
+* Add: work done calculation for orbital transfer between orbits
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update escape_velocity.py
+
+* Delete maths/power_using_iteration.py
+
+* Update and rename workdone.py to orbital_transfer_work.py
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Christian Clauss <cclauss@me.com>"
+AI,95fb181f5a944427fdbc5766cbf4e1cb699d4a6d,physics/escape_velocity.py,feat,2025-05-10T20:43:39+00:00,S Sajeev,True,General AI,"Add escape velocity calculator using standard physics formula (#12721)
+
+* Added iterative solution for power calculation
+
+* Added iterative solution for power calculation
+
+* Added iterative solution for power calculation
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Added iterative solution for power calculation fixes #12709
+
+* Added iterative solution for power calculation  FIXES NUMBER 12709
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Escape velocity is the minimum speed an object must have to break free from a celestial body's gravitational pull without further propulsion.
+Takes input as the Mass of the Celestial body (M) and Radius fron the center of mass (M)
+
+* Fix: added header comment to escape_velocity.py
+
+* Trigger re-PR with a minor change
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Fix: resolve Ruff linter errors and add Wikipedia reference
+
+* Delete maths/power_using_iteration.py
+
+* Test doctests
+
+* Update escape_velocity.py
+
+* Update escape_velocity.py
+
+* Update escape_velocity.py
+
+* Update escape_velocity.py
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+AI,b720f24b89c328944f8a0d6c18db0e09d9bcffba,project_euler/problem_095/__init__.py,feat,2025-05-10T11:13:07+00:00,Mindaugas,True,General AI,"Add solution for the Euler project problem 95. (#12669)
+
+* Add documentation and tests for the Euler project problem 95 solution.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+AI,b720f24b89c328944f8a0d6c18db0e09d9bcffba,project_euler/problem_095/sol1.py,feat,2025-05-10T11:13:07+00:00,Mindaugas,True,General AI,"Add solution for the Euler project problem 95. (#12669)
+
+* Add documentation and tests for the Euler project problem 95 solution.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+AI,d9d56b10464f6825dc762c1665716e76b70c5fa2,project_euler/problem_345/__init__.py,feat,2025-05-06T19:49:59+00:00,Mindaugas,True,General AI,"Add solution for the Euler project problem 345 (#12666)
+
+* Add solution for the Euler project problem 345.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+AI,d9d56b10464f6825dc762c1665716e76b70c5fa2,project_euler/problem_345/sol1.py,feat,2025-05-06T19:49:59+00:00,Mindaugas,True,General AI,"Add solution for the Euler project problem 345 (#12666)
+
+* Add solution for the Euler project problem 345.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+AI,40f4c510b6047d95d07f03c9915a53bbf84789e4,project_euler/problem_190/__init__.py,feat,2025-05-05T07:14:56+00:00,Mindaugas,True,General AI,"Add solution for the Euler problem 190 (#12664)
+
+* Add solution for the Euler project problem 164.
+
+* Add solution for the Euler project problem 190.
+
+* Delete project_euler/problem_164/sol1.py
+
+* Delete project_euler/problem_164/__init__.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+AI,40f4c510b6047d95d07f03c9915a53bbf84789e4,project_euler/problem_190/sol1.py,feat,2025-05-05T07:14:56+00:00,Mindaugas,True,General AI,"Add solution for the Euler problem 190 (#12664)
+
+* Add solution for the Euler project problem 164.
+
+* Add solution for the Euler project problem 190.
+
+* Delete project_euler/problem_164/sol1.py
+
+* Delete project_euler/problem_164/__init__.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+Human,ed7c9b51f940307bfbec79e9cc4587e025e657c5,.devcontainer/post_install,build,2025-07-09T12:25:18+00:00,Bertrand Awenze,False,N/A,"Fix devcontainer build failure (#12837)
+
+* add post-installation script
+
+* set zsh as default terminal and make post-install execution on postcreate
+
+* rename file
+
+* rename script
+
+* Create devcontainers_ci.yml
+
+* Update devcontainer.json
+
+* Update devcontainers_ci.yml
+
+Never push image built here. It's for build testing purpose only.
+
+* postCreateCommand update to reflect that the shell script has been renamed.
+
+* update devcontainer readme file
+
+* trigger workflow only on devcontainer/** changes
+
+* prettier refactor"
+Human,f662b63d1ad958d6f14a25136979f3ebdabb987a,.github/workflows/devcontainer_ci.yml,build,2025-08-12T07:30:10+00:00,dependabot[bot],False,N/A,"Bump actions/checkout from 4 to 5 (#12891)
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 4 to 5.
+- [Release notes](https://github.com/actions/checkout/releases)
+- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/actions/checkout/compare/v4...v5)
+
+---
+updated-dependencies:
+- dependency-name: actions/checkout
+  dependency-version: '5'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+Human,ed7c9b51f940307bfbec79e9cc4587e025e657c5,.github/workflows/devcontainer_ci.yml,build,2025-07-09T12:25:18+00:00,Bertrand Awenze,False,N/A,"Fix devcontainer build failure (#12837)
+
+* add post-installation script
+
+* set zsh as default terminal and make post-install execution on postcreate
+
+* rename file
+
+* rename script
+
+* Create devcontainers_ci.yml
+
+* Update devcontainer.json
+
+* Update devcontainers_ci.yml
+
+Never push image built here. It's for build testing purpose only.
+
+* postCreateCommand update to reflect that the shell script has been renamed.
+
+* update devcontainer readme file
+
+* trigger workflow only on devcontainer/** changes
+
+* prettier refactor"
+Human,4b077c06b623ea20a90e9e5678e38101a4636584,financial/straight_line_depreciation.py,feat,2025-05-31T21:11:46+00:00,JEONGHYUN MIN,False,N/A,"feat: create straight_line_depreciation (#12377)
+
+Co-authored-by: Jeonghyun Min <20122791@tafe.wa.edu.au>"
+Human,d123cbc649e0777717b02dc74b4466872941a8d5,project_euler/problem_122/__init__.py,feat,2025-04-14T18:30:25+00:00,Mindaugas,False,N/A,"Solution for the Euler Project Problem 122 (#12655)
+
+* Add initial version for euler project problem 122.
+
+* Add doctests and documentation for the project euler problem 122.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+Human,d123cbc649e0777717b02dc74b4466872941a8d5,project_euler/problem_122/sol1.py,feat,2025-04-14T18:30:25+00:00,Mindaugas,False,N/A,"Solution for the Euler Project Problem 122 (#12655)
+
+* Add initial version for euler project problem 122.
+
+* Add doctests and documentation for the project euler problem 122.
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+* Update sol1.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+Human,63180d7e243a95ce28c2b52abcd7c81c452f623f,machine_learning/principle_component_analysis.py,ci,2025-09-12T22:56:14+00:00,Christian Clauss,True,General AI,"pre-commit autoupdate 2025-09-11 (#12963)
+
+* pre-commit autoupdate 2025-09-11
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+Human,8826ad3a4d75f7a4e1d7b1a682682528c2c73672,machine_learning/principle_component_analysis.py,feat,2025-03-02T11:03:12+00:00,PARIKSHIT SINGH,False,N/A,"feat: Implement Principal Component Analysis (PCA) (#12596)
+
+- Added PCA implementation with dataset standardization.
+- Used Singular Value Decomposition (SVD) for computing principal components.
+- Fixed import sorting to comply with PEP 8 (Ruff I001).
+- Ensured type hints and docstrings for better readability.
+- Added doctests to validate correctness.
+- Passed all Ruff checks and automated tests."
+Human,f04d308431266759dce36265d8701dfb106932af,dynamic_programming/longest_increasing_subsequence_iterative.py,feat,2025-01-14T20:49:04+00:00,Sanjay Muthu,False,N/A,"Create longest_increasing_subsequence_iterative.py (#12524)
+
+* Create longest_increasing_subsequence_iterative.py
+
+* Update longest_increasing_subsequence_iterative.py
+
+* Update longest_increasing_subsequence_iterative.py
+
+---------
+
+Co-authored-by: Maxim Smolskiy <mithridatus@mail.ru>"
+Human,7e55fb6474a06ecf0000fe11494fe5eefeeb54ab,graphs/lanczos_eigenvectors.py,feat,2024-12-30T19:00:30+00:00,Jeffrey Yancey,False,N/A,"- Implemented `find_lanczos_eigenvectors` to approximate the largest eigenvalues and corresponding eigenvectors of a graph based on its adjacency list. (#11906)
+
+- Utilized `lanczos_iteration` to construct tridiagonal matrices, optimized for large, sparse matrices.
+- Added `multiply_matrix_vector` for efficient matrix-vector multiplication using adjacency lists.
+- Included `validate_adjacency_list` for input validation.
+
+- Supports varied graph analysis applications, particularly for analyzing graph centrality.
+- Included type hints, comprehensive docstrings, and doctests.
+- PEP-8 compliant, with optimized handling of inputs and outputs.
+
+This module provides essential tools for eigenvalue-based graph analysis, ideal for centrality insights and structural assessments."
+Human,a2be5adf673c32720bbfb649c368af8fd7ae9dbb,conversions/rectangular_to_polar.py,test,2024-12-30T12:36:55+00:00,Julia Aragão,False,N/A,"Tests electronics/electric_conductivity.py  #9943 (#12437)
+
+* Function conversion rectangular number to polar
+
+* #9943 : adding test to elelectronics/electric_conductivity.py
+
+* updating DIRECTORY.md
+
+* Apply suggestions from code review
+
+* updating DIRECTORY.md
+
+* Rename rec_to_pol.py to rectangular_to_polar.py
+
+* updating DIRECTORY.md
+
+* Update conversions/rectangular_to_polar.py
+
+* Update conversions/rectangular_to_polar.py
+
+---------
+
+Co-authored-by: Julia <julia.de-jesus-aragao@imt-atlantique.net>
+Co-authored-by: juliaaragao <juliaaragao@users.noreply.github.com>
+Co-authored-by: Christian Clauss <cclauss@me.com>
+Co-authored-by: cclauss <cclauss@users.noreply.github.com>"
+Human,4fe50bc1fcf82fceb61839bae314720c092c0692,matrix/matrix_based_game.py,ci,2025-01-13T20:52:12+00:00,pre-commit-ci[bot],True,General AI,"[pre-commit.ci] pre-commit autoupdate -- ruff 2025 stable format (#12521)
+
+* [pre-commit.ci] pre-commit autoupdate
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.8.6 → v0.9.1](https://github.com/astral-sh/ruff-pre-commit/compare/v0.8.6...v0.9.1)
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update maths/dual_number_automatic_differentiation.py
+
+* Update maths/dual_number_automatic_differentiation.py
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* Update dual_number_automatic_differentiation.py
+
+* Update dual_number_automatic_differentiation.py
+
+* No <fin-streamer> tag with the specified data-test attribute found.
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Christian Clauss <cclauss@me.com>"
+Human,c7921226326f35932bbc9d214e9742c2f3d310bf,matrix/matrix_based_game.py,feat,2024-12-02T10:57:04+00:00,Anamaria Miranda,False,N/A,"Added matrix based color game algorithm (#12400)
+
+* Added matrix based color game
+
+* updating DIRECTORY.md
+
+---------
+
+Co-authored-by: Miranda13 <Miranda13@users.noreply.github.com>"
