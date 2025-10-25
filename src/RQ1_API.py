@@ -709,7 +709,7 @@ class RQ1AnalyzerAPI:
 
 
 def analyze_multiple_repositories(repo_list, num_repos=3):
-    """複数リポジトリの分析を実行 - 完遂保証版"""
+    """複数リポジトリの分析を実行 - 成功数ベース版"""
     github_token = os.getenv("GITHUB_TOKEN")
     
     if not github_token:
@@ -720,7 +720,7 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
     print(f"=" * 80)
     print(f"RQ1 複数リポジトリ分析 (GitHub API版)")
     print(f"=" * 80)
-    print(f"分析対象: {num_repos}リポジトリ")
+    print(f"目標分析数: {num_repos}リポジトリ（成功基準）")
     print(f"GitHub API: OK")
     print(f"=" * 80)
     
@@ -729,11 +729,14 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
     all_classifications = []
     failed_repos = []
     
-    # 各リポジトリを分析
-    for idx, repo_info in enumerate(repo_list[:num_repos]):
+    # 成功したリポジトリがnum_repos個になるまで続ける
+    idx = 0
+    while len(all_results) < num_repos and idx < len(repo_list):
+        repo_info = repo_list[idx]
         repo_name_full = f"{repo_info['owner']}/{repo_info['repository_name']}"
+        
         print(f"\n{'='*80}")
-        print(f"[{idx+1}/{num_repos}] {repo_name_full}")
+        print(f"[試行: {idx+1}] [成功: {len(all_results)}/{num_repos}] {repo_name_full}")
         print(f"スター数: {repo_info['stars']:,}")
         print(f"{'='*80}")
         
@@ -753,7 +756,7 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
                     'data': result
                 })
                 all_classifications.append(result['df_classified'])
-                print(f"\n✓✓✓ [{idx+1}/{num_repos}] {repo_name_full} 分析成功 ✓✓✓")
+                print(f"\n✓✓✓ [成功: {len(all_results)}/{num_repos}] {repo_name_full} 分析成功 ✓✓✓")
                 
                 # ここまでの全リポジトリの統合分析を出力
                 print(f"\n--- 統合分析レポート更新中 ({len(all_results)}件のリポジトリ) ---")
@@ -764,10 +767,10 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
                 failed_repos.append({
                     'repo': repo_name_full,
                     'stars': repo_info['stars'],
-                    'reason': 'データ取得失敗'
+                    'reason': 'データ取得失敗（180日以前のコミットなし）'
                 })
-                print(f"\n✗✗✗ [{idx+1}/{num_repos}] {repo_name_full} 分析失敗（データなし） ✗✗✗")
-                print("→ 次のリポジトリに進みます...")
+                print(f"\n✗✗✗ {repo_name_full} 分析失敗（データなし） ✗✗✗")
+                print(f"→ 次のリポジトリに進みます... (残り成功必要数: {num_repos - len(all_results)})")
                 
         except Exception as e:
             failed_repos.append({
@@ -775,17 +778,22 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
                 'stars': repo_info['stars'],
                 'reason': f'{type(e).__name__}: {str(e)}'
             })
-            print(f"\n✗✗✗ [{idx+1}/{num_repos}] {repo_name_full} エラー発生 ✗✗✗")
+            print(f"\n✗✗✗ {repo_name_full} エラー発生 ✗✗✗")
             print(f"エラー詳細: {type(e).__name__}: {str(e)}")
-            print("→ 次のリポジトリに進みます...")
-            continue
+            print(f"→ 次のリポジトリに進みます... (残り成功必要数: {num_repos - len(all_results)})")
+        
+        idx += 1
     
     # 結果サマリー
     print(f"\n{'='*80}")
     print("分析結果サマリー")
     print(f"{'='*80}")
-    print(f"成功: {len(all_results)}/{num_repos}件")
-    print(f"失敗: {len(failed_repos)}/{num_repos}件")
+    print(f"成功: {len(all_results)}件（目標: {num_repos}件）")
+    print(f"失敗: {len(failed_repos)}件")
+    print(f"試行総数: {idx}件")
+    
+    if len(all_results) < num_repos:
+        print(f"\n⚠ 警告: 目標の{num_repos}件に達しませんでした（リポジトリリスト不足）")
     
     if failed_repos:
         print(f"\n失敗したリポジトリ:")

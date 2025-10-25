@@ -1,0 +1,45 @@
+﻿repository_name,repository_owner,file_name,file_creator,line_count,created_by,creation_date,commit_count
+TheAlgorithms/Python,TheAlgorithms,machine_learning/loss_functions/binary_cross_entropy.py,Arnav Kohli,59,AI,2023-10-08T16:04:43+00:00,2
+TheAlgorithms/Python,TheAlgorithms,data_structures/arrays/kth_largest_element.py,Neha,117,AI,2023-10-26T08:54:30+00:00,1
+TheAlgorithms/Python,TheAlgorithms,machine_learning/loss_functions/mean_squared_logarithmic_error.py,Ankit Avinash,55,AI,2023-10-19T14:46:39+00:00,2
+TheAlgorithms/Python,TheAlgorithms,linear_algebra/src/gaussian_elimination_pivoting/gaussian_elimination_pivoting.py,Mohammad Esfandiyar,101,AI,2023-10-30T13:20:47+00:00,2
+TheAlgorithms/Python,TheAlgorithms,greedy_methods/best_time_to_buy_and_sell_stock.py,Kosuri L Indu,42,AI,2023-10-08T17:07:02+00:00,1
+TheAlgorithms/Python,TheAlgorithms,data_structures/suffix_tree/__init__.py,Ramy,0,AI,2024-09-28T13:37:00+00:00,1
+TheAlgorithms/Python,TheAlgorithms,source/__init__.py,pre-commit-ci[bot],0,AI,2024-07-02T05:02:29+00:00,4
+TheAlgorithms/Python,TheAlgorithms,physics/speeds_of_gas_molecules.py,Baron105,111,AI,2023-10-14T07:01:23+00:00,3
+TheAlgorithms/Python,TheAlgorithms,linear_algebra/matrix_inversion.py,Naitik Dwivedi,36,AI,2025-04-14T18:57:13+00:00,1
+TheAlgorithms/Python,TheAlgorithms,maths/joint_probability_distribution.py,Rahul Jangra,124,AI,2023-10-15T15:03:03+00:00,1
+TheAlgorithms/Python,TheAlgorithms,electronics/__init__.py,Maxim Smolskiy,0,Human,2024-04-02T19:13:56+00:00,1
+TheAlgorithms/Python,TheAlgorithms,machine_learning/loss_functions/categorical_cross_entropy.py,Arnav Kohli,85,Human,2023-10-10T13:20:49+00:00,2
+TheAlgorithms/Python,TheAlgorithms,strings/strip.py,Saurabh Mahapatra,33,Human,2023-10-08T16:10:41+00:00,1
+TheAlgorithms/Python,TheAlgorithms,data_structures/arrays/find_triplets_with_0_sum.py,Pranavkumar Mallela,24,Human,2023-10-12T19:51:53+00:00,2
+TheAlgorithms/Python,TheAlgorithms,machine_learning/loss_functions.py,Tianyi Zheng,252,Human,2023-10-20T21:29:42+00:00,9
+TheAlgorithms/Python,TheAlgorithms,scripts/close_pull_requests_with_require_tests.sh,Christian Clauss,22,Human,2024-09-30T10:49:31+00:00,1
+TheAlgorithms/Python,TheAlgorithms,physics/terminal_velocity.py,Paarth Goyal,60,Human,2023-10-23T05:43:30+00:00,2
+TheAlgorithms/Python,TheAlgorithms,index.md,Christian Clauss,10,Human,2024-10-08T17:09:28+00:00,1
+TheAlgorithms/Python,TheAlgorithms,neural_network/activation_functions/__init__.py,Maxim Smolskiy,0,Human,2024-04-02T19:13:56+00:00,1
+TheAlgorithms/Python,TheAlgorithms,ciphers/running_key_cipher.py,Arshdeep Singh Sachdeva,75,Human,2023-10-29T14:55:37+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/app/marketplace/page.tsx,Swifty,7,AI,2024-09-20T14:50:43+00:00,15
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/backend/server/v2/store/admin_routes.py,Nicholas Tindle,207,AI,2025-03-23T23:30:54+00:00,2
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20241230102007_update_store_agent_view/migration.sql,Swifty,50,AI,2024-12-30T15:04:35+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20250318043016_update_store_submissions_format/migration.sql,Nicholas Tindle,372,AI,2025-03-23T23:30:54+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/components/admin/marketplace/admin-agents-data-table.tsx,Nicholas Tindle,99,Human,2025-03-24T07:52:35+00:00,3
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/backend/blocks/github/statuses.py,Nicholas Tindle,180,Human,2025-01-28T12:34:09+00:00,3
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20241212142024_creator_featured_flag/migration.sql,Swifty,2,Human,2024-12-18T13:32:03+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/components/agptui/composite/FeaturedCreators.tsx,Swifty,56,Human,2024-12-13T16:35:02+00:00,8
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLib/SteamGameHelper.cpp,Kai Tao,171,AI,2025-04-23T07:39:54+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Hosts/Hosts.UITests/Release-Test-Checklist-Migration-Progress.md,Jerry Xu,26,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/SessionHelper.cs,Jerry Xu,101,AI,2025-02-28T11:08:08+00:00,8
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/TextBlock.cs,Jerry Xu,23,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/HyperlinkButton.cs,Jerry Xu,23,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLib/SteamHelper.h,Kai Tao,24,AI,2025-04-23T07:39:54+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Hosts/Hosts.UITests/HostsSettingTests.cs,Jerry Xu,129,AI,2025-02-28T11:08:08+00:00,2
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/NavigationViewItem.cs,Jerry Xu,59,AI,2025-02-28T11:08:08+00:00,2
+microsoft/PowerToys,microsoft,src/modules/cmdpal/Microsoft.CmdPal.UI/Assets/Dev/Square150x150Logo.scale-150.png,Mike Griese,193,Human,2025-03-19T08:39:57+00:00,2
+microsoft/PowerToys,microsoft,src/modules/cmdpal/Exts/Microsoft.CmdPal.Ext.WindowsSettings/Microsoft.CmdPal.Ext.WindowsSettings.csproj,Mike Griese,46,Human,2025-03-19T08:39:57+00:00,2
+microsoft/PowerToys,microsoft,src/modules/ZoomIt/ZoomIt/VideoRecordingSession.cpp,Jaime Bernardo,391,Human,2025-01-16T20:52:24+00:00,1
+microsoft/PowerToys,microsoft,src/modules/ZoomIt/ZoomIt/ZoomIt.vcxproj.filters,Jaime Bernardo,130,Human,2025-01-16T20:52:24+00:00,1
+microsoft/PowerToys,microsoft,src/modules/ZoomIt/ZoomItSettingsInterop/resource.h,Jaime Bernardo,13,Human,2025-01-16T20:52:24+00:00,1
+microsoft/PowerToys,microsoft,src/modules/cmdpal/Exts/ProcessMonitorExtension/Assets/LockScreenLogo.scale-200.png,Mike Griese,10,Human,2025-03-19T08:39:57+00:00,2
+microsoft/PowerToys,microsoft,src/modules/cmdpal/Microsoft.CmdPal.UI/Assets/Stable/Square44x44Logo.targetsize-24.png,Mike Griese,28,Human,2025-03-19T08:39:57+00:00,2
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLauncher/RegistryUtils.cpp,Seraphima Zykova,84,Human,2024-08-23T07:28:13+00:00,1
