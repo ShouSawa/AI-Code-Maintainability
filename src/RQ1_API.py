@@ -85,13 +85,13 @@ class RQ1AnalyzerAPI:
         return 'General AI'
 
     def get_commits_with_file_additions_api(self, max_commits=500):
-        """GitHub APIで180日以前のファイル追加コミット取得（足りない場合は90日以前も取得）"""
+        """GitHub APIで180日以前のファイル追加コミット取得"""
         print("=== GitHub APIでコミット取得中 ===")
         
         commits_data = []
         
         try:
-            # まず180日以前のコミットを取得
+            # 180日以前のコミットを取得
             cutoff_date_180 = datetime.now() - timedelta(days=180)
             print(f"180日以前のコミットを取得中 (until: {cutoff_date_180.date()})...")
             commits_180 = self.repo.get_commits(until=cutoff_date_180)
@@ -136,70 +136,6 @@ class RQ1AnalyzerAPI:
                 except Exception as e:
                     print(f"コミット処理エラー {commit.sha[:8]}: {e}")
                     continue
-            
-            print(f"180日以前のコミット取得完了: {len(commits_data)}件（ファイル追加あり）")
-            
-            # max_commitsに達していない場合、90日以前のコミットも取得
-            if len(commits_data) < max_commits:
-                remaining = max_commits - len(commits_data)
-                print(f"max_commitsに未達 ({len(commits_data)}/{max_commits})")
-                print(f"90日以前のコミットを追加取得中 (最大{remaining}件)...")
-                
-                cutoff_date_90 = datetime.now() - timedelta(days=90)
-                cutoff_date_180 = datetime.now() - timedelta(days=180)
-                
-                # 90日以前180日より後のコミットを取得
-                commits_90_180 = self.repo.get_commits(until=cutoff_date_90, since=cutoff_date_180)
-                
-                # 既に取得したコミットのハッシュセット
-                existing_hashes = {c['hash'] for c in commits_data}
-                
-                for commit in commits_90_180:
-                    if len(commits_data) >= max_commits:
-                        print(f"最大コミット数({max_commits})に達しました")
-                        break
-                    
-                    # 重複チェック
-                    if commit.sha in existing_hashes:
-                        continue
-                    
-                    count += 1
-                    if count % 50 == 0:
-                        print(f"処理中: {len(commits_data)}件...")
-                    
-                    try:
-                        # コミット情報取得
-                        commit_sha = commit.sha
-                        author_name = commit.commit.author.name or "Unknown"
-                        author_email = commit.commit.author.email or "unknown@example.com"
-                        commit_date = commit.commit.author.date.isoformat()
-                        message = commit.commit.message
-                        
-                        # 追加されたファイルを検索
-                        added_files = []
-                        for file in commit.files:
-                            if file.status == 'added':
-                                added_files.append(file.filename)
-                        
-                        if added_files:
-                            commits_data.append({
-                                'hash': commit_sha,
-                                'author_name': author_name,
-                                'author_email': author_email,
-                                'date': commit_date,
-                                'message': message,
-                                'added_files': added_files
-                            })
-                            existing_hashes.add(commit_sha)
-                        
-                        # API rate limit対策
-                        time.sleep(0.1)
-                        
-                    except Exception as e:
-                        print(f"コミット処理エラー {commit.sha[:8]}: {e}")
-                        continue
-                
-                print(f"90日以前のコミット追加取得完了: +{len(commits_data) - (max_commits - remaining)}件")
             
             print(f"コミット取得完了: 合計{len(commits_data)}件（ファイル追加あり）")
             return commits_data
@@ -273,25 +209,73 @@ class RQ1AnalyzerAPI:
             print(f"ファイル履歴取得エラー {file_path}: {e}")
             return []
 
-    def get_files_by_author_type(self, df, target_ai_count=20, target_human_count=20):
-        """AI/Humanファイル選択（同数調整版）"""
-        ai_files, human_files = [], []
+    def get_file_line_count(self, file_path, commit_sha):
+        """ファイルの行数を取得"""
+        try:
+            # 特定のコミットでのファイル内容を取得
+            content = self.repo.get_contents(file_path, ref=commit_sha)
+            if content.encoding == 'base64':
+                import base64
+                decoded_content = base64.b64decode(content.content).decode('utf-8', errors='ignore')
+                return len(decoded_content.splitlines())
+            return 0
+        except Exception as e:
+            print(f"ファイル行数取得エラー {file_path}: {e}")
+            return 0
+
+    def get_file_creation_info(self, file_path):
+        """ファイルの作成情報を取得（最初のコミット）"""
+        try:
+            commits = self.repo.get_commits(path=file_path)
+            commit_list = list(commits)
+            if commit_list:
+                # 最後のコミット（最初のコミット）を取得
+                first_commit = commit_list[-1]
+                return {
+                    'author_name': first_commit.commit.author.name or "Unknown",
+                    'creation_date': first_commit.commit.author.date.isoformat(),
+                    'commit_count': len(commit_list)
+                }
+            return None
+        except Exception as e:
+            print(f"ファイル作成情報取得エラー {file_path}: {e}")
+            return None
+
+    def get_files_by_author_type(self, df, target_ai_count=10, target_human_count=10):
+        """AI/Humanファイル選択（ランダムサンプリング版）"""
+        # AI作成ファイルと人間作成ファイルを分離
+        ai_df = df[df['author_type'] == 'AI'].copy()
+        human_df = df[df['author_type'] == 'Human'].copy()
         
-        for _, row in df.iterrows():
-            if len(ai_files) >= target_ai_count and len(human_files) >= target_human_count:
-                break
+        # ランダムサンプリング
+        ai_files = []
+        human_files = []
+        
+        # AI作成ファイルをランダムに選択
+        if len(ai_df) > 0:
+            sample_size_ai = min(target_ai_count, len(ai_df))
+            ai_sampled = ai_df.sample(n=sample_size_ai, random_state=None)  # random_state=Noneで毎回異なる
             
-            file_info = {
-                'commit_hash': row['commit_hash'],
-                'added_file': row['added_file'],
-                'author_type': row['author_type'],
-                'ai_tool': row['ai_tool']
-            }
+            for _, row in ai_sampled.iterrows():
+                ai_files.append({
+                    'commit_hash': row['commit_hash'],
+                    'added_file': row['added_file'],
+                    'author_type': row['author_type'],
+                    'ai_tool': row['ai_tool']
+                })
+        
+        # 人間作成ファイルをランダムに選択
+        if len(human_df) > 0:
+            sample_size_human = min(target_human_count, len(human_df))
+            human_sampled = human_df.sample(n=sample_size_human, random_state=None)
             
-            if row['author_type'] == 'AI' and len(ai_files) < target_ai_count:
-                ai_files.append(file_info)
-            elif row['author_type'] == 'Human' and len(human_files) < target_human_count:
-                human_files.append(file_info)
+            for _, row in human_sampled.iterrows():
+                human_files.append({
+                    'commit_hash': row['commit_hash'],
+                    'added_file': row['added_file'],
+                    'author_type': row['author_type'],
+                    'ai_tool': row['ai_tool']
+                })
         
         # 同数に調整
         min_count = min(len(ai_files), len(human_files))
@@ -310,6 +294,9 @@ class RQ1AnalyzerAPI:
         ai_count = sum(1 for f in selected_files if f['author_type'] == 'AI')
         print(f"選択ファイル: {len(selected_files)} (AI:{ai_count} Human:{len(selected_files)-ai_count})")
         
+        # ファイル情報記録用
+        file_info_records = []
+        
         results = []
         for idx, file_info in enumerate(selected_files):
             print(f"処理中: {idx+1}/{len(selected_files)} - {file_info['added_file']}")
@@ -317,6 +304,23 @@ class RQ1AnalyzerAPI:
             file_path = file_info['added_file']
             commit_hash = file_info['commit_hash']
             author_type = file_info['author_type']
+            
+            # ファイル作成情報を取得
+            creation_info = self.get_file_creation_info(file_path)
+            if creation_info:
+                line_count = self.get_file_line_count(file_path, commit_hash)
+                
+                # ファイル情報を記録
+                file_info_records.append({
+                    'repository_name': self.repo_name_full,
+                    'repository_owner': self.repo_name_full.split('/')[0],
+                    'file_name': file_path,
+                    'file_creator': creation_info['author_name'],
+                    'line_count': line_count,
+                    'created_by': author_type,
+                    'creation_date': creation_info['creation_date'],
+                    'commit_count': creation_info['commit_count']
+                })
             
             commit_logs = self.get_file_commits_api(file_path)
             
@@ -352,6 +356,9 @@ class RQ1AnalyzerAPI:
                             log['message'], log['author'], log['email']
                         ) if is_ai else 'N/A'
                     })
+        
+        # ファイル情報をインスタンス変数として保存
+        self.file_info_records = file_info_records
         
         return pd.DataFrame(results) if results else None
 
@@ -623,6 +630,30 @@ class RQ1AnalyzerAPI:
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write('\n'.join(results))
 
+    def save_files_info_to_csv(self):
+        """ファイル情報をCSVに保存（累積更新版）"""
+        if not hasattr(self, 'file_info_records') or not self.file_info_records:
+            print("保存するファイル情報がありません")
+            return
+        
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_files.csv")
+        
+        # 新しいデータをDataFrameに変換
+        new_df = pd.DataFrame(self.file_info_records)
+        
+        # 既存のCSVがあれば読み込んで結合
+        if os.path.exists(csv_path):
+            existing_df = pd.read_csv(csv_path)
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        else:
+            combined_df = new_df
+        
+        # CSVに保存
+        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+        print(f"✓ ファイル情報をCSVに保存: {csv_path}")
+        print(f"  今回追加: {len(new_df)}件, 合計: {len(combined_df)}件")
+
     def run_full_analysis(self):
         """全分析実行（API版）- エラーハンドリング強化版"""
         print(f"=== RQ1分析開始 (API版): {self.repo_name_full} ===")
@@ -654,6 +685,10 @@ class RQ1AnalyzerAPI:
                 return None
             
             print(f"✓ ステップ3完了: {len(df_classified)}件のコミットを分類")
+            
+            # ファイル情報をCSVに保存
+            print("\n--- ファイル情報のCSV保存 ---")
+            self.save_files_info_to_csv()
             
             # 個別レポートは出力せず、統合分析でまとめて出力
             print(f"\n✓✓✓ 完了: {self.repo_name} ✓✓✓")
@@ -863,7 +898,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         ])
         
         # コミット頻度分析（AI）
-        ai_frequencies = []
+        ai_frequencies_days = []
         for file_path in ai_df['file_path'].unique():
             file_commits = ai_df[ai_df['file_path'] == file_path].copy()
             if len(file_commits) > 1:
@@ -871,16 +906,26 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
                 time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
                             for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
                 if time_diffs:
-                    ai_frequencies.extend(time_diffs)
+                    ai_frequencies_days.extend(time_diffs)
         
-        if ai_frequencies:
+        if ai_frequencies_days:
+            # 週単位に変換
+            ai_frequencies_weeks = [days / 7.0 for days in ai_frequencies_days]
+            
             results.extend([
                 "コミット頻度:",
-                f"  平均間隔: {np.mean(ai_frequencies):.1f}日",
-                f"  中央値間隔: {np.median(ai_frequencies):.1f}日",
-                f"  最短間隔: {np.min(ai_frequencies)}日",
-                f"  最長間隔: {np.max(ai_frequencies)}日",
-                f"  標準偏差: {np.std(ai_frequencies):.1f}日",
+                "  [週単位]",
+                f"    平均間隔: {np.mean(ai_frequencies_weeks):.2f}週",
+                f"    中央値間隔: {np.median(ai_frequencies_weeks):.2f}週",
+                f"    最短間隔: {np.min(ai_frequencies_weeks):.2f}週",
+                f"    最長間隔: {np.max(ai_frequencies_weeks):.2f}週",
+                f"    標準偏差: {np.std(ai_frequencies_weeks):.2f}週",
+                "  [日単位（参考）]",
+                f"    平均間隔: {np.mean(ai_frequencies_days):.1f}日",
+                f"    中央値間隔: {np.median(ai_frequencies_days):.1f}日",
+                f"    最短間隔: {np.min(ai_frequencies_days)}日",
+                f"    最長間隔: {np.max(ai_frequencies_days)}日",
+                f"    標準偏差: {np.std(ai_frequencies_days):.1f}日",
                 ""
             ])
         else:
@@ -925,7 +970,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         ])
         
         # コミット頻度分析（人間）
-        human_frequencies = []
+        human_frequencies_days = []
         for file_path in human_df['file_path'].unique():
             file_commits = human_df[human_df['file_path'] == file_path].copy()
             if len(file_commits) > 1:
@@ -933,16 +978,26 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
                 time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
                             for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
                 if time_diffs:
-                    human_frequencies.extend(time_diffs)
+                    human_frequencies_days.extend(time_diffs)
         
-        if human_frequencies:
+        if human_frequencies_days:
+            # 週単位に変換
+            human_frequencies_weeks = [days / 7.0 for days in human_frequencies_days]
+            
             results.extend([
                 "コミット頻度:",
-                f"  平均間隔: {np.mean(human_frequencies):.1f}日",
-                f"  中央値間隔: {np.median(human_frequencies):.1f}日",
-                f"  最短間隔: {np.min(human_frequencies)}日",
-                f"  最長間隔: {np.max(human_frequencies)}日",
-                f"  標準偏差: {np.std(human_frequencies):.1f}日",
+                "  [週単位]",
+                f"    平均間隔: {np.mean(human_frequencies_weeks):.2f}週",
+                f"    中央値間隔: {np.median(human_frequencies_weeks):.2f}週",
+                f"    最短間隔: {np.min(human_frequencies_weeks):.2f}週",
+                f"    最長間隔: {np.max(human_frequencies_weeks):.2f}週",
+                f"    標準偏差: {np.std(human_frequencies_weeks):.2f}週",
+                "  [日単位（参考）]",
+                f"    平均間隔: {np.mean(human_frequencies_days):.1f}日",
+                f"    中央値間隔: {np.median(human_frequencies_days):.1f}日",
+                f"    最短間隔: {np.min(human_frequencies_days)}日",
+                f"    最長間隔: {np.max(human_frequencies_days)}日",
+                f"    標準偏差: {np.std(human_frequencies_days):.1f}日",
                 ""
             ])
         else:
