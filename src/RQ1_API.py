@@ -1116,7 +1116,7 @@ def main():
     repo_list = repo_df.to_dict('records')
 
     # 分析対象リポジトリ数
-    num_repos = 3
+    num_repos = 100
     
     print(f"総リポジトリ数: {len(repo_list)}件")
     print(f"分析対象: 上位{num_repos}件")
