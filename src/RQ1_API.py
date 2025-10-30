@@ -417,35 +417,42 @@ class RQ1AnalyzerAPI:
         results = []
         total = len(df)
         
-        for idx, row in df.iterrows():
-            print(f"進捗: {idx}/{total} ({idx/total*100:.0f}%)")
+        try:
+            for idx, row in df.iterrows():
+                print(f"進捗: {idx}/{total} ({idx/total*100:.0f}%)")
+                
+                commit_sha = row['commit_hash']
+                base_result = {
+                    'original_commit_type': row['original_commit_type'],
+                    'commit_hash': commit_sha,
+                    'file_path': row['file_path'],
+                    'commit_date': row['commit_date'],
+                    'author': row['author'],
+                    'is_ai_generated': row['is_ai_generated'],
+                    'ai_tool': row.get('ai_tool', 'N/A'),
+                    'commit_message': row['commit_message']
+                }
+                
+                if commit_sha == 'No commits found':
+                    base_result['classification_label'] = 'no_commits'
+                else:
+                    try:
+                        message, diff = self.fetch_message_and_diff(commit_sha)
+                        base_result['classification_label'] = self.classify_commit(message, diff) if message and diff else 'fetch_error'
+                    except Exception as e:
+                        print(f"エラー {commit_sha[:8]}: {e}")
+                        base_result['classification_label'] = 'error'
+                
+                results.append(base_result)
             
-            commit_sha = row['commit_hash']
-            base_result = {
-                'original_commit_type': row['original_commit_type'],
-                'commit_hash': commit_sha,
-                'file_path': row['file_path'],
-                'commit_date': row['commit_date'],
-                'author': row['author'],
-                'is_ai_generated': row['is_ai_generated'],
-                'ai_tool': row.get('ai_tool', 'N/A'),
-                'commit_message': row['commit_message']
-            }
+            print("分類処理完了")
+            return pd.DataFrame(results)
             
-            if commit_sha == 'No commits found':
-                base_result['classification_label'] = 'no_commits'
-            else:
-                try:
-                    message, diff = self.fetch_message_and_diff(commit_sha)
-                    base_result['classification_label'] = self.classify_commit(message, diff) if message and diff else 'fetch_error'
-                except Exception as e:
-                    print(f"エラー {commit_sha[:8]}: {e}")
-                    base_result['classification_label'] = 'error'
-            
-            results.append(base_result)
-        
-        print("分類処理完了")
-        return pd.DataFrame(results)
+        except Exception as e:
+            print(f"\n✗✗✗ 致命的エラー（Segmentation fault等）: {type(e).__name__} ✗✗✗")
+            print(f"詳細: {str(e)}")
+            print("このリポジトリをスキップします")
+            return None
 
     def analyze_subset(self, subset_df, label):
         """サブセット分析（日本語出力）"""

@@ -43,3 +43,1137 @@ microsoft/PowerToys,microsoft,src/modules/ZoomIt/ZoomItSettingsInterop/resource.
 microsoft/PowerToys,microsoft,src/modules/cmdpal/Exts/ProcessMonitorExtension/Assets/LockScreenLogo.scale-200.png,Mike Griese,10,Human,2025-03-19T08:39:57+00:00,2
 microsoft/PowerToys,microsoft,src/modules/cmdpal/Microsoft.CmdPal.UI/Assets/Stable/Square44x44Logo.targetsize-24.png,Mike Griese,28,Human,2025-03-19T08:39:57+00:00,2
 microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLauncher/RegistryUtils.cpp,Seraphima Zykova,84,Human,2024-08-23T07:28:13+00:00,1
+TheAlgorithms/Python,TheAlgorithms,.github/.github/dependabot.yml,AtomicVar,8,AI,2024-01-16T08:39:54+00:00,2
+TheAlgorithms/Python,TheAlgorithms,data_structures/arrays/sparse_table.py,hollowcrust,94,AI,2023-10-15T20:13:27+00:00,2
+TheAlgorithms/Python,TheAlgorithms,greedy_methods/smallest_range.py,Pedram_Mohajer,71,AI,2023-12-01T16:53:47+00:00,2
+TheAlgorithms/Python,TheAlgorithms,boolean_algebra/karnaugh_map_simplification.py,Khushi Shukla,55,AI,2023-10-29T21:20:57+00:00,1
+TheAlgorithms/Python,TheAlgorithms,computer_vision/intensity_based_segmentation.py,SUDO_USER,62,AI,2024-12-30T15:12:04+00:00,1
+TheAlgorithms/Python,TheAlgorithms,bit_manipulation/find_unique_number.py,parth-6945,37,AI,2025-04-14T18:01:29+00:00,1
+TheAlgorithms/Python,TheAlgorithms,maths/perfect_number.py,Utsav Akash Naskar,77,AI,2020-07-28T07:59:44+00:00,5
+TheAlgorithms/Python,TheAlgorithms,maths/fast_inverse_sqrt.py,Aryansh B,54,AI,2023-10-29T20:57:37+00:00,1
+TheAlgorithms/Python,TheAlgorithms,maths/geometric_mean.py,Kaustubh Mani Tripathi,55,AI,2024-12-31T02:16:32+00:00,1
+TheAlgorithms/Python,TheAlgorithms,docs/source/__init__.py,pre-commit-ci[bot],0,AI,2024-07-02T05:02:29+00:00,3
+TheAlgorithms/Python,TheAlgorithms,physics/rainfall_intensity.py,Yuri Batista Ishizawa,143,Human,2024-06-11T09:45:00+00:00,1
+TheAlgorithms/Python,TheAlgorithms,.github/workflows/sphinx.yml,Christian Clauss,50,Human,2024-10-08T17:09:28+00:00,10
+TheAlgorithms/Python,TheAlgorithms,electronics/__init__.py,Maxim Smolskiy,0,Human,2024-04-02T19:13:56+00:00,1
+TheAlgorithms/Python,TheAlgorithms,greedy_methods/__init__.py,Maxim Smolskiy,0,Human,2024-04-02T19:13:56+00:00,1
+TheAlgorithms/Python,TheAlgorithms,scripts/close_pull_requests_with_failing_tests.sh,Christian Clauss,22,Human,2024-09-30T10:49:31+00:00,1
+TheAlgorithms/Python,TheAlgorithms,graphs/lanczos_eigenvectors.py,Jeffrey Yancey,206,Human,2024-12-30T19:00:30+00:00,1
+TheAlgorithms/Python,TheAlgorithms,project_euler/problem_122/__init__.py,Mindaugas,0,Human,2025-04-14T18:30:25+00:00,1
+TheAlgorithms/Python,TheAlgorithms,data_structures/binary_tree/is_sorted.py,Christian Clauss,97,Human,2023-10-19T17:31:51+00:00,3
+TheAlgorithms/Python,TheAlgorithms,physics/reynolds_number.py,Paarth Goyal,63,Human,2023-10-10T05:24:04+00:00,2
+TheAlgorithms/Python,TheAlgorithms,fractals/__init__.py,Maxim Smolskiy,0,Human,2024-04-02T19:13:56+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/app/marketplace/page.tsx,Swifty,7,AI,2024-09-20T14:50:43+00:00,15
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20250318043016_update_store_submissions_format/migration.sql,Nicholas Tindle,372,AI,2025-03-23T23:30:54+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20241230102007_update_store_agent_view/migration.sql,Swifty,50,AI,2024-12-30T15:04:35+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/backend/server/v2/store/admin_routes.py,Nicholas Tindle,207,AI,2025-03-23T23:30:54+00:00,2
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/app/onboarding/reset/page.ts,Krzysztof Czerwinski,17,Human,2025-03-06T12:19:33+00:00,4
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/backend/migrations/20250416140000_make_arrays_not_null/migration.sql,Krzysztof Czerwinski,56,Human,2025-04-18T07:43:54+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,docs/content/platform/delete-agent.md,Kaitlyn Barnard,23,Human,2024-12-06T19:14:15+00:00,1
+Significant-Gravitas/AutoGPT,Significant-Gravitas,autogpt_platform/frontend/src/components/library/library-action-sub-header.tsx,Swifty,22,Human,2025-02-25T17:29:15+00:00,3
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/SessionHelper.cs,Jerry Xu,101,AI,2025-02-28T11:08:08+00:00,8
+microsoft/PowerToys,microsoft,src/modules/Hosts/Hosts.UITests/Release-Test-Checklist-Migration-Progress.md,Jerry Xu,26,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/TextBlock.cs,Jerry Xu,23,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Hosts/Hosts.UITests/HostsSettingTests.cs,Jerry Xu,129,AI,2025-02-28T11:08:08+00:00,2
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/NavigationViewItem.cs,Jerry Xu,59,AI,2025-02-28T11:08:08+00:00,2
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLib/SteamGameHelper.cpp,Kai Tao,171,AI,2025-04-23T07:39:54+00:00,1
+microsoft/PowerToys,microsoft,src/common/UITestAutomation/Element/HyperlinkButton.cs,Jerry Xu,23,AI,2025-02-28T11:08:08+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesLib/SteamHelper.h,Kai Tao,24,AI,2025-04-23T07:39:54+00:00,1
+microsoft/PowerToys,microsoft,src/modules/fancyzones/UITests-FancyZonesEditor/EditLayoutTests.cs,dreamstart,653,Human,2025-03-14T09:04:23+00:00,3
+microsoft/PowerToys,microsoft,src/modules/ZoomIt/ZoomItModuleInterface/ZoomItModuleInterface.vcxproj,Jaime Bernardo,113,Human,2025-01-16T20:52:24+00:00,1
+microsoft/PowerToys,microsoft,src/settings-ui/Settings.UI/Helpers/PowerToysReleaseInfo.cs,moooyo,29,Human,2025-02-24T18:48:54+00:00,1
+microsoft/PowerToys,microsoft,src/modules/cmdpal/extensionsdk/Microsoft.CommandPalette.Extensions.Toolkit/ISettingsForm.cs,Mike Griese,20,Human,2025-03-19T08:39:57+00:00,1
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesEditor/Telemetry/EditEvent.cs,Seraphima Zykova,48,Human,2024-08-23T07:28:13+00:00,3
+microsoft/PowerToys,microsoft,src/modules/Workspaces/WorkspacesWindowArranger/PropertySheet.props,Seraphima Zykova,16,Human,2024-09-25T09:13:38+00:00,1
+microsoft/PowerToys,microsoft,src/modules/cmdpal/Exts/Microsoft.CmdPal.Ext.Indexer/Commands/OpenInConsoleCommand.cs,Mike Griese,45,Human,2025-03-19T08:39:57+00:00,2
+microsoft/PowerToys,microsoft,src/modules/registrypreview/RegistryPreview/Telemetry/RegistryPreviewEditorStartEvent.cs,dreamstart,18,Human,2025-03-18T13:52:24+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsReexport.ts,Nathan Shively-Sanders,15,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsTslib.ts,Nathan Shively-Sanders,19,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsOneJs.ts,Nathan Shively-Sanders,15,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsDynamic.ts,Nathan Shively-Sanders,12,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsOne.ts,Nathan Shively-Sanders,14,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsNone.ts,Nathan Shively-Sanders,12,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsJSXFactory.ts,Nathan Shively-Sanders,108,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/getImportsDuplicate.ts,Nathan Shively-Sanders,16,AI,2024-09-26T23:10:41+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/server/pasteEdits_requireImportJsx.ts,Isabel Duan,47,Human,2024-11-01T00:03:12+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/tsbuild/noCheck/outFile/dts-errors-with-incremental-discrepancies.js,Sheetal Nandi,114,Human,2024-06-14T18:40:32+00:00,3
+microsoft/TypeScript,microsoft,tests/baselines/reference/declarationAssertionNodeNotReusedWhenTypeNotEquivalent1.types,Mateusz Burzyński,74,Human,2024-12-04T20:04:14+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/declarationEmitExactOptionalPropertyTypesNodeNotReused(exactoptionalpropertytypes=false).types,Wesley Wigham,53,Human,2024-07-10T20:05:12+00:00,2
+microsoft/TypeScript,microsoft,tests/baselines/reference/classFieldsBrokenConstructorEmitNoCrash1.types,Mateusz Burzyński,16,Human,2024-07-22T23:00:16+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesAllowJsImportHelpersCollisions3(module=node18).types,Andrew Branch,50,Human,2024-12-13T18:16:23+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/signatureHelpInferenceJsDocImportTag.baseline,Oleksandr T,118,Human,2024-07-10T22:37:49+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/compiler/unusedLocalsInRecursiveReturn.ts,Gabriela Araujo Britto,9,Human,2024-11-06T02:18:24+00:00,1
+ant-design/ant-design,ant-design,components/grid/hooks/useGutter.ts,二货爱吃白萝卜,38,AI,2025-02-18T11:49:29+00:00,2
+ant-design/ant-design,ant-design,components/statistic/__tests__/a11y.test.ts,Jony J,6,Human,2025-01-27T15:49:40+00:00,1
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/Anthropic/Anthropic icon - Slate.svg,Cristhian Zanforlin Lousa,4,AI,2025-03-11T16:00:05+00:00,1
+langflow-ai/langflow,langflow-ai,src/frontend/src/types/file_management/index.ts,Lucas Oliveira,13,AI,2025-03-18T02:32:55+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/JSicon/Frame.svg,anovazzi1,11,AI,2025-03-17T14:03:59+00:00,1
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/GoogleDrive/index.tsx,Lucas Oliveira,9,AI,2025-03-18T02:32:55+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/Twitter X/TwitterX.jsx,Cristhian Zanforlin Lousa,46,AI,2025-04-22T23:26:33+00:00,3
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/Dropbox/index.tsx,Lucas Oliveira,9,AI,2025-03-18T02:32:55+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/JSicon/JSIcon.jsx,anovazzi1,26,AI,2025-03-17T14:03:59+00:00,3
+langflow-ai/langflow,langflow-ai,src/frontend/tests/utils/upload-file.ts,Lucas Oliveira,82,AI,2025-03-18T02:32:55+00:00,5
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/AWSInverted/index.tsx,Lucas Oliveira,11,AI,2025-03-18T02:32:55+00:00,3
+langflow-ai/langflow,langflow-ai,src/frontend/src/pages/MainPage/pages/enchanced-beam-effect.tsx,Cristhian Zanforlin Lousa,43,AI,2025-04-22T23:26:33+00:00,2
+langflow-ai/langflow,langflow-ai,src/backend/tests/unit/components/tools/test_mcp_component.py,Sebastián Estévez,255,Human,2025-03-21T22:11:01+00:00,7
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/Claude/Claude.jsx,Edwin Jose,32,Human,2025-04-29T17:14:55+00:00,1
+langflow-ai/langflow,langflow-ai,src/frontend/src/customization/hooks/use-generate-token.ts,Cristhian Zanforlin Lousa,7,Human,2025-04-03T18:56:46+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/controllers/API/queries/messages/use-get-messages-polling.ts,Sebastián Estévez,208,Human,2025-03-20T00:05:55+00:00,5
+langflow-ai/langflow,langflow-ai,docs/docs/Develop/logging.md,Mendon Kissling,26,Human,2025-03-31T17:54:10+00:00,2
+langflow-ai/langflow,langflow-ai,docs/static/img/component-url-regex.png,Mendon Kissling,3508,Human,2025-04-22T19:46:34+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/icons/HomeAssistant/index.tsx,YAMON.IO,9,Human,2025-04-01T19:47:53+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/customization/utils/get-modal-props.tsx,Cristhian Zanforlin Lousa,1,Human,2025-03-10T13:10:55+00:00,1
+langflow-ai/langflow,langflow-ai,src/backend/base/langflow/components/apify/__init__.py,Jakub Kopecký,5,Human,2025-02-19T19:10:26+00:00,2
+langflow-ai/langflow,langflow-ai,src/frontend/src/modals/IOModal/components/chatView/chatInput/components/voice-assistant/hooks/use-start-recording.ts,Sebastián Estévez,103,Human,2025-03-20T00:05:55+00:00,3
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/example/init.h,Ryan Ofsky,20,AI,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/README.md,Ryan Ofsky,8,AI,2025-04-02T13:41:16+00:00,1
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/type-pointer.h,Ryan Ofsky,113,AI,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/util.h,Ryan Ofsky,220,AI,2025-04-02T13:41:16+00:00,5
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/doc/design.md,Ryan Ofsky,44,AI,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/src/mp/util.cpp,Ryan Ofsky,154,AI,2025-04-02T13:41:16+00:00,6
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/type-tuple.h,Ryan Ofsky,45,AI,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/type-set.h,Ryan Ofsky,48,AI,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/proxy-types.h,Ryan Ofsky,727,AI,2025-04-02T13:41:16+00:00,6
+bitcoin/bitcoin,bitcoin,src/test/util/time.h,MarcoFalke,23,AI,2025-03-28T09:06:25+00:00,1
+bitcoin/bitcoin,bitcoin,src/test/util/time.cpp,MarcoFalke,5,Human,2025-03-28T09:06:25+00:00,1
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/example/printer.cpp,Ryan Ofsky,51,Human,2025-04-02T13:41:16+00:00,3
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/type-vector.h,Ryan Ofsky,71,Human,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,src/ipc/libmultiprocess/include/mp/type-function.h,Ryan Ofsky,67,Human,2025-04-02T13:41:16+00:00,2
+bitcoin/bitcoin,bitcoin,test/functional/test_framework/compressor.py,Sebastian Falbesoner,58,Human,2025-03-04T14:57:49+00:00,1
+mermaid-js/mermaid,mermaid-js,.changeset/soft-readers-tan.md,Sidharth Vinod,5,AI,2025-04-15T02:20:47+00:00,3
+mermaid-js/mermaid,mermaid-js,packages/parser/src/language/architecture/arch.langium,Thomas Di Cizerone,2,AI,2025-03-23T21:12:35+00:00,1
+mermaid-js/mermaid,mermaid-js,.changeset/gold-shoes-camp.md,Aaron Moat,5,AI,2025-04-08T09:49:47+00:00,3
+mermaid-js/mermaid,mermaid-js,.changeset/honest-trees-dress.md,Alois Klink,7,AI,2025-04-07T09:02:30+00:00,2
+mermaid-js/mermaid,mermaid-js,scripts/compare-timings.ts,Sidharth Vinod,115,AI,2025-04-09T06:38:57+00:00,3
+mermaid-js/mermaid,mermaid-js,packages/parser/src/language/gitGraph/reference.langium,Thomas Di Cizerone,4,AI,2025-03-23T21:12:35+00:00,1
+mermaid-js/mermaid,mermaid-js,.changeset/sad-mails-accept.md,Thomas Di Cizerone,6,AI,2025-03-23T22:03:48+00:00,2
+mermaid-js/mermaid,mermaid-js,.changeset/eleven-wolves-deny.md,Sidharth Vinod,5,AI,2025-02-17T19:03:47+00:00,2
+mermaid-js/mermaid,mermaid-js,.changeset/yellow-mirrors-change.md,Alois Klink,7,AI,2025-04-07T09:02:30+00:00,2
+mermaid-js/mermaid,mermaid-js,packages/mermaid/src/diagrams/architecture/architecture.spec.ts,Thomas Di Cizerone,70,AI,2025-03-23T21:20:26+00:00,3
+mermaid-js/mermaid,mermaid-js,demos/radar.html,Thomas Di Cizerone,157,Human,2025-03-16T17:18:18+00:00,2
+mermaid-js/mermaid,mermaid-js,docs/config/setup/mermaid/type-aliases/InternalHelpers.md,Sidharth Vinod,15,Human,2025-02-21T10:32:03+00:00,2
+mermaid-js/mermaid,mermaid-js,.changeset/neat-moose-compare.md,Sidharth Vinod,5,Human,2025-04-15T02:23:19+00:00,3
+mermaid-js/mermaid,mermaid-js,packages/mermaid/src/diagrams/radar/db.ts,Thomas Di Cizerone,128,Human,2025-03-16T17:13:50+00:00,1
+mermaid-js/mermaid,mermaid-js,packages/parser/tests/radar.test.ts,Thomas Di Cizerone,343,Human,2025-03-16T17:00:50+00:00,1
+mermaid-js/mermaid,mermaid-js,docs/config/setup/config/variables/defaultConfig.md,Sidharth Vinod,15,Human,2025-02-21T10:32:03+00:00,1
+mermaid-js/mermaid,mermaid-js,docs/config/setup/mermaid/type-aliases/InternalHelpers.md,Sidharth Vinod,15,Human,2025-02-21T10:32:03+00:00,2
+mermaid-js/mermaid,mermaid-js,packages/parser/tests/radar.test.ts,Thomas Di Cizerone,343,Human,2025-03-16T17:00:50+00:00,1
+mermaid-js/mermaid,mermaid-js,.github/workflows/release.yml,Sidharth Vinod,46,Human,2024-08-22T08:40:08+00:00,11
+mermaid-js/mermaid,mermaid-js,packages/parser/src/language/gitGraph/reference.langium,Thomas Di Cizerone,4,Human,2025-03-23T21:12:35+00:00,1
+abi/screenshot-to-code,abi,frontend/src/components/ModelSettingsSection.tsx,Abi Raja,65,AI,2024-03-05T17:24:30+00:00,3
+abi/screenshot-to-code,abi,frontend/src/tests/fixtures/simple_button.png,Abi Raja,575,AI,2024-05-20T19:44:22+00:00,1
+abi/screenshot-to-code,abi,.github/FUNDING.yml,Abi Raja,1,AI,2024-05-23T16:19:28+00:00,1
+abi/screenshot-to-code,abi,frontend/src/tests/qa.test.ts,Abi Raja,274,AI,2024-05-17T20:22:45+00:00,16
+abi/screenshot-to-code,abi,frontend/src/tests/fixtures/simple_ui_with_image.png,Abi Raja,865,AI,2024-05-20T19:44:22+00:00,1
+abi/screenshot-to-code,abi,backend/prompts/claude_prompts.py,Abi Raja,33,AI,2024-03-06T01:22:09+00:00,4
+abi/screenshot-to-code,abi,frontend/src/store/app-store.ts,Abi Raja,10,AI,2024-05-30T13:38:15+00:00,8
+abi/screenshot-to-code,abi,frontend/src/.env.jest.example,Abi Raja,2,AI,2024-05-20T19:46:30+00:00,1
+abi/screenshot-to-code,abi,frontend/src/setupTests.ts,Abi Raja,3,AI,2024-05-20T19:24:16+00:00,1
+abi/screenshot-to-code,abi,frontend/src/lib/models.ts,Abi Raja,12,AI,2024-03-05T17:24:30+00:00,9
+abi/screenshot-to-code,abi,frontend/src/components/core/KeyBadge.tsx,Abi Raja,23,Human,2024-07-11T18:18:31+00:00,2
+abi/screenshot-to-code,abi,frontend/src/components/ui/scroll-area.tsx,Abi Raja,46,Human,2023-12-06T19:49:09+00:00,1
+abi/screenshot-to-code,abi,frontend/src/components/settings/AccessCodeSection.tsx,Abi Raja,36,Human,2023-12-06T14:16:21+00:00,3
+abi/screenshot-to-code,abi,frontend/src/components/evals/RunEvalsPage.tsx,Abi Raja,43,Human,2024-12-10T18:48:18+00:00,15
+abi/screenshot-to-code,abi,frontend/src/components/evals/AllEvalsPage.tsx,Abi Raja,48,Human,2024-12-11T19:14:41+00:00,3
+abi/screenshot-to-code,abi,frontend/src/components/history/history_types.ts,Abi Raja,26,Human,2023-12-07T14:39:19+00:00,6
+abi/screenshot-to-code,abi,backend/debug/DebugFileWriter.py,Abi Raja,30,Human,2024-03-25T18:09:13+00:00,1
+abi/screenshot-to-code,abi,.vscode/settings.json,Abi Raja,3,Human,2023-12-09T20:34:16+00:00,2
+abi/screenshot-to-code,abi,backend/image_processing/__init__.py,Abi Raja,0,Human,2024-06-25T12:57:41+00:00,1
+abi/screenshot-to-code,abi,backend/imported_code_prompts.py,Abi Raja,80,Human,2023-12-10T02:00:18+00:00,4
+browser-use/browser-use,browser-use,examples/features/click_fallback_options.py,jersobh,207,AI,2025-03-24T12:34:01+00:00,9
+browser-use/browser-use,browser-use,examples/custom-functions/custom_hooks_before_after_step.py,Carlos Andrés Planchón Prestes,251,AI,2025-03-27T22:53:36+00:00,11
+browser-use/browser-use,browser-use,examples/custom-functions/action_filters.py,Nick Sweeting,86,AI,2025-03-28T02:08:13+00:00,22
+browser-use/browser-use,browser-use,browser_use/browser/chrome.py,Nick Sweeting,184,AI,2025-03-25T22:01:19+00:00,18
+browser-use/browser-use,browser-use,tests/test_action_filters.py,Nick Sweeting,305,AI,2025-03-28T02:06:12+00:00,8
+browser-use/browser-use,browser-use,browser_use/browser/dolphin_service.py,ProphetDiceBot,349,AI,2025-03-17T21:03:01+00:00,7
+browser-use/browser-use,browser-use,docs/customize/hooks.mdx,Carlos Andrés Planchón Prestes,346,AI,2025-03-28T22:43:58+00:00,23
+browser-use/browser-use,browser-use,examples/features/drag_drop.py,PaperBoardOfficial,46,AI,2025-03-29T05:31:09+00:00,6
+browser-use/browser-use,browser-use,browser_use/exceptions.py,Anish Hiranandani,5,AI,2025-03-26T05:48:14+00:00,3
+browser-use/browser-use,browser-use,examples/custom-functions/hover_element.py,jersobh,88,AI,2025-03-26T02:53:14+00:00,14
+browser-use/browser-use,browser-use,examples/models/novita.py,Jason,44,Human,2025-04-16T07:09:11+00:00,7
+browser-use/browser-use,browser-use,docs/logo/light.svg,Gregor Žunič,7,Human,2025-01-22T17:16:55+00:00,2
+browser-use/browser-use,browser-use,docs/customize/sensitive-data.mdx,nilsreichardt,50,Human,2025-02-01T17:47:08+00:00,20
+browser-use/browser-use,browser-use,tests/test_models.py,magmueller,159,Human,2025-01-19T20:38:24+00:00,11
+browser-use/browser-use,browser-use,examples/custom-functions/group_ungroup.py,SwapnilSonker,124,Human,2025-02-14T11:59:52+00:00,6
+browser-use/browser-use,browser-use,examples/ui/streamlit_demo.py,Morris Lee,83,Human,2025-02-15T09:37:05+00:00,19
+browser-use/browser-use,browser-use,.pre-commit-config.yaml,Marco Vinciguerra,18,Human,2025-01-13T11:27:40+00:00,14
+browser-use/browser-use,browser-use,eval/grok.py,Siddhant Somani,27,Human,2025-03-16T01:09:27+00:00,7
+browser-use/browser-use,browser-use,examples/use-cases/wikipedia_banana_to_quantum.py,Magnus Müller,34,Human,2025-02-24T20:58:32+00:00,7
+browser-use/browser-use,browser-use,eval/claude-3.7.py,Parth A. Patel,19,Human,2025-04-14T22:48:54+00:00,2
+google-gemini/gemini-cli,google-gemini,packages/cli/src/ui/App.test.tsx,Evan Senter,121,AI,2025-04-18T17:14:45+00:00,93
+google-gemini/gemini-cli,google-gemini,packages/cli/src/ui/hooks/useInputHistory.test.ts,Evan Senter,177,AI,2025-04-18T17:14:45+00:00,4
+google-gemini/gemini-cli,google-gemini,packages/cli/src/ui/hooks/useInputHistory.ts,Evan Senter,92,AI,2025-04-18T17:14:45+00:00,8
+google-gemini/gemini-cli,google-gemini,packages/cli/vitest.config.ts,Evan Senter,22,AI,2025-04-18T17:14:45+00:00,10
+google-gemini/gemini-cli,google-gemini,packages/server/src/index.test.ts,Evan Senter,9,Human,2025-04-19T17:07:24+00:00,4
+google-gemini/gemini-cli,google-gemini,packages/cli/src/gemini.ts,Taylor Mullen,57,Human,2025-04-16T04:41:08+00:00,46
+google-gemini/gemini-cli,google-gemini,packages/cli/src/tools/read-file.tool.ts,Taylor Mullen,296,Human,2025-04-16T04:41:08+00:00,12
+google-gemini/gemini-cli,google-gemini,scripts/build.sh,Olcan,16,Human,2025-04-21T14:50:18+00:00,8
+Stirling-Tools/Stirling-PDF,Stirling-Tools,.github/workflows/testdriver.yml,Anthony Stirling,154,AI,2025-01-13T19:06:48+00:00,45
+Stirling-Tools/Stirling-PDF,Stirling-Tools,testdriver/test.yml,Anthony Stirling,140,AI,2025-01-13T19:06:48+00:00,2
+Stirling-Tools/Stirling-PDF,Stirling-Tools,src/main/resources/static/js/thirdParty/chart.umd.min.js,ConnorYoh,20,Human,2025-03-25T22:41:17+00:00,2
+Stirling-Tools/Stirling-PDF,Stirling-Tools,src/main/resources/templates/fragments/navbarEntryCustom.html,reecebrowne,13,Human,2025-01-09T20:56:52+00:00,5
+modelcontextprotocol/servers,modelcontextprotocol,src/everything/CLAUDE.md,Ashwin Bhat,20,AI,2025-04-01T21:28:12+00:00,1
+modelcontextprotocol/servers,modelcontextprotocol,src/everything/CLAUDE.md,Ashwin Bhat,20,AI,2025-04-01T21:28:12+00:00,1
+modelcontextprotocol/servers,modelcontextprotocol,src/github/operations/repository.ts,Peter M. Elias,65,Human,2024-12-28T09:41:21+00:00,3
+modelcontextprotocol/servers,modelcontextprotocol,src/sqlite/test.db,Gaoqiang Ji,0,Human,2025-04-16T08:57:17+00:00,2
+toeverything/AFFiNE,toeverything,packages/backend/server/src/plugins/copilot/providers/utils.ts,darkskygit,201,AI,2025-04-10T04:14:09+00:00,26
+toeverything/AFFiNE,toeverything,packages/backend/server/src/plugins/copilot/providers/anthropic.ts,akumatus,170,AI,2025-04-24T12:23:05+00:00,12
+toeverything/AFFiNE,toeverything,tests/affine-cloud-copilot/global-setup.ts,yoyoyohamapi,35,AI,2025-04-14T02:42:06+00:00,2
+toeverything/AFFiNE,toeverything,packages/common/y-octo/core/src/doc/codec/update.rs,Brooooooklyn,721,Human,2025-04-21T02:51:15+00:00,1
+toeverything/AFFiNE,toeverything,packages/frontend/routes/src/index.ts,forehalo,2,Human,2025-04-24T09:17:59+00:00,1
+toeverything/AFFiNE,toeverything,blocksuite/affine/all/src/inlines/link/store.ts,Saul-Mirone,1,Human,2025-04-23T04:42:24+00:00,1
+cypress-io/cypress,cypress-io,system-tests/test/electron_animation_bug_spec.ts,Ryan Manuel,9,AI,2025-03-31T13:50:14+00:00,1
+cypress-io/cypress,cypress-io,system-tests/projects/e2e/cypress/e2e/electron_animation_bug.cy.ts,Ryan Manuel,9,AI,2025-03-31T13:50:14+00:00,1
+cypress-io/cypress,cypress-io,system-tests/projects/e2e/electron_animation_bug.html,Ryan Manuel,26,AI,2025-03-31T13:50:14+00:00,1
+cypress-io/cypress,cypress-io,system-tests/projects/react19/yarn.lock,Bill Glesias,2569,Human,2024-11-21T15:17:03+00:00,3
+cypress-io/cypress,cypress-io,system-tests/projects/svelte-vite-unconfigured/tsconfig.node.json,Bill Glesias,15,Human,2024-12-10T14:21:09+00:00,1
+cypress-io/cypress,cypress-io,packages/driver/test/unit/cypress/stack_utils.spec.ts,Cacie Prins,68,Human,2025-01-14T20:33:33+00:00,3
+cline/cline,cline,.changeset/eighty-tables-warn.md,Evan,5,AI,2025-03-24T22:56:16+00:00,2
+cline/cline,cline,.changeset/itchy-masks-cheat.md,Evan,5,AI,2025-03-13T05:35:25+00:00,2
+cline/cline,cline,.changeset/hip-chefs-peel.md,minorunara,5,AI,2025-03-15T00:05:56+00:00,2
+cline/cline,cline,webview-ui/src/components/chat/OptionsButtons.tsx,Saoud Rizwan,69,AI,2025-03-15T01:25:40+00:00,8
+cline/cline,cline,webview-ui/src/components/chat/SlashCommandMenu.tsx,Toshii,80,Human,2025-04-18T23:43:58+00:00,5
+cline/cline,cline,.changeset/short-pants-serve.md,Peter Dave Hello,5,Human,2025-03-24T23:20:45+00:00,2
+cline/cline,cline,evals/cli/src/utils/vscode.ts,pashpashpash,570,Human,2025-04-15T02:29:49+00:00,6
+cline/cline,cline,.changeset/sweet-toes-bake.md,Evan,5,Human,2025-04-29T04:27:11+00:00,2
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/anthropic/_anthropic_client.py,Victor Dibia,1003,AI,2025-02-26T07:27:41+00:00,20
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/anthropic/_model_info.py,Victor Dibia,113,AI,2025-02-26T07:27:41+00:00,4
+microsoft/autogen,microsoft,python/packages/autogen-core/docs/src/user-guide/autogenstudio-user-guide/experimental.md,Victor Dibia,68,AI,2025-03-14T22:02:05+00:00,2
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/anthropic/config/__init__.py,Victor Dibia,63,AI,2025-02-26T07:27:41+00:00,5
+microsoft/autogen,microsoft,python/packages/autogen-core/docs/src/reference/python/autogen_ext.models.anthropic.rst,Victor Dibia,8,AI,2025-03-09T03:35:28+00:00,2
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/openai/_transformation/__init__.py,EeS,27,AI,2025-03-31T04:09:30+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-studio/autogenstudio/web/auth/authroutes.py,Victor Dibia,194,AI,2025-03-14T22:02:05+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/openai/_transformation/registry.py,EeS,117,AI,2025-03-31T04:09:30+00:00,4
+microsoft/autogen,microsoft,python/packages/autogen-studio/autogenstudio/web/auth/providers.py,Victor Dibia,208,AI,2025-03-14T22:02:05+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/models/openai/_utils.py,EeS,14,AI,2025-03-31T04:09:30+00:00,1
+microsoft/autogen,microsoft,dotnet/src/Microsoft.AutoGen/Core.Grpc/ProtobufMessageSerializer.cs,Jack Gerrits,46,Human,2025-02-05T16:34:02+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/src/autogen_ext/agents/azure/_azure_ai_agent.py,Abdo Talema,1008,Human,2025-04-22T04:51:22+00:00,4
+microsoft/autogen,microsoft,python/samples/gitty/src/gitty/_config.py,gagb,34,Human,2025-03-07T23:24:07+00:00,1
+microsoft/autogen,microsoft,dotnet/test/Microsoft.AutoGen.RuntimeGateway.Grpc.Tests/TestAgent.cs,Ryan Sweet,45,Human,2025-02-08T00:28:55+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-agentchat/src/autogen_agentchat/tools/_team.py,Eitan Yarmush,45,Human,2025-04-17T07:45:33+00:00,4
+microsoft/autogen,microsoft,python/packages/autogen-studio/autogenstudio/web/routes/settingsroute.py,Victor Dibia,32,Human,2025-02-25T15:21:08+00:00,2
+microsoft/autogen,microsoft,python/samples/task_centric_memory/README.md,Ricky Loynd,138,Human,2025-03-04T17:56:49+00:00,2
+microsoft/autogen,microsoft,python/packages/agbench/benchmarks/GAIA/Templates/MagenticOne/prompt.txt,Hussein Mozannar,1,Human,2024-10-18T04:33:33+00:00,3
+microsoft/autogen,microsoft,python/packages/autogen-studio/tests/test_datamodel_types.py,EeS,16,Human,2025-04-04T17:24:55+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/tests/task_centric_memory/data_files/insights/liar_advice.yaml,Ricky Loynd,6,Human,2025-03-04T17:56:49+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/graphics-gradients-scene-ts-webgl2.png,Mat Groves,40,AI,2025-04-29T11:25:59+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/stencil-nested-render-group-scene-ts-webgl2.png,Mat Groves,36,AI,2024-12-04T21:10:10+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/graphics-gradients-scene-ts-webgl1.png,Mat Groves,40,AI,2025-04-29T11:25:59+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/graphics-gradients-scene-ts-webgpu.png,Mat Groves,40,AI,2025-04-29T11:25:59+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/stencil-nested-render-group-scene-ts-webgl1.png,Mat Groves,36,AI,2024-12-04T21:10:10+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/stencil-nested-render-group-scene-ts-webgpu.png,Mat Groves,36,AI,2024-12-04T21:10:10+00:00,1
+pixijs/pixijs,pixijs,tests/visual/scenes/graphics/graphics-gradients.scene.ts,Mat Groves,104,AI,2025-04-29T11:25:59+00:00,1
+pixijs/pixijs,pixijs,tests/visual/scenes/mask/stencil-nested-render-group.scene.ts,Mat Groves,34,AI,2024-12-04T21:10:10+00:00,2
+pixijs/pixijs,pixijs,tests/visual/snapshots/text-drop-shadow-scene-ts-webgl1.png,Zyie,114,Human,2024-05-27T18:27:42+00:00,1
+pixijs/pixijs,pixijs,tests/compressed/textures/test.etc2.ktx,ddenysiuk,42,Human,2024-02-23T20:49:35+00:00,2
+pixijs/pixijs,pixijs,tests/visual/snapshots/sprite-sheet-mesh-scene-ts-webgl1.png,Mat Groves,195,Human,2024-03-13T16:05:04+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/html-text-loaded-font-scene-ts-webgl2.png,Mat Groves,131,Human,2024-03-21T13:11:47+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/ktx-scene-ts-webgl1.png,ddenysiuk,730,Human,2024-02-23T20:49:35+00:00,1
+pixijs/pixijs,pixijs,tests/visual/snapshots/graphics-fills-scene-ts-webgpu.png,Mat Groves,615,Human,2025-01-29T15:51:02+00:00,2
+pixijs/pixijs,pixijs,src/compressed-textures/ktx2/loadKTX2.ts,Mat Groves,53,Human,2024-03-05T13:37:52+00:00,6
+pixijs/pixijs,pixijs,tests/visual/snapshots/tiling-sprite-clamp-offset-scene-ts-webgl1.png,dev7355608,63,Human,2024-08-06T09:10:41+00:00,1
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/completions/singleAnswer-f0.ts,Nicolas,42,AI,2025-04-15T07:19:45+00:00,3
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/reranker-f0.ts,Nicolas,293,AI,2025-04-15T07:19:45+00:00,9
+mendableai/firecrawl,mendableai,apps/api/src/scraper/scrapeURL/lib/smartScrape.ts,Nicolas,164,AI,2025-04-15T07:19:45+00:00,13
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/llmExtract-f0.ts,Nicolas,469,AI,2025-04-15T07:19:45+00:00,8
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/extraction-service-f0.ts,Nicolas,807,AI,2025-04-15T07:19:45+00:00,19
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/build-document-f0.ts,Nicolas,17,AI,2025-04-15T07:19:45+00:00,1
+mendableai/firecrawl,mendableai,examples/qwen3-web-crawler/README.md,Devin AI,76,AI,2025-05-01T01:26:09+00:00,3
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/helpers/mix-schema-objs-f0.ts,Nicolas,48,AI,2025-04-15T07:19:45+00:00,2
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/completions/analyzeSchemaAndPrompt-f0.ts,Nicolas,87,AI,2025-04-15T07:19:45+00:00,4
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/document-scraper-f0.ts,Nicolas,98,AI,2025-04-15T07:19:45+00:00,16
+mendableai/firecrawl,mendableai,examples/groq_web_crawler/groq_website_analyzer.py,ceewaigithub,248,Human,2025-02-26T14:24:38+00:00,1
+mendableai/firecrawl,mendableai,examples/llama-4-maverick-web-crawler/.gitignore,Aparup Ganguly,48,Human,2025-04-07T13:05:23+00:00,1
+mendableai/firecrawl,mendableai,examples/gpt-4.1-web-crawler/requirements.txt,Aparup Ganguly,3,Human,2025-04-14T19:18:19+00:00,1
+mendableai/firecrawl,mendableai,apps/api/src/lib/extract/fire-0/completions/singleAnswer-f0.ts,Nicolas,42,Human,2025-04-15T07:19:45+00:00,3
+mendableai/firecrawl,mendableai,examples/o3-web-crawler/.env.example,Aparup Ganguly,3,Human,2025-04-22T16:18:38+00:00,1
+mendableai/firecrawl,mendableai,examples/gemini-github-analyzer/gemini-github-analyzer.py,Aparup Ganguly,275,Human,2025-02-21T14:38:37+00:00,1
+mendableai/firecrawl,mendableai,examples/gpt-4.1-company-researcher/requirements.txt,Aparup Ganguly,5,Human,2025-04-18T12:23:52+00:00,2
+mendableai/firecrawl,mendableai,.github/workflows/eval-prod.yml,rafaelmmiller,33,Human,2025-02-20T18:01:26+00:00,5
+mendableai/firecrawl,mendableai,examples/gpt-4.1-company-researcher/gpt-4.1-company-researcher.py,Aparup Ganguly,423,Human,2025-04-18T12:23:52+00:00,1
+mendableai/firecrawl,mendableai,examples/claude3.7-web-extractor/claude-3.7-web-extractor.py,Aparup Ganguly,230,Human,2025-03-03T12:18:52+00:00,1
+metabase/metabase,metabase,.claude/commands/fix-flakey-test.md,Filipe Silva,1,AI,2025-04-08T08:37:04+00:00,1
+metabase/metabase,metabase,mage/mage/be_dev.clj,bryan,99,AI,2025-04-25T15:55:31+00:00,6
+metabase/metabase,metabase,.claude/commands/repro-issue.md,Filipe Silva,1,AI,2025-04-08T08:37:04+00:00,1
+metabase/metabase,metabase,.claude/commands/fix-pr.md,Filipe Silva,1,AI,2025-04-08T08:37:04+00:00,1
+metabase/metabase,metabase,bin/claude-print,Filipe Silva,11,AI,2025-04-08T08:37:04+00:00,1
+metabase/metabase,metabase,CLAUDE.md,Filipe Silva,27,AI,2025-04-08T08:37:04+00:00,12
+metabase/metabase,metabase,mage/mage/readability_check.clj,bryan,183,AI,2025-04-25T15:55:31+00:00,4
+metabase/metabase,metabase,.claude/commands/fix-issue.md,Filipe Silva,1,AI,2025-04-08T08:37:04+00:00,1
+metabase/metabase,metabase,docs/embedding/sdk/api/internal/DownloadAccessPermission.html,Timofey Kachalov,7,Human,2025-04-10T16:18:59+00:00,2
+metabase/metabase,metabase,docs/embedding/sdk/api/internal/ChartColor.html,Timofey Kachalov,7,Human,2025-04-10T16:18:59+00:00,2
+metabase/metabase,metabase,frontend/src/metabase-lib/v1/expressions/diagnostics/check-arg-validators.ts,Romeo Van Snick,30,Human,2025-04-17T19:53:10+00:00,2
+metabase/metabase,metabase,resources/frontend_client/app/assets/img/empty-states/visualizations/progress.svg,Nemanja Glumac,13,Human,2025-04-04T19:34:37+00:00,1
+metabase/metabase,metabase,enterprise/frontend/src/embedding-sdk/types/props.ts,Timofey Kachalov,13,Human,2025-04-10T16:06:06+00:00,3
+metabase/metabase,metabase,docs/embedding/sdk/api/internal/NormalizedSchema.html,Timofey Kachalov,9,Human,2025-04-10T16:18:59+00:00,2
+metabase/metabase,metabase,docs/embedding/sdk/api/CreateDashboardModal.html,Timofey Kachalov,6,Human,2025-04-10T16:18:59+00:00,2
+metabase/metabase,metabase,docs/embedding/sdk/api/internal/FileUpload.html,Timofey Kachalov,14,Human,2025-04-10T16:18:59+00:00,2
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/sqlite/1726666294213-AddFollowUpPrompts.ts,Ilango,13,AI,2024-10-04T15:44:28+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/ui/src/assets/images/mistralai.svg,Ilango,1,AI,2024-10-04T15:44:28+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/tools/WolframAlpha/wolframalpha.png,Henry Heng,992,AI,2025-02-01T01:17:40+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/ui/src/ui-component/cards/FollowUpPromptsCard.jsx,Ilango,45,AI,2024-10-04T15:44:28+00:00,2
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/postgres/1726666309552-AddFollowUpPrompts.ts,Ilango,13,AI,2024-10-04T15:44:28+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/tools/WolframAlpha/WolframAlpha.ts,Henry Heng,44,AI,2025-02-01T01:17:40+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/mariadb/1726666318346-AddFollowUpPrompts.ts,Ilango,14,AI,2024-10-04T15:44:28+00:00,2
+FlowiseAI/Flowise,FlowiseAI,packages/ui/src/assets/images/azure_openai.svg,Ilango,1,AI,2024-10-04T15:44:28+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/src/followUpPrompts.ts,Ilango,113,AI,2024-10-04T15:44:28+00:00,11
+FlowiseAI/Flowise,FlowiseAI,packages/ui/src/assets/images/anthropic.svg,Ilango,1,AI,2024-10-04T15:44:28+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/postgres/1720230151480-AddApiKey.ts,Vinod Kiran,20,Human,2024-07-26T16:52:12+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/chatmodels/Deepseek/Deepseek.ts,Nguyễn Đức Hùng,197,Human,2024-12-21T12:54:39+00:00,4
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/tools/CurrentDateTime/currentDateTime.svg,Henry Heng,1,Human,2025-03-06T13:57:18+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/ui/src/assets/images/phoenix.png,Ali Saleh,97,Human,2025-02-24T14:41:30+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/credentials/FireCrawlApi.credential.ts,Henry Heng,26,Human,2024-06-26T13:40:43+00:00,2
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/chatmodels/ChatNemoGuardrails/NemoClient.ts,patrickreinan,70,Human,2024-10-17T00:59:10+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/postgres/1721078251523-AddActionToChatMessage.ts,Henry Heng,11,Human,2024-07-22T16:46:14+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/mariadb/1693997791471-ModifyChatFlow.ts,不知火 Shiranui,11,Human,2024-06-07T11:14:06+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/server/src/database/migrations/mysql/1726156258465-AddArtifactsToChatMessage.ts,Henry Heng,12,Human,2024-09-17T19:12:27+00:00,1
+FlowiseAI/Flowise,FlowiseAI,packages/components/nodes/sequentialagents/Condition/condition.svg,Henry Heng,1,Human,2024-07-22T16:46:14+00:00,1
+streamlit/streamlit,streamlit,.cursor/rules/typescript.mdc,Bob Nisco,41,AI,2025-04-03T21:54:21+00:00,9
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_dataframe_stable_rendering_test/st_dataframe-changed_underlying_data[webkit].png,Lukas Masuch,246,AI,2025-03-28T19:01:31+00:00,1
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_dataframe_stable_rendering_test/st_dataframe-changed_underlying_data[firefox].png,Lukas Masuch,341,AI,2025-03-28T19:01:31+00:00,2
+streamlit/streamlit,streamlit,.cursor/.gitignore,Bob Nisco,6,AI,2025-04-03T21:54:21+00:00,8
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_dataframe_stable_rendering_test/st_dataframe-changed_underlying_data[chromium].png,Lukas Masuch,178,AI,2025-03-28T19:01:31+00:00,2
+streamlit/streamlit,streamlit,.cursor/rules/typescript_tests.mdc,Bob Nisco,25,AI,2025-04-03T21:54:21+00:00,4
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_page_link_test/st_page_link-disabled[firefox].png,Maya Barnes,68,Human,2025-03-11T17:24:09+00:00,3
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_dataframe_interactions_test/st_dataframe-autosized_column[firefox].png,Lukas Masuch,464,Human,2025-02-21T15:53:24+00:00,1
+streamlit/streamlit,streamlit,frontend/lib/src/components/shared/Base/styled-components.ts,Bob Nisco,27,Human,2025-02-19T00:17:01+00:00,1
+streamlit/streamlit,streamlit,frontend/utils/src/types/index.test.ts,Ken McGrady,47,Human,2025-02-05T02:31:57+00:00,1
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_date_input_test/st_date_input-range_date_input_error[dark_theme-firefox].png,Maya Barnes,310,Human,2025-04-08T17:15:07+00:00,4
+streamlit/streamlit,streamlit,e2e_playwright/__snapshots__/linux/st_alert_test/st_alert-error_width_stretch_icon[light_theme-webkit].png,Laura Wilby,169,Human,2025-04-23T19:52:36+00:00,3
+gradio-app/gradio,gradio-app,.changeset/full-cups-melt.md,Hannah,5,AI,2025-01-17T22:52:01+00:00,2
+gradio-app/gradio,gradio-app,test/test_docker/test_reverse_proxy_fastapi_mount/nginx.conf,aliabid94,21,Human,2025-04-10T22:41:16+00:00,1
+mem0ai/mem0,mem0ai,cookbooks/customer-support-chatbot.ipynb,Dev Khant,261,AI,2024-10-23T19:54:04+00:00,3
+mem0ai/mem0,mem0ai,mem0/llms/anthropic.py,Dev Khant,67,AI,2024-09-06T20:42:22+00:00,7
+mem0ai/mem0,mem0ai,docs/integrations/mcp-server.mdx,Dev Khant,60,AI,2025-03-06T15:46:14+00:00,5
+mem0ai/mem0,mem0ai,examples/yt-assistant-chrome/styles/popup.css,Vir Kothari,259,Human,2025-04-10T16:44:57+00:00,1
+mem0ai/mem0,mem0ai,mem0-ts/package.json,Saket Aryan,117,Human,2025-02-27T23:19:17+00:00,41
+mem0ai/mem0,mem0ai,docs/components/vectordbs/dbs/milvus.mdx,k10,35,Human,2024-09-10T16:36:50+00:00,5
+appsmithorg/appsmith,appsmithorg,.cursor/docs/README.md,vivek-appsmith,27,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,.cursor/rules/quality/pre-commit-checks.mdc,vivek-appsmith,310,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,app/client/src/git/components/LatestCommitInfo/LatestCommitInfoView.test.tsx,Rudraprasad Das,94,AI,2025-03-03T10:59:34+00:00,2
+appsmithorg/appsmith,appsmithorg,.cursor/settings.json,vivek-appsmith,144,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,app/client/src/git/components/ReleaseVersionRadioGroup/ReleaseVersionRadioGroupView.test.tsx,Rudraprasad Das,72,AI,2025-03-03T10:59:34+00:00,3
+appsmithorg/appsmith,appsmithorg,.cursor/index.mdc,vivek-appsmith,97,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,.cursor/docs/practices/react-hooks.md,vivek-appsmith,202,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,.cursor/rules/verification/feature-implementation-validator.mdc,vivek-appsmith,744,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,.cursor/hooks/scripts/update-docs.sh,vivek-appsmith,123,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,.cursor/docs/guides/performance.md,vivek-appsmith,353,AI,2025-04-11T06:34:33+00:00,1
+appsmithorg/appsmith,appsmithorg,app/client/packages/icons/src/components/Icons/MapIcon.tsx,vadim,4,Human,2025-03-03T16:23:17+00:00,1
+appsmithorg/appsmith,appsmithorg,app/server/appsmith-server/src/main/java/com/appsmith/server/services/OrganizationService.java,Arpit Mohan,5,Human,2019-09-16T11:21:57+00:00,19
+appsmithorg/appsmith,appsmithorg,app/client/src/widgets/TableWidgetV2/component/TableBody/InifiniteScrollBody/useInfiniteVirtualization.tsx,Rahul Barwal,37,Human,2025-02-17T08:59:40+00:00,3
+appsmithorg/appsmith,appsmithorg,app/server/appsmith-server/src/main/java/com/appsmith/server/services/ce/OrganizationServiceCEImpl.java,Trisha Anand,359,Human,2021-12-15T17:29:46+00:00,19
+appsmithorg/appsmith,appsmithorg,app/client/src/ee/middlewares/PackageMiddleware.ts,Ashit Rath,9,Human,2025-03-05T15:25:35+00:00,1
+appsmithorg/appsmith,appsmithorg,app/client/src/modules/ui-builder/ui/wds/WDSMultiSelectWidget/config/autocompleteConfig.ts,Pawan Kumar,22,Human,2025-02-21T13:22:36+00:00,2
+appsmithorg/appsmith,appsmithorg,app/client/src/ce/pages/Editor/JSEditor/utils/getHighlightedLines.ts,Hetu Nandu,7,Human,2025-03-26T13:58:52+00:00,1
+appsmithorg/appsmith,appsmithorg,app/server/appsmith-server/src/main/resources/application-ce.properties,Subhrashis Das,111,Human,2025-02-25T07:48:42+00:00,5
+appsmithorg/appsmith,appsmithorg,app/server/appsmith-server/src/test/utils/com/appsmith/server/git/ce/GitTestUtilsCE.java,subratadeypappu,26,Human,2025-02-25T13:42:04+00:00,1
+appsmithorg/appsmith,appsmithorg,app/client/src/components/formControls/FunctionCallingConfigControl/index.ts,Ilia,1,Human,2025-02-17T11:59:38+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/inputs/get-routing-forms-params.input.ts,devin-ai-integration[bot],89,AI,2025-04-11T09:58:00+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/teams/routing-forms/controllers/organizations-teams-routing-forms.controller.ts,devin-ai-integration[bot],58,AI,2025-04-11T09:58:00+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/controllers/organizations-routing-forms.controller.e2e-spec.ts,devin-ai-integration[bot],215,AI,2025-04-11T09:58:00+00:00,2
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/outputs/get-routing-forms.output.ts,devin-ai-integration[bot],62,AI,2025-04-11T09:58:00+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/controllers/organizations-routing-forms.controller.ts,devin-ai-integration[bot],54,AI,2025-04-11T09:58:00+00:00,1
+calcom/cal.com,calcom,apps/web/app/notFoundClient.tsx,Benny Joo,216,AI,2025-04-18T02:55:01+00:00,2
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/outputs/update-routing-form-response.output.ts,devin-ai-integration[bot],17,AI,2025-04-11T09:58:00+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/organizations-routing-forms.repository.ts,devin-ai-integration[bot],128,AI,2025-04-11T09:58:00+00:00,2
+calcom/cal.com,calcom,packages/prisma/migrations/20250407204810_add_membership_creation_date/migration.sql,devin-ai-integration[bot],2,AI,2025-04-24T13:48:06+00:00,3
+calcom/cal.com,calcom,apps/api/v2/src/modules/organizations/routing-forms/services/organizations-routing-forms-responses.service.ts,devin-ai-integration[bot],55,AI,2025-04-11T09:58:00+00:00,7
+calcom/cal.com,calcom,apps/web/app/(use-page-wrapper)/(main-nav)/event-types/actions.ts,Benny Joo,7,Human,2025-04-28T14:58:53+00:00,1
+calcom/cal.com,calcom,.yarn/versions/89efa242.yml,GitHub Actions,2,Human,2025-03-24T00:23:17+00:00,1
+calcom/cal.com,calcom,packages/trpc/server/routers/viewer/credentials/_router.tsx,Keith Williams,26,Human,2025-04-04T19:33:14+00:00,2
+calcom/cal.com,calcom,packages/prisma/migrations/20250311134135_add_tracking_to_booking/migration.sql,Carina Wollendorfer,18,Human,2025-03-14T15:21:55+00:00,1
+calcom/cal.com,calcom,packages/app-store/lindy/static/3.jpg,Peer Richelsen,1288,Human,2025-04-16T14:27:53+00:00,1
+calcom/cal.com,calcom,apps/ui-playground/content/design/components/switch.tsx,sean-brydon,87,Human,2025-04-02T08:10:07+00:00,1
+calcom/cal.com,calcom,packages/dayjs/__mocks__/index.ts,Hariom Balhara,15,Human,2025-03-18T12:02:20+00:00,1
+calcom/cal.com,calcom,apps/web/pages/api/trpc/i18n/[trpc].ts,Keith Williams,4,Human,2025-03-17T01:22:48+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/modules/auth/decorators/api-auth-guard-only-allow.decorator.ts,Lauris Skraucis,5,Human,2025-04-24T13:06:37+00:00,2
+calcom/cal.com,calcom,packages/trpc/server/routers/viewer/filterSegments/create.schema.ts,Eunjae Lee,35,Human,2025-03-31T08:53:48+00:00,3
+dotnet/aspnetcore,dotnet,docs/APIReviewPrinciples.md,Artak,14,AI,2025-01-15T05:45:04+00:00,2
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/Components.TestServer/RazorComponents/Pages/EnhancedNav/ScrollTestLandingPageNoStreaming.razor,Ilona Tomkowicz,32,AI,2025-02-27T14:43:16+00:00,1
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/Components.TestServer/RazorComponents/Pages/EnhancedNav/ScrollTestLandingPage.razor,Ilona Tomkowicz,50,AI,2025-02-27T14:43:16+00:00,1
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/Components.TestServer/RazorComponents/Pages/EnhancedNav/ScrollTestNextPageNoStreaming.razor,Ilona Tomkowicz,24,AI,2025-02-27T14:43:16+00:00,1
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/Components.TestServer/RazorComponents/Pages/EnhancedNav/ScrollTestNextPage.razor,Ilona Tomkowicz,38,AI,2025-02-27T14:43:16+00:00,1
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/Components.WasmMinimal/Pages/CustomNotFoundPage.razor,Ilona Tomkowicz,4,Human,2025-04-23T12:09:41+00:00,2
+dotnet/aspnetcore,dotnet,src/Features/JsonPatch.SystemTextJson/test/Internal/ObjectVisitorTest.cs,Artak,222,Human,2025-04-21T22:53:42+00:00,1
+dotnet/aspnetcore,dotnet,src/Http/Http.Abstractions/src/Validation/IValidatableInfo.cs,Safia Abdalla,19,Human,2025-03-13T03:38:50+00:00,3
+dotnet/aspnetcore,dotnet,src/Http/Http.Extensions/test/ValidationsGenerator/ValidationsGenerator.Polymorphism.cs,Safia Abdalla,202,Human,2025-03-13T03:38:50+00:00,2
+dotnet/aspnetcore,dotnet,src/Components/test/testassets/TestContentPackage/Services/InteractiveWebAssemblyService.cs,Javier Calvarro Nelson,15,Human,2025-03-13T22:34:36+00:00,3
+halo-dev/halo,halo-dev,ui/packages/editor/src/utils/isNodeEmpty.ts,Takagi,19,AI,2024-06-26T11:18:50+00:00,3
+halo-dev/halo,halo-dev,ui/packages/editor/src/extensions/gap-cursor/gap-cursor-selection.ts,Takagi,240,AI,2024-06-26T11:18:50+00:00,2
+halo-dev/halo,halo-dev,ui/packages/editor/src/styles/gap-cursor.scss,Takagi,43,AI,2024-06-26T11:18:50+00:00,1
+halo-dev/halo,halo-dev,ui/packages/editor/src/extensions/gap-cursor/index.ts,Takagi,394,AI,2024-06-26T11:18:50+00:00,3
+halo-dev/halo,halo-dev,application/src/main/java/run/halo/app/core/attachment/ThumbnailMigration.java,guqing,144,Human,2024-11-26T03:26:28+00:00,3
+halo-dev/halo,halo-dev,application/src/main/java/run/halo/app/security/authentication/exception/TooManyRequestsException.java,JohnNiang,21,Human,2024-09-28T09:37:36+00:00,1
+halo-dev/halo,halo-dev,application/src/test/java/run/halo/app/core/attachment/impl/ThumbnailServiceImplTest.java,guqing,172,Human,2024-08-26T10:27:14+00:00,6
+halo-dev/halo,halo-dev,application/src/main/java/run/halo/app/security/preauth/PreAuthTwoFactorEndpoint.java,JohnNiang,27,Human,2024-09-28T09:37:36+00:00,4
+crewAIInc/crewAI,crewAIInc,docs/tools/s3readertool.mdx,Tony Kipkemboi,144,AI,2025-03-03T15:29:37+00:00,2
+crewAIInc/crewAI,crewAIInc,tests/cassettes/test_llm_call_with_string_input_and_callbacks.yaml,Brandon Hancock (bhancock_ai),102,AI,2025-01-22T19:36:15+00:00,2
+crewAIInc/crewAI,crewAIInc,src/crewai/types/crew_chat.py,Brandon Hancock (bhancock_ai),40,AI,2025-01-06T21:12:43+00:00,3
+crewAIInc/crewAI,crewAIInc,tests/test_task_guardrails.py,devin-ai-integration[bot],134,AI,2024-12-22T03:52:02+00:00,9
+crewAIInc/crewAI,crewAIInc,tests/cassettes/test_multimodal_agent_describing_image_successfully.yaml,lucasgomide,378,AI,2025-03-26T19:28:37+00:00,2
+crewAIInc/crewAI,crewAIInc,tests/imports_test.py,Devin AI,15,AI,2025-04-09T09:35:05+00:00,2
+crewAIInc/crewAI,crewAIInc,tests/utilities/cassettes/test_llm_emits_call_started_event.yaml,Lorenze Jay,108,AI,2025-02-24T20:17:44+00:00,2
+crewAIInc/crewAI,crewAIInc,src/crewai/utilities/events/task_events.py,Lorenze Jay,84,AI,2025-02-19T21:52:47+00:00,5
+crewAIInc/crewAI,crewAIInc,docs/guides/advanced/fingerprinting.mdx,João Moura,135,AI,2025-03-14T06:00:30+00:00,3
+crewAIInc/crewAI,crewAIInc,tests/telemetry/__init__.py,devin-ai-integration[bot],0,AI,2025-04-09T17:20:34+00:00,2
+crewAIInc/crewAI,crewAIInc,src/crewai/utilities/chromadb.py,lucasgomide,62,Human,2025-03-25T18:06:00+00:00,5
+crewAIInc/crewAI,crewAIInc,src/crewai/lite_agent.py,Brandon Hancock (bhancock_ai),518,Human,2025-04-02T15:54:46+00:00,18
+crewAIInc/crewAI,crewAIInc,docs/images/enterprise/redeploy-button.png,Tony Kipkemboi,1302,Human,2025-04-25T20:59:44+00:00,1
+crewAIInc/crewAI,crewAIInc,docs/images/enterprise/kickoff-slack-crew-kickoff.png,Tony Kipkemboi,290,Human,2025-04-30T15:46:37+00:00,1
+crewAIInc/crewAI,crewAIInc,src/crewai/agents/agent_adapters/openai_agents/openai_agent_tool_adapter.py,Lorenze Jay,91,Human,2025-04-17T16:22:48+00:00,3
+crewAIInc/crewAI,crewAIInc,tests/utilities/cassettes/test_llm_no_stream_chunks_when_streaming_disabled.yaml,Brandon Hancock (bhancock_ai),107,Human,2025-03-07T17:54:32+00:00,3
+crewAIInc/crewAI,crewAIInc,docs/tools/apifyactorstool.mdx,Jakub Kopecký,99,Human,2025-03-16T16:29:57+00:00,2
+crewAIInc/crewAI,crewAIInc,src/crewai/knowledge/knowledge_config.py,Lorenze Jay,16,Human,2025-04-19T01:33:04+00:00,3
+crewAIInc/crewAI,crewAIInc,docs/images/enterprise/activepieces-headers.png,Tony Kipkemboi,452,Human,2025-04-30T15:46:37+00:00,1
+crewAIInc/crewAI,crewAIInc,src/crewai/cli/templates/pipeline/pyproject.toml,Lorenze Jay,17,Human,2024-08-09T21:13:29+00:00,40
+docling-project/docling,docling-project,.actor/.dockerignore,Václav Vančura,11,AI,2025-03-18T09:17:44+00:00,1
+docling-project/docling,docling-project,.actor/input_schema.json,Václav Vančura,27,AI,2025-03-18T09:17:44+00:00,1
+docling-project/docling,docling-project,.actor/actor.json,Václav Vančura,11,AI,2025-03-18T09:17:44+00:00,2
+docling-project/docling,docling-project,.actor/README.md,Václav Vančura,314,AI,2025-03-18T09:17:44+00:00,2
+docling-project/docling,docling-project,.actor/dataset_schema.json,Václav Vančura,31,AI,2025-03-18T09:17:44+00:00,1
+docling-project/docling,docling-project,.actor/actor.sh,Václav Vančura,419,AI,2025-03-18T09:17:44+00:00,2
+docling-project/docling,docling-project,.actor/Dockerfile,Václav Vančura,87,AI,2025-03-18T09:17:44+00:00,2
+docling-project/docling,docling-project,.actor/CHANGELOG.md,Václav Vančura,69,AI,2025-03-18T09:17:44+00:00,1
+docling-project/docling,docling-project,docling/backend/mspowerpoint_backend.py,Christoph Auer,375,Human,2024-10-16T19:02:03+00:00,15
+docling-project/docling,docling-project,tests/data/pubmed/pone.0234687.txt,Lucas Morin,60,Human,2024-12-17T18:27:09+00:00,2
+docling-project/docling,docling-project,.github/ISSUE_TEMPLATE/feature_request.md,Panos Vagenas,18,Human,2024-11-05T22:18:20+00:00,1
+docling-project/docling,docling-project,tests/data/groundtruth/docling_v2/mixed_without_h1.md.md,Panos Vagenas,8,Human,2025-03-26T15:07:14+00:00,2
+docling-project/docling,docling-project,tests/data/groundtruth/docling_v2/wiki_duck.html.json,Peter W. J. Staar,7988,Human,2024-10-30T12:14:56+00:00,22
+docling-project/docling,docling-project,docs/concepts/docling_format.md,Christoph Auer,65,Human,2024-10-16T19:02:03+00:00,2
+docling-project/docling,docling-project,tests/data/groundtruth/docling_v2/test-01.xlsx.json,Peter W. J. Staar,3240,Human,2024-11-19T11:21:17+00:00,12
+docling-project/docling,docling-project,docs/stylesheets/extra.css,Panos Vagenas,3,Human,2024-10-14T12:13:13+00:00,3
+twentyhq/twenty,twentyhq,packages/twenty-shared/src/utils/validation/__tests__/normalizeLocale.test.ts,Félix Malfait,53,AI,2025-04-30T11:11:40+00:00,1
+twentyhq/twenty,twentyhq,packages/twenty-shared/src/utils/validation/normalizeLocale.ts,Félix Malfait,53,AI,2025-04-30T11:11:40+00:00,1
+twentyhq/twenty,twentyhq,packages/twenty-server/src/engine/core-modules/billing/enums/billing-product-key.enum.ts,Etienne,6,Human,2025-04-03T14:18:44+00:00,2
+twentyhq/twenty,twentyhq,packages/twenty-front/src/modules/settings/admin-panel/config-variables/components/SettingsAdminConfigVariablesRow.tsx,nitin,70,Human,2025-04-30T07:12:59+00:00,5
+mattermost/mattermost,mattermost,webapp/channels/src/components/admin_console/client_side_userids_setting.test.tsx,Agniva De Sarker,133,AI,2025-02-13T15:40:34+00:00,1
+mattermost/mattermost,mattermost,webapp/channels/src/components/admin_console/__snapshots__/client_side_userids_setting.test.tsx.snap,Agniva De Sarker,470,AI,2025-02-13T15:40:34+00:00,1
+mattermost/mattermost,mattermost,webapp/channels/src/components/admin_console/client_side_userids_setting.tsx,Agniva De Sarker,81,AI,2025-02-13T15:40:34+00:00,1
+mattermost/mattermost,mattermost,e2e-tests/playwright/test/package.json,Saturnino Abril,26,Human,2025-04-01T00:52:56+00:00,3
+mattermost/mattermost,mattermost,webapp/channels/src/components/channel_settings_modal/channel_settings_modal.scss,Pablo Vélez,232,Human,2025-04-23T10:49:54+00:00,4
+mattermost/mattermost,mattermost,server/tests/exif_samples/left-mirrored.webp,Claudio Costa,104,Human,2025-04-01T19:57:43+00:00,1
+swc-project/swc,swc-project,.changeset/flat-humans-sneeze.md,bohan,6,AI,2025-04-23T14:22:09+00:00,2
+swc-project/swc,swc-project,crates/swc_par_iter/src/iter/for_each.rs,Donny/강동윤,75,Human,2025-03-25T16:34:34+00:00,2
+openai/codex,openai,codex-cli/src/utils/storage/command-history.ts,Tomas Cupr,159,AI,2025-04-17T19:41:54+00:00,3
+openai/codex,openai,codex-rs/repl/src/cli.rs,Michael Bolin,60,AI,2025-04-24T20:31:40+00:00,7
+openai/codex,openai,codex-cli/tests/model-utils.test.ts,chunterb,78,AI,2025-04-22T21:31:25+00:00,2
+openai/codex,openai,codex-rs/execpolicy/src/arg_type.rs,Michael Bolin,87,AI,2025-04-25T00:14:47+00:00,2
+openai/codex,openai,codex-rs/tui/src/cli.rs,Michael Bolin,41,AI,2025-04-24T20:31:40+00:00,23
+openai/codex,openai,scripts/readme_toc.py,Michael Bolin,119,AI,2025-04-22T16:38:12+00:00,2
+openai/codex,openai,codex-rs/execpolicy/src/error.rs,Michael Bolin,96,AI,2025-04-25T00:14:47+00:00,2
+openai/codex,openai,codex-rs/execpolicy/tests/head.rs,Michael Bolin,132,AI,2025-04-25T00:14:47+00:00,6
+openai/codex,openai,codex-rs/execpolicy/tests/literal.rs,Michael Bolin,50,AI,2025-04-25T00:14:47+00:00,4
+openai/codex,openai,codex-rs/core/tests/live_cli.rs,Michael Bolin,143,AI,2025-04-24T20:31:40+00:00,6
+openai/codex,openai,codex-cli/.husky/pre-push,Alpha Diop,5,Human,2025-04-17T14:18:43+00:00,2
+openai/codex,openai,codex-cli/src/shims-external.d.ts,Fouad Matin,24,Human,2025-04-22T08:30:16+00:00,2
+openai/codex,openai,codex-cli/src/components/vendor/ink-text-input.tsx,Ilan Bigio,338,Human,2025-04-16T16:56:08+00:00,5
+openai/codex,openai,codex-cli/tests/project-doc.test.ts,Ilan Bigio,57,Human,2025-04-16T16:56:08+00:00,2
+openai/codex,openai,codex-cli/tests/agent-network-errors.test.ts,Ilan Bigio,179,Human,2025-04-16T16:56:08+00:00,5
+openai/codex,openai,.github/ISSUE_TEMPLATE/3-docs-issue.yml,Fouad Matin,27,Human,2025-04-18T00:19:30+00:00,1
+openai/codex,openai,codex-cli/src/components/diff-overlay.tsx,Fouad Matin,93,Human,2025-04-19T23:23:27+00:00,2
+openai/codex,openai,codex-cli/tests/config.test.tsx,Ilan Bigio,106,Human,2025-04-16T16:56:08+00:00,10
+openai/codex,openai,codex-cli/tests/multiline-external-editor-shortcut.test.tsx,Ilan Bigio,64,Human,2025-04-16T16:56:08+00:00,3
+openai/codex,openai,codex-cli/tests/agent-function-call-id.test.ts,Ilan Bigio,149,Human,2025-04-16T16:56:08+00:00,5
+cockroachdb/cockroach,cockroachdb,pkg/crosscluster/logical/savepoint_test.go,Jeff Swenson,70,AI,2025-04-17T18:15:22+00:00,1
+cockroachdb/cockroach,cockroachdb,pkg/crosscluster/logical/savepoint.go,Jeff Swenson,49,AI,2025-04-17T18:15:22+00:00,1
+cockroachdb/cockroach,cockroachdb,pkg/cmd/drtprod/scripts/pua_operations.sh,Shailendra Patel,129,Human,2025-04-11T03:34:08+00:00,1
+cockroachdb/cockroach,cockroachdb,pkg/sql/schemachanger/scplan/internal/rules/release_25_2/dep_drop_trigger.go,Radu Berinde,31,Human,2025-04-16T20:41:26+00:00,1
+backstage/backstage,backstage,.changeset/cyan-islands-swim.md,Thomas Cardonne,14,AI,2025-04-29T16:31:00+00:00,2
+backstage/backstage,backstage,.changeset/slick-brooms-start.md,Thomas Cardonne,5,AI,2025-04-24T12:51:26+00:00,2
+backstage/backstage,backstage,packages/cli/src/modules/start/alpha.ts,Patrik Oldsberg,99,Human,2025-04-04T20:19:43+00:00,5
+backstage/backstage,backstage,plugins/notifications-backend-module-slack/README.md,Adam Kunicki,5,Human,2025-03-26T16:26:16+00:00,2
+danny-avila/LibreChat,danny-avila,packages/mcp/server-rollup.config.js,Danny Avila,40,AI,2024-12-17T18:12:57+00:00,2
+danny-avila/LibreChat,danny-avila,client/src/components/Conversations/ConvoOptions/index.js,Marco Beretta,4,AI,2025-04-15T08:04:00+00:00,1
+danny-avila/LibreChat,danny-avila,packages/mcp/src/index.ts,Danny Avila,4,AI,2024-12-17T18:12:57+00:00,4
+danny-avila/LibreChat,danny-avila,client/src/components/Chat/Input/MCPSelect.tsx,Danny Avila,82,AI,2025-04-07T23:16:56+00:00,19
+danny-avila/LibreChat,danny-avila,client/src/components/Chat/Messages/Content/Parts/CodeProgress.tsx,Danny Avila,90,AI,2024-09-30T21:17:57+00:00,2
+danny-avila/LibreChat,danny-avila,client/src/hooks/SSE/useAttachmentHandler.ts,Danny Avila,20,AI,2024-09-30T21:17:57+00:00,6
+danny-avila/LibreChat,danny-avila,client/src/common/agents-types.ts,Danny Avila,27,AI,2024-08-31T20:33:51+00:00,10
+danny-avila/LibreChat,danny-avila,api/models/Role.spec.js,Danny Avila,197,AI,2024-08-26T19:34:46+00:00,6
+danny-avila/LibreChat,danny-avila,client/src/hooks/Agents/useAgentsMap.ts,Danny Avila,21,AI,2024-08-31T20:33:51+00:00,4
+danny-avila/LibreChat,danny-avila,client/src/components/Chat/Messages/Content/Parts/ExecuteCode.tsx,Danny Avila,127,AI,2024-09-30T21:17:57+00:00,7
+danny-avila/LibreChat,danny-avila,client/src/hooks/Endpoint/useSelectorEffects.ts,Marco Beretta,96,Human,2025-03-25T22:50:58+00:00,3
+danny-avila/LibreChat,danny-avila,client/src/hooks/Endpoint/useKeyDialog.ts,Marco Beretta,38,Human,2025-03-25T22:50:58+00:00,1
+danny-avila/LibreChat,danny-avila,client/src/components/ui/Progress.tsx,Ruben Talstra,22,Human,2025-02-18T00:09:36+00:00,2
+danny-avila/LibreChat,danny-avila,client/src/locales/nl/translation.json,Ruben Talstra,308,Human,2025-02-09T17:05:31+00:00,24
+danny-avila/LibreChat,danny-avila,api/server/services/createRunBody.js,Danny Avila,78,Human,2024-12-11T20:26:18+00:00,1
+danny-avila/LibreChat,danny-avila,client/src/components/Nav/SettingsTabs/Chat/ShowThinking.tsx,Danny Avila,37,Human,2025-01-30T00:46:58+00:00,4
+danny-avila/LibreChat,danny-avila,client/public/assets/c.svg,Danny Avila,1,Human,2024-12-04T20:48:13+00:00,1
+danny-avila/LibreChat,danny-avila,client/src/locales/es/translation.json,Ruben Talstra,819,Human,2025-02-09T17:05:31+00:00,30
+danny-avila/LibreChat,danny-avila,packages/data-schemas/src/schema/toolCall.ts,Ruben Talstra,55,Human,2025-03-07T16:55:44+00:00,1
+danny-avila/LibreChat,danny-avila,client/src/components/SidePanel/Agents/Code/Form.tsx,Danny Avila,33,Human,2024-11-01T22:36:39+00:00,2
+GitbookIO/gitbook,GitbookIO,packages/gitbook/src/routes/markdownPage.ts,Samy Pessé,34,AI,2025-03-27T12:35:18+00:00,8
+GitbookIO/gitbook,GitbookIO,packages/gitbook-v2/src/app/sites/static/[mode]/[siteURL]/[siteData]/~gitbook/markdown/[pagePath]/route.ts,Samy Pessé,11,AI,2025-03-27T12:35:18+00:00,2
+GitbookIO/gitbook,GitbookIO,packages/gitbook/src/fonts/custom.ts,Valentino Hudhra,53,Human,2025-03-24T07:20:58+00:00,3
+GitbookIO/gitbook,GitbookIO,packages/gitbook/src/components/hooks/useCurrentPagePath.ts,Samy Pessé,22,Human,2025-02-26T12:20:16+00:00,4
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/test/test_list_assistants401_response.py,tomasz-io,51,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/test/test_default_api.py,tomasz-io,38,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/package.json,tomasz-io,20,AI,2025-04-18T00:19:31+00:00,14
+continuedev/continue,continuedev,packages/continue-sdk/openapi.yaml,tomasz-io,129,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/openapi_client/exceptions.py,tomasz-io,216,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/typescript/src/apis/index.ts,tomasz-io,3,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/openapi_client/api/default_api.py,tomasz-io,325,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/typescript/tsconfig.esm.json,tomasz-io,7,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/swagger-ui-server.js,tomasz-io,43,AI,2025-04-18T00:19:31+00:00,1
+continuedev/continue,continuedev,packages/continue-sdk/clients/typescript/src/apis/DefaultApi.ts,tomasz-io,120,AI,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/pyproject.toml,tomasz-io,89,Human,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,packages/continue-sdk/clients/python/openapi_client/models/__init__.py,tomasz-io,20,Human,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,core/tools/implementations/createRuleBlock.ts,Patrick Erichsen,59,Human,2025-04-18T04:42:52+00:00,20
+continuedev/continue,continuedev,gui/src/components/ToggleDiv.tsx,Nate,66,Human,2025-04-18T16:31:13+00:00,8
+continuedev/continue,continuedev,core/tools/implementations/runTerminalCommand.test.ts,chezsmithy,334,Human,2025-04-18T07:11:01+00:00,8
+continuedev/continue,continuedev,packages/continue-sdk/clients/typescript/src/models/ListAssistants200ResponseInnerConfigResult.ts,tomasz-io,83,Human,2025-04-18T00:19:31+00:00,2
+continuedev/continue,continuedev,docs/static/img/mcp-blocks-overview.png,Patrick Erichsen,0,Human,2025-04-25T00:35:23+00:00,2
+continuedev/continue,continuedev,gui/src/components/config/FatalErrorNotice.tsx,Dallin Romney,37,Human,2025-04-18T22:54:21+00:00,8
+continuedev/continue,continuedev,docs/static/img/agent-response.png,Dallin Romney,3963,Human,2025-03-25T23:22:37+00:00,3
+continuedev/continue,continuedev,gui/src/components/mainInput/InputToolbar/EnterButton.tsx,Nate,29,Human,2025-04-21T05:39:52+00:00,4
+BerriAI/litellm,BerriAI,tests/litellm/types/llms/test_types_llms_openai.py,Krish Dholakia,21,AI,2025-04-23T06:58:43+00:00,2
+BerriAI/litellm,BerriAI,litellm/router_utils/common_utils.py,Krish Dholakia,14,AI,2025-04-03T18:48:52+00:00,4
+BerriAI/litellm,BerriAI,tests/litellm/llms/hosted_vllm/chat/test_hosted_vllm_chat_transformation.py,Krish Dholakia,45,AI,2025-04-19T18:16:37+00:00,2
+BerriAI/litellm,BerriAI,litellm/types/integrations/anthropic_cache_control_hook.py,Ishaan Jaff,17,AI,2025-04-15T03:50:13+00:00,3
+BerriAI/litellm,BerriAI,tests/litellm/llms/anthropic/chat/test_anthropic_chat_handler.py,Krish Dholakia,38,AI,2025-04-19T18:16:37+00:00,2
+BerriAI/litellm,BerriAI,tests/litellm/proxy/spend_tracking/test_spend_tracking_utils.py,Krish Dholakia,102,AI,2025-04-10T04:26:43+00:00,3
+BerriAI/litellm,BerriAI,ui/litellm-dashboard/src/components/add_model/cache_control_settings.tsx,Ishaan Jaff,159,AI,2025-04-15T04:17:42+00:00,5
+BerriAI/litellm,BerriAI,litellm/integrations/anthropic_cache_control_hook.py,Ishaan Jaff,118,AI,2025-04-15T03:50:13+00:00,8
+BerriAI/litellm,BerriAI,tests/litellm/llms/bedrock/chat/test_invoke_handler.py,Krish Dholakia,22,AI,2025-04-19T18:16:37+00:00,2
+BerriAI/litellm,BerriAI,docs/my-website/img/litellm_codex.gif,Ishaan Jaff,0,AI,2025-04-19T02:53:59+00:00,1
+BerriAI/litellm,BerriAI,litellm/proxy/_experimental/out/_next/static/chunks/817-9919df897a7c474b.js,Ishaan Jaff,0,Human,2025-04-12T16:13:00+00:00,4
+BerriAI/litellm,BerriAI,litellm/types/proxy/management_endpoints/scim_v2.py,Ishaan Jaff,82,Human,2025-04-17T02:21:47+00:00,4
+BerriAI/litellm,BerriAI,litellm/types/vector_stores.py,Ishaan Jaff,63,Human,2025-05-01T04:49:59+00:00,7
+BerriAI/litellm,BerriAI,litellm-proxy-extras/dist/litellm_proxy_extras-0.1.4.tar.gz,Krish Dholakia,196,Human,2025-04-12T15:24:46+00:00,1
+BerriAI/litellm,BerriAI,tests/litellm/integrations/gcs_pubsub/test_pub_sub.py,Krish Dholakia,68,Human,2025-04-16T04:50:48+00:00,2
+BerriAI/litellm,BerriAI,litellm/proxy/_experimental/out/_next/static/chunks/app/onboarding/page-82b2525e758a7201.js,Krrish Dholakia,1,Human,2025-04-17T05:11:53+00:00,4
+BerriAI/litellm,BerriAI,litellm/proxy/common_utils/html_forms/jwt_display_template.py,Ishaan Jaff,284,Human,2025-04-09T22:29:35+00:00,1
+BerriAI/litellm,BerriAI,litellm/integrations/agentops/__init__.py,Dwij,3,Human,2025-04-22T17:29:01+00:00,1
+BerriAI/litellm,BerriAI,ui/litellm-dashboard/src/components/vector_store_management/VectorStoreForm.tsx,Ishaan Jaff,229,Human,2025-05-01T04:49:59+00:00,9
+BerriAI/litellm,BerriAI,litellm/proxy/common_utils/timezone_utils.py,Krish Dholakia,29,Human,2025-04-30T03:59:44+00:00,2
+nrwl/nx,nrwl,docs/blog/media/nx-mcp-cursor-nx-release.mp4,Juri,0,AI,2025-03-04T21:23:12+00:00,2
+nrwl/nx,nrwl,docs/blog/images/articles/mcp-architecture.avif,Juri,521,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/images/articles/cursor-mcp-server-config.avif,Juri,1813,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/images/articles/cursor-nx-enable-mcp.avif,Juri,767,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/images/articles/mcp-nx-architecture.avif,Juri,770,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/images/articles/cursor-nx-mcp-heroimg.jpg,Juri,1951,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/images/articles/cursor-nx-notification.avif,Juri,493,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,docs/blog/media/nx-mcp-cursor-dependencies.mp4,Juri,0,AI,2025-03-04T21:23:12+00:00,2
+nrwl/nx,nrwl,docs/blog/2025-03-06-making-cursor-smarter.md,Juri,155,AI,2025-03-04T21:23:12+00:00,12
+nrwl/nx,nrwl,docs/blog/images/articles/mcp-cursor-disabled.avif,Juri,1214,AI,2025-03-04T21:23:12+00:00,1
+nrwl/nx,nrwl,e2e/react/src/module-federation/misc.rspack.test.ts,Colum Ferry,183,Human,2025-04-02T15:58:45+00:00,8
+nrwl/nx,nrwl,packages/react/src/generators/host/lib/normalize-host-name.ts,Colum Ferry,15,Human,2025-04-02T15:58:45+00:00,1
+nrwl/nx,nrwl,nx-dev/tutorial/src/templates/react-monorepo/lesson-2/apps/react-store-e2e/package.json,Isaac Mann,12,Human,2025-04-09T11:14:19+00:00,3
+nrwl/nx,nrwl,nx-dev/tutorial/src/templates/react-monorepo/lesson-6/libs/shared/ui/src/lib/ui.spec.tsx,Isaac Mann,10,Human,2025-04-09T11:14:19+00:00,2
+nrwl/nx,nrwl,packages/gradle/project-graph/src/test/kotlin/dev/nx/gradle/utils/ProcessTaskUtilsTest.kt,Emily Xiong,96,Human,2025-04-23T17:13:25+00:00,5
+nrwl/nx,nrwl,nx-dev/tutorial/src/components/Editor.tsx,Isaac Mann,313,Human,2025-04-09T11:14:19+00:00,2
+nrwl/nx,nrwl,packages/nx/src/migrations/update-21-0-0/release-changelog-config-changes.md,James Henry,54,Human,2025-04-30T08:41:03+00:00,1
+nrwl/nx,nrwl,nx-dev/nx-dev/public/images/team/josh-vanallen.avif,Josh VanAllen,334,Human,2025-04-14T14:52:40+00:00,1
+nrwl/nx,nrwl,nx-dev/tutorial/src/templates/react-monorepo/lesson-5/apps/inventory/index.html,Isaac Mann,16,Human,2025-04-09T11:14:19+00:00,2
+nrwl/nx,nrwl,docs/shared/packages/module-federation/nx-module-federation-plugin.md,Colum Ferry,181,Human,2025-04-02T15:58:54+00:00,4
+microsoft/semantic-kernel,microsoft,dotnet/src/Agents/Abstractions/Definition/AgentFactory.cs,Mark Wallace,67,AI,2025-04-09T19:10:35+00:00,1
+microsoft/semantic-kernel,microsoft,python/semantic_kernel/connectors/memory/mongodb_atlas/const.py,Eduard van Valkenburg,14,AI,2025-02-06T03:49:29+00:00,3
+microsoft/semantic-kernel,microsoft,python/tests/unit/agents/bedrock_agent/test_bedrock_agent_base.py,Tao Chen,800,AI,2025-02-05T00:29:04+00:00,2
+microsoft/semantic-kernel,microsoft,python/samples/demos/copilot_studio_skill/src/api/sk_conversation_agent.py,unsafecode,10,AI,2025-03-20T10:14:38+00:00,2
+microsoft/semantic-kernel,microsoft,python/samples/demos/copilot_studio_skill/src/api/dockerfile,unsafecode,23,AI,2025-03-20T10:14:38+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/InternalUtilities/samples/AgentUtilities/BaseBedrockAgentTest.cs,Tao Chen,41,AI,2025-02-19T22:10:47+00:00,3
+microsoft/semantic-kernel,microsoft,python/samples/demos/copilot_studio_skill/src/api/requirements.txt,unsafecode,4,AI,2025-03-20T10:14:38+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/Agents/Bedrock/Properties/AssemblyInfo.cs,Tao Chen,6,AI,2025-02-19T22:10:47+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/Agents/Abstractions/Definition/AgentMetadata.cs,Mark Wallace,45,AI,2025-04-09T19:10:35+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/samples/GettingStartedWithAgents/BedrockAgent/Step02_BedrockAgent_CodeInterpreter.cs,Tao Chen,90,AI,2025-02-19T22:10:47+00:00,5
+microsoft/semantic-kernel,microsoft,dotnet/src/Agents/Runtime/Core/AgentsApp.cs,Chris,104,Human,2025-04-21T20:55:51+00:00,1
+microsoft/semantic-kernel,microsoft,python/samples/getting_started_with_processes/step03/processes_states/FishSandwichStateProcessSuccess.json,Evan Mattson,60,Human,2025-04-28T22:51:11+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/VectorDataIntegrationTests/VectorDataIntegrationTests/Collections/CollectionConformanceTests.cs,Adam Sitnik,111,Human,2025-03-13T17:58:00+00:00,5
+microsoft/semantic-kernel,microsoft,dotnet/samples/Demos/AgentFrameworkWithAspire/ChatWithAgent.ServiceDefaults/CommonExtensions.cs,SergeyMenshykh,145,Human,2025-03-24T19:44:30+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/Agents/Runtime/Core.Tests/AgentsAppBuilderTests.cs,Chris,167,Human,2025-04-21T20:55:51+00:00,1
+microsoft/semantic-kernel,microsoft,python/samples/concepts/realtime/simple_realtime_chat_webrtc.py,Eduard van Valkenburg,84,Human,2025-03-04T07:44:10+00:00,2
+microsoft/semantic-kernel,microsoft,dotnet/samples/Demos/ModelContextProtocolClientServer/MCPServer/Tools/OrderProcessingUtils.cs,SergeyMenshykh,33,Human,2025-04-17T10:09:24+00:00,1
+microsoft/semantic-kernel,microsoft,dotnet/src/IntegrationTests/Connectors/Memory/InMemory/CommonInMemoryVectorStoreRecordCollectionTests.cs,westey,31,Human,2025-01-10T14:17:08+00:00,2
+microsoft/semantic-kernel,microsoft,python/samples/concepts/realtime/simple_realtime_chat_websocket.py,Eduard van Valkenburg,90,Human,2025-03-04T07:44:10+00:00,3
+microsoft/semantic-kernel,microsoft,dotnet/src/VectorDataIntegrationTests/WeaviateIntegrationTests/WeaviateEmbeddingGenerationTests.cs,westey,38,Human,2025-04-29T15:23:16+00:00,3
+HumanSignal/label-studio,HumanSignal,label_studio/ml_model_providers/migrations/0008_alter_modelproviderconnection_provider.py,matt-bernstein,29,AI,2025-02-06T19:33:05+00:00,1
+HumanSignal/label-studio,HumanSignal,label_studio/ml_models/migrations/0015_alter_thirdpartymodelversion_provider.py,matt-bernstein,30,AI,2025-02-06T19:33:05+00:00,1
+HumanSignal/label-studio,HumanSignal,web/libs/storybook/tsconfig.json,Nick Skriabin,23,Human,2024-02-08T13:54:30+00:00,7
+HumanSignal/label-studio,HumanSignal,web/libs/ui/src/assets/icons/play.svg,Yousif Yassi,6,Human,2025-03-21T14:21:21+00:00,1
+keepassxreboot/keepassxc,keepassxreboot,cmake/FindBotan.cmake,Barnabás Pőcze,65,AI,2023-05-07T12:48:58+00:00,2
+keepassxreboot/keepassxc,keepassxreboot,share/icons/application/scalable/actions/totp-edit.svg,Jonathan White,1,Human,2022-09-03T13:17:18+00:00,1
+pulumi/pulumi,pulumi,pkg/backend/display/ai.go,Artur Laksberg,74,AI,2025-03-28T18:12:04+00:00,6
+pulumi/pulumi,pulumi,pkg/backend/display/ai_test.go,Artur Laksberg,105,AI,2025-03-28T18:12:04+00:00,5
+pulumi/pulumi,pulumi,pkg/backend/httpstate/client/ai_test.go,Artur Laksberg,246,AI,2025-03-28T18:12:04+00:00,3
+pulumi/pulumi,pulumi,sdk/go/common/apitype/ai.go,Artur Laksberg,63,AI,2025-03-28T18:12:04+00:00,3
+pulumi/pulumi,pulumi,pkg/backend/httpstate/client/ai.go,Artur Laksberg,110,AI,2025-03-28T18:12:04+00:00,3
+pulumi/pulumi,pulumi,cmd/pulumi-test-language/tests/l1_proxy_index.go,Fraser Waters,56,Human,2025-03-21T23:14:47+00:00,5
+pulumi/pulumi,pulumi,changelog/pending/20250311--sdk-dotnet--upgrade-pulumi-dotnet-to-3-76-1.yaml,Thomas Gummerer,4,Human,2025-03-11T13:05:11+00:00,2
+pulumi/pulumi,pulumi,sdk/nodejs/cmd/pulumi-language-nodejs/testdata/tsnode/sdks/any-type-function-15.0.0/dynListToDyn.ts,Brandon Pollack,32,Human,2025-02-12T03:39:05+00:00,2
+pulumi/pulumi,pulumi,sdk/nodejs/cmd/pulumi-language-nodejs/testdata/tsnode/projects/l1-config-types/index.ts,Fraser Waters,16,Human,2025-03-21T16:12:13+00:00,2
+pulumi/pulumi,pulumi,sdk/nodejs/cmd/pulumi-language-nodejs/testdata/tsnode/sdks/call-15.7.9/custom.ts,Will Jones,86,Human,2025-03-21T17:32:03+00:00,4
+remotion-dev/remotion,remotion-dev,packages/template-render-server/.gitignore,Igor Samokhovets,11,AI,2025-04-04T12:11:16+00:00,2
+remotion-dev/remotion,remotion-dev,packages/template-render-server/remotion/HelloWorld/Logo.tsx,Igor Samokhovets,87,AI,2025-04-04T12:11:16+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/.dockerignore,Igor Samokhovets,3,AI,2025-04-07T13:21:40+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/remotion/HelloWorld/Title.tsx,Igor Samokhovets,58,AI,2025-04-04T12:11:16+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/remotion/HelloWorld/Subtitle.tsx,Igor Samokhovets,26,AI,2025-04-04T12:11:16+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/remotion/index.ts,Igor Samokhovets,7,AI,2025-04-04T12:11:16+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/remotion/HelloWorld/constants.ts,Igor Samokhovets,5,AI,2025-04-04T12:11:16+00:00,1
+remotion-dev/remotion,remotion-dev,packages/docs/src/components/icons/render-server.tsx,Igor Samokhovets,20,AI,2025-04-22T13:42:47+00:00,1
+remotion-dev/remotion,remotion-dev,packages/template-render-server/Dockerfile,Igor Samokhovets,41,AI,2025-04-07T13:21:40+00:00,2
+remotion-dev/remotion,remotion-dev,packages/template-render-server/server/index.ts,Igor Samokhovets,89,AI,2025-04-04T12:11:16+00:00,6
+remotion-dev/remotion,remotion-dev,packages/template-music-visualization/.prettierrc,Igor Samokhovets,5,Human,2025-03-27T16:21:57+00:00,1
+remotion-dev/remotion,remotion-dev,packages/media-parser/src/containers/mp3/get-seeking-byte.ts,Jonny Burger,60,Human,2025-04-17T11:32:04+00:00,5
+remotion-dev/remotion,remotion-dev,packages/media-parser/src/containers/mp3/seek/get-byte-from-observed-samples.ts,Jonny Burger,39,Human,2025-04-17T14:53:36+00:00,1
+remotion-dev/remotion,remotion-dev,packages/google-fonts/src/ProtestGuerrilla.ts,Jonny Burger,56,Human,2025-04-15T09:58:25+00:00,2
+remotion-dev/remotion,remotion-dev,packages/google-fonts/src/Triodion.ts,Jonny Burger,49,Human,2025-04-15T09:58:25+00:00,2
+remotion-dev/remotion,remotion-dev,packages/google-fonts/src/ProtestRevolution.ts,Jonny Burger,55,Human,2025-04-15T09:58:25+00:00,2
+remotion-dev/remotion,remotion-dev,packages/media-parser/src/containers/m3u/seek/get-chunk-to-seek-to.ts,Jonny Burger,20,Human,2025-04-25T09:07:53+00:00,2
+remotion-dev/remotion,remotion-dev,packages/media-parser/src/containers/webm/seek/format-cues.ts,Jonny Burger,63,Human,2025-04-04T09:47:32+00:00,2
+remotion-dev/remotion,remotion-dev,packages/google-fonts/src/RedditSans.ts,Jonny Burger,175,Human,2025-04-15T09:58:25+00:00,4
+PaddlePaddle/Paddle,PaddlePaddle,test/dygraph_to_static/test_jit_backend.py,Nyakku Shigure,70,AI,2025-03-25T02:36:13+00:00,2
+PaddlePaddle/Paddle,PaddlePaddle,test/sot/test_collections_namedtuple.py,Nyakku Shigure,97,AI,2025-04-26T05:55:41+00:00,1
+PaddlePaddle/Paddle,PaddlePaddle,test/sot/test_sot_place.py,Nyakku Shigure,104,AI,2025-04-01T15:31:40+00:00,2
+PaddlePaddle/Paddle,PaddlePaddle,paddle/ap/include/kernel_dispatch/device_ctx_method_class.h,Li Xinqi,25,Human,2025-04-25T02:50:56+00:00,1
+PaddlePaddle/Paddle,PaddlePaddle,paddle/ap/include/drr/native_ir_op_method_class.h,Li Xinqi,28,Human,2025-04-25T02:50:56+00:00,1
+PaddlePaddle/Paddle,PaddlePaddle,paddle/ap/include/axpr/continuation.h,Li Xinqi,46,Human,2025-04-25T02:50:56+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.iOS.Tests/snapshots/ios/CarouselViewItemsShouldRenderVertically.png,Ahamed-Ali,6659,AI,2025-02-05T20:27:49+00:00,3
+dotnet/maui,dotnet,src/Core/tests/DeviceTests/Resources/Fonts/ionicons.ttf,Matthew Leibowitz,11904,AI,2025-01-08T21:22:24+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/FromBundle_Image.png,Matthew Leibowitz,1197,AI,2025-01-08T21:22:24+00:00,1
+dotnet/maui,dotnet,.github/prompts/release_notes.prompt.md,Rui Marinho,419,AI,2025-04-11T14:38:25+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/CarouselViewItemsShouldRenderVertically.png,Ahamed-Ali,1025,AI,2025-02-05T20:27:49+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue27241.xaml.cs,Ahamed-Ali,11,AI,2025-02-05T20:27:49+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.iOS.Tests/snapshots/ios/FromEmbedded_Label.png,Matthew Leibowitz,856,AI,2025-01-08T21:22:24+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue27241.xaml,Ahamed-Ali,53,AI,2025-02-05T20:27:49+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/FromEmbedded_Label.png,Matthew Leibowitz,942,AI,2025-01-08T21:22:24+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/FromBundle_Label.png,Matthew Leibowitz,1355,AI,2025-01-08T21:22:24+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue24489_2.xaml,TJ Lambert,13,Human,2025-01-23T21:07:07+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.iOS.Tests/snapshots/ios/VerifyInitialToolbarButtonHidden.png,devanathan-vaithiyanathan,110,Human,2025-01-10T17:54:41+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Mac.Tests/snapshots/mac/TabbedPageBackButtonUpdated.png,Vignesh-SF3580,223,Human,2025-03-27T19:37:03+00:00,2
+dotnet/maui,dotnet,src/Controls/src/Core/TitleBar/TitleBar.iOS.cs,TJ Lambert,23,Human,2025-01-23T21:07:07+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.WinUI.Tests/snapshots/windows/VerifyMeasureAllItemsWithObservableCollection.png,NafeelaNazhir,2110,Human,2025-05-01T21:45:52+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue25534.xaml,SuthiYuvaraj,10,Human,2025-01-08T20:54:47+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue27797.xaml.cs,Jakub Florkowski,260,Human,2025-02-25T22:54:53+00:00,3
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Mac.Tests/snapshots/mac/VerifyButtonPage1_Border.png,nivetha-nagalingam,1314,Human,2025-02-24T20:22:35+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/Issue21202Test.png,LogishaSelvarajSF4525,2066,Human,2025-02-13T14:34:10+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/ShadowShouldUpdateWhenClipping.png,NirmalKumarYuvaraj,1568,Human,2025-03-18T18:20:19+00:00,1
+fishaudio/fish-speech,fishaudio,fish_speech/tokenizer.py,spicysama,152,AI,2024-12-03T09:30:08+00:00,3
+fishaudio/fish-speech,fishaudio,install_env.bat,spicysama,173,AI,2024-05-17T03:36:24+00:00,13
+fishaudio/fish-speech,fishaudio,tools/gen_ref.py,spicysama,36,AI,2024-05-24T05:27:14+00:00,2
+fishaudio/fish-speech,fishaudio,tools/msgpack_api.py,spicysama,68,AI,2024-09-08T09:05:20+00:00,6
+fishaudio/fish-speech,fishaudio,tools/server/inference.py,Picus303,41,AI,2024-12-07T06:13:19+00:00,3
+fishaudio/fish-speech,fishaudio,docs/assets/figs/logo-circle.png,Whale and Dolphin,292,AI,2024-11-05T03:48:56+00:00,2
+fishaudio/fish-speech,fishaudio,API_FLAGS.txt,Guanghua Lu,6,AI,2024-05-17T03:16:18+00:00,12
+fishaudio/fish-speech,fishaudio,fish_speech/text/chn_text_norm/README.md,PoTaTo,36,AI,2024-06-12T05:41:20+00:00,2
+fishaudio/fish-speech,fishaudio,tools/server/views.py,Picus303,246,AI,2024-12-07T06:13:19+00:00,8
+fishaudio/fish-speech,fishaudio,run_cmd.bat,Guanghua Lu,53,AI,2024-05-17T03:16:18+00:00,5
+fishaudio/fish-speech,fishaudio,fish_speech/models/vqgan/modules/hifigan.py,Lengyue,278,Human,2024-04-03T08:35:33+00:00,2
+fishaudio/fish-speech,fishaudio,fish_speech/models/vits_decoder/modules/modules.py,Lengyue,619,Human,2024-05-02T12:09:26+00:00,2
+fishaudio/fish-speech,fishaudio,fish_speech/configs/data/pretrain.yaml,Lengyue,43,Human,2023-12-18T03:40:17+00:00,2
+fishaudio/fish-speech,fishaudio,README.ja.md,Ikko Eltociear Ashimine,83,Human,2024-09-12T04:03:28+00:00,8
+fishaudio/fish-speech,fishaudio,fish_speech/configs/model/dual_ar_8_codebook_medium.yaml,Lengyue,9,Human,2024-04-03T03:53:46+00:00,2
+fishaudio/fish-speech,fishaudio,fish_speech/models/vqgan/modules/rvq.py,Lengyue,358,Human,2024-03-09T03:36:27+00:00,3
+fishaudio/fish-speech,fishaudio,fish_speech/models/vqgan/modules/fsq.py,Lengyue,128,Human,2024-04-03T08:35:33+00:00,8
+fishaudio/fish-speech,fishaudio,fish_speech/models/vqgan/modules/convnext.py,Lengyue,315,Human,2024-01-15T22:56:11+00:00,4
+fishaudio/fish-speech,fishaudio,docs/stylesheets/extra.css,Lengyue,3,Human,2023-12-18T10:11:54+00:00,4
+fishaudio/fish-speech,fishaudio,docs/assets/audios/1_output.wav,Lengyue,29708,Human,2023-12-18T10:11:54+00:00,2
+hcengineering/platform,hcengineering,plugins/setting-resources/src/components/Mailboxes.svelte,Chunosov,128,AI,2025-03-26T04:38:18+00:00,3
+hcengineering/platform,hcengineering,plugins/setting-resources/src/components/MailboxEditorModal.svelte,Chunosov,124,AI,2025-03-26T04:38:18+00:00,5
+hcengineering/platform,hcengineering,plugins/setting-resources/src/components/MailboxItem.svelte,Chunosov,188,AI,2025-03-26T04:38:18+00:00,3
+hcengineering/platform,hcengineering,models/my-space/.eslintrc.js,Artyom Savchenko,7,Human,2025-02-17T10:50:49+00:00,2
+hcengineering/platform,hcengineering,plugins/mail-assets/lang/ja.json,かっこかり,13,Human,2025-04-16T14:46:40+00:00,3
+hcengineering/platform,hcengineering,plugins/chat-resources/tsconfig.json,Kristina,9,Human,2025-03-31T10:09:09+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/containers.md,James Montemagno,30,AI,2025-03-18T17:20:38+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/efcore.md,James Montemagno,27,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/csharp.md,James Montemagno,14,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/fsharp.md,James Montemagno,21,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/media/authenticated-request-duration-in-the-aspire-dashboard.png,James Montemagno,6727,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/README.md,James Montemagno,40,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/aspnetcore.md,James Montemagno,227,AI,2025-03-18T17:20:38+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/runtime.md,James Montemagno,173,AI,2025-03-18T17:20:38+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/sdk.md,James Montemagno,28,AI,2025-03-18T17:20:38+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview2/libraries.md,James Montemagno,19,AI,2025-03-18T17:20:38+00:00,1
+dotnet/core,dotnet,release-notes/8.0/8.0.0/api-diff/Microsoft.NETCore.App/8.0.0_System.Reflection.Metadata.md,Carlos Sánchez López,13,Human,2023-11-27T21:03:02+00:00,2
+dotnet/core,dotnet,release-notes/9.0/preview/preview6/api-diff/Microsoft.NETCore.App/9.0-preview6_System.Runtime.InteropServices.md,Carlos Sánchez López,11,Human,2024-07-15T22:02:15+00:00,2
+dotnet/core,dotnet,release-notes/9.0/9.0.0/api-diff/Microsoft.AspNetCore.App/9.0.0_Microsoft.AspNetCore.Http.md,Carlos Sánchez López,47,Human,2024-11-19T00:17:42+00:00,2
+dotnet/core,dotnet,release-notes/8.0/preview/api-diff/rc1/Microsoft.NETCore.App/8.0-rc1_System.IO.md,Carlos Sánchez López,14,Human,2023-09-27T10:38:13+00:00,2
+dotnet/core,dotnet,release-notes/8.0/preview/api-diff/preview2/Microsoft.AspNetCore.App/8.0-preview2_Microsoft.Extensions.DependencyInjection.md,Carlos Sánchez López,10,Human,2023-04-03T20:17:08+00:00,2
+dotnet/core,dotnet,release-notes/8.0/preview/api-diff/rc1/Microsoft.AspNetCore.App/8.0-rc1_Microsoft.AspNetCore.Components.Discovery.md,Carlos Sánchez López,43,Human,2023-09-27T10:38:13+00:00,2
+dotnet/core,dotnet,release-notes/8.0/8.0.1/api-diff/Microsoft.AspNetCore.App/8.0.1_Microsoft.AspNetCore.Mvc.Razor.TagHelpers.md,Carlos Sánchez López,42,Human,2023-04-03T20:16:48+00:00,2
+dotnet/core,dotnet,release-notes/9.0/get-started.md,Rahul Bhandari,14,Human,2024-02-13T17:37:17+00:00,2
+dotnet/core,dotnet,release-notes/9.0/preview/preview7/sdk.md,Rahul Bhandari,88,Human,2024-08-13T16:38:47+00:00,6
+dotnet/core,dotnet,release-notes/8.0/preview/api-diff/preview3/README.md,Carlos Sánchez López,7,Human,2023-04-26T18:58:12+00:00,1
+microsoft/typescript-go,microsoft,_packages/ast/src/is.ts,Andrew Branch,1115,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,_packages/ast/src/syntaxKind.ts,Andrew Branch,355,AI,2025-04-10T23:45:46+00:00,3
+microsoft/typescript-go,microsoft,internal/api/api.go,Andrew Branch,375,AI,2025-04-10T23:45:46+00:00,13
+microsoft/typescript-go,microsoft,_packages/api/src/typeFlags.enum.ts,Andrew Branch,32,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,_packages/api/package.json,Andrew Branch,51,AI,2025-04-10T23:45:46+00:00,4
+microsoft/typescript-go,microsoft,_packages/api/src/proto.ts,Andrew Branch,23,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,_packages/ast/src/utils.ts,Andrew Branch,9,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,_packages/api/tsconfig.base.json,Andrew Branch,9,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,internal/lsp/converters.go,Andrew Branch,218,AI,2025-02-11T01:25:17+00:00,7
+microsoft/typescript-go,microsoft,_packages/api/test/tsconfig.json,Andrew Branch,6,AI,2025-04-10T23:45:46+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/declFileTypeAnnotationParenType.js,Ron Buckton,21,Human,2025-03-18T17:45:01+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/inheritanceMemberFuncOverridingProperty.errors.txt,Jake Bailey,15,Human,2025-03-10T16:26:17+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/contextualTyping10.js.diff,Ron Buckton,15,Human,2025-03-18T17:45:01+00:00,3
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/chainedAssignment1.symbols,Gabriela Araujo Britto,57,Human,2025-02-26T22:53:49+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/contextualTyping.js,Ron Buckton,350,Human,2025-03-18T17:45:01+00:00,3
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/declareAlreadySeen.types.diff,Jake Bailey,10,Human,2025-03-14T23:39:25+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/avoidCycleWithVoidExpressionReturnedFromArrow.types,Jake Bailey,55,Human,2025-03-14T23:39:25+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/commentOnArrayElement1.symbols,Gabriela Araujo Britto,12,Human,2025-02-26T22:53:49+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/aliasOnMergedModuleInterface.types.diff,Jake Bailey,45,Human,2025-03-14T23:39:25+00:00,4
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/letDeclarations-scopes-duplicates6.errors.txt,Jake Bailey,31,Human,2025-03-10T16:26:17+00:00,2
+mlflow/mlflow,mlflow,docs/static/images/llms/anthropic/anthropic-tool-calling.png,Yuki Watanabe,4773,AI,2025-03-06T08:30:09+00:00,1
+mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/src/assets/icons/SortUnsortedIcon.svg,Daniel Lok,6,Human,2025-02-14T04:11:11+00:00,2
+onlook-dev/onlook,onlook-dev,apps/studio/src/lib/editor/engine/overlay/components/InsertRect.tsx,devin-ai-integration[bot],14,AI,2024-12-18T01:23:00+00:00,2
+onlook-dev/onlook,onlook-dev,apps/studio/src/lib/editor/engine/overlay/components/HoverRect.tsx,devin-ai-integration[bot],15,AI,2024-12-18T01:23:00+00:00,2
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/HotkeysModal/index.tsx,devin-ai-integration[bot],219,AI,2025-02-26T20:10:37+00:00,4
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/LayersPanel/WindowsTab/index.tsx,devin-ai-integration[bot],59,AI,2025-02-27T05:49:45+00:00,5
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/TopBar/ProjectSelect/SettingsModal/ProjectTab.tsx,devin-ai-integration[bot],162,AI,2025-02-15T23:45:14+00:00,3
+onlook-dev/onlook,onlook-dev,packages/ui/src/components/password-input.tsx,devin-ai-integration[bot],50,AI,2025-04-11T23:52:34+00:00,2
+onlook-dev/onlook,onlook-dev,apps/studio/src/locales/ja/translation.json,devin-ai-integration[bot],61,AI,2025-02-04T08:59:35+00:00,10
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/EditPanel/ChatTab/ContextPills/DraftingImagePill.tsx,devin-ai-integration[bot],62,AI,2025-01-06T05:16:12+00:00,3
+onlook-dev/onlook,onlook-dev,apps/studio/electron/preload/webview/bundles/helpers.ts,devin-ai-integration[bot],15,AI,2025-01-14T08:28:12+00:00,2
+onlook-dev/onlook,onlook-dev,packages/growth/src/script.ts,Kiet,93,AI,2025-03-07T07:16:40+00:00,1
+onlook-dev/onlook,onlook-dev,apps/web/server/src/router/trpc.ts,Kiet,13,Human,2025-04-10T07:13:42+00:00,1
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/EditPanel/StylesTab/compound/FillInput.tsx,Kiet,19,Human,2025-01-18T00:56:36+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/preload/script/api/elements/move/helpers.ts,Kiet,72,Human,2025-04-11T17:50:36+00:00,2
+onlook-dev/onlook,onlook-dev,apps/studio/electron/main/events/payments.ts,Kiet,26,Human,2025-01-23T19:42:43+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/public/assets/dunes-create-light.png,Kiet,19252,Human,2025-04-02T18:52:47+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/project/[id]/_components/editor-bar/inputs/input-range.tsx,Ty,91,Human,2025-04-10T22:47:10+00:00,8
+onlook-dev/onlook,onlook-dev,apps/studio/src/lib/state/index.tsx,Kiet,17,Human,2025-03-18T01:30:44+00:00,2
+onlook-dev/onlook,onlook-dev,deno.lock,Kiet,9323,Human,2025-01-19T07:39:43+00:00,2
+onlook-dev/onlook,onlook-dev,packages/ai/test/tools/list-files.test.ts,Kiet,77,Human,2025-02-09T06:26:42+00:00,3
+onlook-dev/onlook,onlook-dev,apps/studio/src/routes/editor/TopBar/Profile/PricingPage.tsx,Kiet,262,Human,2025-01-23T19:42:43+00:00,12
+RustPython/RustPython,RustPython,.github/copilot-instructions.md,Jeong YunWon,186,AI,2025-04-20T09:56:59+00:00,7
+RustPython/RustPython,RustPython,Lib/test/typinganndata/ann_module695.py,Ashwin Naren,72,Human,2025-04-27T06:26:37+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,PreCommit.md,Dustin Decker,192,AI,2025-05-01T22:56:27+00:00,3
+trufflesecurity/trufflehog,trufflesecurity,pkg/handlers/apk.go,joeleonjr,405,AI,2024-11-15T18:25:11+00:00,6
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/requests.go,Kashif Khan,121,AI,2025-02-12T21:26:27+00:00,2
+trufflesecurity/trufflehog,trufflesecurity,pkg/handlers/apk_test.go,joeleonjr,114,AI,2024-11-15T18:25:11+00:00,5
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/permissions.yaml,Kashif Khan,2,AI,2025-02-12T21:26:27+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/anthropic_test.go,Kashif Khan,85,AI,2025-02-12T21:26:27+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/result_output.json,Kashif Khan,90,AI,2025-02-12T21:26:27+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/anthropic.go,Kashif Khan,163,AI,2025-02-12T21:26:27+00:00,4
+trufflesecurity/trufflehog,trufflesecurity,pkg/analyzer/analyzers/anthropic/permissions.go,Kashif Khan,61,AI,2025-02-12T21:26:27+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/shotstack/shotstack_integration_test.go,Nabeel Alam,120,Human,2024-12-12T11:21:38+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,examples/generic_with_filters.yml,Zachary Rice,1498,Human,2025-01-30T18:34:07+00:00,2
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/kanbantool/kanbantool_integration_test.go,Nabeel Alam,120,Human,2024-11-19T17:43:36+00:00,2
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/netlify/v2/netlify_v2_test.go,Amaan Ullah,91,Human,2025-04-28T05:26:35+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/worldcoinindex/worldcoinindex_integration_test.go,Nabeel Alam,120,Human,2024-12-12T19:02:52+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/azure_entra/common.go,Richard Gomez,127,Human,2024-11-20T21:07:16+00:00,2
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/flexport/flexport_test.go,0x1,238,Human,2024-12-02T19:11:30+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/selectpdf/selectpdf_integration_test.go,Nabeel Alam,120,Human,2024-12-12T11:21:38+00:00,1
+trufflesecurity/trufflehog,trufflesecurity,pkg/detectors/mindmeister/mindmeister_integration_test.go,Nabeel Alam,120,Human,2024-11-19T17:43:36+00:00,1
+vectordotdev/vector,vectordotdev,website/static/img/guides/dd-metrics-vector-errors-visualization.png,Pavlos Rontidis,3984,AI,2025-03-27T19:08:45+00:00,1
+vectordotdev/vector,vectordotdev,changelog.d/21707_exclusive_route_transform.feature.md,Pavlos Rontidis,3,Human,2024-11-14T19:03:27+00:00,2
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/deployments/deployment-parameters-table/index.ts,Devin Villarosa,1,AI,2025-02-10T17:37:42+00:00,1
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/flow-runs/data-table/use-delete-flow-runs-dialog.ts,Devin Villarosa,52,AI,2025-02-19T16:33:01+00:00,4
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/ui/date-time-picker/date-time-picker.tsx,Devin Villarosa,157,AI,2025-03-06T00:32:24+00:00,5
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/deployments/create-flow-run-form/flow-run-start-input.tsx,Devin Villarosa,68,AI,2025-03-06T00:32:24+00:00,2
+PrefectHQ/prefect,PrefectHQ,docs/v3/api-ref/cli/init.mdx,Adam Azzam,46,AI,2025-02-07T22:12:34+00:00,2
+PrefectHQ/prefect,PrefectHQ,docs/v3/api-ref/cli/task-run.mdx,Adam Azzam,159,AI,2025-02-07T22:12:34+00:00,2
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/deployments/deployment-parameters-table/deployment-parameters-table.stories.tsx,Devin Villarosa,41,AI,2025-02-10T17:37:42+00:00,2
+PrefectHQ/prefect,PrefectHQ,docs/v3/api-ref/cli/deployment.mdx,Adam Azzam,554,AI,2025-02-07T22:12:34+00:00,4
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/flow-runs/flow-runs-list/use-delete-flow-runs-dialog.ts,Devin Villarosa,60,AI,2025-02-21T20:26:50+00:00,4
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/flow-runs/data-table/tasks-cell.tsx,Devin Villarosa,39,AI,2025-02-19T20:08:47+00:00,3
+PrefectHQ/prefect,PrefectHQ,.github/workflows/k8s-integration-tests.yaml,nate nowack,83,Human,2025-03-05T23:30:41+00:00,8
+PrefectHQ/prefect,PrefectHQ,src/prefect/_vendor/croniter/croniter.py,nate nowack,1456,Human,2025-02-19T00:28:53+00:00,1
+PrefectHQ/prefect,PrefectHQ,src/prefect/server/database/_migrations/versions/postgresql/2025_04_29_112902_4160a4841eed_remove_flow_run_notifications.py,Alex Streed,221,Human,2025-04-30T18:26:59+00:00,1
+PrefectHQ/prefect,PrefectHQ,docs/v3/manage/server/examples/docker.mdx,daniel-prefect,24,Human,2025-03-12T22:37:06+00:00,2
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/mocks/create-fake-work-pool-type.ts,Nicholas Brown,16,Human,2025-04-03T14:47:49+00:00,1
+PrefectHQ/prefect,PrefectHQ,scripts/run_precommit_generation_scripts.py,nate nowack,55,Human,2025-04-16T15:48:55+00:00,2
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/flow-runs/activity-chart/activity-chart.test.tsx,Devan Grose,16,Human,2025-02-26T17:31:29+00:00,2
+PrefectHQ/prefect,PrefectHQ,src/integrations/prefect-snowflake/prefect_snowflake/experimental/workers/__init__.py,Oscar Björhn,0,Human,2025-03-31T17:29:25+00:00,1
+PrefectHQ/prefect,PrefectHQ,ui-v2/src/components/task-runs/task-run-artifacts/task-run-artifacts.test.tsx,Alex Streed,121,Human,2025-04-08T14:12:00+00:00,2
+PrefectHQ/prefect,PrefectHQ,tests/test_waiters.py,Alex Streed,129,Human,2025-02-21T21:16:28+00:00,1
+github/github-mcp-server,github,pkg/github/secret_scanning_test.go,Tony Truong,243,AI,2025-04-17T08:19:59+00:00,6
+github/github-mcp-server,github,pkg/github/repository_resource_test.go,Ariel Deitcher,283,AI,2025-04-02T21:33:34+00:00,11
+github/github-mcp-server,github,pkg/github/secret_scanning.go,Tony Truong,146,AI,2025-04-17T08:19:59+00:00,10
+github/github-mcp-server,github,third-party/github.com/google/go-querystring/query/LICENSE,Sam Morrow,27,Human,2025-03-31T21:58:23+00:00,1
+github/github-mcp-server,github,third-party/github.com/hashicorp/hcl/hcl/parser/test-fixtures/assign_deep.hcl,Sam Morrow,5,Human,2025-03-31T21:58:23+00:00,2
+github/github-mcp-server,github,third-party/github.com/hashicorp/hcl/hcl/printer/testdata/comment_multiline_stanza.golden,Sam Morrow,10,Human,2025-03-31T21:58:23+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,scripts/modules/task-manager/update-single-task-status.js,Eyal Toledano,126,AI,2025-04-21T21:48:30+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,scripts/modules/task-manager/update-task-by-id.js,Eyal Toledano,682,AI,2025-04-21T21:48:30+00:00,21
+eyaltoledano/claude-task-master,eyaltoledano,tests/unit/ai-services.test.js,Eyal Toledano,288,AI,2025-03-24T17:28:08+00:00,7
+eyaltoledano/claude-task-master,eyaltoledano,scripts/modules/task-manager/remove-task.js,Eyal Toledano,158,AI,2025-04-21T21:48:30+00:00,6
+eyaltoledano/claude-task-master,eyaltoledano,assets/roocode/.roo/rules-ask/ask-rules,neno,89,AI,2025-04-22T22:15:01+00:00,4
+eyaltoledano/claude-task-master,eyaltoledano,tasks/task_067.txt,Eyal Toledano,11,AI,2025-04-26T22:30:02+00:00,4
+eyaltoledano/claude-task-master,eyaltoledano,mcp-server/src/core/task-master-core.js,Eyal Toledano,119,AI,2025-03-30T04:29:12+00:00,36
+eyaltoledano/claude-task-master,eyaltoledano,tests/unit/dependency-manager.test.js,Eyal Toledano,585,AI,2025-03-24T17:28:08+00:00,6
+eyaltoledano/claude-task-master,eyaltoledano,scripts/modules/ai-services.js,Eyal Toledano,538,AI,2025-03-24T03:19:37+00:00,20
+eyaltoledano/claude-task-master,eyaltoledano,mcp-server/src/core/direct-functions/initialize-project-direct.js,Eyal Toledano,139,Human,2025-04-11T05:16:32+00:00,5
+eyaltoledano/claude-task-master,eyaltoledano,.changeset/chubby-moose-stay.md,Eyal Toledano,5,Human,2025-04-16T04:40:32+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,mcp-server/src/tools/clear-subtasks.js,Eyal Toledano,98,Human,2025-03-31T17:07:42+00:00,14
+eyaltoledano/claude-task-master,eyaltoledano,docs/fastmcp-core.txt,Eyal Toledano,1179,Human,2025-04-02T16:33:46+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,.cursor/rules/glossary.mdc,Eyal Toledano,24,Human,2025-03-31T03:51:55+00:00,4
+eyaltoledano/claude-task-master,eyaltoledano,tasks/task_050.txt,Eyal Toledano,131,Human,2025-04-08T19:39:25+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,tests/unit/commands.test.js,Eyal Toledano,119,Human,2025-03-24T17:28:08+00:00,18
+eyaltoledano/claude-task-master,eyaltoledano,.changeset/ninety-wombats-pull.md,Eyal Toledano,5,Human,2025-04-27T22:50:47+00:00,2
+eyaltoledano/claude-task-master,eyaltoledano,mcp-server/src/tools/remove-subtask.js,Eyal Toledano,103,Human,2025-03-31T17:01:31+00:00,14
+eyaltoledano/claude-task-master,eyaltoledano,tasks/task_057.txt,Eyal Toledano,67,Human,2025-04-09T22:18:13+00:00,3
+dotnet/roslyn,dotnet,src/Workspaces/Remote/Core/ExportProviderBuilder.cs,Todd Grunke,204,AI,2025-04-22T22:42:36+00:00,13
+dotnet/roslyn,dotnet,src/Features/ExternalAccess/Copilot/Completion/TraitItem.cs,Gen Lu,26,AI,2025-04-14T16:46:51+00:00,1
+dotnet/roslyn,dotnet,src/Features/Core/Portable/Extensions/ExtensionMessageHandlerService.cs,Matteo Prosperi,258,AI,2025-03-31T23:51:19+00:00,93
+dotnet/roslyn,dotnet,src/Workspaces/Core/Portable/Workspace/WorkspaceEventRegistration.cs,Todd Grunke,30,AI,2025-04-26T14:20:22+00:00,2
+dotnet/roslyn,dotnet,src/Features/Core/Portable/EditAndContinue/AbstractEditAndContinueAnalyzer.ActiveMembersBuilder.cs,Tomáš Matoušek,108,AI,2025-04-09T02:12:46+00:00,3
+dotnet/roslyn,dotnet,src/Compilers/Core/Portable/Syntax/SeparatedSyntaxListExtensions.cs,Todd Grunke,27,AI,2025-04-28T17:26:27+00:00,1
+dotnet/roslyn,dotnet,src/Features/ExternalAccess/Copilot/Internal/Completion/CSharpContextProviderService.cs,Gen Lu,85,AI,2025-04-14T16:46:51+00:00,5
+dotnet/roslyn,dotnet,src/Workspaces/Remote/Core/IRemoteInitializationService.cs,Todd Grunke,19,AI,2025-04-22T22:42:36+00:00,1
+dotnet/roslyn,dotnet,src/EditorFeatures/Core.Wpf/Copilot/CopilotWpfTextCreationListener.cs,Cyrus Najmabadi,135,AI,2025-04-12T00:13:59+00:00,4
+dotnet/roslyn,dotnet,src/EditorFeatures/Core/Copilot/CopilotConstants.cs,Ankita Khera,25,AI,2025-03-28T16:32:36+00:00,1
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.Analyzers/CSharp/MetaAnalyzers/Fixers/CSharpConfigureGeneratedCodeAnalysisFix.cs,Joey Robichaud,37,Human,2025-02-07T08:58:35+00:00,3
+dotnet/roslyn,dotnet,src/Features/ExternalAccess/Copilot/Completion/IContextProvider.cs,Gen Lu,21,Human,2025-04-14T16:46:51+00:00,1
+dotnet/roslyn,dotnet,Ide.slnf,Joey Robichaud,248,Human,2025-04-01T21:07:44+00:00,2
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.ResxSourceGenerator/Microsoft.CodeAnalysis.ResxSourceGenerator/xlf/Resources.zh-Hans.xlf,Joey Robichaud,6,Human,2025-02-07T08:58:35+00:00,1
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.Analyzers/CSharp/MetaAnalyzers/Fixers/CSharpApplyDiagnosticAnalyzerAttributeFix.cs,Joey Robichaud,23,Human,2025-02-07T08:58:35+00:00,3
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.Analyzers/CSharp/MetaAnalyzers/Fixers/CSharpConfigureGeneratedCodeAnalysisFix.cs,Joey Robichaud,37,Human,2025-02-07T08:58:35+00:00,3
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/PerformanceSensitiveAnalyzers/CSharp/Analyzers/xlf/AnalyzersResources.ko.xlf,Joey Robichaud,127,Human,2025-02-07T08:58:35+00:00,1
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.Analyzers/UnitTests/InternalImplementationOnlyTests.cs,Joey Robichaud,753,Human,2025-02-07T08:58:35+00:00,7
+dotnet/roslyn,dotnet,src/RoslynAnalyzers/Microsoft.CodeAnalysis.Analyzers/UnitTests/MetaAnalyzers/DoNotStorePerCompilationDataOntoFieldsRuleTests.cs,Joey Robichaud,614,Human,2025-02-07T08:58:35+00:00,7
+dotnet/roslyn,dotnet,src/Features/ExternalAccess/Copilot/GenerateDocumentation/IExternalCSharpCopilotGenerateDocumentationService.cs,Ankita Khera,14,Human,2025-02-21T03:41:46+00:00,3
+microsoft/fluentui,microsoft,change/@fluentui-react-menu-820da09f-c52a-4751-a749-7f8ca4387d65.json,ling1726,7,AI,2025-01-24T17:57:40+00:00,2
+microsoft/fluentui,microsoft,change/@fluentui-merge-styles-f28e7eb2-d3a4-4060-95af-0c74756f900d.json,Victor Genaev,7,Human,2025-01-17T11:53:47+00:00,2
+neondatabase/neon,neondatabase,docker-compose/ext-src/pgtap-src/regular-test.sh,a-masterov,10,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/ip4r-src/regular-test.sh,a-masterov,7,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_ivm-src/regular.patch,a-masterov,309,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_roaringbitmap-src/regular-test.sh,a-masterov,7,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/rum-src/regular-test.sh,a-masterov,7,AI,2025-04-28T08:13:49+00:00,2
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_ivm-src/regular-test.sh,a-masterov,9,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,.github/workflows/cloud-extensions.yml,a-masterov,112,AI,2025-04-28T08:13:49+00:00,3
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_uuidv7-src/regular-test.sh,a-masterov,7,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/hypopg-src/regular-test.sh,a-masterov,7,AI,2025-04-28T08:13:49+00:00,1
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_graphql-src/regular-test.sh,a-masterov,23,AI,2025-04-28T08:13:49+00:00,2
+neondatabase/neon,neondatabase,docker-compose/ext-src/rag_jina_reranker_v1_tiny_en-src/sql/reranking_functions_enhanced.sql,a-masterov,35,Human,2025-03-19T15:38:33+00:00,2
+neondatabase/neon,neondatabase,test_runner/regress/test_pageserver_config.py,Christian Schwarz,56,Human,2024-04-15T20:14:42+00:00,3
+neondatabase/neon,neondatabase,docker-compose/ext-src/pg_jsonschema-src/expected/jsonschema_edge_cases.out,a-masterov,87,Human,2025-04-15T14:06:01+00:00,1
+neondatabase/neon,neondatabase,test_runner/regress/test_lfc_prewarm.py,Konstantin Knizhnik,147,Human,2025-04-29T06:44:28+00:00,10
+neondatabase/neon,neondatabase,object_storage/src/lib.rs,Mikhail Kot,344,Human,2025-04-08T14:54:53+00:00,2
+neondatabase/neon,neondatabase,pgxn/neon/communicator.c,Heikki Linnakangas,2504,Human,2025-04-09T12:28:59+00:00,11
+neondatabase/neon,neondatabase,docker-compose/ext-src/rag_jina_reranker_v1_tiny_en-src/Makefile,a-masterov,10,Human,2025-03-19T15:38:33+00:00,3
+neondatabase/neon,neondatabase,test_runner/regress/data/test_remote_extensions/test_extension/sql/test_extension--1.0--1.1.sql,Tristan Partin,10,Human,2025-03-09T17:29:44+00:00,2
+neondatabase/neon,neondatabase,.github/workflows/large_oltp_benchmark.yml,Peter Bendel,147,Human,2025-03-03T15:25:48+00:00,7
+neondatabase/neon,neondatabase,storage_controller/src/service/safekeeper_service.rs,Arpad Müller,518,Human,2025-03-18T09:00:53+00:00,28
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/connector-development/config-based/assets/connector-flow.png,Ian Alton,7452,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/cloud/managing-airbyte-cloud/assets/notification-slack-success.png,Ian Alton,1929,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/static/.gitbook/assets/04_source-details.png,Ian Alton,4434,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/connector-development/writing-connector-docs.md,Ian Alton,201,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/understanding-airbyte/tech-stack.md,Ian Alton,49,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/cloud/managing-airbyte-cloud/assets/notification-slack-add-webhook.png,Ian Alton,3502,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/connector-development/connector-metadata-file.md,Ian Alton,250,AI,2025-04-23T23:58:09+00:00,2
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/assets/destination/databricks/databricks_cluster_connection_details2.png,Ian Alton,3194,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.6/cloud/managing-airbyte-cloud/assets/connection_not_yet_synced.png,Ian Alton,51,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/static/.gitbook/assets/07_view-jwt-token.png,Ian Alton,3366,AI,2025-04-23T23:58:09+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/toolkits/load-object-storage/src/test/kotlin/io/airbyte/cdk/load/pipeline/object_storage/file/FileChunkTaskTest.kt,Ryan Br...,275,Human,2025-04-29T16:58:58+00:00,7
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-amazon-ads/source_amazon_ads/schemas/sponsored_products_asins_targets_report_stream_daily.json,Alfredo Garcia,87,Human,2025-04-22T14:34:12+00:00,2
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/toolkits/load-object-storage/src/main/kotlin/io/airbyte/cdk/load/pipline/object_storage/file/RouteEventTask.kt,Ryan Br...,58,Human,2025-04-29T16:58:58+00:00,3
+airbytehq/airbyte,airbytehq,docs/platform/operating-airbyte/ip-allowlist.md,Ian Alton,30,Human,2025-05-01T23:43:50+00:00,2
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-opuswatch/icon.svg,Sebastiaan Zwinkels,87,Human,2025-04-28T13:51:53+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/toolkits/load-object-storage/src/main/kotlin/io/airbyte/cdk/load/pipline/object_storage/file/UploadIdGenerator.kt,Ryan Br...,15,Human,2025-04-29T16:58:58+00:00,2
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-opuswatch/metadata.yaml,Sebastiaan Zwinkels,35,Human,2025-04-28T13:51:53+00:00,19
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-microsoft-lists/integration_tests/fast/test_airbyte_standards.py,Aldo Gonzalez,23,Human,2025-04-25T21:31:18+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/toolkits/load-object-storage/src/test/kotlin/io/airbyte/cdk/load/pipeline/object_storage/file/RouteEventTaskTest.kt,Ryan Br...,200,Human,2025-04-29T16:58:58+00:00,10
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/toolkits/load-object-storage/src/main/kotlin/io/airbyte/cdk/load/pipline/object_storage/file/FileCompletedOutputPartitioner.kt,Ryan Br...,29,Human,2025-04-29T16:58:58+00:00,2
+yamadashy/repomix,yamadashy,.clinerules,yamadashy,2,AI,2025-02-25T16:01:13+00:00,3
+yamadashy/repomix,yamadashy,CLAUDE.md,yamadashy,30,AI,2025-03-01T16:29:48+00:00,26
+yamadashy/repomix,yamadashy,src/core/mcp/tools/readRepomixOutputTool.ts,yamadashy,76,AI,2025-03-13T15:23:36+00:00,2
+yamadashy/repomix,yamadashy,src/core/mcp/tools/readRepomixOutputTool.ts,yamadashy,76,AI,2025-03-13T15:23:36+00:00,2
+yamadashy/repomix,yamadashy,website/client/src/pt-br/guide/configuration.md,Kazuki Yamada,84,Human,2025-01-16T16:11:03+00:00,21
+yamadashy/repomix,yamadashy,src/core/treeSitter/queries/queryCss.ts,Kazuki Yamada,9,Human,2025-03-15T10:59:11+00:00,1
+yamadashy/repomix,yamadashy,website/client/src/es/guide/remote-repository-processing.md,Kazuki Yamada,68,Human,2025-01-16T16:00:24+00:00,2
+yamadashy/repomix,yamadashy,website/client/src/fr/guide/command-line-options.md,yamadashy,64,Human,2025-03-20T15:54:21+00:00,14
+compiler-explorer/compiler-explorer,compiler-explorer,static/bootstrap-utils.ts,Matt Godbolt,471,AI,2025-04-24T17:10:37+00:00,2
+compiler-explorer/compiler-explorer,compiler-explorer,docs/Bootstrap5Migration.md,Matt Godbolt,387,AI,2025-04-24T17:10:37+00:00,3
+compiler-explorer/compiler-explorer,compiler-explorer,CLAUDE.md,Matt Godbolt,62,AI,2025-04-24T17:10:37+00:00,14
+compiler-explorer/compiler-explorer,compiler-explorer,docs/TestingTheUi.md,Matt Godbolt,240,AI,2025-04-24T17:10:37+00:00,3
+compiler-explorer/compiler-explorer,compiler-explorer,views/resources/template_screenshots/LLVM IR.default.png,Mats Jun Larsen,6270,Human,2024-12-07T15:59:58+00:00,2
+compiler-explorer/compiler-explorer,compiler-explorer,views/resources/template_screenshots/LLVM IR.real-dark.png,Mats Jun Larsen,6469,Human,2024-12-07T15:59:58+00:00,2
+compiler-explorer/compiler-explorer,compiler-explorer,test/android/parse-data/InnerClassCases.smali,kevinjeon-g,187,Human,2025-01-29T09:36:11+00:00,1
+compiler-explorer/compiler-explorer,compiler-explorer,lib/handlers/api/formatting-controller.ts,Mats Jun Larsen,82,Human,2024-11-30T03:14:11+00:00,4
+github/docs,github,data/reusables/copilot/model-use-cases/o1.md,Sophie,2,AI,2025-04-04T15:13:27+00:00,2
+github/docs,github,content/code-security/securing-your-organization/fixing-security-alerts-at-scale/creating-managing-security-campaigns.md,Anne-Marie,148,AI,2025-04-08T16:06:10+00:00,5
+github/docs,github,data/reusables/copilot/model-use-cases/claude-35-sonnet.md,Sophie,2,AI,2025-04-04T15:13:27+00:00,1
+github/docs,github,content/code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/viewing-the-secret-risk-assessment-report-for-your-organization.md,Felicity Chapman,81,AI,2025-04-01T10:29:37+00:00,3
+github/docs,github,assets/images/help/enterprises/ghas-licenses-dropdown.png,Felicity Chapman,2106,AI,2025-04-01T10:29:37+00:00,2
+github/docs,github,data/reusables/user-settings/billing-plans-two-platforms.md,Sophie,1,AI,2025-04-29T03:03:33+00:00,2
+github/docs,github,data/reusables/advanced-security/ghas-products-bullets.md,Felicity Chapman,2,AI,2025-04-01T10:29:37+00:00,1
+github/docs,github,data/reusables/gated-features/security-overview-fpt-sp-only.md,Felicity Chapman,3,AI,2025-04-01T10:29:37+00:00,1
+github/docs,github,assets/images/help/repository/secret-scanning-create-custom-pattern-ghas.png,Felicity Chapman,988,AI,2025-04-01T10:29:37+00:00,1
+github/docs,github,content/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/getting-started-with-copilot-on-your-personal-account/getting-started-with-a-copilot-plan.md,Sophie,94,AI,2025-04-04T15:13:27+00:00,5
+github/docs,github,content/pages/getting-started-with-github-pages/github-pages-limits.md,Ben Ahmady,50,Human,2025-04-09T16:34:07+00:00,1
+github/docs,github,src/frame/components/context/SharedUIContext.tsx,Evan Bonsignori,34,Human,2025-04-16T17:51:47+00:00,2
+github/docs,github,content/nonprofit/quickstart.md,Cynthia L,79,Human,2025-03-31T22:42:33+00:00,1
+github/docs,github,content/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/billing-and-payments/index.md,Sophie,10,Human,2025-04-04T15:13:27+00:00,2
+github/docs,github,assets/images/help/security-configurations/current-sp-cs-license-usage.png,Felicity Chapman,1086,Human,2025-04-01T10:29:37+00:00,3
+github/docs,github,src/frame/components/page-header/HeaderSearchAndWidgets.module.scss,Evan Bonsignori,12,Human,2025-04-29T17:54:11+00:00,2
+github/docs,github,assets/images/help/2fa/ghes-filter-org-members-by-2fa.png,Maya Messinger,5242,Human,2025-04-02T20:56:46+00:00,2
+github/docs,github,data/reusables/organizations/billing_plans_or_licensing.md,Felicity Chapman,1,Human,2025-04-01T10:29:37+00:00,3
+github/docs,github,assets/images/social-cards/copilot.png,Roniece Ricardo,7747,Human,2025-04-07T15:32:41+00:00,11
+github/docs,github,src/search/components/input/AISearchCTAPopup.tsx,Evan Bonsignori,107,Human,2025-05-01T19:34:09+00:00,6
+stackblitz-labs/bolt.diy,stackblitz-labs,app/components/@settings/tabs/data/DataVisualization.tsx,Stijnus,384,AI,2025-03-29T19:43:07+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/services/importExportService.ts,Stijnus,695,AI,2025-03-29T19:43:07+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/modules/llm/providers/amazon-bedrock.ts,kunjabijukchhe,113,AI,2025-01-06T12:19:16+00:00,4
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/hooks/useIndexedDB.ts,Stijnus,58,AI,2025-03-29T19:43:07+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/components/ui/Checkbox.tsx,Stijnus,25,AI,2025-03-29T19:43:07+00:00,2
+stackblitz-labs/bolt.diy,stackblitz-labs,public/icons/AmazonBedrock.svg,kunjabijukchhe,1,AI,2025-01-06T12:19:16+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/routes/api.export-api-keys.ts,Stijnus,44,AI,2025-03-29T19:43:07+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/persistence/chats.ts,Stijnus,140,AI,2025-03-29T19:43:07+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/hooks/useDataOperations.ts,Stijnus,966,AI,2025-03-29T19:43:07+00:00,2
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/hooks/useLocalProviders.ts,Stijnus,25,Human,2025-01-28T21:57:06+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,.github/workflows/semantic-pr.yaml,Dominic Elm,32,Human,2024-07-10T16:44:39+00:00,6
+stackblitz-labs/bolt.diy,stackblitz-labs,icons/nuxt.svg,Anirban Kar,1,Human,2024-12-24T17:07:28+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,scripts/clean.js,Stijnus,45,Human,2025-01-30T22:28:21+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/components/ui/ScrollArea.tsx,Stijnus,41,Human,2025-01-24T15:14:48+00:00,2
+stackblitz-labs/bolt.diy,stackblitz-labs,scripts/update-imports.sh,Stijnus,7,Human,2025-02-02T00:42:30+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,public/logo-light.png,Anirban Kar,1568,Human,2024-12-10T16:16:05+00:00,1
+stackblitz-labs/bolt.diy,stackblitz-labs,app/lib/api/features.ts,Stijnus,35,Human,2025-01-20T08:53:15+00:00,1
+modelcontextprotocol/python-sdk,modelcontextprotocol,src/mcp/cli/__init__.py,David Soria Parra,7,AI,2024-12-18T15:26:02+00:00,2
+modelcontextprotocol/python-sdk,modelcontextprotocol,src/mcp/server/fastmcp/prompts/prompt_manager.py,David Soria Parra,33,AI,2024-12-09T16:16:47+00:00,2
+modelcontextprotocol/python-sdk,modelcontextprotocol,examples/servers/simple-resource/mcp_simple_resource/server.py,David Soria Parra,89,AI,2024-11-12T14:23:13+00:00,16
+modelcontextprotocol/python-sdk,modelcontextprotocol,.github/workflows/main.yml,Justin Spahr-Summers,19,AI,2024-10-02T20:47:43+00:00,6
+modelcontextprotocol/python-sdk,modelcontextprotocol,tests/server/fastmcp/prompts/test_manager.py,David Soria Parra,107,AI,2024-12-09T16:16:47+00:00,4
+modelcontextprotocol/python-sdk,modelcontextprotocol,src/mcp/server/auth/middleware/bearer_auth.py,Peter Raboud,89,AI,2025-05-01T18:42:59+00:00,4
+modelcontextprotocol/python-sdk,modelcontextprotocol,tests/server/fastmcp/prompts/__init__.py,David Soria Parra,0,AI,2024-12-09T16:16:47+00:00,1
+modelcontextprotocol/python-sdk,modelcontextprotocol,tests/server/auth/test_error_handling.py,Peter Raboud,294,AI,2025-05-01T18:42:59+00:00,3
+modelcontextprotocol/python-sdk,modelcontextprotocol,.git-blame-ignore-revs,Jerome,0,AI,2025-02-13T01:15:23+00:00,2
+modelcontextprotocol/python-sdk,modelcontextprotocol,.github/workflows/check-lock.yml,David Soria Parra,25,AI,2025-02-03T12:33:30+00:00,2
+modelcontextprotocol/python-sdk,modelcontextprotocol,src/mcp/server/fastmcp/utilities/logging.py,David Soria Parra,43,Human,2024-12-09T16:16:47+00:00,3
+modelcontextprotocol/python-sdk,modelcontextprotocol,examples/servers/simple-resource/mcp_simple_resource/__init__.py,David Soria Parra,1,Human,2024-11-12T14:23:13+00:00,1
+modelcontextprotocol/python-sdk,modelcontextprotocol,RELEASE.md,David Soria Parra,10,Human,2024-10-21T14:54:17+00:00,4
+modelcontextprotocol/python-sdk,modelcontextprotocol,examples/servers/simple-resource/mcp_simple_resource/__main__.py,David Soria Parra,5,Human,2024-11-12T14:23:13+00:00,3
+modelcontextprotocol/python-sdk,modelcontextprotocol,src/mcp/server/fastmcp/tools/__init__.py,David Soria Parra,4,Human,2024-12-09T16:16:47+00:00,1
+modelcontextprotocol/python-sdk,modelcontextprotocol,CONTRIBUTING.md,Justin Spahr-Summers,59,Human,2024-11-20T15:32:22+00:00,6
+modelcontextprotocol/python-sdk,modelcontextprotocol,examples/servers/simple-prompt/README.md,David Soria Parra,42,Human,2024-11-12T12:22:13+00:00,3
+modelcontextprotocol/python-sdk,modelcontextprotocol,.github/ISSUE_TEMPLATE/feature_request.md,David Soria Parra,20,Human,2024-11-28T10:43:12+00:00,2
+modelcontextprotocol/python-sdk,modelcontextprotocol,tests/issues/test_188_concurrency.py,David Soria Parra,49,Human,2025-02-13T10:21:31+00:00,8
+modelcontextprotocol/python-sdk,modelcontextprotocol,tests/server/fastmcp/resources/test_function_resources.py,David Soria Parra,122,Human,2024-12-09T16:16:47+00:00,6
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientSpecifiedPickupDirectoryTest.cs,Radek Zikmund,107,AI,2025-04-22T08:14:42+00:00,3
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/LoopbackServerTestBase.cs,Radek Zikmund,179,AI,2025-04-22T08:14:42+00:00,3
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientConnectionTest.cs,Radek Zikmund,59,AI,2025-04-22T08:14:42+00:00,2
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientTlsTest.cs,Radek Zikmund,195,AI,2025-04-22T08:14:42+00:00,4
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientAuthTest.cs,Radek Zikmund,70,AI,2025-04-22T08:14:42+00:00,2
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientSendMailTest.cs,Radek Zikmund,328,AI,2025-04-22T08:14:42+00:00,3
+dotnet/runtime,dotnet,src/libraries/System.Net.Mail/tests/Functional/SmtpClientAttachmentTest.cs,Radek Zikmund,104,AI,2025-04-22T08:14:42+00:00,1
+dotnet/runtime,dotnet,src/tests/async/pinvoke.csproj,Vladimir Sadov,8,Human,2025-05-01T13:07:39+00:00,2
+dotnet/runtime,dotnet,src/native/managed/cdacreader/tests/RuntimeInfoTests.cs,Max Charlamb,102,Human,2025-04-10T17:01:58+00:00,2
+dotnet/runtime,dotnet,src/native/managed/cdacreader/Microsoft.Diagnostics.DataContractReader.Contracts/Data/PEAssembly.cs,Max Charlamb,19,Human,2025-04-15T18:58:26+00:00,2
+dotnet/runtime,dotnet,src/tests/async/valuetask.cs,Vladimir Sadov,27,Human,2025-05-01T13:07:39+00:00,2
+dotnet/runtime,dotnet,src/tests/async/override.cs,Vladimir Sadov,90,Human,2025-05-01T13:07:39+00:00,2
+dotnet/runtime,dotnet,src/coreclr/System.Private.CoreLib/src/System/Reflection/InstanceCalliHelper.cs,Steve Harter,166,Human,2025-04-16T14:14:00+00:00,1
+dotnet/runtime,dotnet,src/mono/browser/runtime/diagnostics/diagnostics-js.ts,Pavel Savara,161,Human,2025-04-08T12:48:33+00:00,4
+elizaOS/eliza,elizaOS,packages/plugin-anthropic/__tests__/index.test.ts,ai16z-demirix,127,AI,2025-04-27T20:22:27+00:00,3
+elizaOS/eliza,elizaOS,packages/plugin-anthropic/__tests__/utils.test.ts,ai16z-demirix,72,AI,2025-04-27T20:11:09+00:00,3
+elizaOS/eliza,elizaOS,packages/plugin-twitter/src/timeline.ts,Ting Chien Meng,419,AI,2025-05-02T02:06:57+00:00,9
+elizaOS/eliza,elizaOS,packages/docs/src/data/partners.tsx,madjin,800,Human,2025-04-04T02:46:01+00:00,3
+elizaOS/eliza,elizaOS,packages/docs/partners/thales-cto/index.md,madjin,39,Human,2025-04-04T02:46:01+00:00,3
+elizaOS/eliza,elizaOS,packages/docs/static/img/partners/multiplex.jpg,madjin,163,Human,2025-04-04T02:46:01+00:00,3
+sst/opencode,sst,internal/llm/models/openrouter.go,Isaac Scarrott,262,AI,2025-04-29T11:56:49+00:00,3
+sst/opencode,sst,internal/llm/tools/edit.go,Kujtim Hoxha,420,Human,2025-03-25T12:04:36+00:00,26
+marimo-team/marimo,marimo-team,tests/_server/test_print.py,devin-ai-integration[bot],201,AI,2025-03-07T02:37:38+00:00,2
+marimo-team/marimo,marimo-team,docs/examples/running_cells/stop.md,Akshay Agrawal,9,AI,2025-04-16T00:50:58+00:00,1
+marimo-team/marimo,marimo-team,marimo/_server/lsp.py,Myles Scolnick,263,AI,2025-03-13T18:56:54+00:00,27
+marimo-team/marimo,marimo-team,marimo/_ast/parse.py,Dylan Madisetti,866,AI,2025-04-11T16:26:30+00:00,9
+marimo-team/marimo,marimo-team,tests/_messaging/test_completion_option.py,devin-ai-integration[bot],62,AI,2025-03-07T00:02:44+00:00,1
+marimo-team/marimo,marimo-team,examples/outputs/stacks.py,Akshay Agrawal,33,AI,2025-04-16T00:50:58+00:00,2
+marimo-team/marimo,marimo-team,tests/_messaging/test_print_override.py,devin-ai-integration[bot],200,AI,2025-03-07T00:02:44+00:00,3
+marimo-team/marimo,marimo-team,docs/examples/outputs/stacks.md,Akshay Agrawal,7,AI,2025-04-16T00:50:58+00:00,1
+marimo-team/marimo,marimo-team,docs/api/inputs/data_editor.md,Akshay Agrawal,8,AI,2025-04-16T00:50:58+00:00,1
+marimo-team/marimo,marimo-team,docs/_static/example-thumbs/date.png,Akshay Agrawal,251,AI,2025-04-16T00:50:58+00:00,1
+marimo-team/marimo,marimo-team,.env.testing,Luis Chaves Rodriguez,1,Human,2025-03-29T18:37:53+00:00,1
+marimo-team/marimo,marimo-team,tests/_plugins/stateless/test_audio.py,Myles Scolnick,156,Human,2025-03-26T17:13:37+00:00,2
+marimo-team/marimo,marimo-team,tests/_data/snapshots/column_preview_categorical_chart_code.txt,Myles Scolnick,10,Human,2025-03-12T20:33:05+00:00,3
+marimo-team/marimo,marimo-team,frontend/src/core/codemirror/cells/traceback-decorations.ts,Myles Scolnick,101,Human,2025-05-02T14:10:04+00:00,4
+marimo-team/marimo,marimo-team,marimo/_smoke_tests/tqdm_update_test.py,brenoca,46,Human,2025-04-22T18:38:37+00:00,3
+marimo-team/marimo,marimo-team,tests/_output/formatters/test_ipython_update.py,brenoca,79,Human,2025-05-01T19:03:43+00:00,1
+marimo-team/marimo,marimo-team,tests/_ast/test_toplevel.py,Dylan Madisetti,275,Human,2025-03-13T02:02:00+00:00,9
+marimo-team/marimo,marimo-team,frontend/src/core/codemirror/__tests__/extensions.test.ts,Myles Scolnick,114,Human,2025-03-07T22:20:01+00:00,3
+marimo-team/marimo,marimo-team,marimo/_sql/engines/ibis.py,Thierry Jean,395,Human,2025-04-29T01:40:53+00:00,11
+marimo-team/marimo,marimo-team,frontend/src/utils/pathUtils.test.ts,Myles Scolnick,82,Human,2025-03-13T16:52:32+00:00,5
+browserbase/stagehand,browserbase,lib/handlers/agentHandler.ts,Miguel,637,AI,2025-03-13T17:26:42+00:00,10
+browserbase/stagehand,browserbase,examples/cua-example.ts,Miguel,92,AI,2025-03-13T17:26:42+00:00,7
+browserbase/stagehand,browserbase,.changeset/flat-tigers-sleep.md,Anirudh Kamath,5,AI,2024-12-10T04:50:55+00:00,2
+browserbase/stagehand,browserbase,lib/llm/LLMClient.ts,Filip Michalsky,29,AI,2024-09-19T03:00:18+00:00,27
+browserbase/stagehand,browserbase,examples/ai_sdk_example.ts,Sameel,40,AI,2025-01-08T08:28:10+00:00,6
+browserbase/stagehand,browserbase,.changeset/perfect-planes-bow.md,Anirudh Kamath,5,AI,2024-12-09T01:22:31+00:00,2
+browserbase/stagehand,browserbase,.changeset/calm-teachers-rescue.md,Sameel,5,AI,2025-01-07T02:23:07+00:00,2
+browserbase/stagehand,browserbase,lib/inferenceLogUtils.ts,Sean McGuire,114,AI,2025-03-15T00:29:20+00:00,3
+browserbase/stagehand,browserbase,.changeset/fifty-crabs-arrive.md,Sean McGuire,5,AI,2025-03-15T00:29:20+00:00,2
+browserbase/stagehand,browserbase,lib/agent/AgentClient.ts,Miguel,44,AI,2025-03-13T17:26:42+00:00,2
+browserbase/stagehand,browserbase,evals/experimental/ibm.ts,Sameel,59,Human,2024-12-06T05:21:30+00:00,2
+browserbase/stagehand,browserbase,examples/instructions.ts,Sameel,32,Human,2025-01-08T18:22:14+00:00,8
+browserbase/stagehand,browserbase,types/stagehandErrors.ts,Sean McGuire,147,Human,2025-03-22T02:11:47+00:00,16
+browserbase/stagehand,browserbase,pnpm-workspace.yaml,Anirudh Kamath,5,Human,2025-05-03T01:05:28+00:00,3
+browserbase/stagehand,browserbase,evals/act/bidnet.ts,Sameel,31,Human,2024-12-06T05:21:30+00:00,2
+browserbase/stagehand,browserbase,types/context.ts,Miguel,25,Human,2025-01-20T17:42:40+00:00,11
+browserbase/stagehand,browserbase,.changeset/loose-cooks-lead.md,Miguel,5,Human,2025-04-25T22:04:08+00:00,2
+browserbase/stagehand,browserbase,.changeset/plenty-corners-bake.md,Sean McGuire,5,Human,2025-04-11T18:32:33+00:00,2
+browserbase/stagehand,browserbase,evals/bananalyzer-ts/.gitignore,Navid Pour,2,Human,2024-09-30T18:39:31+00:00,2
+browserbase/stagehand,browserbase,evals/tasks/radio_btn.ts,Sean McGuire,30,Human,2025-04-21T21:10:38+00:00,7
+Skyvern-AI/skyvern,Skyvern-AI,skyvern/utils/image_resizer.py,Shuchang Zheng,59,AI,2025-04-30T08:13:36+00:00,2
+Skyvern-AI/skyvern,Skyvern-AI,skyvern/client/types/text_prompt_block.py,LawyZheng,28,Human,2025-02-18T16:58:48+00:00,7
+vercel/vercel,vercel,.changeset/wicked-rice-turn.md,Trek Glowacki,4,AI,2024-12-09T17:16:42+00:00,2
+vercel/vercel,vercel,examples/ionic-angular/src/app/tabs/tabs.page.scss,Austin Merrick,1,Human,2025-01-16T21:25:06+00:00,1
+OpenListTeam/OpenList,OpenListTeam,drivers/azure_blob/util.go,New Future,401,AI,2025-04-03T12:43:21+00:00,1
+OpenListTeam/OpenList,OpenListTeam,drivers/azure_blob/types.go,New Future,20,AI,2025-04-03T12:43:21+00:00,3
+OpenListTeam/OpenList,OpenListTeam,drivers/azure_blob/driver.go,New Future,313,AI,2025-04-03T12:43:21+00:00,3
+OpenListTeam/OpenList,OpenListTeam,drivers/azure_blob/meta.go,New Future,27,AI,2025-04-03T12:43:21+00:00,4
+OpenListTeam/OpenList,OpenListTeam,drivers/lark/meta.go,WintBit,36,Human,2024-05-22T15:31:58+00:00,3
+OpenListTeam/OpenList,OpenListTeam,server/s3.go,itsHenry,29,Human,2024-03-02T07:35:10+00:00,5
+OpenListTeam/OpenList,OpenListTeam,drivers/vtencent/util.go,zhangxiang,289,Human,2023-11-23T13:40:16+00:00,7
+OpenListTeam/OpenList,OpenListTeam,internal/archive/archives/utils.go,KirCute_ECT,80,Human,2025-01-18T15:28:12+00:00,6
+onyx-dot-app/onyx,onyx-dot-app,web/public/Deepseek.svg,pablonyx,1,AI,2025-03-05T17:57:39+00:00,1
+onyx-dot-app/onyx,onyx-dot-app,backend/onyx/connectors/vision_enabled_connector.py,pablonyx,45,Human,2025-03-05T17:44:18+00:00,4
+openai/openai-agents-python,openai,src/agents/extensions/models/litellm_provider.py,Rohan Mehta,21,AI,2025-04-21T19:03:06+00:00,2
+openai/openai-agents-python,openai,src/agents/models/multi_provider.py,Rohan Mehta,144,AI,2025-04-21T19:03:06+00:00,1
+openai/openai-agents-python,openai,examples/model_providers/litellm_auto.py,Rohan Mehta,41,AI,2025-04-21T19:03:06+00:00,3
+openai/openai-agents-python,openai,examples/research_bot/manager.py,Rohan Mehta,119,Human,2025-03-11T16:42:28+00:00,2
+openai/openai-agents-python,openai,src/agents/__pycache__/stream_events.cpython-313.pyc,Rohan Mehta,66,Human,2025-03-11T16:42:28+00:00,2
+openai/openai-agents-python,openai,examples/research_bot/agents/__pycache__/research_manager_agent.cpython-313.pyc,Rohan Mehta,102,Human,2025-03-11T16:42:28+00:00,2
+zauberzeug/nicegui,zauberzeug,.cursor/rules/general.mdc,Rodja Trappe,21,AI,2025-03-10T14:58:46+00:00,4
+zauberzeug/nicegui,zauberzeug,.cursor/rules/coding.mdc,Rodja Trappe,28,AI,2025-03-10T14:58:46+00:00,4
+zauberzeug/nicegui,zauberzeug,fetch_languages.py,Falko Schindler,12,Human,2025-02-18T14:28:32+00:00,2
+zauberzeug/nicegui,zauberzeug,website/documentation/content/rating_documentation.py,Simon Robinson,49,Human,2025-02-18T15:09:40+00:00,2
+coturn/coturn,coturn,release.sh,Pavel Punsky,48,AI,2022-11-20T22:23:17+00:00,2
+coturn/coturn,coturn,authors.sh,Pavel Punsky,14,AI,2022-11-20T22:23:17+00:00,2
+coturn/coturn,coturn,docker/coturn/alpine/Dockerfile,tyranron,133,Human,2021-04-01T09:01:24+00:00,28
+coturn/coturn,coturn,.github/dependabot.yml,tyranron,6,Human,2022-05-06T08:53:54+00:00,1
+MetaMask/metamask-extension,MetaMask,app/scripts/controller-init/messengers/delegation/delegation-controller-messenger.test.ts,Caainã Jeronimo,12,AI,2025-05-01T20:09:44+00:00,2
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/allowedTargetsBuilder.test.ts,Caainã Jeronimo,98,AI,2025-05-01T20:09:44+00:00,2
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/limitedCallsBuilder.test.ts,Caainã Jeronimo,77,AI,2025-05-01T20:09:44+00:00,2
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/allowedMethodsBuilder.test.ts,Caainã Jeronimo,100,AI,2025-05-01T20:09:44+00:00,2
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/index.ts,Caainã Jeronimo,32,AI,2025-05-01T20:09:44+00:00,1
+MetaMask/metamask-extension,MetaMask,ui/store/controller-actions/delegation-controller.ts,Caainã Jeronimo,47,AI,2025-05-01T20:09:44+00:00,3
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/allowedMethodsBuilder.ts,Caainã Jeronimo,61,AI,2025-05-01T20:09:44+00:00,1
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/limitedCallsBuilder.ts,Caainã Jeronimo,38,AI,2025-05-01T20:09:44+00:00,1
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/allowedTargetsBuilder.ts,Caainã Jeronimo,45,AI,2025-05-01T20:09:44+00:00,1
+MetaMask/metamask-extension,MetaMask,shared/lib/delegation/caveatBuilder/allowedCalldataBuilder.ts,Caainã Jeronimo,46,AI,2025-05-01T20:09:44+00:00,1
+MetaMask/metamask-extension,MetaMask,test/e2e/mock-response-data/accounts-api-tokens.json,seaona,13,Human,2025-04-03T12:53:16+00:00,1
+MetaMask/metamask-extension,MetaMask,app/scripts/controllers/institutional-snap/institutional-snap-controller.types.ts,Shane T,64,Human,2025-04-09T20:05:15+00:00,1
+MetaMask/metamask-extension,MetaMask,test/e2e/tests/bridge/bridge-cross-chain-swap.spec.ts,Davide Brocchetto,89,Human,2025-03-26T08:13:41+00:00,6
+MetaMask/metamask-extension,MetaMask,app/scripts/migrations/155.test.ts,Micaela Estabillo,118,Human,2025-04-28T21:24:13+00:00,2
+MetaMask/metamask-extension,MetaMask,ui/components/app/import-token/network-selector-custom-import/__snapshots__/index.test.tsx.snap,Salim TOUBAL,33,Human,2025-04-03T17:42:07+00:00,2
+MetaMask/metamask-extension,MetaMask,ui/pages/remote-mode/components/revoke-withdrawl-confirm-modal/remote-mode-hardware-wallet-confirm.stories.tsx,Kevin Bluer,28,Human,2025-04-24T01:29:35+00:00,2
+MetaMask/metamask-extension,MetaMask,ui/pages/confirmations/components/confirm/info/shared/selected-gas-fee-token/selected-gas-fee-token.stories.tsx,Matthew Walsh,106,Human,2025-03-27T13:28:23+00:00,2
+MetaMask/metamask-extension,MetaMask,ui/pages/remote-mode/components/remote-mode-status/remote-mode-status.stories.tsx,Kevin Bluer,30,Human,2025-04-28T22:00:04+00:00,3
+MetaMask/metamask-extension,MetaMask,app/scripts/controller-init/messengers/notifications/notification-services-controller-messenger.test.ts,Prithpal Sooriya,14,Human,2025-03-24T18:02:33+00:00,2
+MetaMask/metamask-extension,MetaMask,.yarn/patches/@metamask-notification-services-controller-npm-6.0.0-d0cefeaee1.patch,Prithpal Sooriya,56,Human,2025-05-01T11:11:04+00:00,2
+tinacms/tinacms,tinacms,.changeset/rare-turkeys-bow.md,Kelly Davis,6,AI,2024-09-30T07:55:49+00:00,2
+tinacms/tinacms,tinacms,packages/tinacms-gitprovider-github/tsconfig.json,Logan Anderson,28,Human,2023-11-17T19:26:56+00:00,1
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0026/MASTG-DEMO-0026.md,Jan Seredynski,33,AI,2025-03-07T12:47:25+00:00,2
+OWASP/mastg,OWASP,rules/mastg-android-device-passcode-present.yml,Jan Seredynski,17,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,tests-beta/android/MASVS-CODE/MASTG-TEST-0245.md,Jan Seredynski,29,AI,2025-03-07T12:47:25+00:00,3
+OWASP/mastg,OWASP,demos/android/MASVS-CODE/MASTG-DEMO-0025/MastgTest_reversed.java,Jan Seredynski,28,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-RESILIENCE/MASTG-DEMO-0027/MASTG-DEMO-0027.md,Jan Seredynski,38,AI,2025-03-07T12:47:25+00:00,2
+OWASP/mastg,OWASP,demos/android/MASVS-RESILIENCE/MASTG-DEMO-0028/MastgTest_reversed.java,Jan Seredynski,55,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-RESILIENCE/MASTG-DEMO-0027/AndroidManifest.xml,Jan Seredynski,34,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0026/output.txt,Jan Seredynski,12,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-RESILIENCE/MASTG-DEMO-0028/MastgTest.kt,Jan Seredynski,55,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0024/MastgTest.swift,Jan Seredynski,22,AI,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-RESILIENCE/MASTG-DEMO-0028/MASTG-DEMO-0028.md,Jan Seredynski,34,Human,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,techniques/android/MASTG-TECH-0126.md,ScreaM,47,Human,2025-03-07T16:20:38+00:00,4
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0036/MASTestApp,Carlos Holguera,368,Human,2025-03-17T13:23:03+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-PRIVACY/MASTG-DEMO-0033/MASTG-DEMO-0033.md,Carlos Holguera,37,Human,2025-03-14T18:57:56+00:00,3
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0026/MASTestApp,Jan Seredynski,847,Human,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0024/isDevicePasscodeSet.r2,Jan Seredynski,21,Human,2025-03-07T12:47:25+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-CRYPTO/MASTG-DEMO-0023/MastgTest.kt,Carlos Holguera,133,Human,2025-02-01T14:15:56+00:00,1
+OWASP/mastg,OWASP,demos/ios/MASVS-RESILIENCE/MASTG-DEMO-0021/MastgTest.swift,pruDhv!,110,Human,2025-01-10T09:09:22+00:00,1
+OWASP/mastg,OWASP,demos/android/MASVS-PRIVACY/MASTG-DEMO-0033/output.txt,Carlos Holguera,18,Human,2025-03-14T18:57:56+00:00,1
+OWASP/mastg,OWASP,tests-beta/android/MASVS-PRIVACY/MASTG-TEST-0254.md,Carlos Holguera,34,Human,2025-03-15T12:17:01+00:00,4
+cockpit-project/cockpit,cockpit-project,src/cockpit/channels/info.py,Allison Karlitskaya,31,AI,2025-03-20T19:49:53+00:00,1
+cockpit-project/cockpit,cockpit-project,.github/workflows/docker-mirors.yml,Martin Pitt,22,AI,2025-02-05T15:54:13+00:00,2
+cockpit-project/cockpit,cockpit-project,pkg/base1/test-transport.ts,Allison Karlitskaya,9,Human,2025-03-18T10:46:39+00:00,2
+cockpit-project/cockpit,cockpit-project,test/verify/files/smart-dumps/ST9160821AS--3.CLH,Tomáš Matuš,14,Human,2025-03-11T08:34:49+00:00,1
+comet-ml/opik,comet-ml,sdks/python/src/opik/llm_usage/google_usage.py,Aliaksandr Kuzmik,25,AI,2025-03-11T19:44:26+00:00,3
+comet-ml/opik,comet-ml,sdks/python/src/opik/llm_usage/opik_usage_factory.py,Aliaksandr Kuzmik,51,AI,2025-03-11T19:44:26+00:00,6
+comet-ml/opik,comet-ml,sdks/python/src/opik/llm_usage/anthropic_usage.py,Aliaksandr Kuzmik,25,AI,2025-03-11T19:44:26+00:00,1
+comet-ml/opik,comet-ml,sdks/python/tests/unit/llm_usage/test_client_with_usage_logged.py,Aliaksandr Kuzmik,278,AI,2025-03-11T19:44:26+00:00,3
+comet-ml/opik,comet-ml,sdks/python/src/opik/llm_usage/base_original_provider_usage.py,Aliaksandr Kuzmik,38,AI,2025-03-11T19:44:26+00:00,3
+comet-ml/opik,comet-ml,sdks/python/src/opik/llm_usage/unknown_usage.py,Aliaksandr Kuzmik,12,AI,2025-03-11T19:44:26+00:00,1
+comet-ml/opik,comet-ml,sdks/python/tests/unit/llm_usage/test_google_usage.py,Aliaksandr Kuzmik,104,AI,2025-03-11T19:44:26+00:00,1
+comet-ml/opik,comet-ml,sdks/python/src/opik/integrations/langchain/anthropic_run_helpers.py,Aliaksandr Kuzmik,88,AI,2025-03-18T11:43:01+00:00,5
+comet-ml/opik,comet-ml,sdks/python/src/opik/integrations/langchain/anthropic_vertexai_run_helpers.py,Boris Feld,100,AI,2025-04-15T15:46:46+00:00,3
+comet-ml/opik,comet-ml,sdks/python/tests/unit/llm_usage/test_opik_usage_factory.py,Aliaksandr Kuzmik,31,AI,2025-03-11T19:44:26+00:00,2
+comet-ml/opik,comet-ml,sdks/python/src/opik/rest_api/types/feature_support_or_builder_edition_removed.py,BorisTkachenko,21,Human,2025-03-18T12:29:40+00:00,2
+comet-ml/opik,comet-ml,sdks/python/src/opik/file_upload/file_uploader.py,Iaroslav Omelianenko,126,Human,2025-04-28T10:19:42+00:00,3
+comet-ml/opik,comet-ml,sdks/python/src/opik/rest_api/types/field_options_ctype.py,BorisTkachenko,7,Human,2025-03-18T12:29:40+00:00,2
+comet-ml/opik,comet-ml,sdks/opik_optimizer/tests/test_utils.py,Doug Blank,65,Human,2025-05-01T14:51:59+00:00,2
+comet-ml/opik,comet-ml,sdks/python/src/opik/guardrails/guardrail.py,Aliaksandr Kuzmik,99,Human,2025-04-02T18:45:49+00:00,4
+comet-ml/opik,comet-ml,sdks/typescript/src/opik/rest_api/api/types/MethodOptions.ts,BorisTkachenko,25,Human,2025-03-18T12:29:40+00:00,2
+comet-ml/opik,comet-ml,sdks/python/tests/unit/guardrails/guards/test_pii.py,Aliaksandr Kuzmik,36,Human,2025-04-02T18:45:49+00:00,1
+comet-ml/opik,comet-ml,sdks/python/src/opik/guardrails/__init__.py,Aliaksandr Kuzmik,4,Human,2025-04-02T18:45:49+00:00,1
+comet-ml/opik,comet-ml,sdks/opik_optimizer/tests/test_mappers.py,Doug Blank,51,Human,2025-05-01T14:51:59+00:00,2
+comet-ml/opik,comet-ml,sdks/typescript/src/opik/rest_api/api/types/ScopeSpans.ts,BorisTkachenko,24,Human,2025-03-18T12:29:40+00:00,2
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-chat/src/lib/slack.ts,Eric Allam,114,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,.changeset/honest-files-decide.md,Eric Allam,5,AI,2025-04-02T11:00:02+00:00,2
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-chat/src/lib/migrate.ts,Eric Allam,49,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-chat/src/components/chat-container.tsx,Eric Allam,203,AI,2025-04-02T11:00:02+00:00,3
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-chat/trigger.config.ts,Eric Allam,20,AI,2025-04-02T11:00:02+00:00,4
+triggerdotdev/trigger.dev,triggerdotdev,ai/references/repo.md,Eric Allam,37,AI,2025-03-10T23:03:27+00:00,2
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-openai-agents/src/lib/utils.ts,Eric Allam,6,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-openai-agents/next.config.ts,Eric Allam,7,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-openai-agents/postcss.config.mjs,Eric Allam,5,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,references/d3-openai-agents/public/globe.svg,Eric Allam,1,AI,2025-04-02T11:00:02+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,apps/webapp/app/assets/images/queues-dashboard.png,Matt Aitken,4179,Human,2025-03-19T13:22:31+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/database/prisma/migrations/20250319103257_add_release_concurrency_on_waitpoint_to_task_queue/migration.sql,Eric Allam,5,Human,2025-03-19T16:29:09+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,packages/core/src/v3/runEngineWorker/types.ts,nicktrn,32,Human,2025-03-05T14:40:14+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,references/hello-world/src/db.ts,Eric Allam,48,Human,2025-03-24T15:55:00+00:00,3
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/database/prisma/migrations/20250203223832_add_text_pattern_ops_index_to_secret_store_key/migration.sql,Eric Allam,2,Human,2025-02-03T22:52:16+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/run-engine/src/engine/consts.ts,nicktrn,1,Human,2025-03-05T14:40:14+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/database/prisma/migrations/20250319114436_add_metadata_to_task_run_execution_snapshots/migration.sql,Eric Allam,5,Human,2025-03-19T16:29:09+00:00,1
+triggerdotdev/trigger.dev,triggerdotdev,apps/webapp/app/v3/runQueue.server.ts,nicktrn,36,Human,2025-03-05T14:40:14+00:00,2
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/run-engine/src/engine/tests/triggerAndWait.test.ts,nicktrn,456,Human,2025-03-05T14:40:14+00:00,7
+triggerdotdev/trigger.dev,triggerdotdev,internal-packages/run-engine/tsconfig.src.json,Eric Allam,19,Human,2025-03-07T14:30:19+00:00,3
+volcengine/verl,volcengine,.github/workflows/pre-commit.yml,Shawn/Yuxuan Tong,30,AI,2025-04-18T14:49:31+00:00,8
+volcengine/verl,volcengine,.github/workflows/pre-commit-full.yml,Shawn/Yuxuan Tong,30,AI,2025-04-18T14:49:31+00:00,5
+volcengine/verl,volcengine,.pre-commit-config.yaml,Shawn/Yuxuan Tong,8,AI,2025-04-18T14:49:31+00:00,8
+volcengine/verl,volcengine,examples/tuning/32b/qwen2_32B_grpo_8_h20_megatron_vllm.sh,BearBiscuit,52,Human,2025-04-26T18:03:34+00:00,3
+volcengine/verl,volcengine,verl/third_party/vllm/vllm_spmd/dtensor_weight_loaders.py,ZSL98,380,Human,2025-02-14T16:17:33+00:00,3
+volcengine/verl,volcengine,tests/e2e/run_deepseek_grpo.sh,Blue Space,42,Human,2025-03-23T02:50:12+00:00,4
+microsoft/garnet,microsoft,libs/server/Lua/LuaRunner.Loader.cs,kevin-montrose,519,AI,2025-03-25T21:29:36+00:00,3
+microsoft/garnet,microsoft,libs/common/ExceptionInjectionType.cs,Badrish Chandramouli,14,AI,2025-03-20T23:27:38+00:00,9
+microsoft/garnet,microsoft,libs/common/ExceptionInjectionHelper.cs,Badrish Chandramouli,34,AI,2025-03-20T23:27:38+00:00,6
+microsoft/garnet,microsoft,libs/storage/Tsavorite/cs/src/core/Allocator/ScanCursorState.cs,Ted Hart,21,AI,2024-09-18T05:23:51+00:00,2
+microsoft/garnet,microsoft,libs/server/Lua/LuaRunner.Strings.cs,kevin-montrose,266,AI,2025-03-25T21:29:36+00:00,3
+microsoft/garnet,microsoft,libs/server/Lua/LuaRunner.Functions.cs,kevin-montrose,3907,AI,2025-03-25T21:29:36+00:00,5
+microsoft/garnet,microsoft,test/Garnet.test/NetworkTests.cs,Badrish Chandramouli,87,AI,2025-03-20T23:27:38+00:00,1
+microsoft/garnet,microsoft,libs/storage/Tsavorite/cs/src/core/TsavoriteLog/TsavoriteLogScanSingleIterator.cs,Badrish Chandramouli,59,AI,2024-09-26T02:46:12+00:00,1
+microsoft/garnet,microsoft,libs/storage/Tsavorite/cs/src/core/Index/Checkpointing/IndexResizeSMTask.cs,Badrish Chandramouli,74,Human,2025-03-07T22:16:47+00:00,2
+microsoft/garnet,microsoft,libs/server/Lua/LuaOptions.cs,kevin-montrose,87,Human,2025-01-16T19:17:25+00:00,5
+microsoft/garnet,microsoft,test/Garnet.fuzz/Targets/IFuzzerTarget.cs,kevin-montrose,56,Human,2025-04-17T14:02:05+00:00,3
+microsoft/garnet,microsoft,test/Garnet.fuzz/Targets/GarnetEndToEnd.cs,kevin-montrose,425,Human,2025-04-17T14:02:05+00:00,3
+microsoft/garnet,microsoft,libs/server/Resp/RespServerSessionSlotVerify.cs,Vasileios Zois,53,Human,2024-06-27T22:27:16+00:00,8
+microsoft/garnet,microsoft,libs/storage/Tsavorite/cs/test/StructWithStringTests.cs,Ted Hart,163,Human,2024-08-02T21:29:03+00:00,2
+microsoft/garnet,microsoft,benchmark/BDN.benchmark/Resp/RespLuaStress.cs,Badrish Chandramouli,76,Human,2024-08-16T23:37:15+00:00,2
+microsoft/garnet,microsoft,test/Garnet.test/LuaScriptRunnerTests.cs,Badrish Chandramouli,105,Human,2024-08-16T23:37:15+00:00,12
+567-labs/instructor,567-labs,docs/concepts/iterable.md,devin-ai-integration[bot],172,AI,2024-11-19T05:57:24+00:00,6
+567-labs/instructor,567-labs,docs/prompting/few_shot/cosp.md,devin-ai-integration[bot],193,AI,2024-11-19T05:57:24+00:00,1
+567-labs/instructor,567-labs,docs/integrations/vertex.md,devin-ai-integration[bot],107,AI,2024-11-19T05:57:24+00:00,6
+567-labs/instructor,567-labs,CLAUDE.md,Jason Liu,40,AI,2025-03-04T04:41:40+00:00,4
+567-labs/instructor,567-labs,docs_todo.md,Jason Liu,70,AI,2025-03-04T04:41:40+00:00,2
+567-labs/instructor,567-labs,tests/llm/test_anthropic/test_system.py,Ivan Leo,144,AI,2024-10-29T07:03:29+00:00,3
+567-labs/instructor,567-labs,tests/llm/test_anthropic/conftest.py,Sonal Saldanha,39,AI,2024-05-20T16:51:26+00:00,3
+567-labs/instructor,567-labs,docs/integrations/fireworks.md,devin-ai-integration[bot],258,AI,2024-11-19T05:57:24+00:00,2
+567-labs/instructor,567-labs,docs/templates/concept_template.md,Jason Liu,114,AI,2025-03-04T04:41:40+00:00,2
+567-labs/instructor,567-labs,docs/integrations/llama-cpp-python.md,devin-ai-integration[bot],83,AI,2024-11-19T05:57:24+00:00,3
+567-labs/instructor,567-labs,tests/conftest.py,Richie Caputo,4,Human,2024-10-20T15:01:05+00:00,1
+567-labs/instructor,567-labs,docs/learning/getting_started/structured_outputs.md,Jason Liu,147,Human,2025-04-13T08:30:04+00:00,2
+567-labs/instructor,567-labs,tests/llm/test_gemini/evals/test_classification_enums.py,Sonal Saldanha,98,Human,2024-05-23T17:19:10+00:00,2
+567-labs/instructor,567-labs,docs/prompting/decomposition/decomp.md,shreya w,7,Human,2024-06-19T02:00:00+00:00,2
+567-labs/instructor,567-labs,docs/prompting/decomposition/skeleton_of_thought.md,shreya w,7,Human,2024-06-19T02:00:00+00:00,3
+567-labs/instructor,567-labs,docs/examples/extracting_receipts.md,Jason Liu,88,Human,2024-05-27T13:46:08+00:00,6
+567-labs/instructor,567-labs,docs/prompting/decomposition/plan_and_solve.md,shreya w,7,Human,2024-06-19T02:00:00+00:00,2
+567-labs/instructor,567-labs,tests/llm/test_gemini/evals/test_simple.py,Sonal Saldanha,36,Human,2024-05-23T17:19:10+00:00,2
+567-labs/instructor,567-labs,docs/blog/posts/img/type.png,Jason Liu,1682,Human,2024-04-01T14:42:52+00:00,1
+567-labs/instructor,567-labs,docs/blog/posts/consistent-stories.md,Ivan Leo,265,Human,2024-12-11T06:48:56+00:00,1
+AstrBotDevs/AstrBot,AstrBotDevs,astrbot/core/db/plugin/sqlite_impl.py,AliveGh0st,112,AI,2025-04-03T06:20:15+00:00,3
+AstrBotDevs/AstrBot,AstrBotDevs,astrbot/core/provider/sources/dashscope_tts.py,Soulter,39,Human,2025-04-03T16:32:37+00:00,8
+Chia-Network/chia-blockchain,Chia-Network,chia/cmds/dev/__init__.py,Kyle Altendorf,0,AI,2025-03-21T21:31:13+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/data_layer/singleton_record.py,Matt Hauff,22,AI,2025-01-27T15:19:54+00:00,3
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/wallet/test_coin_management.py,Matt Hauff,354,AI,2024-12-17T17:44:33+00:00,7
+Chia-Network/chia-blockchain,Chia-Network,chia/cmds/gh.py,Kyle Altendorf,275,AI,2024-12-19T18:32:56+00:00,3
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/cmds/test_dev_gh.py,Kyle Altendorf,131,AI,2024-12-19T18:32:56+00:00,3
+Chia-Network/chia-blockchain,Chia-Network,chia/cmds/mempool_funcs.py,Rigidity,62,AI,2025-03-19T00:09:02+00:00,2
+Chia-Network/chia-blockchain,Chia-Network,chia/cmds/mempool.py,Rigidity,78,AI,2025-03-19T00:09:02+00:00,2
+Chia-Network/chia-blockchain,Chia-Network,chia/wallet/wsm_apis.py,Matt Hauff,98,AI,2025-03-26T20:08:00+00:00,3
+Chia-Network/chia-blockchain,Chia-Network,chia/wallet/nft_wallet/nft_puzzle_utils.py,matt-o-how,293,AI,2025-01-17T16:58:16+00:00,5
+Chia-Network/chia-blockchain,Chia-Network,chia/util/task_referencer.py,Kyle Altendorf,59,AI,2025-01-02T17:13:51+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/data_layer/singleton_record.py,Matt Hauff,22,Human,2025-01-27T15:19:54+00:00,3
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-5379a4d9ff29c29d1ef0906d22e82c52472753d31806189ab813c43365341b78-full-40-v1.0.dat,Florin Chirica,5735,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-bd0494ba430aff13458b557113b073d226eaf11257dfe26ff3323fa1cfe1335b-delta-39-v1.0.dat,Florin Chirica,420,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-71c797fb7592d3f0a5a20c79ab8497ddaa0fd9ec17712e109d25c91b3f3c76e5-delta-3-v1.0.dat,Florin Chirica,178,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-28a6b7c134abfaeb0ab58a018313f6c87a61a40a4d9ec9bedf53aa1d12f3ee37-delta-7-v1.0.dat,Florin Chirica,266,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-6518527b7c939bee60ce6b024cbe90d3b9d8913c56b8ce11a4df5da7ff7db1c8-delta-8-v1.0.dat,Florin Chirica,291,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/cmds/cmd_helpers.py,Kyle Altendorf,242,Human,2024-12-17T21:14:13+00:00,6
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-343a2bf9add798e3ac2e6a571823cf9fa7e8a1bed532143354ead2648bd036ef-delta-10-v1.0.dat,Florin Chirica,304,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-0cc077559b9c7b4aefe8f8f591c195e0779bebdf89f2ad8285a00ea5f859d965-delta-1-v1.0.dat,Florin Chirica,103,Human,2025-03-14T20:07:48+00:00,1
+Chia-Network/chia-blockchain,Chia-Network,chia/_tests/core/data_layer/old_format/files/2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e612073746f7265206964-f7ad2bdf86d9609b4d6381086ec1e296bf558e2ff467ead29dd7fa6e31bacc56-delta-43-v1.0.dat,Florin Chirica,379,Human,2025-03-14T20:07:48+00:00,1
