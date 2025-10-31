@@ -912,35 +912,49 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
             ""
         ])
         
-        # コミット頻度分析（AI）
-        ai_frequencies_days = []
+        # コミット頻度分析（AI）- 期間あたりのコミット回数
+        ai_commit_rates = {
+            '1week': [],
+            '2weeks': [],
+            '1month': [],
+            '3months': []
+        }
+        
         for file_path in ai_df['file_path'].unique():
             file_commits = ai_df[ai_df['file_path'] == file_path].copy()
-            if len(file_commits) > 1:
+            if len(file_commits) > 0:
                 dates = file_commits['commit_date'].sort_values()
-                time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
-                            for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
-                if time_diffs:
-                    ai_frequencies_days.extend(time_diffs)
+                first_date = dates.iloc[0]
+                last_date = dates.iloc[-1]
+                total_days = (last_date - first_date).days
+                
+                if total_days > 0:
+                    total_commits = len(file_commits)
+                    
+                    # 各期間でのコミット回数を計算
+                    ai_commit_rates['1week'].append(total_commits / (total_days / 7.0))
+                    ai_commit_rates['2weeks'].append(total_commits / (total_days / 14.0))
+                    ai_commit_rates['1month'].append(total_commits / (total_days / 30.0))
+                    ai_commit_rates['3months'].append(total_commits / (total_days / 90.0))
         
-        if ai_frequencies_days:
-            # 週単位に変換
-            ai_frequencies_weeks = [days / 7.0 for days in ai_frequencies_days]
-            
+        if ai_commit_rates['1week']:
             results.extend([
-                "コミット頻度:",
-                "  [週単位]",
-                f"    平均間隔: {np.mean(ai_frequencies_weeks):.2f}週",
-                f"    中央値間隔: {np.median(ai_frequencies_weeks):.2f}週",
-                f"    最短間隔: {np.min(ai_frequencies_weeks):.2f}週",
-                f"    最長間隔: {np.max(ai_frequencies_weeks):.2f}週",
-                f"    標準偏差: {np.std(ai_frequencies_weeks):.2f}週",
-                "  [日単位（参考）]",
-                f"    平均間隔: {np.mean(ai_frequencies_days):.1f}日",
-                f"    中央値間隔: {np.median(ai_frequencies_days):.1f}日",
-                f"    最短間隔: {np.min(ai_frequencies_days)}日",
-                f"    最長間隔: {np.max(ai_frequencies_days)}日",
-                f"    標準偏差: {np.std(ai_frequencies_days):.1f}日",
+                "コミット頻度（期間あたりのコミット回数）:",
+                "  [1週間あたり]",
+                f"    平均: {np.mean(ai_commit_rates['1week']):.2f}回",
+                f"    中央値: {np.median(ai_commit_rates['1week']):.2f}回",
+                f"    最小: {np.min(ai_commit_rates['1week']):.2f}回",
+                f"    最大: {np.max(ai_commit_rates['1week']):.2f}回",
+                f"    標準偏差: {np.std(ai_commit_rates['1week']):.2f}回",
+                "  [2週間あたり]",
+                f"    平均: {np.mean(ai_commit_rates['2weeks']):.2f}回",
+                f"    中央値: {np.median(ai_commit_rates['2weeks']):.2f}回",
+                "  [1ヶ月あたり]",
+                f"    平均: {np.mean(ai_commit_rates['1month']):.2f}回",
+                f"    中央値: {np.median(ai_commit_rates['1month']):.2f}回",
+                "  [3ヶ月あたり]",
+                f"    平均: {np.mean(ai_commit_rates['3months']):.2f}回",
+                f"    中央値: {np.median(ai_commit_rates['3months']):.2f}回",
                 ""
             ])
         else:
@@ -984,35 +998,49 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
             ""
         ])
         
-        # コミット頻度分析（人間）
-        human_frequencies_days = []
+        # コミット頻度分析（人間）- 期間あたりのコミット回数
+        human_commit_rates = {
+            '1week': [],
+            '2weeks': [],
+            '1month': [],
+            '3months': []
+        }
+        
         for file_path in human_df['file_path'].unique():
             file_commits = human_df[human_df['file_path'] == file_path].copy()
-            if len(file_commits) > 1:
+            if len(file_commits) > 0:
                 dates = file_commits['commit_date'].sort_values()
-                time_diffs = [(dates.iloc[i] - dates.iloc[i-1]).days 
-                            for i in range(1, len(dates)) if (dates.iloc[i] - dates.iloc[i-1]).days > 0]
-                if time_diffs:
-                    human_frequencies_days.extend(time_diffs)
+                first_date = dates.iloc[0]
+                last_date = dates.iloc[-1]
+                total_days = (last_date - first_date).days
+                
+                if total_days > 0:
+                    total_commits = len(file_commits)
+                    
+                    # 各期間でのコミット回数を計算
+                    human_commit_rates['1week'].append(total_commits / (total_days / 7.0))
+                    human_commit_rates['2weeks'].append(total_commits / (total_days / 14.0))
+                    human_commit_rates['1month'].append(total_commits / (total_days / 30.0))
+                    human_commit_rates['3months'].append(total_commits / (total_days / 90.0))
         
-        if human_frequencies_days:
-            # 週単位に変換
-            human_frequencies_weeks = [days / 7.0 for days in human_frequencies_days]
-            
+        if human_commit_rates['1week']:
             results.extend([
-                "コミット頻度:",
-                "  [週単位]",
-                f"    平均間隔: {np.mean(human_frequencies_weeks):.2f}週",
-                f"    中央値間隔: {np.median(human_frequencies_weeks):.2f}週",
-                f"    最短間隔: {np.min(human_frequencies_weeks):.2f}週",
-                f"    最長間隔: {np.max(human_frequencies_weeks):.2f}週",
-                f"    標準偏差: {np.std(human_frequencies_weeks):.2f}週",
-                "  [日単位（参考）]",
-                f"    平均間隔: {np.mean(human_frequencies_days):.1f}日",
-                f"    中央値間隔: {np.median(human_frequencies_days):.1f}日",
-                f"    最短間隔: {np.min(human_frequencies_days)}日",
-                f"    最長間隔: {np.max(human_frequencies_days)}日",
-                f"    標準偏差: {np.std(human_frequencies_days):.1f}日",
+                "コミット頻度（期間あたりのコミット回数）:",
+                "  [1週間あたり]",
+                f"    平均: {np.mean(human_commit_rates['1week']):.2f}回",
+                f"    中央値: {np.median(human_commit_rates['1week']):.2f}回",
+                f"    最小: {np.min(human_commit_rates['1week']):.2f}回",
+                f"    最大: {np.max(human_commit_rates['1week']):.2f}回",
+                f"    標準偏差: {np.std(human_commit_rates['1week']):.2f}回",
+                "  [2週間あたり]",
+                f"    平均: {np.mean(human_commit_rates['2weeks']):.2f}回",
+                f"    中央値: {np.median(human_commit_rates['2weeks']):.2f}回",
+                "  [1ヶ月あたり]",
+                f"    平均: {np.mean(human_commit_rates['1month']):.2f}回",
+                f"    中央値: {np.median(human_commit_rates['1month']):.2f}回",
+                "  [3ヶ月あたり]",
+                f"    平均: {np.mean(human_commit_rates['3months']):.2f}回",
+                f"    中央値: {np.median(human_commit_rates['3months']):.2f}回",
                 ""
             ])
         else:
