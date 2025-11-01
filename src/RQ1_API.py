@@ -405,6 +405,15 @@ class RQ1AnalyzerAPI:
             print(f"GitHub取得エラー: {e}")
             return None, None
 
+    def get_commit_changed_lines(self, commit_sha):
+        """コミットの変更行数を取得"""
+        try:
+            commit = self.repo.get_commit(commit_sha)
+            return commit.stats.additions + commit.stats.deletions
+        except Exception as e:
+            print(f"変更行数取得エラー {commit_sha[:8]}: {e}")
+            return 0
+
     def step3_classify_commits(self, df):
         """ステップ3: コミット分類"""
         print("\n=== ステップ3: コミット分類 ===")
@@ -637,6 +646,59 @@ class RQ1AnalyzerAPI:
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write('\n'.join(results))
 
+    def save_detailed_results_to_csv(self, df_classified):
+        """全コミット情報を詳細CSVに保存（累積更新版）"""
+        print("\n--- 詳細結果CSV保存中 ---")
+        
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_result_v2.csv")
+        
+        # CSVデータを作成
+        csv_records = []
+        
+        for _, row in df_classified.iterrows():
+            file_path = row['file_path']
+            
+            # ファイル情報を取得
+            file_info = None
+            if hasattr(self, 'file_info_records'):
+                for record in self.file_info_records:
+                    if record['file_name'] == file_path:
+                        file_info = record
+                        break
+            
+            # コミットの変更行数を取得
+            changed_lines = 0
+            if row['commit_hash'] != 'No commits found':
+                changed_lines = self.get_commit_changed_lines(row['commit_hash'])
+            
+            csv_records.append({
+                'repository_name': self.repo_name_full,
+                'file_name': file_path,
+                'file_created_by': row['original_commit_type'],
+                'file_line_count': file_info['line_count'] if file_info else 0,
+                'file_creation_date': file_info['creation_date'] if file_info else '',
+                'file_commit_count': file_info['commit_count'] if file_info else 0,
+                'commit_message': row['commit_message'],
+                'commit_created_by': 'AI' if row['is_ai_generated'] else 'Human',
+                'commit_changed_lines': changed_lines,
+                'commit_date': row['commit_date']
+            })
+        
+        new_df = pd.DataFrame(csv_records)
+        
+        # 既存のCSVがあれば読み込んで結合
+        if os.path.exists(csv_path):
+            existing_df = pd.read_csv(csv_path)
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        else:
+            combined_df = new_df
+        
+        # CSVに保存
+        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+        print(f"✓ 詳細結果CSV保存完了: {csv_path}")
+        print(f"  今回追加: {len(new_df)}件, 合計: {len(combined_df)}件")
+
     def save_files_info_to_csv(self):
         """ファイル情報をCSVに保存（累積更新版）"""
         if not hasattr(self, 'file_info_records') or not self.file_info_records:
@@ -696,6 +758,10 @@ class RQ1AnalyzerAPI:
             # ファイル情報をCSVに保存
             print("\n--- ファイル情報のCSV保存 ---")
             self.save_files_info_to_csv()
+            
+            # 詳細結果をCSVに保存（全コミット情報）
+            print("\n--- 詳細結果のCSV保存 ---")
+            self.save_detailed_results_to_csv(df_classified)
             
             # 個別レポートは出力せず、統合分析でまとめて出力
             print(f"\n✓✓✓ 完了: {self.repo_name} ✓✓✓")
