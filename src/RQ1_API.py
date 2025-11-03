@@ -3,7 +3,7 @@ RQ1統合プログラム: AIコミット分析システム（GitHub API版）
 機能: リポジトリをクローンせずにGitHub APIで分析
 """
 
-import os
+import os # ファイルパスを扱うためのライブラリ
 import pandas as pd
 from datetime import datetime, timedelta
 import re
