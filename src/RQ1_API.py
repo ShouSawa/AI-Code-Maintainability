@@ -4,7 +4,7 @@ RQ1統合プログラム: AIコミット分析システム（GitHub API版）
 """
 
 import os # ファイルパスを扱うためのライブラリ
-import pandas as pd
+import pandas as pd # データフレームを扱うためのライブラリ
 from datetime import datetime, timedelta
 import re
 import numpy as np
