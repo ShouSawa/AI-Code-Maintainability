@@ -8,7 +8,7 @@ import pandas as pd # データフレームを扱うためのライブラリ
 from datetime import datetime, timedelta # 日付取得や時間の計算のためのライブラリ
 import re # 正規表現を扱うためのライブラリ
 import numpy as np # 数値計算を行うためのライブラリ
-from transformers import pipeline
+from transformers import pipeline # 事前学習したモデルを扱うためのライブラリ
 import requests
 from github import Github
 from dotenv import load_dotenv
