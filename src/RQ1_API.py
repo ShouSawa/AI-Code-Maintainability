@@ -9,8 +9,8 @@ from datetime import datetime, timedelta # 日付取得や時間の計算のた�
 import re # 正規表現を扱うためのライブラリ
 import numpy as np # 数値計算を行うためのライブラリ
 from transformers import pipeline # 事前学習したモデルを扱うためのライブラリ
-import requests
-from github import Github
+import requests # HTTPリクエストを扱うためのライブラリ
+from github import Github # Github APIを扱うためのライブラリ
 from dotenv import load_dotenv
 import time
 
