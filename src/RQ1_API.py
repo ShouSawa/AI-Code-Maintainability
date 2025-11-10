@@ -11,7 +11,7 @@ import numpy as np # 数値計算を行うためのライブラリ
 from transformers import pipeline # 事前学習したモデルを扱うためのライブラリ
 import requests # HTTPリクエストを扱うためのライブラリ
 from github import Github # Github APIを扱うためのライブラリ
-from dotenv import load_dotenv
+from dotenv import load_dotenv # .envファイルを読み込むためのライブラリ
 import time
 
 # srcフォルダ内の.envファイルを読み込む
