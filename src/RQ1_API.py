@@ -147,7 +147,8 @@ class RQ1AnalyzerAPI:
     def step1_find_added_files(self):
         """ステップ1: ファイル追加分析（API版）"""
         print("\n=== ステップ1: ファイル追加分析 (API版) ===")
-        
+
+        # 180日前のコミットを取得する
         commits_data = self.get_commits_with_file_additions_api()
         
         if not commits_data:
