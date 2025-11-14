@@ -7,7 +7,8 @@ data_list/trash/**
 data_list/all_pull_request_local.parquet
 data_list/all_repository_local.parquet
 
-dataset/**
+# parquet形式の大容量データセットは無視
+dataset/**.parquet
 
 # PySSZ関連の出力ファイル（追加推奨）
 pyszz_v2/

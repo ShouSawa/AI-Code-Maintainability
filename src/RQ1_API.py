@@ -23,14 +23,12 @@ pipe = pipeline("text-generation", model="0x404/ccs-code-llama-7b", device_map="
 tokenizer = pipe.tokenizer
 
 class RQ1AnalyzerAPI:
-    # AIパターン定義（クラス変数で共有）
-    AI_PATTERNS = {
-        'copilot': [r'github.*copilot', r'copilot', r'co-authored-by:.*github.*copilot'],
-        'codex': [r'openai.*codex', r'codex', r'gpt-.*code'],
-        'devin': [r'devin', r'devin.*ai'],
-        'cursor': [r'cursor.*ai', r'cursor.*editor'],
-        'claude': [r'claude.*code', r'claude.*ai', r'anthropic'],
-        'general': [r'ai.*assisted', r'machine.*generated', r'bot.*commit', r'automated.*commit', r'ai.*commit']
+    # AIボットアカウント定義（作成者名/メールアドレスで判定）
+    AI_BOT_ACCOUNTS = {
+        'copilot': ['copilot'],  # GitHub Copilot (大文字小文字無視)
+        'cursor': ['cursor[bot]', 'cursor'],  # Cursor
+        'devin': ['devin-ai-integration[bot]', 'devin'],  # Devin
+        'claude': ['claude[bot]', 'claude']  # Claude
     }
     
     def __init__(self, repo_name_full, github_token=None):
@@ -58,31 +56,31 @@ class RQ1AnalyzerAPI:
         print(f"スター数: {self.repo.stargazers_count}, フォーク数: {self.repo.forks_count}")
 
     def is_ai_generated_commit(self, commit_message, author_name, author_email):
-        """AIコミット判定"""
-        text = f"{commit_message} {author_name} {author_email}".lower()
+        """AIコミット判定（ボットアカウント名で判定）"""
+        author_lower = author_name.lower()
         
-        for ai_type, patterns in self.AI_PATTERNS.items():
-            if any(re.search(pattern, text, re.IGNORECASE) for pattern in patterns):
-                return True, ai_type
+        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+            for bot_name in bot_names:
+                if bot_name.lower() in author_lower:
+                    return True, ai_type
         return False, "human"
 
     def detect_specific_ai_tool(self, commit_message, author_name, author_email):
-        """AIツール特定"""
-        text = f"{commit_message} {author_name} {author_email}".lower()
+        """AIツール特定（ボットアカウント名で判定）"""
+        author_lower = author_name.lower()
         
         tool_map = {
-            'GitHub Copilot': [r'github.*copilot', r'copilot'],
-            'OpenAI Codex': [r'openai.*codex', r'codex'],
-            'Devin': [r'devin'],
-            'Cursor': [r'cursor.*ai', r'cursor.*editor'],
-            'Claude Code': [r'claude.*code', r'claude.*ai', r'anthropic'],
-            'ChatGPT/OpenAI': [r'gpt', r'chatgpt', r'openai']
+            'GitHub Copilot': ['copilot'],
+            'Cursor': ['cursor[bot]', 'cursor'],
+            'Devin': ['devin-ai-integration[bot]', 'devin'],
+            'Claude': ['claude[bot]', 'claude']
         }
         
-        for tool, patterns in tool_map.items():
-            if any(re.search(pattern, text) for pattern in patterns):
-                return tool
-        return 'General AI'
+        for tool, bot_names in tool_map.items():
+            for bot_name in bot_names:
+                if bot_name.lower() in author_lower:
+                    return tool
+        return 'N/A'
 
     def get_commits_with_file_additions_api(self, max_commits=500):
         """GitHub APIで180日以前のファイル追加コミット取得"""

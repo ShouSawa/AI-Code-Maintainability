@@ -11,6 +11,7 @@ import time
 from github import Github
 from dotenv import load_dotenv
 import json
+import csv
 
 # srcフォルダ内の.envファイルを読み込む
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,14 +22,12 @@ load_dotenv(dotenv_path)
 class OldCommitAnalyzer:
     """180日以前のコミットを分析するクラス"""
     
-    # AIパターン定義
-    AI_PATTERNS = {
-        'copilot': [r'github.*copilot', r'copilot', r'co-authored-by:.*github.*copilot'],
-        'codex': [r'openai.*codex', r'codex', r'gpt-.*code'],
-        'devin': [r'devin', r'devin.*ai'],
-        'cursor': [r'cursor.*ai', r'cursor.*editor'],
-        'claude': [r'claude.*code', r'claude.*ai', r'anthropic'],
-        'general': [r'ai.*assisted', r'machine.*generated', r'bot.*commit', r'automated.*commit', r'ai.*commit']
+    # AIボットアカウント定義（作成者名で判定）
+    AI_BOT_ACCOUNTS = {
+        'copilot': ['copilot'],  # GitHub Copilot
+        'cursor': ['cursor'],  # Cursor
+        'devin': ['devin-ai-integration'],  # Devin
+        'claude': ['claude']  # Claude
     }
     
     def __init__(self, github_token):
@@ -43,32 +42,53 @@ class OldCommitAnalyzer:
         self.output_dir = os.path.join(script_dir, "../dataset")
         os.makedirs(self.output_dir, exist_ok=True)
         
-    def is_ai_generated_commit(self, commit_message, author_name, author_email):
-        """AIコミット判定"""
-        text = f"{commit_message} {author_name} {author_email}".lower()
+        # コミット情報を格納するリスト
+        self.all_commits_data = []
         
-        for ai_type, patterns in self.AI_PATTERNS.items():
-            if any(re.search(pattern, text, re.IGNORECASE) for pattern in patterns):
+    def is_ai_generated_commit(self, author_name):
+        """
+        コミットがAIによって生成されたかどうかを判定（作成者名のみで判定）
+        
+        Args:
+            author_name: コミット作成者名
+            
+        Returns:
+            tuple: (bool, str) - AIかどうか, AIの種類またはhuman
+        """
+        author_lower = author_name.lower()
+        
+        # ボットアカウント名で判定
+        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+            # bot_nameの中にauthor_lowerが含まれているかチェック
+            if any(bot_name.lower() in author_lower for bot_name in bot_names):
                 return True, ai_type
+        
         return False, "human"
     
-    def detect_specific_ai_tool(self, commit_message, author_name, author_email):
-        """AIツール特定"""
-        text = f"{commit_message} {author_name} {author_email}".lower()
+    def detect_specific_ai_tool(self, author_name):
+        """
+        特定のAIツールを識別（作成者名のみで判定）
         
-        tool_map = {
-            'GitHub Copilot': [r'github.*copilot', r'copilot'],
-            'OpenAI Codex': [r'openai.*codex', r'codex'],
-            'Devin': [r'devin'],
-            'Cursor': [r'cursor.*ai', r'cursor.*editor'],
-            'Claude Code': [r'claude.*code', r'claude.*ai', r'anthropic'],
-            'ChatGPT/OpenAI': [r'gpt', r'chatgpt', r'openai']
-        }
+        Args:
+            author_name: コミット作成者名
+            
+        Returns:
+            str: AIツール名、または'N/A'
+        """
+        author_lower = author_name.lower()
         
-        for tool, patterns in tool_map.items():
-            if any(re.search(pattern, text) for pattern in patterns):
-                return tool
-        return 'General AI'
+        # ボットアカウント名で特定のツールを識別
+        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+            if any(bot_name.lower() in author_lower for bot_name in bot_names):
+                tool_map = {
+                    'copilot': 'GitHub Copilot',
+                    'cursor': 'Cursor',
+                    'devin': 'Devin',
+                    'claude': 'Claude'
+                }
+                return tool_map.get(ai_type, 'N/A')
+        
+        return 'N/A'
     
     def check_repo_has_old_commits(self, repo_full_name):
         """リポジトリに180日以前のコミットがあるかチェック"""
@@ -124,13 +144,38 @@ class OldCommitAnalyzer:
                     author_name = commit.commit.author.name or "Unknown"
                     author_email = commit.commit.author.email or "unknown@example.com"
                     message = commit.commit.message
+                    commit_date = commit.commit.author.date
                     
-                    # AI判定
-                    is_ai, ai_type = self.is_ai_generated_commit(message, author_name, author_email)
+                    # コミットアカウントのみ取得（author + committer）
+                    all_authors = [author_name]
+                    
+                    # committerも追加（authorと異なる場合）
+                    if commit.commit.committer and commit.commit.committer.name:
+                        committer_name = commit.commit.committer.name
+                        if committer_name != author_name and committer_name not in all_authors:
+                            all_authors.append(committer_name)
+                    
+                    # 全作成者を文字列に結合
+                    all_authors_str = ', '.join(all_authors)
+                    
+                    # AI判定（作成者名のみで判定）
+                    is_ai, ai_type = self.is_ai_generated_commit(author_name)
+                    
+                    # コミット情報をCSV用に保存
+                    commit_info = {
+                        'repository': repo_full_name,
+                        'commit_sha': commit.sha,
+                        'author_name': author_name,
+                        'all_authors': all_authors_str,  # 全作成者
+                        'commit_date': commit_date.strftime('%Y-%m-%d %H:%M:%S'),
+                        'is_ai': 'AI' if is_ai else 'Human',
+                        'ai_tool': self.detect_specific_ai_tool(author_name) if is_ai else 'N/A'
+                    }
+                    self.all_commits_data.append(commit_info)
                     
                     if is_ai:
                         ai_count += 1
-                        ai_tool = self.detect_specific_ai_tool(message, author_name, author_email)
+                        ai_tool = self.detect_specific_ai_tool(author_name)
                         ai_tools[ai_tool] = ai_tools.get(ai_tool, 0) + 1
                     else:
                         human_count += 1
@@ -211,10 +256,6 @@ class OldCommitAnalyzer:
             
             index += 1
             
-            # 進捗保存（10件ごと）
-            if analyzed_count % 10 == 0 and analyzed_count > 0:
-                self.save_intermediate_results(results)
-            
             # API rate limit対策
             time.sleep(1)
         
@@ -227,26 +268,26 @@ class OldCommitAnalyzer:
         
         # 最終結果を保存
         self.save_final_results(results)
-        return results
-    
-    def save_intermediate_results(self, results):
-        """中間結果を保存"""
-        output_path = os.path.join(self.output_dir, "dataset_AI_progress.txt")
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write("="*80 + "\n")
-            f.write("180日以前のコミット分析 - 中間結果\n")
-            f.write(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"分析済みリポジトリ数: {len(results)}\n")
-            f.write("="*80 + "\n\n")
-            
-            for result in results:
-                self.write_result(f, result)
         
-        print(f"  中間結果を保存: {output_path}")
+        # CSVファイルを保存
+        self.save_commits_csv()
+        
+        return results
     
     def save_final_results(self, results):
         """最終結果を保存"""
         output_path = os.path.join(self.output_dir, "dataset_AI.txt")
+        
+        # 全体統計を事前計算
+        total_commits = sum(r['total_commits'] for r in results)
+        total_ai = sum(r['ai_commits'] for r in results)
+        total_human = sum(r['human_commits'] for r in results)
+        
+        # AIツール統計を事前計算
+        all_ai_tools = {}
+        for result in results:
+            for tool, count in result['ai_tools'].items():
+                all_ai_tools[tool] = all_ai_tools.get(tool, 0) + count
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write("="*80 + "\n")
@@ -255,24 +296,26 @@ class OldCommitAnalyzer:
             f.write(f"分析リポジトリ数: {len(results)}\n")
             f.write("="*80 + "\n\n")
             
-            # 全体統計
-            total_commits = sum(r['total_commits'] for r in results)
-            total_ai = sum(r['ai_commits'] for r in results)
-            total_human = sum(r['human_commits'] for r in results)
+            # ★★★ 一番上にAI全体統計を表示 ★★★
+            f.write("【AIコミット統計サマリー】\n")
+            f.write(f"AIコミット総数: {total_ai:,}件\n")
+            if all_ai_tools:
+                f.write(f"\n各エージェント別コミット数:\n")
+                sorted_tools = sorted(all_ai_tools.items(), key=lambda x: x[1], reverse=True)
+                for tool, count in sorted_tools:
+                    percentage = count / total_ai * 100 if total_ai > 0 else 0
+                    f.write(f"  - {tool}: {count:,}件 ({percentage:.2f}%)\n")
+            f.write("\n" + "="*80 + "\n\n")
             
+            # 全体統計
             f.write("【全体統計】\n")
             f.write(f"総コミット数: {total_commits:,}\n")
             f.write(f"AIコミット数: {total_ai:,} ({total_ai/total_commits*100:.2f}%)\n")
             f.write(f"Humanコミット数: {total_human:,} ({total_human/total_commits*100:.2f}%)\n\n")
             
-            # AIツール統計
-            all_ai_tools = {}
-            for result in results:
-                for tool, count in result['ai_tools'].items():
-                    all_ai_tools[tool] = all_ai_tools.get(tool, 0) + count
-            
+            # AIツール統計（詳細版）
             if all_ai_tools:
-                f.write("【使用AIツール統計】\n")
+                f.write("【使用AIツール統計（詳細）】\n")
                 sorted_tools = sorted(all_ai_tools.items(), key=lambda x: x[1], reverse=True)
                 for tool, count in sorted_tools:
                     f.write(f"  {tool}: {count:,}件 ({count/total_ai*100:.2f}%)\n")
@@ -293,6 +336,35 @@ class OldCommitAnalyzer:
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"JSON形式でも保存しました: {json_path}")
+    
+    def save_commits_csv(self):
+        """全コミット情報をCSVに保存"""
+        csv_path = os.path.join(self.output_dir, "dataset_AI_commits.csv")
+        
+        if not self.all_commits_data:
+            print("CSVに保存するコミットデータがありません")
+            return
+        
+        # CSVファイルに書き込み
+        with open(csv_path, 'w', encoding='utf-8', newline='') as f:
+            fieldnames = ['repository', 'commit_sha', 'author_name', 'all_authors', 'commit_date', 'is_ai', 'ai_tool']
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            
+            # ヘッダー書き込み
+            writer.writeheader()
+            
+            # データ書き込み
+            for commit_data in self.all_commits_data:
+                writer.writerow(commit_data)
+        
+        print(f"コミット情報をCSVに保存しました: {csv_path}")
+        print(f"総コミット数: {len(self.all_commits_data):,}件")
+        
+        # 統計情報も表示
+        ai_commits = sum(1 for c in self.all_commits_data if c['is_ai'] == 'AI')
+        human_commits = sum(1 for c in self.all_commits_data if c['is_ai'] == 'Human')
+        print(f"  AIコミット: {ai_commits:,}件")
+        print(f"  Humanコミット: {human_commits:,}件")
     
     def write_result(self, f, result):
         """結果を1件書き込む"""
