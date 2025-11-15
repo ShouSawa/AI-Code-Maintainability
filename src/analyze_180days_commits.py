@@ -1,6 +1,6 @@
 """
-180日以前のコミット分析プログラム
-機能: repository_listから上位100個のリポジトリの180日以前のコミットを分析
+60日以前のコミット分析プログラム
+機能: repository_listから上位100個のリポジトリの60日以前のコミットを分析
 """
 
 import os
@@ -20,7 +20,7 @@ load_dotenv(dotenv_path)
 
 
 class OldCommitAnalyzer:
-    """180日以前のコミットを分析するクラス"""
+    """60日以前のコミットを分析するクラス"""
     
     # AIボットアカウント定義（作成者名で判定）
     AI_BOT_ACCOUNTS = {
@@ -91,12 +91,12 @@ class OldCommitAnalyzer:
         return 'N/A'
     
     def check_repo_has_old_commits(self, repo_full_name):
-        """リポジトリに180日以前のコミットがあるかチェック"""
+        """リポジトリに60日以前のコミットがあるかチェック"""
         try:
             repo = self.g.get_repo(repo_full_name)
-            cutoff_date = datetime.now() - timedelta(days=180)
+            cutoff_date = datetime.now() - timedelta(days=60)
             
-            # 180日以前のコミットを取得（1件でも取得できればOK）
+            # 60日以前のコミットを取得（1件でも取得できればOK）
             commits = repo.get_commits(until=cutoff_date)
             
             # 最初の1件だけ確認
@@ -111,7 +111,7 @@ class OldCommitAnalyzer:
             return False
     
     def analyze_repo_commits(self, repo_full_name, max_commits=500):
-        """リポジトリの180日以前のコミットを分析"""
+        """リポジトリの60日以前のコミットを分析"""
         print(f"\n{'='*80}")
         print(f"分析中: {repo_full_name}")
         print(f"{'='*80}")
@@ -120,10 +120,10 @@ class OldCommitAnalyzer:
             repo = self.g.get_repo(repo_full_name)
             print(f"スター数: {repo.stargazers_count}, フォーク数: {repo.forks_count}")
             
-            cutoff_date = datetime.now() - timedelta(days=180)
+            cutoff_date = datetime.now() - timedelta(days=60)
             print(f"対象期間: ~{cutoff_date.date()}")
             
-            # 180日以前のコミットを取得
+            # 60日以前のコミットを取得
             commits = repo.get_commits(until=cutoff_date)
             
             ai_count = 0
@@ -213,7 +213,7 @@ class OldCommitAnalyzer:
     def analyze_top_100_repos(self):
         """repository_listから上位100個のリポジトリを分析"""
         print("="*80)
-        print("180日以前のコミット分析開始")
+        print("60日以前のコミット分析開始")
         print("="*80)
         
         # repository_list.csvを読み込む
@@ -236,11 +236,11 @@ class OldCommitAnalyzer:
             
             print(f"\n[{analyzed_count + 1}/100] チェック中: {repo_full_name} (スター: {row['stars']})")
             
-            # 180日以前のコミットがあるかチェック
+            # 60日以前のコミットがあるかチェック
             has_old_commits = self.check_repo_has_old_commits(repo_full_name)
             
             if has_old_commits:
-                print(f"  ✓ 180日以前のコミットあり - 分析開始")
+                print(f"  ✓ 60日以前のコミットあり - 分析開始")
                 result = self.analyze_repo_commits(repo_full_name)
                 
                 if result:
@@ -251,7 +251,7 @@ class OldCommitAnalyzer:
                     print(f"  × 分析失敗 - スキップ")
                     skipped_count += 1
             else:
-                print(f"  × 180日以前のコミットなし - スキップ")
+                print(f"  × 60日以前のコミットなし - スキップ")
                 skipped_count += 1
             
             index += 1
@@ -276,7 +276,7 @@ class OldCommitAnalyzer:
     
     def save_final_results(self, results):
         """最終結果を保存"""
-        output_path = os.path.join(self.output_dir, "dataset_AI.txt")
+        output_path = os.path.join(self.output_dir, "dataset_AI_60days.txt")
         
         # 全体統計を事前計算
         total_commits = sum(r['total_commits'] for r in results)
@@ -291,7 +291,7 @@ class OldCommitAnalyzer:
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write("="*80 + "\n")
-            f.write("180日以前のコミット分析 - 最終結果\n")
+            f.write("60日以前のコミット分析 - 最終結果\n")
             f.write(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"分析リポジトリ数: {len(results)}\n")
             f.write("="*80 + "\n\n")
@@ -332,14 +332,14 @@ class OldCommitAnalyzer:
         print(f"\n最終結果を保存しました: {output_path}")
         
         # JSON形式でも保存
-        json_path = os.path.join(self.output_dir, "dataset_AI.json")
+        json_path = os.path.join(self.output_dir, "dataset_AI_60days.json")
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"JSON形式でも保存しました: {json_path}")
     
     def save_commits_csv(self):
         """全コミット情報をCSVに保存"""
-        csv_path = os.path.join(self.output_dir, "dataset_AI_commits.csv")
+        csv_path = os.path.join(self.output_dir, "dataset_AI_commits_60days.csv")
         
         if not self.all_commits_data:
             print("CSVに保存するコミットデータがありません")

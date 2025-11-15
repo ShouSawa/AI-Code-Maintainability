@@ -23,12 +23,12 @@ pipe = pipeline("text-generation", model="0x404/ccs-code-llama-7b", device_map="
 tokenizer = pipe.tokenizer
 
 class RQ1AnalyzerAPI:
-    # AIボットアカウント定義（作成者名/メールアドレスで判定）
+    # AIボットアカウント定義（作成者名で判定）
     AI_BOT_ACCOUNTS = {
-        'copilot': ['copilot'],  # GitHub Copilot (大文字小文字無視)
-        'cursor': ['cursor[bot]', 'cursor'],  # Cursor
-        'devin': ['devin-ai-integration[bot]', 'devin'],  # Devin
-        'claude': ['claude[bot]', 'claude']  # Claude
+        'copilot': ['copilot'],  # GitHub Copilot
+        'cursor': ['cursor'],  # Cursor
+        'devin': ['devin-ai-integration'],  # Devin
+        'claude': ['claude']  # Claude
     }
     
     def __init__(self, repo_name_full, github_token=None):
@@ -55,47 +55,65 @@ class RQ1AnalyzerAPI:
         print(f"リポジトリ接続成功: {repo_name_full}")
         print(f"スター数: {self.repo.stargazers_count}, フォーク数: {self.repo.forks_count}")
 
-    def is_ai_generated_commit(self, commit_message, author_name, author_email):
-        """AIコミット判定（ボットアカウント名で判定）"""
-        author_lower = author_name.lower()
+    def is_ai_generated_commit(self, all_authors):
+        """
+        AIコミット判定（全アカウントをチェック）
         
-        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
-            for bot_name in bot_names:
-                if bot_name.lower() in author_lower:
+        Args:
+            all_authors: コミットに関与した全アカウント名のリスト
+            
+        Returns:
+            tuple: (bool, str) - AIかどうか, AIの種類またはhuman
+        """
+        # 全アカウントをチェック
+        for author_name in all_authors:
+            author_lower = author_name.lower()
+            for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+                if any(bot_name.lower() in author_lower for bot_name in bot_names):
                     return True, ai_type
+        
         return False, "human"
 
-    def detect_specific_ai_tool(self, commit_message, author_name, author_email):
-        """AIツール特定（ボットアカウント名で判定）"""
-        author_lower = author_name.lower()
+    def detect_specific_ai_tool(self, all_authors):
+        """
+        AIツール特定（全アカウントをチェック）
         
+        Args:
+            all_authors: コミットに関与した全アカウント名のリスト
+            
+        Returns:
+            str: AIツール名、または'N/A'
+        """
         tool_map = {
-            'GitHub Copilot': ['copilot'],
-            'Cursor': ['cursor[bot]', 'cursor'],
-            'Devin': ['devin-ai-integration[bot]', 'devin'],
-            'Claude': ['claude[bot]', 'claude']
+            'copilot': 'Copilot',
+            'cursor': 'Cursor',
+            'devin': 'Devin',
+            'claude': 'Claude'
         }
         
-        for tool, bot_names in tool_map.items():
-            for bot_name in bot_names:
-                if bot_name.lower() in author_lower:
-                    return tool
+        # 全アカウントをチェック
+        for author_name in all_authors:
+            author_lower = author_name.lower()
+            for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+                if any(bot_name.lower() in author_lower for bot_name in bot_names):
+                    return tool_map.get(ai_type, 'N/A')
+        
         return 'N/A'
 
     def get_commits_with_file_additions_api(self, max_commits=500):
-        """GitHub APIで180日以前のファイル追加コミット取得"""
+        """GitHub APIで90日以前のファイル追加コミット取得"""
         print("=== GitHub APIでコミット取得中 ===")
         
         commits_data = []
         
         try:
-            # 180日以前のコミットを取得
-            cutoff_date_180 = datetime.now() - timedelta(days=180)
-            print(f"180日以前のコミットを取得中 (until: {cutoff_date_180.date()})...")
-            commits_180 = self.repo.get_commits(until=cutoff_date_180)
+            # 90日以前のコミットを取得
+            cutoff_date_90 = datetime.now() - timedelta(days=90)
+            print(f"90日以前のコミットを取得中 (until: {cutoff_date_90.date()})...")
+            commits_90 = self.repo.get_commits(until=cutoff_date_90)
             
             count = 0
-            for commit in commits_180:
+            for commit in commits_90:
                 if count >= max_commits:
                     print(f"最大コミット数({max_commits})に達しました")
                     break
@@ -112,6 +130,15 @@ class RQ1AnalyzerAPI:
                     commit_date = commit.commit.author.date.isoformat()
                     message = commit.commit.message
                     
+                    # コミットアカウントのみ取得（author + committer）
+                    all_authors = [author_name]
+                    
+                    # committerも追加（authorと異なる場合）
+                    if commit.commit.committer and commit.commit.committer.name:
+                        committer_name = commit.commit.committer.name
+                        if committer_name != author_name and committer_name not in all_authors:
+                            all_authors.append(committer_name)
+                    
                     # 追加されたファイルを検索
                     added_files = []
                     for file in commit.files:
@@ -123,6 +150,7 @@ class RQ1AnalyzerAPI:
                             'hash': commit_sha,
                             'author_name': author_name,
                             'author_email': author_email,
+                            'all_authors': all_authors,  # 全作成者リスト
                             'date': commit_date,
                             'message': message,
                             'added_files': added_files
@@ -146,7 +174,7 @@ class RQ1AnalyzerAPI:
         """ステップ1: ファイル追加分析（API版）"""
         print("\n=== ステップ1: ファイル追加分析 (API版) ===")
 
-        # 180日前のコミットを取得する
+        # 90日前のコミットを取得する
         commits_data = self.get_commits_with_file_additions_api()
         
         if not commits_data:
@@ -156,13 +184,9 @@ class RQ1AnalyzerAPI:
         # データ作成
         csv_data = []
         for commit in commits_data:
-            is_ai, ai_type = self.is_ai_generated_commit(
-                commit['message'], commit['author_name'], commit['author_email']
-            )
+            is_ai, ai_type = self.is_ai_generated_commit(commit['all_authors'])
             author_type = "AI" if is_ai else "Human"
-            ai_tool = self.detect_specific_ai_tool(
-                commit['message'], commit['author_name'], commit['author_email']
-            ) if is_ai else "N/A"
+            ai_tool = self.detect_specific_ai_tool(commit['all_authors']) if is_ai else "N/A"
             
             for file_path in commit['added_files']:
                 csv_data.append({
@@ -188,10 +212,22 @@ class RQ1AnalyzerAPI:
             commit_logs = []
             
             for commit in commits:
+                author_name = commit.commit.author.name or "Unknown"
+                
+                # コミットアカウントのみ取得（author + committer）
+                all_authors = [author_name]
+                
+                # committerも追加（authorと異なる場合）
+                if commit.commit.committer and commit.commit.committer.name:
+                    committer_name = commit.commit.committer.name
+                    if committer_name != author_name and committer_name not in all_authors:
+                        all_authors.append(committer_name)
+                
                 commit_logs.append({
                     'hash': commit.sha,
                     'date': commit.commit.author.date.isoformat(),
-                    'author': commit.commit.author.name or "Unknown",
+                    'author': author_name,
+                    'all_authors': all_authors,  # 全作成者リスト
                     'email': commit.commit.author.email or "unknown@example.com",
                     'message': commit.commit.message
                 })
@@ -230,8 +266,20 @@ class RQ1AnalyzerAPI:
             if commit_list:
                 # 最後のコミット（最初のコミット）を取得
                 first_commit = commit_list[-1]
+                author_name = first_commit.commit.author.name or "Unknown"
+                
+                # コミットアカウントのみ取得（author + committer）
+                all_authors = [author_name]
+                
+                # committerも追加（authorと異なる場合）
+                if first_commit.commit.committer and first_commit.commit.committer.name:
+                    committer_name = first_commit.commit.committer.name
+                    if committer_name != author_name and committer_name not in all_authors:
+                        all_authors.append(committer_name)
+                
                 return {
-                    'author_name': first_commit.commit.author.name or "Unknown",
+                    'author_name': author_name,
+                    'all_authors': all_authors,  # 全作成者リスト
                     'creation_date': first_commit.commit.author.date.isoformat(),
                     'commit_count': len(commit_list)
                 }
@@ -338,9 +386,7 @@ class RQ1AnalyzerAPI:
                 })
             else:
                 for log in commit_logs:
-                    is_ai, ai_type = self.is_ai_generated_commit(
-                        log['message'], log['author'], log['email']
-                    )
+                    is_ai, ai_type = self.is_ai_generated_commit(log['all_authors'])
                     results.append({
                         'original_commit_type': author_type,
                         'original_commit_hash': commit_hash,
@@ -351,9 +397,7 @@ class RQ1AnalyzerAPI:
                         'commit_message': log['message'],
                         'is_ai_generated': is_ai,
                         'ai_type': ai_type,
-                        'ai_tool': self.detect_specific_ai_tool(
-                            log['message'], log['author'], log['email']
-                        ) if is_ai else 'N/A'
+                        'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
                     })
         
         # ファイル情報をインスタンス変数として保存
@@ -839,7 +883,7 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
                 failed_repos.append({
                     'repo': repo_name_full,
                     'stars': repo_info['stars'],
-                    'reason': 'データ取得失敗（180日以前のコミットなし）'
+                    'reason': 'データ取得失敗（90日以前のコミットなし）'
                 })
                 print(f"\n✗✗✗ {repo_name_full} 分析失敗（データなし） ✗✗✗")
                 print(f"→ 次のリポジトリに進みます... (残り成功必要数: {num_repos - len(all_results)})")
