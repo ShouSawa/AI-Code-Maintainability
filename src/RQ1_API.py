@@ -749,7 +749,7 @@ class RQ1AnalyzerAPI:
             return
         
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_files.csv")
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_files_properly.csv")
         
         # 新しいデータをDataFrameに変換
         new_df = pd.DataFrame(self.file_info_records)
