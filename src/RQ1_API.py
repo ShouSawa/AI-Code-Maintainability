@@ -600,7 +600,7 @@ class RQ1AnalyzerAPI:
             ])
         
         # ファイル保存
-        output_file = os.path.join(self.final_output_dir, f"{self.repo_name}_commit_analysis_results.txt")
+        output_file = os.path.join(self.final_output_dir, f"{self.repo_name}_commit_analysis_results_properly.txt")
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write('\n'.join(results))
         
@@ -929,7 +929,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
     # ファイル名を固定して上書き更新
-    output_file = os.path.join(output_dir, f"multi_repo_analysis_results.txt")
+    output_file = os.path.join(output_dir, f"multi_repo_analysis_results_properly.txt")
     
     # 全データを統合
     combined_df = pd.concat(all_classifications, ignore_index=True)
