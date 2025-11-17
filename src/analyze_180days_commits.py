@@ -12,11 +12,75 @@ from github import Github
 from dotenv import load_dotenv
 import json
 import csv
+import socket  # ネットワーク接続確認用
 
 # srcフォルダ内の.envファイルを読み込む
 script_dir = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(script_dir, '.env')
 load_dotenv(dotenv_path)
+
+
+# ネットワーク再接続機能
+def check_network_connectivity(host="api.github.com", port=443, timeout=5):
+    """
+    ネットワーク接続を確認する
+    
+    Args:
+        host: 接続先ホスト
+        port: 接続ポート
+        timeout: タイムアウト（秒）
+    
+    Returns:
+        bool: 接続可能ならTrue
+    """
+    try:
+        socket.create_connection((host, port), timeout=timeout)
+        return True
+    except (socket.gaierror, socket.timeout, OSError):
+        return False
+
+def retry_with_network_check(func):
+    """
+    ネットワークエラー時に自動的に再接続を試みるデコレータ
+    
+    Args:
+        func: ラップする関数
+    
+    Returns:
+        ラップされた関数
+    """
+    def wrapper(*args, **kwargs):
+        max_wait = 60  # 最大待機時間（秒）
+        wait_time = 10  # 初期待機時間（秒）
+        
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                error_str = str(e).lower()
+                # DNS解決エラーやConnectionErrorを検出
+                if 'nameresolutionerror' in error_str or 'failed to resolve' in error_str or \
+                   'connectionerror' in error_str or 'connection error' in error_str or \
+                   'getaddrinfo failed' in error_str:
+                    
+                    print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワークエラーを検出しました: {e}")
+                    print(f"ネットワーク接続を確認中...")
+                    
+                    # ネットワークが復旧するまで待機
+                    while not check_network_connectivity():
+                        print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワークに接続できません。{wait_time}秒後に再試行します...")
+                        time.sleep(wait_time)
+                        # 指数バックオフ（最大60秒まで）
+                        wait_time = min(wait_time * 2, max_wait)
+                    
+                    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワーク接続が復旧しました。処理を再開します...")
+                    wait_time = 10  # 待機時間をリセット
+                    continue  # 関数を再実行
+                else:
+                    # ネットワーク以外のエラーはそのまま送出
+                    raise
+    
+    return wrapper
 
 
 class OldCommitAnalyzer:
@@ -110,6 +174,8 @@ class OldCommitAnalyzer:
             print(f"  エラー: {e}")
             return False
     
+    @retry_with_network_check
+    @retry_with_network_check
     def analyze_repo_commits(self, repo_full_name, max_commits=500):
         """リポジトリの60日以前のコミットを分析"""
         print(f"\n{'='*80}")
@@ -155,28 +221,29 @@ class OldCommitAnalyzer:
                         if committer_name != author_name and committer_name not in all_authors:
                             all_authors.append(committer_name)
                     
-                    # 全作成者を文字列に結合
-                    all_authors_str = ', '.join(all_authors)
+                    # AI判定（全作成者で判定）
+                    is_ai = self.is_ai_generated_commit(all_authors)
+                    ai_tool = self.detect_specific_ai_tool(all_authors)
                     
-                    # AI判定（作成者名のみで判定）
-                    is_ai, ai_type = self.is_ai_generated_commit(author_name)
-                    
-                    # コミット情報をCSV用に保存
+                    # RQ1_result_v2.csv形式でコミット情報を保存
                     commit_info = {
-                        'repository': repo_full_name,
-                        'commit_sha': commit.sha,
-                        'author_name': author_name,
-                        'all_authors': all_authors_str,  # 全作成者
-                        'commit_date': commit_date.strftime('%Y-%m-%d %H:%M:%S'),
-                        'is_ai': 'AI' if is_ai else 'Human',
-                        'ai_tool': self.detect_specific_ai_tool(author_name) if is_ai else 'N/A'
+                        'repository_name': repo_full_name,
+                        'file_name': '',  # 60日以前のコミットではファイル情報なし
+                        'file_created_by': '',
+                        'file_line_count': 0,
+                        'file_creation_date': '',
+                        'file_commit_count': 0,
+                        'commit_message': message.replace('\n', ' ').replace('\r', ' ')[:200] if message else '',
+                        'commit_created_by': 'AI' if is_ai else 'Human',
+                        'commit_changed_lines': commit.stats.total if commit.stats else 0,
+                        'commit_date': commit_date.isoformat()
                     }
                     self.all_commits_data.append(commit_info)
                     
                     if is_ai:
                         ai_count += 1
-                        ai_tool = self.detect_specific_ai_tool(author_name)
-                        ai_tools[ai_tool] = ai_tools.get(ai_tool, 0) + 1
+                        if ai_tool != 'N/A':
+                            ai_tools[ai_tool] = ai_tools.get(ai_tool, 0) + 1
                     else:
                         human_count += 1
                     
@@ -338,33 +405,36 @@ class OldCommitAnalyzer:
         print(f"JSON形式でも保存しました: {json_path}")
     
     def save_commits_csv(self):
-        """全コミット情報をCSVに保存"""
-        csv_path = os.path.join(self.output_dir, "dataset_AI_commits_60days.csv")
+        """全コミット情報をRQ1_result_v2.csvに追記保存"""
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_result_v2.csv")
         
         if not self.all_commits_data:
             print("CSVに保存するコミットデータがありません")
             return
         
-        # CSVファイルに書き込み
-        with open(csv_path, 'w', encoding='utf-8', newline='') as f:
-            fieldnames = ['repository', 'commit_sha', 'author_name', 'all_authors', 'commit_date', 'is_ai', 'ai_tool']
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            
-            # ヘッダー書き込み
-            writer.writeheader()
-            
-            # データ書き込み
-            for commit_data in self.all_commits_data:
-                writer.writerow(commit_data)
+        # 新しいデータをDataFrameに変換
+        new_df = pd.DataFrame(self.all_commits_data)
         
-        print(f"コミット情報をCSVに保存しました: {csv_path}")
-        print(f"総コミット数: {len(self.all_commits_data):,}件")
+        # 既存のCSVがあれば読み込んで結合
+        if os.path.exists(csv_path):
+            existing_df = pd.read_csv(csv_path)
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            print(f"既存データに追加: {len(existing_df):,}件 → {len(combined_df):,}件")
+        else:
+            combined_df = new_df
+            print(f"新規作成: {len(combined_df):,}件")
+        
+        # CSVに保存
+        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+        print(f"✓ コミット情報をCSVに保存しました: {csv_path}")
+        print(f"  今回追加: {len(new_df):,}件, 合計: {len(combined_df):,}件")
         
         # 統計情報も表示
-        ai_commits = sum(1 for c in self.all_commits_data if c['is_ai'] == 'AI')
-        human_commits = sum(1 for c in self.all_commits_data if c['is_ai'] == 'Human')
-        print(f"  AIコミット: {ai_commits:,}件")
-        print(f"  Humanコミット: {human_commits:,}件")
+        ai_commits = sum(1 for c in self.all_commits_data if c['commit_created_by'] == 'AI')
+        human_commits = sum(1 for c in self.all_commits_data if c['commit_created_by'] == 'Human')
+        print(f"  今回のAIコミット: {ai_commits:,}件")
+        print(f"  今回のHumanコミット: {human_commits:,}件")
     
     def write_result(self, f, result):
         """結果を1件書き込む"""

@@ -1,0 +1,94 @@
+﻿repository_name,repository_owner,file_name,file_creator,line_count,created_by,creation_date,commit_count
+microsoft/vscode,microsoft,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,Copilot,97,AI,2025-08-16T06:42:16+00:00,33
+microsoft/vscode,microsoft,src/vs/workbench/contrib/testing/common/testingChatAgentTool.ts,Connor Peet,318,Human,2025-07-22T23:36:59+00:00,12
+microsoft/vscode,microsoft,src/vs/workbench/services/dataChannel/browser/dataChannelService.ts,Henning Dieterichs,40,Human,2025-07-16T11:43:02+00:00,2
+microsoft/vscode,microsoft,src/vs/workbench/api/browser/mainThreadChatSessions.ts,Osvaldo Ortega,323,Human,2025-07-17T18:37:20+00:00,51
+microsoft/vscode,microsoft,src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/taskHelpers.ts,Daniel Imms,115,Human,2025-08-05T11:11:07+00:00,16
+langchain-ai/langchain,langchain-ai,libs/core/tests/unit_tests/utils/test_strings.py,Copilot,49,AI,2025-07-22T00:33:20+00:00,4
+langchain-ai/langchain,langchain-ai,libs/langchain_v1/tests/unit_tests/test_imports.py,Eugene Yurtsev,60,Human,2025-07-24T13:47:48+00:00,2
+microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.types,Copilot,35,AI,2025-06-25T21:29:50+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.js,Copilot,18,AI,2025-06-25T21:29:50+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/compiler/privateFieldsInClassExpressionDeclaration.ts,Copilot,15,AI,2025-07-31T22:51:51+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/accessorInAmbientContextES5.js,Copilot,81,AI,2025-06-25T21:29:02+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/compiler/accessorInAmbientContextES5.ts,Copilot,29,AI,2025-06-25T21:29:02+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.symbols,Copilot,22,AI,2025-06-25T21:29:50+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/privateFieldsInClassExpressionDeclaration.js,Copilot,44,AI,2025-07-31T22:51:51+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/fourslash/symbolCompletionLowerPriority.ts,Copilot,20,AI,2025-07-02T21:46:24+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.errors.txt,Copilot,17,AI,2025-06-25T21:29:50+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/privateFieldsInClassExpressionDeclaration.errors.txt,Copilot,31,AI,2025-07-31T22:51:51+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/compiler/controlFlowForStatementContinueIntoIncrementor1.ts,Mateusz Burzyński,34,Human,2025-01-22T19:40:58+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesTripleSlashReferenceModeOverride2(module=node20).js,Andrew Branch,37,Human,2025-06-09T21:20:00+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/classAccessorInitializationInferenceWithElementAccess1.types,Mateusz Burzyński,85,Human,2024-10-16T00:52:12+00:00,1
+microsoft/TypeScript,microsoft,tests/cases/fourslash/server/pasteEdits_multiplePastesConsistentlySmallerInSize.ts,navya9singh,92,Human,2024-08-20T00:45:57+00:00,2
+microsoft/TypeScript,microsoft,tests/cases/fourslash/server/pasteEdits_noImportNeededInUpdatedProgram.ts,navya9singh,20,Human,2024-08-20T00:45:57+00:00,2
+microsoft/TypeScript,microsoft,tests/baselines/reference/capturedLetConstInLoop14.js,Mateusz Burzyński,34,Human,2024-07-26T21:34:48+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesImportHelpersCollisions3(module=node18).symbols,Andrew Branch,22,Human,2024-12-13T18:16:23+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesImportHelpersCollisions3(module=node18).js,Andrew Branch,42,Human,2024-12-13T18:16:23+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/importAttributes10.symbols,Mateusz Burzyński,50,Human,2025-06-24T16:49:37+00:00,1
+microsoft/TypeScript,microsoft,tests/baselines/reference/nullishCoalescingOperator1.errors.txt,Ryan Cavanaugh,71,Human,2024-07-22T22:26:17+00:00,1
+nvm-sh/nvm,nvm-sh,.github/copilot-instructions.md,copilot-swe-agent[bot],427,AI,2025-07-02T17:12:44+00:00,1
+nvm-sh/nvm,nvm-sh,test/fast/Unit tests/nvm_process_nvmrc,Jordan Harband,34,Human,2024-06-07T17:13:00+00:00,2
+vitejs/vite,vitejs,playground/css/empty.css,Evan You,0,AI,2020-06-24T15:59:08+00:00,3
+vitejs/vite,vitejs,packages/vite/src/node/__tests__/fixtures/config/import-meta/vite.config.ts,Copilot,6,AI,2025-08-05T04:50:10+00:00,2
+vitejs/vite,vitejs,packages/vite/src/node/ssr/runtime/__tests__/fixtures/string-literal-sourcemap.ts,Copilot,12,AI,2025-08-08T02:49:29+00:00,1
+vitejs/vite,vitejs,packages/vite/src/node/__tests__/fixtures/scan-jsx-runtime/tsconfig.json,Hiroshi Ogawa,13,Human,2025-07-29T10:05:06+00:00,1
+vitejs/vite,vitejs,playground/optimize-deps/dep-cjs-with-external-dep/index.js,James Opstad,4,Human,2025-04-28T09:26:37+00:00,2
+vitejs/vite,vitejs,packages/vite/src/node/ssr/runtime/__tests__/fixtures/cyclic2/test6/index.js,Hiroshi Ogawa,2,Human,2025-03-26T01:18:29+00:00,1
+browser-use/browser-use,browser-use,browser_use/browser/python_highlights.py,Cursor Agent,245,AI,2025-08-17T22:39:32+00:00,30
+browser-use/browser-use,browser-use,browser_use/dom/playground/multi_act.py,Gregor Žunič,32,Human,2025-08-12T19:04:23+00:00,3
+browser-use/browser-use,browser-use,examples/search/simple_search.py,mertunsall,74,Human,2025-07-26T19:42:48+00:00,3
+microsoft/autogen,microsoft,python/samples/agentchat_dspy/single_agent.py,Copilot,0,AI,2025-07-20T07:30:42+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-agentchat/tests/test_events.py,Copilot,85,AI,2025-08-05T16:32:05+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/tests/tools/test_mcp_workbench_overrides.py,Copilot,298,AI,2025-07-06T20:39:05+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/tests/teams/__init__.py,Copilot,1,AI,2025-07-29T22:31:42+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-ext/tests/teams/test_magentic_one.py,Copilot,138,AI,2025-07-29T22:31:42+00:00,3
+microsoft/autogen,microsoft,python/packages/autogen-core/tests/test_static_workbench_overrides.py,Copilot,285,AI,2025-07-06T20:39:05+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-studio/frontend/src/components/views/settings/sidebar.tsx,Victor Dibia,87,Human,2025-02-09T04:50:12+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-studio/frontend/src/components/views/labs/sidebar.tsx,Victor Dibia,111,Human,2025-04-09T02:44:45+00:00,1
+microsoft/autogen,microsoft,python/samples/core_streaming_handoffs_fastapi/topics.py,amith-ajith,5,Human,2025-04-25T01:35:36+00:00,1
+microsoft/autogen,microsoft,python/packages/autogen-core/src/autogen_core/model_context/_token_limited_chat_completion_context.py,Griffin Bassman,83,Human,2025-03-27T20:59:27+00:00,2
+microsoft/autogen,microsoft,python/packages/autogen-ext/tests/tools/web_search/test_duckduckgo_search.py,VARAD SRIVASTAVA,734,Human,2025-07-06T22:59:55+00:00,2
+microsoft/autogen,microsoft,python/samples/core_streaming_response_fastapi/app.py,ToryPan,141,Human,2025-04-21T23:55:03+00:00,1
+mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/deep-research.test.ts,devin-ai-integration[bot],47,AI,2025-07-03T15:34:02+00:00,2
+mendableai/firecrawl,mendableai,apps/api/src/scraper/scrapeURL/lib/__tests__/extractLinks.test.ts,devin-ai-integration[bot],64,AI,2025-07-02T21:14:53+00:00,1
+mendableai/firecrawl,mendableai,apps/js-sdk/firecrawl/src/__tests__/v1/unit/monitor-job-status-retry.test.ts,Gergő Móricz,154,AI,2025-08-01T18:36:32+00:00,2
+mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/crawl-status.ts,devin-ai-integration[bot],449,AI,2025-07-25T16:58:38+00:00,24
+mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/iframe-selectors.test.ts,devin-ai-integration[bot],73,AI,2025-07-25T16:56:08+00:00,2
+mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/generateDomainSplits.test.ts,devin-ai-integration[bot],43,AI,2025-07-25T16:45:53+00:00,2
+mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/batch-scrape.ts,devin-ai-integration[bot],203,AI,2025-07-25T16:58:38+00:00,19
+mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/v2/watcher_async.py,rafaelmmiller,245,Human,2025-08-11T17:29:26+00:00,3
+mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/v2/methods/scrape.py,rafaelmmiller,68,Human,2025-08-05T20:41:12+00:00,5
+mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/crawl-cancel.ts,Gergő Móricz,53,Human,2025-08-12T10:35:21+00:00,3
+mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/__tests__/e2e/v2/test_map.py,rafaelmmiller,68,Human,2025-08-08T14:56:05+00:00,4
+mendableai/firecrawl,mendableai,apps/api/src/search/v2/searchapi.ts,Gergő Móricz,66,Human,2025-08-03T22:15:22+00:00,2
+mendableai/firecrawl,mendableai,apps/js-sdk/example_v1.js,rafaelmmiller,19,Human,2025-08-12T13:25:41+00:00,1
+mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/scrape-status.ts,Gergő Móricz,53,Human,2025-08-03T23:09:29+00:00,3
+mendableai/firecrawl,mendableai,apps/api/src/search/v2/searxng.ts,Gergő Móricz,68,Human,2025-08-03T22:15:22+00:00,2
+mendableai/firecrawl,mendableai,apps/js-sdk/firecrawl/audit-ci.jsonc,Gergő Móricz,4,Human,2025-08-10T13:36:01+00:00,1
+mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/v2/scrape-cache.test.ts,Gergő Móricz,103,Human,2025-08-03T21:36:14+00:00,4
+usememos/memos,usememos,server/router/api/v1/test/user_service_stats_test.go,Copilot,105,AI,2025-07-02T12:17:19+00:00,3
+usememos/memos,usememos,proto/gen/api/v1/attachment_service.pb.gw.go,Steven,615,Human,2025-06-17T14:15:19+00:00,2
+gradio-app/gradio,gradio-app,.changeset/honest-radios-check.md,Copilot,6,AI,2025-07-18T18:53:02+00:00,2
+gradio-app/gradio,gradio-app,.changeset/cuddly-pianos-sit.md,Copilot,6,AI,2025-07-28T10:13:27+00:00,2
+gradio-app/gradio,gradio-app,.changeset/bumpy-pianos-spend.md,Abubakar Abid,5,Human,2025-05-28T17:39:18+00:00,2
+gradio-app/gradio,gradio-app,demo/hidden_change/run.py,pngwn,91,Human,2025-07-23T19:38:42+00:00,1
+calcom/cal.com,calcom,apps/api/v2/src/lib/services/available-slots.service.ts,devin-ai-integration[bot],36,AI,2025-07-11T14:37:24+00:00,10
+calcom/cal.com,calcom,packages/lib/di/modules/busy-times.ts,devin-ai-integration[bot],10,AI,2025-08-08T09:14:08+00:00,2
+calcom/cal.com,calcom,apps/web/lib/plain/PlainContactForm.tsx,devin-ai-integration[bot],243,AI,2025-07-24T18:14:38+00:00,4
+calcom/cal.com,calcom,packages/lib/di/modules/FilterHosts.ts,devin-ai-integration[bot],10,AI,2025-08-11T12:24:15+00:00,3
+calcom/cal.com,calcom,apps/api/v2/src/modules/cal-unified-calendars/pipes/google-calendar-event-input-pipe.ts,devin-ai-integration[bot],121,AI,2025-08-13T16:24:19+00:00,2
+calcom/cal.com,calcom,packages/lib/di/modules/cache.ts,devin-ai-integration[bot],11,AI,2025-07-31T17:39:27+00:00,2
+calcom/cal.com,calcom,apps/web/app/api/support/route.ts,devin-ai-integration[bot],95,AI,2025-07-24T18:14:38+00:00,2
+calcom/cal.com,calcom,packages/lib/server/repository/routingForm/queuedFormResponse/PrismaQueuedFormResponseRepository.integration-test.ts,devin-ai-integration[bot],432,AI,2025-08-05T16:47:50+00:00,2
+calcom/cal.com,calcom,apps/web/app/api/support/upload/route.ts,devin-ai-integration[bot],84,AI,2025-07-24T18:14:38+00:00,2
+calcom/cal.com,calcom,packages/ui/components/file-uploader/index.ts,devin-ai-integration[bot],2,AI,2025-07-24T18:14:38+00:00,1
+calcom/cal.com,calcom,packages/lib/server/service/routingForm/responseData/types.ts,Joe Au-Yeung,9,Human,2025-07-17T21:40:18+00:00,2
+calcom/cal.com,calcom,packages/app-store/btcpayserver/api/webhook.ts,Chukwuleta Tobechi,100,Human,2025-07-29T16:08:19+00:00,2
+calcom/cal.com,calcom,packages/platform/atoms/scripts/dev-on.js,Lauris Skraucis,20,Human,2025-07-03T16:45:23+00:00,1
+calcom/cal.com,calcom,packages/features/calAIPhone/providers/retellAI/services/BillingService.ts,Udit Takkar,157,Human,2025-08-08T15:57:13+00:00,5
+calcom/cal.com,calcom,packages/features/redis/di/redisModule.ts,Alex van Andel,17,Human,2025-08-05T17:32:02+00:00,3
+calcom/cal.com,calcom,packages/features/insights/components/booking/MostCancelledBookingsTables.tsx,Eunjae Lee,35,Human,2025-07-29T10:37:18+00:00,1
+calcom/cal.com,calcom,packages/lib/server/repository/ISelectedSlotRepository.ts,Alex van Andel,24,Human,2025-07-25T23:59:32+00:00,1
+calcom/cal.com,calcom,packages/app-store/btcpayserver/components/EventTypeAppSettingsInterface.tsx,Chukwuleta Tobechi,134,Human,2025-07-29T16:08:19+00:00,3
+calcom/cal.com,calcom,packages/app-store/btcpayserver/lib/PaymentService.ts,Chukwuleta Tobechi,204,Human,2025-07-29T16:08:19+00:00,2
+calcom/cal.com,calcom,packages/lib/event-types/getEventTypeById.test.ts,Lauris Skraucis,327,Human,2025-07-28T11:50:12+00:00,2

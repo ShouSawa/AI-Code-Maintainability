@@ -13,6 +13,7 @@ import requests # HTTPリクエストを扱うためのライブラリ
 from github import Github # Github APIを扱うためのライブラリ
 from dotenv import load_dotenv # .envファイルを読み込むためのライブラリ
 import time
+import socket
 
 # srcフォルダ内の.envファイルを読み込む
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +22,68 @@ load_dotenv(dotenv_path)
 
 pipe = pipeline("text-generation", model="0x404/ccs-code-llama-7b", device_map="auto")
 tokenizer = pipe.tokenizer
+
+# ネットワーク再接続機能
+def check_network_connectivity(host="api.github.com", port=443, timeout=5):
+    """
+    ネットワーク接続を確認する
+    
+    Args:
+        host: 接続先ホスト
+        port: 接続ポート
+        timeout: タイムアウト（秒）
+    
+    Returns:
+        bool: 接続可能ならTrue
+    """
+    try:
+        socket.create_connection((host, port), timeout=timeout)
+        return True
+    except (socket.gaierror, socket.timeout, OSError):
+        return False
+
+def retry_with_network_check(func):
+    """
+    ネットワークエラー時に自動的に再接続を試みるデコレータ
+    
+    Args:
+        func: ラップする関数
+    
+    Returns:
+        ラップされた関数
+    """
+    def wrapper(*args, **kwargs):
+        max_wait = 60  # 最大待機時間（秒）
+        wait_time = 10  # 初期待機時間（秒）
+        
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                error_str = str(e).lower()
+                # DNS解決エラーやConnectionErrorを検出
+                if 'nameresolutionerror' in error_str or 'failed to resolve' in error_str or \
+                   'connectionerror' in error_str or 'connection error' in error_str or \
+                   'getaddrinfo failed' in error_str:
+                    
+                    print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワークエラーを検出しました: {e}")
+                    print(f"ネットワーク接続を確認中...")
+                    
+                    # ネットワークが復旧するまで待機
+                    while not check_network_connectivity():
+                        print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワークに接続できません。{wait_time}秒後に再試行します...")
+                        time.sleep(wait_time)
+                        # 指数バックオフ（最大60秒まで）
+                        wait_time = min(wait_time * 2, max_wait)
+                    
+                    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワーク接続が復旧しました。処理を再開します...")
+                    wait_time = 10  # 待機時間をリセット
+                    continue  # 関数を再実行
+                else:
+                    # ネットワーク以外のエラーはそのまま送出
+                    raise
+    
+    return wrapper
 
 class RQ1AnalyzerAPI:
     # AIボットアカウント定義（作成者名で判定）
@@ -100,6 +163,7 @@ class RQ1AnalyzerAPI:
         
         return 'N/A'
 
+    @retry_with_network_check
     def get_commits_with_file_additions_api(self, max_commits=500):
         """GitHub APIで90日以前のファイル追加コミット取得"""
         print("=== GitHub APIでコミット取得中 ===")
@@ -205,6 +269,7 @@ class RQ1AnalyzerAPI:
         print(f"分析完了 - 総計:{len(df)} AI:{len(df[df['author_type']=='AI'])} Human:{len(df[df['author_type']=='Human'])}")
         return df
 
+    @retry_with_network_check
     def get_file_commits_api(self, file_path):
         """GitHub APIで特定ファイルのコミット履歴取得"""
         try:
@@ -258,6 +323,7 @@ class RQ1AnalyzerAPI:
             print(f"ファイル行数取得エラー {file_path}: {e}")
             return 0
 
+    @retry_with_network_check
     def get_file_creation_info(self, file_path):
         """ファイルの作成情報を取得（最初のコミット）"""
         try:
@@ -280,6 +346,7 @@ class RQ1AnalyzerAPI:
                 return {
                     'author_name': author_name,
                     'all_authors': all_authors,  # 全作成者リスト
+                    'all_creator_names': all_authors,  # CSV出力用（ファイル作成者名）
                     'creation_date': first_commit.commit.author.date.isoformat(),
                     'commit_count': len(commit_list)
                 }
@@ -363,6 +430,7 @@ class RQ1AnalyzerAPI:
                     'repository_owner': self.repo_name_full.split('/')[0],
                     'file_name': file_path,
                     'file_creator': creation_info['author_name'],
+                    'all_creator_names': creation_info['all_creator_names'],  # 全作成者名リスト
                     'line_count': line_count,
                     'created_by': author_type,
                     'creation_date': creation_info['creation_date'],
@@ -379,6 +447,7 @@ class RQ1AnalyzerAPI:
                     'commit_hash': 'No commits found',
                     'commit_date': '',
                     'author': '',
+                    'all_authors': [],
                     'commit_message': '',
                     'is_ai_generated': False,
                     'ai_type': 'N/A',
@@ -394,6 +463,7 @@ class RQ1AnalyzerAPI:
                         'commit_hash': log['hash'],
                         'commit_date': log['date'],
                         'author': log['author'],
+                        'all_authors': log['all_authors'],  # 全作成者リスト
                         'commit_message': log['message'],
                         'is_ai_generated': is_ai,
                         'ai_type': ai_type,
@@ -715,15 +785,30 @@ class RQ1AnalyzerAPI:
             if row['commit_hash'] != 'No commits found':
                 changed_lines = self.get_commit_changed_lines(row['commit_hash'])
             
+            # ファイル作成者名を取得（全アカウント）
+            file_creator_names = ''
+            if file_info and 'all_creator_names' in file_info:
+                file_creator_names = ', '.join(file_info['all_creator_names'])
+            
+            # コミット作成者名を取得（全アカウント）
+            commit_author_names = ''
+            if 'all_authors' in row and row['all_authors']:
+                if isinstance(row['all_authors'], list):
+                    commit_author_names = ', '.join(row['all_authors'])
+                else:
+                    commit_author_names = str(row['all_authors'])
+            
             csv_records.append({
                 'repository_name': self.repo_name_full,
                 'file_name': file_path,
                 'file_created_by': row['original_commit_type'],
+                'file_creator_names': file_creator_names,
                 'file_line_count': file_info['line_count'] if file_info else 0,
                 'file_creation_date': file_info['creation_date'] if file_info else '',
                 'file_commit_count': file_info['commit_count'] if file_info else 0,
                 'commit_message': row['commit_message'],
                 'commit_created_by': 'AI' if row['is_ai_generated'] else 'Human',
+                'commit_author_names': commit_author_names,
                 'commit_changed_lines': changed_lines,
                 'commit_date': row['commit_date']
             })
