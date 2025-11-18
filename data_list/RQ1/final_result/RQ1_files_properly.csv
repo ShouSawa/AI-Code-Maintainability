@@ -110,3 +110,221 @@ mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/design-system/Ic
 mlflow/mlflow,mlflow,mlflow/server/js/src/shared/web-shared/genai-traces-table/types.ts,Daniel Lok,"['Daniel Lok', 'GitHub']",375,Human,2025-08-07T07:13:30+00:00,5
 mlflow/mlflow,mlflow,docs/static/images/mlflow-3/eval-monitor/trace-evaluation-result.png,Yuki Watanabe,"['Yuki Watanabe', 'GitHub']",6713,Human,2025-08-19T03:24:48+00:00,1
 mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/design-system/TypeaheadCombobox/hooks/useTypeaheadComboboxContext.js,Daniel Lok,"['Daniel Lok', 'GitHub']",6,Human,2025-07-15T10:25:01+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/features/page.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",42,AI,2025-08-16T07:44:13+00:00,6
+onlook-dev/onlook,onlook-dev,docs/content/docs/user-guide/quickstart/index.mdx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",83,AI,2025-05-17T00:39:46+00:00,3
+onlook-dev/onlook,onlook-dev,docs/content/docs/developer/architecture.mdx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",50,AI,2025-05-16T20:02:39+00:00,6
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/_components/landing-page/features-faq-section.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",50,AI,2025-08-16T07:44:13+00:00,2
+onlook-dev/onlook,onlook-dev,docs/public/images/quickstart-banner.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",403,AI,2025-05-17T00:39:46+00:00,2
+onlook-dev/onlook,onlook-dev,bun.lockb,Kiet Ho,['Kiet Ho'],7426,AI,2024-06-24T18:37:03+00:00,97
+onlook-dev/onlook,onlook-dev,docs/content/index.mdx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",29,AI,2025-05-16T20:02:39+00:00,3
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/_components/shared/mockups/tailwind-color-editor.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",266,AI,2025-08-16T07:44:13+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/_components/landing-page/social-proof-section.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",34,AI,2025-08-16T07:44:13+00:00,1
+onlook-dev/onlook,onlook-dev,docs/public/images/faq-banner.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",518,AI,2025-05-17T00:39:46+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/components/ui/modal/settings/preferences.tsx,Kiet,"['Kiet', 'GitHub']",203,Human,2025-05-14T23:16:52+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/components/ui/settings-modal/domain/custom/verified.tsx,Kiet,"['Kiet', 'GitHub']",71,Human,2025-06-17T18:47:03+00:00,3
+onlook-dev/onlook,onlook-dev,apps/web/client/src/hooks/use-parallax-cursor.ts,Daniel R Farrell,"['Daniel R Farrell', 'GitHub']",61,Human,2025-07-11T03:35:58+00:00,1
+onlook-dev/onlook,onlook-dev,packages/fonts/test/data/remove-fonts-classname/template-literal-static-only/expected.tsx,spartan-vutrannguyen,"['spartan-vutrannguyen', 'GitHub']",4,Human,2025-08-01T21:21:56+00:00,1
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/project/[id]/_components/editor-bar/text-selected/text-color.tsx,Kiet,"['Kiet', 'GitHub']",58,Human,2025-05-22T16:58:46+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/project/[id]/_components/top-bar/publish/dropdown/index.tsx,spartan-vutrannguyen,"['spartan-vutrannguyen', 'GitHub']",40,Human,2025-06-07T02:34:31+00:00,9
+onlook-dev/onlook,onlook-dev,apps/web/client/public/preload/index.js,Kiet,"['Kiet', 'GitHub']",17,Human,2025-07-14T23:18:54+00:00,2
+onlook-dev/onlook,onlook-dev,apps/web/client/src/server/api/routers/project/createRequest.ts,Kiet,"['Kiet', 'GitHub']",33,Human,2025-06-30T01:35:58+00:00,1
+onlook-dev/onlook,onlook-dev,apps/web/client/src/app/project/[id]/_components/left-panel/image-tab/image-dropdown-menu.tsx,spartan-vutrannguyen,"['spartan-vutrannguyen', 'GitHub']",140,Human,2025-06-26T18:10:05+00:00,5
+onlook-dev/onlook,onlook-dev,apps/web/client/test/sandbox/file-event-bus.test.ts,Kiet,"['Kiet', 'GitHub']",162,Human,2025-05-14T23:16:52+00:00,2
+CarGuo/GSYVideoPlayer,CarGuo,gsyVideoPlayer-java/src/main/java/com/shuyu/gsyvideoplayer/utils/GSYAudioFocusManager.java,Copilot,"['Copilot', 'GitHub']",251,AI,2025-08-07T06:51:42+00:00,1
+CarGuo/GSYVideoPlayer,CarGuo,doc/AudioManager_Optimization.md,Copilot,"['Copilot', 'GitHub']",159,AI,2025-08-07T06:51:42+00:00,1
+CarGuo/GSYVideoPlayer,CarGuo,gsyVideoPlayer-java/src/main/java/com/shuyu/gsyvideoplayer/utils/GSYAudioFocusManagerTest.java,Copilot,"['Copilot', 'GitHub']",120,AI,2025-08-07T06:51:42+00:00,1
+CarGuo/GSYVideoPlayer,CarGuo,.gitattributes,Goooler,['Goooler'],4,Human,2021-07-27T09:46:09+00:00,1
+CarGuo/GSYVideoPlayer,CarGuo,img/home_logo.png,guoshuyu,['guoshuyu'],257,Human,2022-01-12T06:02:59+00:00,1
+CarGuo/GSYVideoPlayer,CarGuo,gsyVideoPlayer-x86_64/src/main/jniLibs/x86_64/libijkplayer.so,guoshuyu,['guoshuyu'],5405,Human,2021-12-30T05:06:51+00:00,1
+QL-Win/QuickLook,QL-Win,QuickLook.Plugin/QuickLook.Plugin.MarkdownViewer/Resources/js/mermaid.min.js,Copilot,"['Copilot', 'GitHub']",0,AI,2025-08-01T18:09:52+00:00,1
+QL-Win/QuickLook,QL-Win,QuickLook.Plugin/QuickLook.Plugin.MarkdownViewer/Translations.config,copilot-swe-agent[bot],"['copilot-swe-agent[bot]', 'ema']",13,AI,2025-07-23T14:59:35+00:00,2
+QL-Win/QuickLook,QL-Win,QuickLook.Appx/Images/Square44x44Logo.altform-lightunplated_targetsize-48.png,ema,['ema'],73,Human,2025-06-06T15:54:31+00:00,1
+QL-Win/QuickLook,QL-Win,QuickLook.Plugin/QuickLook.Plugin.TextViewer/Syntax/Dark/ReStructuredText.xshd,ema,['ema'],74,Human,2025-07-08T16:12:52+00:00,1
+microsoft/fluentui,microsoft,change/@fluentui-react-dialog-60b61b15-50b3-4773-ac9a-8b4df48c83ae.json,Copilot,"['Copilot', 'GitHub']",7,AI,2025-07-30T08:23:33+00:00,2
+microsoft/fluentui,microsoft,packages/react-examples/src/react-charting/FunnelChart/FunnelChart.Basic.Example.tsx,srmukher,"['srmukher', 'GitHub']",127,Human,2025-07-02T06:44:43+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_shape_start_greater_than_end/model.onnx,Copilot,"['Copilot', 'GitHub']",20,AI,2025-07-16T23:02:26+00:00,2
+onnx/onnx,onnx,onnx/backend/test/data/node/test_einsum_scalar/test_data_set_0/input_0.pb,Copilot,"['Copilot', 'GitHub']",2,AI,2025-07-16T22:37:48+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_shape_start_greater_than_end/test_data_set_0/output_0.pb,Copilot,"['Copilot', 'GitHub']",1,AI,2025-07-16T23:02:26+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_einsum_scalar/test_data_set_0/output_0.pb,Copilot,"['Copilot', 'GitHub']",2,AI,2025-07-16T22:37:48+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_shape_start_greater_than_end/test_data_set_0/input_0.pb,Copilot,"['Copilot', 'GitHub']",1,AI,2025-07-16T23:02:26+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_einsum_scalar/model.onnx,Copilot,"['Copilot', 'GitHub']",14,AI,2025-07-16T22:37:48+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_attention_4d_diff_heads_mask4d_padded_kv_expanded/model.onnx,Yuan Yao,"['Yuan Yao', 'GitHub']",239,Human,2025-07-30T17:33:38+00:00,4
+onnx/onnx,onnx,onnx/backend/test/data/node/test_clip_min_greater_than_max_expanded/test_data_set_0/input_2.pb,Alexandre Eichenberger,"['Alexandre Eichenberger', 'GitHub']",1,Human,2024-09-26T21:06:49+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_attention_4d_with_qk_matmul/test_data_set_0/input_1.pb,Shubham Bhokare,"['Shubham Bhokare', 'GitHub']",24,Human,2025-02-28T23:52:43+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_attention_4d_attn_mask_4d_causal_expanded/test_data_set_0/input_0.pb,Xavier Dupré,"['Xavier Dupré', 'GitHub']",24,Human,2025-07-14T18:54:08+00:00,1
+onnx/onnx,onnx,onnx/backend/test/data/node/test_rotary_embedding_with_rotary_dim/test_data_set_0/input_1.pb,Shubham Bhokare,"['Shubham Bhokare', 'GitHub']",17,Human,2025-02-20T03:50:03+00:00,2
+onnx/onnx,onnx,onnx/backend/test/data/node/test_attention_3d_gqa_softcap_expanded/test_data_set_0/input_0.pb,Shubham Bhokare,"['Shubham Bhokare', 'GitHub']",57,Human,2025-02-28T23:52:43+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/understanding-airbyte/high-level-view.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",56,AI,2025-08-15T20:27:39+00:00,2
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/assets/OCIScreen7.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",2985,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/assets/25.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",8248,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/connector-development/connector-builder-ui/partitioning.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",149,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/assets/destination/databricks/databricks_generate_token.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",2138,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/understanding-airbyte/cdc.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",77,AI,2025-08-15T20:27:39+00:00,2
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/using-airbyte/getting-started/assets/getting-started-field-selection.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",2246,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/assets/airbyte_kestra_2.gif,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",0,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/enterprise-setup/upgrade-service-account.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",68,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,docusaurus/platform_versioned_docs/version-1.8/assets/dg_console.png,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",951,AI,2025-08-15T20:27:39+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-adobe-commerce-magento/icon.svg,joacocourreges,"['joacocourreges', 'GitHub']",31,Human,2025-08-04T16:52:25+00:00,1
+airbytehq/airbyte,airbytehq,docs/integrations/sources/ticktick.md,luutuankiet,"['luutuankiet', 'GitHub']",25,Human,2025-08-14T16:02:34+00:00,12
+airbytehq/airbyte,airbytehq,docs/platform/connector-development/connector-builder-ui/global-configuration.md,Ian Alton,"['Ian Alton', 'GitHub']",90,Human,2025-08-06T23:35:04+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/core/load/src/main/kotlin/io/airbyte/cdk/load/dataflow/input/DataFlowPipelineInputFlow.kt,Benoit Moriceau,"['Benoit Moriceau', 'GitHub']",28,Human,2025-08-05T17:03:45+00:00,6
+airbytehq/airbyte,airbytehq,docs/platform/connector-development/connector-builder-ui/assets/stream-templates/component-mappings.png,Ian Alton,"['Ian Alton', 'GitHub']",1517,Human,2025-08-06T23:35:04+00:00,1
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/core/load/src/test/kotlin/io/airbyte/cdk/load/dataflow/input/DestinationMessageInputFlowTest.kt,Benoit Moriceau,"['Benoit Moriceau', 'GitHub']",89,Human,2025-08-13T21:30:56+00:00,2
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/core/load/src/main/kotlin/io/airbyte/cdk/load/dataflow/stages/StateStage.kt,Benoit Moriceau,"['Benoit Moriceau', 'GitHub']",29,Human,2025-08-05T17:03:45+00:00,7
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/core/load/src/test/kotlin/io/airbyte/cdk/load/dataflow/state/StateHistogramTest.kt,Ryan Br...,"['Ryan Br...', 'GitHub']",159,Human,2025-08-13T20:22:27+00:00,3
+airbytehq/airbyte,airbytehq,airbyte-cdk/bulk/core/load/src/test/kotlin/io/airbyte/cdk/load/dataflow/DestinationLifecycleTest.kt,Benoit Moriceau,"['Benoit Moriceau', 'GitHub']",60,Human,2025-08-13T21:30:56+00:00,4
+airbytehq/airbyte,airbytehq,airbyte-integrations/connectors/source-outlook/metadata.yaml,saif-qureshi-341,"['saif-qureshi-341', 'GitHub']",34,Human,2025-08-14T15:59:03+00:00,9
+yamadashy/repomix,yamadashy,src/core/file/fileStdin.ts,claude[bot],"['claude[bot]', 'Kazuki Yamada']",73,AI,2025-06-13T02:46:12+00:00,6
+yamadashy/repomix,yamadashy,browser/app/_locales/vi/detailed-description.txt,Kazuki Yamada,['Kazuki Yamada'],24,Human,2025-06-01T10:30:22+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/auth/forms/Auth.module.css,Copilot,"['Copilot', 'GitHub']",16,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/data/Generator/templates/sdk/wasp/auth/forms/internal/Message.module.css,Copilot,"['Copilot', 'GitHub']",22,AI,2025-08-14T14:31:35+00:00,1
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/auth/forms/internal/util.ts,Copilot,"['Copilot', 'GitHub']",16,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/auth/forms/internal/Message.module.css,Copilot,"['Copilot', 'GitHub']",22,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/scripts/copy-assets.js,Copilot,"['Copilot', 'GitHub']",14,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/auth/forms/internal/common/LoginSignupForm.module.css,Copilot,"['Copilot', 'GitHub']",55,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/data/Generator/templates/sdk/wasp/auth/forms/internal/Form.module.css,Copilot,"['Copilot', 'GitHub']",99,AI,2025-08-14T14:31:35+00:00,1
+wasp-lang/wasp,wasp-lang,waspc/data/Generator/templates/sdk/wasp/auth/forms/internal/auth-styles.css,Copilot,"['Copilot', 'GitHub']",30,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspComplexTest-golden/waspComplexTest/.wasp/out/sdk/wasp/auth/forms/internal/social/SocialIcons.module.css,Copilot,"['Copilot', 'GitHub']",4,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspJob-golden/waspJob/.wasp/out/sdk/wasp/scripts/copy-assets.js,Copilot,"['Copilot', 'GitHub']",14,AI,2025-08-14T14:31:35+00:00,2
+wasp-lang/wasp,wasp-lang,web/versioned_docs/version-0.16.0/deployment/deployment-methods/GuideLink.tsx,Filip Sodić,['Filip Sodić'],22,Human,2025-01-29T15:19:35+00:00,2
+wasp-lang/wasp,wasp-lang,web/versioned_docs/version-0.16.0/project/EnvVarsTable.css,Filip Sodić,['Filip Sodić'],28,Human,2025-01-29T15:19:35+00:00,1
+wasp-lang/wasp,wasp-lang,waspc/data/Cli/starters/basic/src/auth/email/PasswordResetPage.tsx,Franjo Mindek,"['Franjo Mindek', 'GitHub']",19,Human,2025-07-04T14:38:42+00:00,1
+wasp-lang/wasp,wasp-lang,web/docs/deployment/deployment-methods/self-hosted.md,Mihovil Ilakovac,"['Mihovil Ilakovac', 'GitHub']",129,Human,2025-01-09T11:30:43+00:00,4
+wasp-lang/wasp,wasp-lang,waspc/data/Cli/starters/skeleton/public/.gitkeep,Filip Sodić,"['Filip Sodić', 'GitHub']",0,Human,2025-07-14T10:56:41+00:00,1
+wasp-lang/wasp,wasp-lang,web/static/img/lw8/join-event-instructions.png,Matija Sosic,['Matija Sosic'],3868,Human,2025-01-09T16:02:42+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/packages/deploy/src/common/brandedTypes.ts,Mihovil Ilakovac,"['Mihovil Ilakovac', 'GitHub']",4,Human,2025-07-07T14:48:50+00:00,1
+wasp-lang/wasp,wasp-lang,web/docs/project/_clientEnvVarsNote.md,Mihovil Ilakovac,"['Mihovil Ilakovac', 'GitHub']",4,Human,2025-01-09T11:30:43+00:00,2
+wasp-lang/wasp,wasp-lang,waspc/e2e-test/test-outputs/waspBuild-golden/waspBuild/.wasp/build/sdk/wasp/dist/client/operations/hooks.d.ts.map,Filip Sodić,"['Filip Sodić', 'GitHub']",1,Human,2025-04-23T12:16:47+00:00,2
+wasp-lang/wasp,wasp-lang,web/versioned_docs/version-0.15.0/_WaspStartNote.md,Filip Sodić,['Filip Sodić'],7,Human,2024-10-10T17:16:38+00:00,1
+rqlite/rqlite,rqlite,store/store_cdc_test.go,Copilot,"['Copilot', 'GitHub']",171,AI,2025-06-10T18:24:05+00:00,9
+rqlite/rqlite,rqlite,store/store_request_raft_index_test.go,Copilot,"['Copilot', 'GitHub']",105,AI,2025-06-18T00:51:43+00:00,2
+rqlite/rqlite,rqlite,cdc/config_test.go,Copilot,"['Copilot', 'GitHub']",319,AI,2025-08-13T01:57:00+00:00,4
+rqlite/rqlite,rqlite,store/store_raft_index_test.go,Copilot,"['Copilot', 'GitHub']",63,AI,2025-06-17T21:01:32+00:00,2
+rqlite/rqlite,rqlite,gcp/gcs_test.go,Philip O'Toole,"[""Philip O'Toole"", 'GitHub']",245,Human,2025-07-06T14:11:04+00:00,5
+rqlite/rqlite,rqlite,cmd/rqlite/http/env_test.go,Mostafa Khaled,"['Mostafa Khaled', 'GitHub']",117,Human,2025-06-20T13:40:46+00:00,2
+rqlite/rqlite,rqlite,gcp/example/main.go,Philip O'Toole,"[""Philip O'Toole"", 'GitHub']",66,Human,2025-07-06T14:11:04+00:00,3
+rqlite/rqlite,rqlite,store/cdc_cluster.go,Philip O'Toole,"[""Philip O'Toole"", 'GitHub']",111,Human,2025-08-16T20:26:43+00:00,4
+dotnet/runtime,dotnet,src/libraries/System.Runtime.Loader/tests/System.Runtime.Loader.Test.AssemblyVersion1/System.Runtime.Loader.Test.AssemblyVersion1.csproj,Copilot,"['Copilot', 'GitHub']",13,AI,2025-08-06T02:08:51+00:00,1
+dotnet/runtime,dotnet,src/libraries/System.Runtime.Loader/tests/System.Runtime.Loader.Test.AssemblyVersion1/VersionTestClass.cs,Copilot,"['Copilot', 'GitHub']",11,AI,2025-08-06T02:08:51+00:00,2
+dotnet/runtime,dotnet,src/libraries/System.Reflection.Emit/tests/TypeBuilder/TypeBuilderInstantiationErrorMessageTests.cs,Copilot,"['Copilot', 'GitHub']",32,AI,2025-08-13T00:36:32+00:00,2
+dotnet/runtime,dotnet,src/libraries/System.Runtime.Loader/tests/AssemblyResolutionDowngradeTest.cs,Copilot,"['Copilot', 'GitHub']",250,AI,2025-08-06T02:08:51+00:00,2
+dotnet/runtime,dotnet,src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/CompilerLoweringPreserveAttribute.cs,Sven Boemer,"['Sven Boemer', 'GitHub']",16,Human,2025-07-18T18:29:14+00:00,2
+dotnet/runtime,dotnet,src/native/managed/cdac/Microsoft.Diagnostics.DataContractReader.Contracts/Data/PatchpointInfo.cs,Max Charlamb,"['Max Charlamb', 'GitHub']",21,Human,2025-08-20T13:41:05+00:00,1
+dotnet/runtime,dotnet,src/libraries/System.Net.WebSockets.Client/tests/ClientWebSocketTestBase.Echo.cs,Natalia Kondratyeva,"['Natalia Kondratyeva', 'GitHub']",50,Human,2025-07-23T06:50:50+00:00,1
+dotnet/runtime,dotnet,src/tests/Common/CoreCLRTestLibrary/Vectors.cs,snickolls-arm,"['snickolls-arm', 'GitHub']",115,Human,2025-07-29T18:51:46+00:00,2
+elizaOS/eliza,elizaOS,scripts/debug-cli-delegation.ts,claude[bot],['claude[bot]'],478,AI,2025-07-28T20:02:37+00:00,2
+elizaOS/eliza,elizaOS,packages/cli/tests/unit/utils/server-manager.test.ts,Cursor Agent,['Cursor Agent'],205,AI,2025-07-18T07:05:37+00:00,7
+elizaOS/eliza,elizaOS,packages/cli/tests/unit/utils/loader-integration.test.ts,Cursor Agent,['Cursor Agent'],173,AI,2025-07-18T11:03:47+00:00,3
+elizaOS/eliza,elizaOS,packages/cli/src/commands/start/utils/__tests__/loader.test.ts,Cursor Agent,['Cursor Agent'],56,AI,2025-07-18T10:22:42+00:00,6
+elizaOS/eliza,elizaOS,packages/cli/tests/unit/utils/loader-sync-async.test.ts,Cursor Agent,['Cursor Agent'],221,AI,2025-07-18T11:03:47+00:00,3
+elizaOS/eliza,elizaOS,scripts/debug-cli-delegation.test.ts,claude[bot],['claude[bot]'],498,AI,2025-07-28T20:02:37+00:00,2
+elizaOS/eliza,elizaOS,packages/cli/src/utils/module-loader.test.ts,Cursor Agent,['Cursor Agent'],83,AI,2025-07-18T10:32:15+00:00,4
+elizaOS/eliza,elizaOS,packages/docs/plugins/sql.mdx,Sayo,['Sayo'],210,Human,2025-07-31T11:40:19+00:00,2
+elizaOS/eliza,elizaOS,packages/project-tee-starter/src/__tests__/e2e/project-tee-starter.e2e.ts,yung algorithm,['yung algorithm'],280,Human,2025-08-05T02:36:41+00:00,3
+elizaOS/eliza,elizaOS,packages/project-tee-starter/src/frontend/index.css,HashWarlock,['HashWarlock'],106,Human,2025-07-29T01:33:11+00:00,3
+elizaOS/eliza,elizaOS,packages/cli/src/commands/scenario/src/__tests__/path-parser.test.ts,Monil Patel,['Monil Patel'],241,Human,2025-08-16T17:24:29+00:00,2
+elizaOS/eliza,elizaOS,packages/docs/plugins/sql/schema-management.mdx,Sayo,['Sayo'],264,Human,2025-07-31T11:40:19+00:00,2
+elizaOS/eliza,elizaOS,packages/project-tee-starter/src/frontend/index.html,HashWarlock,['HashWarlock'],22,Human,2025-07-29T01:33:11+00:00,2
+elizaOS/eliza,elizaOS,packages/cli/src/commands/shared/auth-utils.ts,Sayo,['Sayo'],41,Human,2025-08-04T12:40:15+00:00,1
+elizaOS/eliza,elizaOS,packages/docs/api-reference/messaging/add-agent-to-channel.mdx,Sayo,['Sayo'],3,Human,2025-07-31T11:40:19+00:00,2
+elizaOS/eliza,elizaOS,packages/docs/api-reference/openapi.yaml,Sayo,['Sayo'],4038,Human,2025-07-31T11:40:19+00:00,3
+microsoft/playwright-mcp,microsoft,.github/workflows/copilot-setup-steps.yml,Copilot,"['Copilot', 'GitHub']",44,AI,2025-07-19T01:03:23+00:00,2
+microsoft/playwright-mcp,microsoft,utils/check-deps.js,Pavel Feldman,"['Pavel Feldman', 'GitHub']",179,Human,2025-08-12T00:21:26+00:00,4
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/no-unsafe-return/index.ts,Copilot,"['Copilot', 'GitHub']",13,AI,2025-08-13T04:19:44+00:00,2
+oxc-project/oxc,oxc-project,tasks/mcp/README.md,Copilot,"['Copilot', 'GitHub']",103,AI,2025-08-09T05:32:20+00:00,2
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/no-unnecessary-template-expression/index.ts,Copilot,"['Copilot', 'GitHub']",10,AI,2025-08-13T04:19:44+00:00,2
+oxc-project/oxc,oxc-project,crates/oxc_ast_visit/README.md,Copilot,"['Copilot', 'GitHub']",25,AI,2025-08-01T10:13:46+00:00,1
+oxc-project/oxc,oxc-project,AGENTS.md,Copilot,"['Copilot', 'GitHub']",202,AI,2025-08-01T02:21:19+00:00,12
+oxc-project/oxc,oxc-project,crates/oxc_minifier/tests/peephole/obscure_edge_cases.rs,Copilot,"['Copilot', 'GitHub']",640,AI,2025-08-02T12:42:56+00:00,4
+oxc-project/oxc,oxc-project,crates/oxc_linter/src/rules/typescript/no_meaningless_void_operator.rs,Copilot,"['Copilot', 'GitHub']",56,AI,2025-08-13T04:19:44+00:00,1
+oxc-project/oxc,oxc-project,tasks/mcp/src/index.ts,Copilot,"['Copilot', 'GitHub']",88,AI,2025-08-09T05:32:20+00:00,4
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/no-meaningless-void-operator/index.ts,Copilot,"['Copilot', 'GitHub']",13,AI,2025-08-13T04:19:44+00:00,2
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/no-unsafe-enum-comparison/index.ts,Copilot,"['Copilot', 'GitHub']",14,AI,2025-08-13T04:19:44+00:00,2
+oxc-project/oxc,oxc-project,apps/oxlint/src/snapshots/fixtures__tsgolint_--type-aware --silent no-floating-promises@oxlint.snap,Sysix,['Sysix'],13,Human,2025-08-18T21:54:20+00:00,2
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/no-floating-promises/index.ts,camchenry,['camchenry'],14,Human,2025-08-07T13:46:24+00:00,2
+oxc-project/oxc,oxc-project,crates/oxc_linter/src/rules/typescript/no_misused_promises.rs,camchenry,['camchenry'],64,Human,2025-08-07T13:46:24+00:00,4
+oxc-project/oxc,oxc-project,tasks/transform_conformance/tests/babel-plugin-transform-react-jsx/test/fixtures/spread-props-classic/options.json,Dunqing,['Dunqing'],10,Human,2025-08-12T11:59:13+00:00,1
+oxc-project/oxc,oxc-project,tasks/coverage/misc/fail/oxc-12612-2.ts,camc314,['camc314'],1,Human,2025-08-01T04:42:56+00:00,1
+oxc-project/oxc,oxc-project,crates/oxc_ast_visit/src/utf8_to_utf16/translation.rs,overlookmotel,['overlookmotel'],180,Human,2025-08-20T14:50:08+00:00,3
+oxc-project/oxc,oxc-project,tasks/track_memory_allocations/src/lib.rs,camchenry,['camchenry'],153,Human,2025-08-06T05:38:03+00:00,10
+oxc-project/oxc,oxc-project,apps/oxlint/fixtures/tsgolint/non-tsgolint.ts,Sysix,['Sysix'],1,Human,2025-08-08T13:17:37+00:00,1
+oxc-project/oxc,oxc-project,crates/oxc_isolated_declarations/tests/snapshots/union-type.snap,Boshen,['Boshen'],13,Human,2025-08-05T12:17:54+00:00,1
+oxc-project/oxc,oxc-project,crates/oxc_language_server/fixtures/linter/ts_path_alias/deep/tsconfig.json,Sysix,['Sysix'],10,Human,2025-08-04T09:32:27+00:00,1
+langbot-app/LangBot,langbot-app,pkg/api/http/controller/groups/pipelines/__init__.py,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",0,AI,2025-06-08T07:34:26+00:00,2
+langbot-app/LangBot,langbot-app,web/src/i18n/locales/en-US.ts,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",174,AI,2025-05-13T14:39:19+00:00,72
+langbot-app/LangBot,langbot-app,web/src/app/home/models/component/embedding-card/EmbeddingCardVO.ts,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'Junyan Qin']",23,AI,2025-05-21T04:42:39+00:00,1
+langbot-app/LangBot,langbot-app,web/src/app/home/models/component/embedding-card/EmbeddingCard.module.css,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'Junyan Qin']",97,AI,2025-05-21T04:42:39+00:00,4
+langbot-app/LangBot,langbot-app,web/src/app/home/models/component/embedding-card/EmbeddingCard.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'Junyan Qin']",53,AI,2025-05-21T04:42:39+00:00,1
+langbot-app/LangBot,langbot-app,web/src/app/home/knowledge/components/kb-retrieve/KBRetrieve.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",98,AI,2025-07-20T09:56:46+00:00,2
+langbot-app/LangBot,langbot-app,web/src/app/infra/entities/message/index.ts,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",7,AI,2025-06-08T07:34:26+00:00,1
+langbot-app/LangBot,langbot-app,web/src/components/ui/hover-card.tsx,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",51,AI,2025-05-13T04:25:32+00:00,2
+langbot-app/LangBot,langbot-app,web/src/app/home/models/component/ICreateEmbeddingField.ts,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'Junyan Qin']",7,AI,2025-05-21T04:42:39+00:00,1
+langbot-app/LangBot,langbot-app,web/src/i18n/index.ts,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",34,AI,2025-05-13T14:39:19+00:00,3
+langbot-app/LangBot,langbot-app,web/src/app/home/bots/components/bot-card/BotCard.tsx,Junyan Qin,['Junyan Qin'],53,Human,2025-04-28T13:41:03+00:00,8
+langbot-app/LangBot,langbot-app,pkg/rag/knowledge/kbmgr.py,Junyan Qin,['Junyan Qin'],212,Human,2025-07-16T13:17:18+00:00,6
+langbot-app/LangBot,langbot-app,web/next,Junyan Qin,['Junyan Qin'],0,Human,2025-05-07T10:06:44+00:00,1
+langbot-app/LangBot,langbot-app,pkg/rag/knowledge/services/base_service.py,WangCham,"['WangCham', 'Junyan Qin']",26,Human,2025-06-25T06:32:53+00:00,4
+langbot-app/LangBot,langbot-app,web/src/app/home/components/dynamic-form/DynamicFormItemConfig.ts,Junyan Qin,['Junyan Qin'],54,Human,2025-04-28T13:41:03+00:00,7
+langbot-app/LangBot,langbot-app,web/src/app/infra/basic-component/create-card-component/CreateCardComponent.tsx,Junyan Qin,['Junyan Qin'],27,Human,2025-04-28T13:41:03+00:00,4
+langbot-app/LangBot,langbot-app,web/web@0.1.0,Junyan Qin,['Junyan Qin'],0,Human,2025-05-07T10:06:44+00:00,1
+langbot-app/LangBot,langbot-app,web/public/file.svg,Junyan Qin,['Junyan Qin'],1,Human,2025-04-28T13:41:03+00:00,1
+langbot-app/LangBot,langbot-app,pkg/rag/knowledge/services/parser.py,WangCham,"['WangCham', 'Junyan Qin']",291,Human,2025-06-25T06:32:53+00:00,8
+langbot-app/LangBot,langbot-app,web/src/app/infra/entities/api/index.ts,Junyan Qin,['Junyan Qin'],309,Human,2025-05-08T10:09:52+00:00,35
+OWASP/mastg,OWASP,tools/network/MASTG-TOOL-0143.md,copilot-swe-agent[bot],['copilot-swe-agent[bot]'],20,AI,2025-07-05T04:25:51+00:00,2
+OWASP/mastg,OWASP,tools/ios/MASTG-TOOL-0138.md,Jeroen Beckers,['Jeroen Beckers'],7,Human,2025-06-21T22:33:36+00:00,2
+microsoft/windows-rs,microsoft,crates/tests/libs/registry/tests/volatile.rs,Copilot,"['Copilot', 'GitHub']",23,AI,2025-06-18T17:36:36+00:00,1
+microsoft/windows-rs,microsoft,crates/samples/components/json_validator_winrt/readme.md,Kenny Kerr,"['Kenny Kerr', 'GitHub']",1,Human,2024-01-31T20:20:35+00:00,1
+Z3Prover/z3,Z3Prover,scripts/update_version.py,Copilot,"['Copilot', 'GitHub']",139,AI,2025-08-20T16:12:33+00:00,2
+Z3Prover/z3,Z3Prover,VERSION.txt,Copilot,"['Copilot', 'GitHub']",1,AI,2025-08-20T16:12:33+00:00,2
+Z3Prover/z3,Z3Prover,.github/copilot-instructions.md,Copilot,"['Copilot', 'GitHub']",167,AI,2025-08-12T22:18:52+00:00,1
+Z3Prover/z3,Z3Prover,src/api/python/test_dist_info.py,Copilot,"['Copilot', 'GitHub']",129,AI,2025-06-28T23:06:03+00:00,2
+Z3Prover/z3,Z3Prover,src/api/python/demonstrate_fix.py,Copilot,"['Copilot', 'GitHub']",140,AI,2025-06-28T23:06:03+00:00,2
+Z3Prover/z3,Z3Prover,genaisrc/mergeopt.genai.mts,Nikolaj Bjorner,['Nikolaj Bjorner'],57,Human,2025-02-13T23:00:05+00:00,2
+Z3Prover/z3,Z3Prover,.github/workflows/ocaml.yaml,Shiwei Weng 翁士伟,"['Shiwei Weng 翁士伟', 'GitHub']",99,Human,2025-04-19T20:41:27+00:00,3
+Z3Prover/z3,Z3Prover,src/api/mcp/z3mcp.py,Nikolaj Bjorner,['Nikolaj Bjorner'],16,Human,2025-04-18T17:00:04+00:00,2
+Z3Prover/z3,Z3Prover,makefile,Shiwei Weng 翁士伟,"['Shiwei Weng 翁士伟', 'GitHub']",400,Human,2025-04-19T20:41:27+00:00,2
+Z3Prover/z3,Z3Prover,genaisrc/myopttool.genai.mts,Nikolaj Bjorner,['Nikolaj Bjorner'],18,Human,2025-02-14T05:11:58+00:00,3
+567-labs/instructor,567-labs,docs/integrations/groq.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",157,AI,2024-11-19T05:57:24+00:00,3
+567-labs/instructor,567-labs,docs/integrations/google.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",277,AI,2024-11-19T05:57:24+00:00,8
+567-labs/instructor,567-labs,docs/integrations/litellm.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",85,AI,2024-11-19T05:57:24+00:00,4
+567-labs/instructor,567-labs,docs/integrations/llama-cpp-python.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",83,AI,2024-11-19T05:57:24+00:00,3
+567-labs/instructor,567-labs,docs/integrations/azure.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",309,AI,2024-11-19T05:57:24+00:00,3
+567-labs/instructor,567-labs,docs/integrations/openai.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",275,AI,2024-11-19T05:57:24+00:00,6
+567-labs/instructor,567-labs,tests/test_dynamic_model_creation.py,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",46,AI,2025-06-03T20:13:26+00:00,2
+567-labs/instructor,567-labs,docs/concepts/validation.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",150,AI,2024-11-19T05:57:24+00:00,8
+567-labs/instructor,567-labs,docs/concepts/unions.md,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",168,AI,2024-11-19T05:57:24+00:00,5
+567-labs/instructor,567-labs,docs/examples/recursive.md,Jason,['Jason'],127,AI,2023-07-09T06:55:03+00:00,11
+567-labs/instructor,567-labs,tests/dsl/test_simple_type.py,Ivan Leo,"['Ivan Leo', 'GitHub']",51,Human,2024-06-11T17:41:30+00:00,1
+567-labs/instructor,567-labs,tests/llm/test_mistral/conftest.py,Ivan Leo,"['Ivan Leo', 'GitHub']",14,Human,2025-03-13T14:27:19+00:00,3
+567-labs/instructor,567-labs,docs/examples/multi_modal_gemini.md,Ivan Leo,"['Ivan Leo', 'GitHub']",190,Human,2024-09-19T15:00:59+00:00,5
+567-labs/instructor,567-labs,tests/llm/test_anthropic/test_system.py,Ivan Leo,"['Ivan Leo', 'GitHub']",144,Human,2024-10-29T07:03:29+00:00,3
+567-labs/instructor,567-labs,tests/assets/image.jpg,Ivan Leo,"['Ivan Leo', 'GitHub']",14178,Human,2025-03-09T21:40:42+00:00,1
+567-labs/instructor,567-labs,docs/tutorials/7-synthetic-data-generation.ipynb,shreya w,"['shreya w', 'GitHub']",27,Human,2024-06-25T09:39:30+00:00,7
+567-labs/instructor,567-labs,test_new_batch_api.py,Jason Liu,['Jason Liu'],76,Human,2025-07-08T03:51:10+00:00,2
+567-labs/instructor,567-labs,tests/llm/test_genai/test_decimal.py,Jason Liu,"['Jason Liu', 'GitHub']",129,Human,2025-07-16T17:00:32+00:00,2
+567-labs/instructor,567-labs,docs/prompting/few_shot/example_generation/sg_icl.md,shreya w,"['shreya w', 'GitHub']",7,Human,2024-06-19T02:00:00+00:00,4
+567-labs/instructor,567-labs,docs/concepts/error_handling.md,Jason Liu,"['Jason Liu', 'GitHub']",293,Human,2025-05-22T20:26:39+00:00,4
+AstrBotDevs/AstrBot,AstrBotDevs,.github/copilot-instructions.md,Copilot,"['Copilot', 'GitHub']",63,AI,2025-08-13T15:31:28+00:00,1
+AstrBotDevs/AstrBot,AstrBotDevs,dashboard/src/i18n/loader.ts,IGCrystal,['IGCrystal'],288,Human,2025-06-16T05:53:33+00:00,7
+dotnet/orleans,dotnet,src/Orleans.Serialization.Abstractions/README.md,Copilot,"['Copilot', 'GitHub']",46,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Azure/Orleans.Clustering.AzureStorage/README.md,Copilot,"['Copilot', 'GitHub']",120,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Azure/Orleans.GrainDirectory.AzureStorage/README.md,Copilot,"['Copilot', 'GitHub']",46,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Orleans.Serialization.TestKit/README.md,Copilot,"['Copilot', 'GitHub']",84,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Redis/Orleans.Persistence.Redis/README.md,Copilot,"['Copilot', 'GitHub']",85,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Redis/Orleans.Reminders.Redis/README.md,Copilot,"['Copilot', 'GitHub']",85,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Azure/Orleans.Hosting.AzureCloudServices/README.md,Copilot,"['Copilot', 'GitHub']",66,AI,2025-05-22T20:58:33+00:00,2
+dotnet/orleans,dotnet,src/Serializers/Orleans.Serialization.Protobuf/README.md,Copilot,"['Copilot', 'GitHub']",132,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/AWS/Orleans.Reminders.DynamoDB/README.md,Copilot,"['Copilot', 'GitHub']",113,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/Azure/Orleans.Reminders.AzureStorage/README.md,Copilot,"['Copilot', 'GitHub']",89,AI,2025-05-22T20:58:33+00:00,1
+dotnet/orleans,dotnet,src/AdoNet/Orleans.GrainDirectory.AdoNet/AdoNetGrainDirectoryOptions.cs,Jorge Candeias,"['Jorge Candeias', 'GitHub']",20,Human,2025-05-30T03:21:48+00:00,1
+dotnet/orleans,dotnet,test/Orleans.Journaling.Tests/TestPerson.cs,Reuben Bond,"['Reuben Bond', 'GitHub']",15,Human,2025-04-23T02:18:00+00:00,1
+dotnet/orleans,dotnet,playground/DashboardToy/DashboardToy.Frontend/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf,Ledjon Behluli,"['Ledjon Behluli', 'GitHub']",1333,Human,2024-07-06T00:08:23+00:00,1
+dotnet/orleans,dotnet,src/Orleans.Core/Placement/PlacementFilterContext.cs,rkargMsft,"['rkargMsft', 'GitHub']",6,Human,2025-02-27T19:58:08+00:00,2
+dotnet/orleans,dotnet,test/Orleans.CodeGenerator.Tests/snapshots/OrleansSourceGeneratorTests.TestCompoundTypeAlias.verified.cs,Meir Blachman,"['Meir Blachman', 'GitHub']",253,Human,2025-04-29T22:52:18+00:00,1
+dotnet/orleans,dotnet,playground/DashboardToy/DashboardToy.Frontend/wwwroot/css/open-iconic/font/fonts/open-iconic.svg,Ledjon Behluli,"['Ledjon Behluli', 'GitHub']",543,Human,2024-07-06T00:08:23+00:00,1
+dotnet/orleans,dotnet,src/Orleans.CodeGenerator/Properties/launchSettings.json,Daniel Cazzulino,"['Daniel Cazzulino', 'GitHub']",8,Human,2024-10-01T21:58:50+00:00,1
+dotnet/orleans,dotnet,sign/packages.config,Benjamin Petit,"['Benjamin Petit', 'GitHub']",8,Human,2024-07-30T12:13:30+00:00,1
+dotnet/orleans,dotnet,sign/snk/ECMA.snk,Benjamin Petit,"['Benjamin Petit', 'GitHub']",1,Human,2024-07-30T12:13:30+00:00,1
+dotnet/orleans,dotnet,src/api/Orleans.Transactions.TestKit.xUnit/Orleans.Transactions.TestKit.xUnit.cs,Reuben Bond,"['Reuben Bond', 'GitHub']",374,Human,2025-04-08T13:05:40+00:00,2
+StarRocks/starrocks,StarRocks,.github/copilot-instructions.md,Copilot,"['Copilot', 'GitHub']",258,AI,2025-08-20T08:43:07+00:00,1
+StarRocks/starrocks,StarRocks,be/src/storage/sstable/sstable_predicate_fwd.h,srlch,"['srlch', 'GitHub']",35,Human,2025-07-21T01:33:53+00:00,1
