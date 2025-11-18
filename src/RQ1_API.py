@@ -391,7 +391,7 @@ class RQ1AnalyzerAPI:
                     'ai_tool': row['ai_tool']
                 })
         
-        # 同数に調整
+        # 同数に調整（数が小さい方合わせる）
         min_count = min(len(ai_files), len(human_files))
         ai_files = ai_files[:min_count]
         human_files = human_files[:min_count]
@@ -909,7 +909,7 @@ class RQ1AnalyzerAPI:
             return None
 
 
-def analyze_multiple_repositories(repo_list, num_repos=3):
+def analyze_multiple_repositories(repo_list, start_index=0, num_repos=3):
     """複数リポジトリの分析を実行 - 成功数ベース版"""
     github_token = os.getenv("GITHUB_TOKEN")
     
@@ -921,6 +921,7 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
     print(f"=" * 80)
     print(f"RQ1 複数リポジトリ分析 (GitHub API版)")
     print(f"=" * 80)
+    print(f"開始位置: {start_index + 1}番目のリポジトリから")
     print(f"目標分析数: {num_repos}リポジトリ（成功基準）")
     print(f"GitHub API: OK")
     print(f"=" * 80)
@@ -931,7 +932,7 @@ def analyze_multiple_repositories(repo_list, num_repos=3):
     failed_repos = []
     
     # 成功したリポジトリがnum_repos個になるまで続ける
-    idx = 0
+    idx = start_index
     while len(all_results) < num_repos and idx < len(repo_list):
         repo_info = repo_list[idx]
         repo_name_full = f"{repo_info['owner']}/{repo_info['repository_name']}"
@@ -1344,14 +1345,19 @@ def main():
     repo_df = pd.read_csv(csv_path)
     repo_list = repo_df.to_dict('records')
 
+    # 開始位置（上から何番目のリポジトリから始めるか）
+    # 例: start_repo = 0 なら1番目から、start_repo = 100 なら101番目から開始
+    start_repo = 91
+    
     # 分析対象リポジトリ数
-    num_repos = 100
+    num_repos = 82
     
     print(f"総リポジトリ数: {len(repo_list)}件")
-    print(f"分析対象: 上位{num_repos}件")
+    print(f"開始位置: {start_repo + 1}番目")
+    print(f"分析対象: {num_repos}件")
     
     # 複数リポジトリ分析実行
-    analyze_multiple_repositories(repo_list, num_repos)
+    analyze_multiple_repositories(repo_list, start_repo, num_repos)
 
 
 if __name__ == "__main__":

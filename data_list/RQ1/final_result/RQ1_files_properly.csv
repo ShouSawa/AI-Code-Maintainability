@@ -1,94 +1,112 @@
-﻿repository_name,repository_owner,file_name,file_creator,line_count,created_by,creation_date,commit_count
-microsoft/vscode,microsoft,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,Copilot,97,AI,2025-08-16T06:42:16+00:00,33
-microsoft/vscode,microsoft,src/vs/workbench/contrib/testing/common/testingChatAgentTool.ts,Connor Peet,318,Human,2025-07-22T23:36:59+00:00,12
-microsoft/vscode,microsoft,src/vs/workbench/services/dataChannel/browser/dataChannelService.ts,Henning Dieterichs,40,Human,2025-07-16T11:43:02+00:00,2
-microsoft/vscode,microsoft,src/vs/workbench/api/browser/mainThreadChatSessions.ts,Osvaldo Ortega,323,Human,2025-07-17T18:37:20+00:00,51
-microsoft/vscode,microsoft,src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/taskHelpers.ts,Daniel Imms,115,Human,2025-08-05T11:11:07+00:00,16
-langchain-ai/langchain,langchain-ai,libs/core/tests/unit_tests/utils/test_strings.py,Copilot,49,AI,2025-07-22T00:33:20+00:00,4
-langchain-ai/langchain,langchain-ai,libs/langchain_v1/tests/unit_tests/test_imports.py,Eugene Yurtsev,60,Human,2025-07-24T13:47:48+00:00,2
-microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.types,Copilot,35,AI,2025-06-25T21:29:50+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.js,Copilot,18,AI,2025-06-25T21:29:50+00:00,1
-microsoft/TypeScript,microsoft,tests/cases/compiler/privateFieldsInClassExpressionDeclaration.ts,Copilot,15,AI,2025-07-31T22:51:51+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/accessorInAmbientContextES5.js,Copilot,81,AI,2025-06-25T21:29:02+00:00,1
-microsoft/TypeScript,microsoft,tests/cases/compiler/accessorInAmbientContextES5.ts,Copilot,29,AI,2025-06-25T21:29:02+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.symbols,Copilot,22,AI,2025-06-25T21:29:50+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/privateFieldsInClassExpressionDeclaration.js,Copilot,44,AI,2025-07-31T22:51:51+00:00,1
-microsoft/TypeScript,microsoft,tests/cases/fourslash/symbolCompletionLowerPriority.ts,Copilot,20,AI,2025-07-02T21:46:24+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/bigintAmbientMinimal.errors.txt,Copilot,17,AI,2025-06-25T21:29:50+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/privateFieldsInClassExpressionDeclaration.errors.txt,Copilot,31,AI,2025-07-31T22:51:51+00:00,1
-microsoft/TypeScript,microsoft,tests/cases/compiler/controlFlowForStatementContinueIntoIncrementor1.ts,Mateusz Burzyński,34,Human,2025-01-22T19:40:58+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesTripleSlashReferenceModeOverride2(module=node20).js,Andrew Branch,37,Human,2025-06-09T21:20:00+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/classAccessorInitializationInferenceWithElementAccess1.types,Mateusz Burzyński,85,Human,2024-10-16T00:52:12+00:00,1
-microsoft/TypeScript,microsoft,tests/cases/fourslash/server/pasteEdits_multiplePastesConsistentlySmallerInSize.ts,navya9singh,92,Human,2024-08-20T00:45:57+00:00,2
-microsoft/TypeScript,microsoft,tests/cases/fourslash/server/pasteEdits_noImportNeededInUpdatedProgram.ts,navya9singh,20,Human,2024-08-20T00:45:57+00:00,2
-microsoft/TypeScript,microsoft,tests/baselines/reference/capturedLetConstInLoop14.js,Mateusz Burzyński,34,Human,2024-07-26T21:34:48+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesImportHelpersCollisions3(module=node18).symbols,Andrew Branch,22,Human,2024-12-13T18:16:23+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/nodeModulesImportHelpersCollisions3(module=node18).js,Andrew Branch,42,Human,2024-12-13T18:16:23+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/importAttributes10.symbols,Mateusz Burzyński,50,Human,2025-06-24T16:49:37+00:00,1
-microsoft/TypeScript,microsoft,tests/baselines/reference/nullishCoalescingOperator1.errors.txt,Ryan Cavanaugh,71,Human,2024-07-22T22:26:17+00:00,1
-nvm-sh/nvm,nvm-sh,.github/copilot-instructions.md,copilot-swe-agent[bot],427,AI,2025-07-02T17:12:44+00:00,1
-nvm-sh/nvm,nvm-sh,test/fast/Unit tests/nvm_process_nvmrc,Jordan Harband,34,Human,2024-06-07T17:13:00+00:00,2
-vitejs/vite,vitejs,playground/css/empty.css,Evan You,0,AI,2020-06-24T15:59:08+00:00,3
-vitejs/vite,vitejs,packages/vite/src/node/__tests__/fixtures/config/import-meta/vite.config.ts,Copilot,6,AI,2025-08-05T04:50:10+00:00,2
-vitejs/vite,vitejs,packages/vite/src/node/ssr/runtime/__tests__/fixtures/string-literal-sourcemap.ts,Copilot,12,AI,2025-08-08T02:49:29+00:00,1
-vitejs/vite,vitejs,packages/vite/src/node/__tests__/fixtures/scan-jsx-runtime/tsconfig.json,Hiroshi Ogawa,13,Human,2025-07-29T10:05:06+00:00,1
-vitejs/vite,vitejs,playground/optimize-deps/dep-cjs-with-external-dep/index.js,James Opstad,4,Human,2025-04-28T09:26:37+00:00,2
-vitejs/vite,vitejs,packages/vite/src/node/ssr/runtime/__tests__/fixtures/cyclic2/test6/index.js,Hiroshi Ogawa,2,Human,2025-03-26T01:18:29+00:00,1
-browser-use/browser-use,browser-use,browser_use/browser/python_highlights.py,Cursor Agent,245,AI,2025-08-17T22:39:32+00:00,30
-browser-use/browser-use,browser-use,browser_use/dom/playground/multi_act.py,Gregor Žunič,32,Human,2025-08-12T19:04:23+00:00,3
-browser-use/browser-use,browser-use,examples/search/simple_search.py,mertunsall,74,Human,2025-07-26T19:42:48+00:00,3
-microsoft/autogen,microsoft,python/samples/agentchat_dspy/single_agent.py,Copilot,0,AI,2025-07-20T07:30:42+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-agentchat/tests/test_events.py,Copilot,85,AI,2025-08-05T16:32:05+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-ext/tests/tools/test_mcp_workbench_overrides.py,Copilot,298,AI,2025-07-06T20:39:05+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-ext/tests/teams/__init__.py,Copilot,1,AI,2025-07-29T22:31:42+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-ext/tests/teams/test_magentic_one.py,Copilot,138,AI,2025-07-29T22:31:42+00:00,3
-microsoft/autogen,microsoft,python/packages/autogen-core/tests/test_static_workbench_overrides.py,Copilot,285,AI,2025-07-06T20:39:05+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-studio/frontend/src/components/views/settings/sidebar.tsx,Victor Dibia,87,Human,2025-02-09T04:50:12+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-studio/frontend/src/components/views/labs/sidebar.tsx,Victor Dibia,111,Human,2025-04-09T02:44:45+00:00,1
-microsoft/autogen,microsoft,python/samples/core_streaming_handoffs_fastapi/topics.py,amith-ajith,5,Human,2025-04-25T01:35:36+00:00,1
-microsoft/autogen,microsoft,python/packages/autogen-core/src/autogen_core/model_context/_token_limited_chat_completion_context.py,Griffin Bassman,83,Human,2025-03-27T20:59:27+00:00,2
-microsoft/autogen,microsoft,python/packages/autogen-ext/tests/tools/web_search/test_duckduckgo_search.py,VARAD SRIVASTAVA,734,Human,2025-07-06T22:59:55+00:00,2
-microsoft/autogen,microsoft,python/samples/core_streaming_response_fastapi/app.py,ToryPan,141,Human,2025-04-21T23:55:03+00:00,1
-mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/deep-research.test.ts,devin-ai-integration[bot],47,AI,2025-07-03T15:34:02+00:00,2
-mendableai/firecrawl,mendableai,apps/api/src/scraper/scrapeURL/lib/__tests__/extractLinks.test.ts,devin-ai-integration[bot],64,AI,2025-07-02T21:14:53+00:00,1
-mendableai/firecrawl,mendableai,apps/js-sdk/firecrawl/src/__tests__/v1/unit/monitor-job-status-retry.test.ts,Gergő Móricz,154,AI,2025-08-01T18:36:32+00:00,2
-mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/crawl-status.ts,devin-ai-integration[bot],449,AI,2025-07-25T16:58:38+00:00,24
-mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/iframe-selectors.test.ts,devin-ai-integration[bot],73,AI,2025-07-25T16:56:08+00:00,2
-mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/generateDomainSplits.test.ts,devin-ai-integration[bot],43,AI,2025-07-25T16:45:53+00:00,2
-mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/batch-scrape.ts,devin-ai-integration[bot],203,AI,2025-07-25T16:58:38+00:00,19
-mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/v2/watcher_async.py,rafaelmmiller,245,Human,2025-08-11T17:29:26+00:00,3
-mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/v2/methods/scrape.py,rafaelmmiller,68,Human,2025-08-05T20:41:12+00:00,5
-mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/crawl-cancel.ts,Gergő Móricz,53,Human,2025-08-12T10:35:21+00:00,3
-mendableai/firecrawl,mendableai,apps/python-sdk/firecrawl/__tests__/e2e/v2/test_map.py,rafaelmmiller,68,Human,2025-08-08T14:56:05+00:00,4
-mendableai/firecrawl,mendableai,apps/api/src/search/v2/searchapi.ts,Gergő Móricz,66,Human,2025-08-03T22:15:22+00:00,2
-mendableai/firecrawl,mendableai,apps/js-sdk/example_v1.js,rafaelmmiller,19,Human,2025-08-12T13:25:41+00:00,1
-mendableai/firecrawl,mendableai,apps/api/src/controllers/v2/scrape-status.ts,Gergő Móricz,53,Human,2025-08-03T23:09:29+00:00,3
-mendableai/firecrawl,mendableai,apps/api/src/search/v2/searxng.ts,Gergő Móricz,68,Human,2025-08-03T22:15:22+00:00,2
-mendableai/firecrawl,mendableai,apps/js-sdk/firecrawl/audit-ci.jsonc,Gergő Móricz,4,Human,2025-08-10T13:36:01+00:00,1
-mendableai/firecrawl,mendableai,apps/api/src/__tests__/snips/v2/scrape-cache.test.ts,Gergő Móricz,103,Human,2025-08-03T21:36:14+00:00,4
-usememos/memos,usememos,server/router/api/v1/test/user_service_stats_test.go,Copilot,105,AI,2025-07-02T12:17:19+00:00,3
-usememos/memos,usememos,proto/gen/api/v1/attachment_service.pb.gw.go,Steven,615,Human,2025-06-17T14:15:19+00:00,2
-gradio-app/gradio,gradio-app,.changeset/honest-radios-check.md,Copilot,6,AI,2025-07-18T18:53:02+00:00,2
-gradio-app/gradio,gradio-app,.changeset/cuddly-pianos-sit.md,Copilot,6,AI,2025-07-28T10:13:27+00:00,2
-gradio-app/gradio,gradio-app,.changeset/bumpy-pianos-spend.md,Abubakar Abid,5,Human,2025-05-28T17:39:18+00:00,2
-gradio-app/gradio,gradio-app,demo/hidden_change/run.py,pngwn,91,Human,2025-07-23T19:38:42+00:00,1
-calcom/cal.com,calcom,apps/api/v2/src/lib/services/available-slots.service.ts,devin-ai-integration[bot],36,AI,2025-07-11T14:37:24+00:00,10
-calcom/cal.com,calcom,packages/lib/di/modules/busy-times.ts,devin-ai-integration[bot],10,AI,2025-08-08T09:14:08+00:00,2
-calcom/cal.com,calcom,apps/web/lib/plain/PlainContactForm.tsx,devin-ai-integration[bot],243,AI,2025-07-24T18:14:38+00:00,4
-calcom/cal.com,calcom,packages/lib/di/modules/FilterHosts.ts,devin-ai-integration[bot],10,AI,2025-08-11T12:24:15+00:00,3
-calcom/cal.com,calcom,apps/api/v2/src/modules/cal-unified-calendars/pipes/google-calendar-event-input-pipe.ts,devin-ai-integration[bot],121,AI,2025-08-13T16:24:19+00:00,2
-calcom/cal.com,calcom,packages/lib/di/modules/cache.ts,devin-ai-integration[bot],11,AI,2025-07-31T17:39:27+00:00,2
-calcom/cal.com,calcom,apps/web/app/api/support/route.ts,devin-ai-integration[bot],95,AI,2025-07-24T18:14:38+00:00,2
-calcom/cal.com,calcom,packages/lib/server/repository/routingForm/queuedFormResponse/PrismaQueuedFormResponseRepository.integration-test.ts,devin-ai-integration[bot],432,AI,2025-08-05T16:47:50+00:00,2
-calcom/cal.com,calcom,apps/web/app/api/support/upload/route.ts,devin-ai-integration[bot],84,AI,2025-07-24T18:14:38+00:00,2
-calcom/cal.com,calcom,packages/ui/components/file-uploader/index.ts,devin-ai-integration[bot],2,AI,2025-07-24T18:14:38+00:00,1
-calcom/cal.com,calcom,packages/lib/server/service/routingForm/responseData/types.ts,Joe Au-Yeung,9,Human,2025-07-17T21:40:18+00:00,2
-calcom/cal.com,calcom,packages/app-store/btcpayserver/api/webhook.ts,Chukwuleta Tobechi,100,Human,2025-07-29T16:08:19+00:00,2
-calcom/cal.com,calcom,packages/platform/atoms/scripts/dev-on.js,Lauris Skraucis,20,Human,2025-07-03T16:45:23+00:00,1
-calcom/cal.com,calcom,packages/features/calAIPhone/providers/retellAI/services/BillingService.ts,Udit Takkar,157,Human,2025-08-08T15:57:13+00:00,5
-calcom/cal.com,calcom,packages/features/redis/di/redisModule.ts,Alex van Andel,17,Human,2025-08-05T17:32:02+00:00,3
-calcom/cal.com,calcom,packages/features/insights/components/booking/MostCancelledBookingsTables.tsx,Eunjae Lee,35,Human,2025-07-29T10:37:18+00:00,1
-calcom/cal.com,calcom,packages/lib/server/repository/ISelectedSlotRepository.ts,Alex van Andel,24,Human,2025-07-25T23:59:32+00:00,1
-calcom/cal.com,calcom,packages/app-store/btcpayserver/components/EventTypeAppSettingsInterface.tsx,Chukwuleta Tobechi,134,Human,2025-07-29T16:08:19+00:00,3
-calcom/cal.com,calcom,packages/app-store/btcpayserver/lib/PaymentService.ts,Chukwuleta Tobechi,204,Human,2025-07-29T16:08:19+00:00,2
-calcom/cal.com,calcom,packages/lib/event-types/getEventTypeById.test.ts,Lauris Skraucis,327,Human,2025-07-28T11:50:12+00:00,2
+﻿repository_name,repository_owner,file_name,file_creator,all_creator_names,line_count,created_by,creation_date,commit_count
+vercel/turborepo,vercel,crates/turborepo-lockfiles/fixtures/pnpm-10-patch.lock,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",76,AI,2025-05-07T18:11:02+00:00,1
+vercel/turborepo,vercel,crates/turborepo-signals/src/listeners.rs,Chris Olszewski,"['Chris Olszewski', 'GitHub']",37,Human,2025-02-27T18:19:31+00:00,3
+microsoft/graphrag,microsoft,tests/unit/logger/test_standard_logging.py,Copilot,"['Copilot', 'GitHub']",199,AI,2025-07-10T00:29:03+00:00,3
+microsoft/graphrag,microsoft,graphrag/logger/standard_logging.py,Copilot,"['Copilot', 'GitHub']",153,AI,2025-07-10T00:29:03+00:00,3
+microsoft/graphrag,microsoft,.semversioner/next-release/patch-20250611170907043237.json,Copilot,"['Copilot', 'GitHub']",4,AI,2025-07-10T00:29:03+00:00,2
+microsoft/graphrag,microsoft,unified-search-app/uv.lock,Copilot,"['Copilot', 'GitHub']",2988,AI,2025-08-14T00:57:25+00:00,1
+microsoft/graphrag,microsoft,.semversioner/next-release/minor-20250521041234833898.json,Copilot,"['Copilot', 'GitHub']",4,AI,2025-07-10T18:08:44+00:00,2
+microsoft/graphrag,microsoft,.semversioner/next-release/patch-20250519191613388970.json,Copilot,"['Copilot', 'GitHub']",4,AI,2025-05-20T22:34:28+00:00,2
+microsoft/graphrag,microsoft,uv.lock,Copilot,"['Copilot', 'GitHub']",4166,AI,2025-08-14T00:57:25+00:00,8
+microsoft/graphrag,microsoft,.semversioner/next-release/minor-20250728163653403774.json,Copilot,"['Copilot', 'GitHub']",4,AI,2025-08-14T00:57:25+00:00,2
+microsoft/graphrag,microsoft,tests/unit/logger/__init__.py,Copilot,"['Copilot', 'GitHub']",4,AI,2025-07-10T00:29:03+00:00,2
+microsoft/graphrag,microsoft,graphrag/index/reporting/file_workflow_callbacks.py,Alonso Guevara,['Alonso Guevara'],67,Human,2024-07-01T21:25:30+00:00,5
+microsoft/graphrag,microsoft,tests/integration/llm/__init__.py,Alonso Guevara,"['Alonso Guevara', 'GitHub']",2,Human,2025-02-20T14:56:20+00:00,2
+microsoft/graphrag,microsoft,graphrag/config/input_models/storage_config_input.py,Alonso Guevara,['Alonso Guevara'],18,Human,2024-07-01T21:25:30+00:00,3
+microsoft/graphrag,microsoft,.semversioner/next-release/patch-20250213222251109897.json,Alonso Guevara,"['Alonso Guevara', 'GitHub']",4,Human,2025-02-13T23:32:54+00:00,2
+microsoft/graphrag,microsoft,docs/examples_notebooks/inputs/operation dulce/lancedb/default-entity-description.lance/data/eabd7580-86f5-4022-8aa7-fe0aff816d98.lance,Nathan Evans,"['Nathan Evans', 'GitHub']",2411,Human,2025-03-12T00:23:49+00:00,1
+microsoft/graphrag,microsoft,.semversioner/next-release/patch-20250430001238698062.json,Nathan Evans,"['Nathan Evans', 'GitHub']",4,Human,2025-04-30T01:18:49+00:00,2
+microsoft/graphrag,microsoft,unified-search-app/app/ui/report_details.py,gaudyb,"['gaudyb', 'GitHub']",98,Human,2025-04-07T17:59:02+00:00,1
+microsoft/graphrag,microsoft,tests/verbs/data/entities.parquet,Nathan Evans,"['Nathan Evans', 'GitHub']",1548,Human,2025-02-07T19:11:03+00:00,5
+microsoft/graphrag,microsoft,graphrag/index/graph/extractors/graph/prompts.py,Alonso Guevara,['Alonso Guevara'],107,Human,2024-07-01T21:25:30+00:00,3
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/parameters/components/Upscale/ParamTileControlNetModel.tsx,Cursor Agent,"['Cursor Agent', 'psychedelicious']",38,AI,2025-06-29T20:04:55+00:00,6
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/system/components/VideosModal/PlaylistCard.tsx,Cursor Agent,"['Cursor Agent', 'psychedelicious']",33,AI,2025-07-07T16:28:34+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/controlLayers/components/Settings/CanvasSettingsDefaultAutoSwitchSelect.tsx,Cursor Agent,"['Cursor Agent', 'Kent Keirsey']",35,AI,2025-07-08T17:19:05+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/controlLayers/components/CanvasAlerts/CanvasAlertsSaveAllStagingImagesToGallery.tsx,Cursor Agent,"['Cursor Agent', 'psychedelicious']",23,AI,2025-07-07T01:27:09+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/controlLayers/components/Settings/CanvasSettingsSaveAllStagingImagesToGalleryCheckbox.tsx,Cursor Agent,"['Cursor Agent', 'psychedelicious']",25,AI,2025-07-07T01:27:09+00:00,2
+invoke-ai/InvokeAI,invoke-ai,REFIMAGE_MODEL_SWITCHING_IMPLEMENTATION.md,Cursor Agent,"['Cursor Agent', 'psychedelicious']",114,AI,2025-07-08T15:35:41+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/system/components/VideosModal/PlaylistCardList.tsx,Cursor Agent,"['Cursor Agent', 'psychedelicious']",20,AI,2025-07-07T16:28:34+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/prompt/PromptExpansion/graph.ts,Mary Hipp Rogers,"['Mary Hipp Rogers', 'GitHub']",43,Human,2025-07-02T14:26:48+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/gallery/hooks/useRecallDimensions.ts,psychedelicious,['psychedelicious'],50,Human,2025-07-09T07:09:54+00:00,6
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/ui/layouts/navigation-api.test.ts,psychedelicious,['psychedelicious'],873,Human,2025-07-04T01:40:05+00:00,16
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/nodes/components/flow/nodes/common/NonInvocationNodeTitle.tsx,psychedelicious,"['psychedelicious', 'Kent Keirsey']",69,Human,2025-07-25T08:38:07+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/nodes/components/flow/nodes/common/shared.ts,psychedelicious,"['psychedelicious', 'Kent Keirsey']",95,Human,2025-07-25T08:38:07+00:00,4
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/gallery/hooks/useDeleteImage.ts,psychedelicious,['psychedelicious'],34,Human,2025-07-09T07:09:54+00:00,2
+invoke-ai/InvokeAI,invoke-ai,invokeai/frontend/web/src/features/gallery/store/types.test.ts,psychedelicious,['psychedelicious'],13,Human,2025-07-25T03:13:28+00:00,1
+remotion-dev/remotion,remotion-dev,packages/renderer/src/test/validate-even-dimensions-with-codec.test.ts,copilot-swe-agent[bot],['copilot-swe-agent[bot]'],192,AI,2025-07-25T08:07:23+00:00,3
+remotion-dev/remotion,remotion-dev,packages/google-fonts/src/BitcountGridSingle.ts,Jonny Burger,['Jonny Burger'],103,Human,2025-07-21T14:35:59+00:00,2
+remotion-dev/remotion,remotion-dev,packages/example/src/TikTokTextbox/rounded-corner.tsx,Jonny Burger,['Jonny Burger'],67,Human,2025-06-03T11:58:36+00:00,3
+remotion-dev/remotion,remotion-dev,packages/video/src/new-video-for-rendering.tsx,JonnyBurger,['JonnyBurger'],168,Human,2025-07-29T08:45:24+00:00,43
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue28986_ContentPage.xaml.cs,Copilot,"['Copilot', 'GitHub']",84,AI,2025-07-28T14:01:29+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Shared.Tests/Tests/Issues/Issue30690.cs,copilot-swe-agent[bot],"['copilot-swe-agent[bot]', 'Matthew Leibowitz']",111,AI,2025-07-17T20:29:39+00:00,10
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Mac.Tests/snapshots/mac/AddItemsToCarouselViewWorks.png,Copilot,"['Copilot', 'Shane Neuville (Rebase PR Action)']",288,AI,2025-08-13T06:10:02+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue28986.xaml.cs,Copilot,"['Copilot', 'GitHub']",97,AI,2025-07-28T14:01:29+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue28986_ScrollView.xaml,Copilot,"['Copilot', 'GitHub']",99,AI,2025-07-28T14:01:29+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/Core.UnitTests/SafeAreaTests.cs,Copilot,"['Copilot', 'GitHub']",631,AI,2025-07-28T14:01:29+00:00,3
+dotnet/maui,dotnet,src/Core/src/Converters/SafeAreaEdgesTypeConverter.cs,Copilot,"['Copilot', 'GitHub']",85,AI,2025-07-28T14:01:29+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Issues/Issue30690.cs,copilot-swe-agent[bot],"['copilot-swe-agent[bot]', 'Matthew Leibowitz']",150,AI,2025-07-17T20:29:39+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/Xaml.UnitTests/SafeAreaEdgesTests.xaml,Copilot,"['Copilot', 'GitHub']",30,AI,2025-07-28T14:01:29+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.WinUI.Tests/snapshots/windows/SearchBar_SetFlowDirection_VerifyVisualState.png,TamilarasanSF4853,"['TamilarasanSF4853', 'Shane Neuville']",279,Human,2025-07-10T21:48:14+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Android.Tests/snapshots/android/Button_setLineBreakModeAndText_VerifyVisualState.png,TamilarasanSF4853,"['TamilarasanSF4853', 'Shane Neuville (Rebase PR Action)']",1384,Human,2025-06-13T12:08:40+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.HostApp/Resources/Raw/hybridroot/assets/mov_bbb.mp4,TJ Lambert,"['TJ Lambert', 'GitHub']",22266,Human,2025-08-06T08:38:10+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.WinUI.Tests/snapshots/windows/RadioButton_SetFontFamilyAndFontSize_VerifyVisualState.png,TamilarasanSF4853,"['TamilarasanSF4853', 'Shane Neuville (Rebase PR Action)']",453,Human,2025-06-09T19:21:55+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Mac.Tests/snapshots/mac/ClearButtonVisiblityButton_TextPresent.png,LogishaSelvarajSF4525,"['LogishaSelvarajSF4525', 'Shane Neuville (Rebase PR Action)']",297,Human,2025-06-26T17:35:09+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/ManualTests/ViewModels/GroupedAnimalsViewModel.cs,Javier Suárez,['Javier Suárez'],479,Human,2025-06-12T13:04:23+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.Shared.Tests/Tests/Issues/Issue21886.cs,SyedAbdulAzeemSF4852,"['SyedAbdulAzeemSF4852', 'Shane Neuville (Rebase PR Action)']",32,Human,2025-06-24T17:20:26+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/ManualTests/Tests/Commands/G4.xaml.cs,Javier Suárez,['Javier Suárez'],24,Human,2025-06-12T13:04:23+00:00,2
+dotnet/maui,dotnet,src/Controls/tests/TestCases.WinUI.Tests/snapshots/windows/Button_setShadowAndText_VerifyVisualState.png,TamilarasanSF4853,"['TamilarasanSF4853', 'Shane Neuville (Rebase PR Action)']",349,Human,2025-06-13T12:08:40+00:00,1
+dotnet/maui,dotnet,src/Controls/tests/TestCases.WinUI.Tests/snapshots/windows/Button_setFontSizeAndText_VerifyVisualState.png,TamilarasanSF4853,"['TamilarasanSF4853', 'Shane Neuville (Rebase PR Action)']",261,Human,2025-06-13T12:08:40+00:00,1
+The-Art-of-Hacking/h4cker,The-Art-of-Hacking,osint/quick_recon/plugins/__pycache__/pasting.cpython-312.pyc,copilot-swe-agent[bot],['copilot-swe-agent[bot]'],46,AI,2025-08-13T04:01:36+00:00,1
+The-Art-of-Hacking/h4cker,The-Art-of-Hacking,.github/copilot-instructions.md,copilot-swe-agent[bot],['copilot-swe-agent[bot]'],156,AI,2025-08-13T04:05:29+00:00,2
+The-Art-of-Hacking/h4cker,The-Art-of-Hacking,threat_intelligence/stix_4f66bca89e4beb33758a46fb192b744779052b2e5e2e96e2b41d2fd093f61074.json,Omar Santos,"['Omar Santos', 'GitHub']",88,Human,2025-02-14T23:52:14+00:00,2
+The-Art-of-Hacking/h4cker,The-Art-of-Hacking,SCOR/devops_devsecops.md,Omar Santos,"['Omar Santos', 'GitHub']",336,Human,2024-04-08T20:21:34+00:00,1
+Tencent/ncnn,Tencent,toolchains/windows-xp-msvc.toolchain.cmake,Copilot,"['Copilot', 'GitHub']",31,AI,2025-07-24T07:45:02+00:00,1
+Tencent/ncnn,Tencent,.github/workflows/windows-xp-mingw.yml,Copilot,"['Copilot', 'GitHub']",57,AI,2025-07-24T07:45:02+00:00,2
+Tencent/ncnn,Tencent,docs/developer-guide/build-ncnn-on-windows-xp.zh.md,Copilot,"['Copilot', 'GitHub']",137,AI,2025-07-24T07:45:02+00:00,1
+Tencent/ncnn,Tencent,.github/workflows/windows-xp-clang.yml,Copilot,"['Copilot', 'GitHub']",62,AI,2025-07-24T07:45:02+00:00,2
+Tencent/ncnn,Tencent,toolchains/windows-xp-clang.toolchain.cmake,Copilot,"['Copilot', 'GitHub']",33,AI,2025-07-24T07:45:02+00:00,1
+Tencent/ncnn,Tencent,toolchains/windows-xp-mingw.toolchain.cmake,Copilot,"['Copilot', 'GitHub']",43,AI,2025-07-24T07:45:02+00:00,1
+Tencent/ncnn,Tencent,.github/workflows/windows-xp-msvc.yml,Copilot,"['Copilot', 'GitHub']",56,AI,2025-07-24T07:45:02+00:00,2
+Tencent/ncnn,Tencent,tools/pnnx/tests/onnx/test_F_hardswish.py,nihui,"['nihui', 'GitHub']",80,Human,2024-07-09T03:26:17+00:00,3
+Tencent/ncnn,Tencent,tools/pnnx/tests/ncnn/test_torch_roll.py,nihui,"['nihui', 'GitHub']",64,Human,2024-08-12T11:33:39+00:00,2
+Tencent/ncnn,Tencent,tools/pnnx/tests/test_transformers_ctrl_attention.py,nihui,"['nihui', 'GitHub']",68,Human,2025-05-20T06:21:11+00:00,2
+Tencent/ncnn,Tencent,tools/pnnx/tests/onnx/test_F_avg_pool2d.py,nihui,"['nihui', 'GitHub']",59,Human,2024-06-25T03:57:00+00:00,2
+Tencent/ncnn,Tencent,tools/pnnx/src/pass_onnx/nn_BatchNorm2d.cpp,nihui,"['nihui', 'GitHub']",72,Human,2024-03-19T08:05:05+00:00,4
+Tencent/ncnn,Tencent,tools/pnnx/src/pass_level5/fuse_multiheadattention_sameqkv.h,nihui,"['nihui', 'GitHub']",21,Human,2025-05-26T04:35:58+00:00,2
+Tencent/ncnn,Tencent,src/layer/riscv/pooling_riscv_zfh.cpp,nihui,"['nihui', 'GitHub']",695,Human,2024-12-04T08:16:17+00:00,2
+dotnet/core,dotnet,release-notes/10.0/preview/preview5/aspnetcore.md,Copilot,"['Copilot', 'GitHub']",170,AI,2025-06-07T05:09:32+00:00,2
+dotnet/core,dotnet,.github/copilot-instructions.md,Copilot,"['Copilot', 'GitHub']",174,AI,2025-08-19T15:57:36+00:00,1
+dotnet/core,dotnet,release-notes/8.0/preview/api-diff/rc2/Microsoft.AspNetCore.App/8.0-rc2_Microsoft.Extensions.DependencyInjection.md,Carlos Sánchez López,"['Carlos Sánchez López', 'GitHub']",35,Human,2023-10-26T00:56:57+00:00,2
+dotnet/core,dotnet,release-notes/9.0/supported-os.json,Rich Lander,"['Rich Lander', 'GitHub']",327,Human,2024-06-26T14:57:07+00:00,16
+microsoft/typescript-go,microsoft,testdata/baselines/reference/config/tsconfigParsing/null overrides in extended tsconfig - mixed field types with jsonSourceFile api.js,Copilot,"['Copilot', 'GitHub']",47,AI,2025-06-30T20:36:42+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/config/tsconfigParsing/null overrides in middle level of extends chain with jsonSourceFile api.js,Copilot,"['Copilot', 'GitHub']",48,AI,2025-06-30T20:36:42+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/tsc/projectReferences/rewriteRelativeImportExtensionsProjectReferences3.js,Copilot,"['Copilot', 'GitHub']",60,AI,2025-06-12T15:06:00+00:00,7
+microsoft/typescript-go,microsoft,internal/tspath/untitled_test.go,Copilot,"['Copilot', 'GitHub']",61,AI,2025-07-15T23:27:09+00:00,1
+microsoft/typescript-go,microsoft,testdata/tests/cases/compiler/circularControlFlowNarrowingWithCurrentElement01.ts,Copilot,"['Copilot', 'GitHub']",40,AI,2025-07-07T21:05:41+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/conformance/cjsErrors(module=nodenext).errors.txt,Copilot,"['Copilot', 'GitHub']",12,AI,2025-06-12T15:06:00+00:00,1
+microsoft/typescript-go,microsoft,internal/ls/hover_test.go,Copilot,"['Copilot', 'GitHub']",97,AI,2025-07-08T20:37:25+00:00,6
+microsoft/typescript-go,microsoft,internal/fourslash/tests/chineseCharacterDisplay_test.go,Copilot,"['Copilot', 'GitHub']",50,AI,2025-08-11T23:10:41+00:00,1
+microsoft/typescript-go,microsoft,testdata/tests/cases/compiler/parameterPropertyWithDefaultValue.ts,Copilot,"['Copilot', 'GitHub']",8,AI,2025-07-30T14:58:40+00:00,1
+microsoft/typescript-go,microsoft,testdata/tests/cases/compiler/parameterPropertyWithDefaultValueExtended.ts,Copilot,"['Copilot', 'GitHub']",29,AI,2025-07-30T14:58:40+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/narrowUnknownByTypePredicate.symbols.diff,Jake Bailey,"['Jake Bailey', 'GitHub']",11,Human,2025-06-03T22:40:51+00:00,2
+microsoft/typescript-go,microsoft,internal/format/util.go,Wesley Wigham,"['Wesley Wigham', 'GitHub']",190,Human,2025-06-05T19:43:52+00:00,6
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/jsdocTypeCast.js.diff,Jake Bailey,"['Jake Bailey', 'GitHub']",10,Human,2025-06-19T18:53:24+00:00,1
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submoduleAccepted/conformance/jsdocImportType2.errors.txt.diff,Nathan Shively-Sanders,"['Nathan Shively-Sanders', 'GitHub']",37,Human,2025-04-08T21:01:29+00:00,3
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/declarationEmitComputedPropertyNameEnum1.js,Ron Buckton,"['Ron Buckton', 'GitHub']",34,Human,2025-03-18T17:45:01+00:00,3
+microsoft/typescript-go,microsoft,internal/ls/signaturehelp_test.go,navya9singh,"['navya9singh', 'GitHub']",1057,Human,2025-06-03T21:01:20+00:00,8
+microsoft/typescript-go,microsoft,internal/fourslash/tests/gen/referencesForIllegalAssignment_test.go,Isabel Duan,"['Isabel Duan', 'GitHub']",19,Human,2025-07-08T17:43:00+00:00,1
+microsoft/typescript-go,microsoft,internal/fourslash/tests/gen/goToDefinitionReturn2_test.go,Daniel Rosenwasser,"['Daniel Rosenwasser', 'GitHub']",21,Human,2025-07-24T00:35:33+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/submodule/compiler/outModuleConcatES6.sourcemap.txt,Ron Buckton,"['Ron Buckton', 'GitHub']",94,Human,2025-04-09T19:57:21+00:00,2
+microsoft/typescript-go,microsoft,testdata/baselines/reference/fourslash/signatureHelp/SignatureHelpRestArgs3.baseline,Daniel Rosenwasser,"['Daniel Rosenwasser', 'GitHub']",79,Human,2025-08-04T18:17:52+00:00,2
+mlflow/mlflow,mlflow,dev/clint/src/clint/rules/no_class_based_tests.py,Copilot,"['Copilot', 'GitHub']",35,AI,2025-08-19T08:21:43+00:00,1
+mlflow/mlflow,mlflow,dev/clint/tests/rules/test_no_class_based_tests.py,Copilot,"['Copilot', 'GitHub']",73,AI,2025-08-19T08:21:43+00:00,3
+mlflow/mlflow,mlflow,.github/workflows/preview-comment.js,Copilot,"['Copilot', 'GitHub']",119,AI,2025-07-03T23:39:40+00:00,4
+mlflow/mlflow,mlflow,mlflow/server/js/src/common/components/DarkThemeSwitch.test.tsx,Copilot,"['Copilot', 'GitHub']",56,AI,2025-07-04T11:09:37+00:00,2
+mlflow/mlflow,mlflow,docs/.prettierignore,Copilot,"['Copilot', 'GitHub']",2,AI,2025-07-02T12:53:05+00:00,3
+mlflow/mlflow,mlflow,dev/get_version.py,Copilot,"['Copilot', 'GitHub']",22,AI,2025-08-15T06:44:42+00:00,2
+mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/development/index.js,Daniel Lok,"['Daniel Lok', 'GitHub']",10,Human,2025-07-15T10:25:01+00:00,2
+mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/design-system/Icon/__generated/icons/QueryEditorIcon.js.map,Daniel Lok,"['Daniel Lok', 'GitHub']",1,Human,2025-07-15T10:25:01+00:00,2
+mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/design-system/Icon/__generated/icons/PinFillIcon.js.map,Daniel Lok,"['Daniel Lok', 'GitHub']",1,Human,2025-07-15T10:25:01+00:00,2
+mlflow/mlflow,mlflow,mlflow/server/js/src/shared/web-shared/genai-traces-table/types.ts,Daniel Lok,"['Daniel Lok', 'GitHub']",375,Human,2025-08-07T07:13:30+00:00,5
+mlflow/mlflow,mlflow,docs/static/images/mlflow-3/eval-monitor/trace-evaluation-result.png,Yuki Watanabe,"['Yuki Watanabe', 'GitHub']",6713,Human,2025-08-19T03:24:48+00:00,1
+mlflow/mlflow,mlflow,mlflow/server/js/vendor/design-system/dist/design-system/TypeaheadCombobox/hooks/useTypeaheadComboboxContext.js,Daniel Lok,"['Daniel Lok', 'GitHub']",6,Human,2025-07-15T10:25:01+00:00,2
