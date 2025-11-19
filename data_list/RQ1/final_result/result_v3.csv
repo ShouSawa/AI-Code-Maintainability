@@ -1,0 +1,551 @@
+﻿repository_name,file_name,file_created_by,file_creator_names,file_line_count,file_creation_date,file_commit_count,commit_message,commit_created_by,commit_author_names,commit_changed_lines,commit_date
+Significant-Gravitas/AutoGPT,.github/copilot-instructions.md,AI,"Copilot, GitHub",244,2025-08-21T21:00:19+00:00,2,"docs(frontend): contributing guidelines (#11210)
+
+## Changes 🏗️
+
+Document how to contribute on the Front-end so it is easier for
+non-regular contributors.
+
+## Checklist 📋
+
+### For code changes:
+- [x] I have clearly listed my changes in the PR description
+- [x] I have made a test plan
+- [x] I have tested my changes according to the test plan:
+- [x] Contribution guidelines make sense and look good considering the
+AutoGPT stack
+
+### For configuration changes:
+
+None",Human,,1097,2025-10-21T08:26:51+00:00
+Significant-Gravitas/AutoGPT,.github/copilot-instructions.md,AI,"Copilot, GitHub",244,2025-08-21T21:00:19+00:00,2,"feat(platform): Enhance GitHub Copilot agent setup with CI-aligned environment and comprehensive platform documentation integration (#10708)
+
+This PR transforms GitHub Copilot from a general coding assistant into a
+platform-specific expert by providing comprehensive onboarding and a
+fully configured development environment that mirrors the AutoGPT
+platform's CI/CD pipeline.
+
+## Key Features
+
+### CI-Aligned Development Environment
+- **Production-Grade Setup**: The `copilot-setup-steps.yml` workflow now
+mirrors the platform's CI workflows, providing Copilot with the same
+environment used for testing and deployment
+- **Essential Services**: Automatically starts Docker services
+(PostgreSQL, Redis, RabbitMQ, ClamAV) required for platform development
+- **Database Readiness**: Includes Prisma migrations and client
+generation to ensure the database is immediately usable
+- **Environment Configuration**: Copies default environment files and
+validates service health, eliminating manual setup steps
+
+### Comprehensive Platform Knowledge
+- **Unified Documentation**: The `copilot-instructions.md` file
+integrates knowledge from multiple sources (installer.md,
+advanced_setup.md, CLAUDE.md, AGENTS.md) into a single comprehensive
+guide
+- **Development Patterns**: Includes advanced patterns for block
+development, API creation, frontend work, and security implementation
+- **Architecture Insights**: Provides deep understanding of the agent
+block system, database schema, middleware, and CI/CD workflows
+- **Troubleshooting Guide**: Comprehensive error handling and validation
+steps based on production experience
+
+### Enhanced Development Workflow
+```bash
+# Before: Trial-and-error dependency installation
+# After: Fully configured environment ready immediately
+
+# Copilot now understands:
+poetry run serve                    # Backend server (port 8000)
+pnpm dev                           # Frontend server (port 3000)
+docker compose up -d               # Essential services
+poetry run pytest backend/blocks/test/test_block.py -xvs  # Block validation
+```
+
+## Benefits
+
+This configuration provides Copilot with:
+- **Immediate Productivity**: No time wasted on environment setup or
+dependency discovery
+- **Platform Expertise**: Deep understanding of AutoGPT's architecture,
+security patterns, and development workflows
+- **CI Consistency**: Local development environment matches production
+testing environment
+- **Comprehensive Context**: Access to all platform documentation and
+development patterns in a single source
+
+The setup eliminates the slow trial-and-error process typical of
+LLM-based development tools and ensures Copilot works efficiently from
+the first interaction.
+
+## References
+
+- [GitHub Copilot Agent Environment
+Setup](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment#preinstalling-tools-or-dependencies-in-copilots-environment)
+- [AutoGPT Platform CI Workflows](.github/workflows/)
+- [Platform Development Guide](autogpt_platform/CLAUDE.md)
+
+<!-- START COPILOT CODING AGENT TIPS -->
+---
+
+💡 You can make Copilot smarter by setting up custom instructions,
+customizing its development environment and configuring Model Context
+Protocol (MCP) servers. Learn more [Copilot coding agent
+tips](https://gh.io/copilot-coding-agent-tips) in the docs.
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: ntindle <8845353+ntindle@users.noreply.github.com>
+Co-authored-by: Nicholas Tindle <nicholas.tindle@agpt.co>
+Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>
+Co-authored-by: Claude <noreply@anthropic.com>
+Co-authored-by: Nicholas Tindle <nicktindle@outlook.com>
+Co-authored-by: Reinier van der Leer <pwuts@agpt.co>",AI,,546,2025-08-21T21:00:19+00:00
+Significant-Gravitas/AutoGPT,.github/workflows/copilot-setup-steps.yml,AI,"Copilot, GitHub",302,2025-08-21T21:00:19+00:00,1,"feat(platform): Enhance GitHub Copilot agent setup with CI-aligned environment and comprehensive platform documentation integration (#10708)
+
+This PR transforms GitHub Copilot from a general coding assistant into a
+platform-specific expert by providing comprehensive onboarding and a
+fully configured development environment that mirrors the AutoGPT
+platform's CI/CD pipeline.
+
+## Key Features
+
+### CI-Aligned Development Environment
+- **Production-Grade Setup**: The `copilot-setup-steps.yml` workflow now
+mirrors the platform's CI workflows, providing Copilot with the same
+environment used for testing and deployment
+- **Essential Services**: Automatically starts Docker services
+(PostgreSQL, Redis, RabbitMQ, ClamAV) required for platform development
+- **Database Readiness**: Includes Prisma migrations and client
+generation to ensure the database is immediately usable
+- **Environment Configuration**: Copies default environment files and
+validates service health, eliminating manual setup steps
+
+### Comprehensive Platform Knowledge
+- **Unified Documentation**: The `copilot-instructions.md` file
+integrates knowledge from multiple sources (installer.md,
+advanced_setup.md, CLAUDE.md, AGENTS.md) into a single comprehensive
+guide
+- **Development Patterns**: Includes advanced patterns for block
+development, API creation, frontend work, and security implementation
+- **Architecture Insights**: Provides deep understanding of the agent
+block system, database schema, middleware, and CI/CD workflows
+- **Troubleshooting Guide**: Comprehensive error handling and validation
+steps based on production experience
+
+### Enhanced Development Workflow
+```bash
+# Before: Trial-and-error dependency installation
+# After: Fully configured environment ready immediately
+
+# Copilot now understands:
+poetry run serve                    # Backend server (port 8000)
+pnpm dev                           # Frontend server (port 3000)
+docker compose up -d               # Essential services
+poetry run pytest backend/blocks/test/test_block.py -xvs  # Block validation
+```
+
+## Benefits
+
+This configuration provides Copilot with:
+- **Immediate Productivity**: No time wasted on environment setup or
+dependency discovery
+- **Platform Expertise**: Deep understanding of AutoGPT's architecture,
+security patterns, and development workflows
+- **CI Consistency**: Local development environment matches production
+testing environment
+- **Comprehensive Context**: Access to all platform documentation and
+development patterns in a single source
+
+The setup eliminates the slow trial-and-error process typical of
+LLM-based development tools and ensures Copilot works efficiently from
+the first interaction.
+
+## References
+
+- [GitHub Copilot Agent Environment
+Setup](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment#preinstalling-tools-or-dependencies-in-copilots-environment)
+- [AutoGPT Platform CI Workflows](.github/workflows/)
+- [Platform Development Guide](autogpt_platform/CLAUDE.md)
+
+<!-- START COPILOT CODING AGENT TIPS -->
+---
+
+💡 You can make Copilot smarter by setting up custom instructions,
+customizing its development environment and configuring Model Context
+Protocol (MCP) servers. Learn more [Copilot coding agent
+tips](https://gh.io/copilot-coding-agent-tips) in the docs.
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: ntindle <8845353+ntindle@users.noreply.github.com>
+Co-authored-by: Nicholas Tindle <nicholas.tindle@agpt.co>
+Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>
+Co-authored-by: Claude <noreply@anthropic.com>
+Co-authored-by: Nicholas Tindle <nicktindle@outlook.com>
+Co-authored-by: Reinier van der Leer <pwuts@agpt.co>",AI,,546,2025-08-21T21:00:19+00:00
+Significant-Gravitas/AutoGPT,forge/autogpt/sdk/ai_profile.py,Human,SwiftyOS,25,2023-09-04T14:21:09+00:00,3,Renamed forge module forge from autogpt,Human,,76,2023-09-12T09:00:05+00:00
+Significant-Gravitas/AutoGPT,forge/autogpt/sdk/ai_profile.py,Human,SwiftyOS,25,2023-09-04T14:21:09+00:00,3,Addition of Ability Register and Sample Ability (#27),Human,,228,2023-09-05T11:13:29+00:00
+Significant-Gravitas/AutoGPT,forge/autogpt/sdk/ai_profile.py,Human,SwiftyOS,25,2023-09-04T14:21:09+00:00,3,Re-Organised project and added benchmark code,Human,,566277,2023-09-04T14:21:09+00:00
+Significant-Gravitas/AutoGPT,reports/Turbo/regression_tests.json,Human,,0,,0,,Human,,0,
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Clean up typings and type checks for chat sessions
+
+For #278114
+
+- Try to simplify the picker item typings in chatActions. Difficult to understand original intent but some fields seem unused and other didn't seem to be working correctly for the `hasKey` checks
+
+- Reuses typings for `IMarshalledChatSessionContext`
+
+- Remove `isLocalChatSessionItem` and check the resource instead",Human,,141,2025-11-18T19:22:06+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Removing history custom node from agents view (#276642)
+
+* Removing history custom node from agents view
+
+* Grouping
+
+* Clean up
+
+* Update src/vs/workbench/contrib/chat/browser/chatSessions/view/sessionsViewPane.ts
+
+Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>
+
+* Review comments
+
+* Using archive instead
+
+* Using map
+
+* Remove id change
+
+---------
+
+Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",Human,,203,2025-11-13T10:31:44+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,agent sessions - offer action to toggle to the new single view (#274777),Human,,49,2025-11-03T15:28:15+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Switch many callers to use `getWidgetBySessionResource` (#274253)
+
+This new version of the function should be preferred as it helps move us further along with using URIs for chat sessions",Human,,52,2025-10-31T07:50:36+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,More plumbing through of session resources instead of ids,Human,,195,2025-10-30T19:37:54+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Add `IChatDetail.sessionResource`,Human,,75,2025-10-30T17:59:48+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"More use of session resource instead of ids
+
+This also removes some code that was duplicated to handle local vs contributed sessions",Human,,186,2025-10-29T23:52:21+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"More clean up to chat session uris
+
+- We will use `vscodeChatEditor` for the `new chat editor` flow
+- Keep `vscode-chat-session` but make it clear it's only for local chat sessions
+- Get rid of the `target: sessionId` support for chat editors and instead use `vscode-chat-session` uris
+- Mark `Session.id` as deprecated as the resource should be preferred",Human,,180,2025-10-29T18:23:26+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Extract `localChatSessionType` constant
+
+Makes it easier to maintain and find where local sessions are used",Human,,179,2025-10-28T20:59:41+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Merge pull request #273035 from mjbvz/dev/mjbvz/substantial-butterfly
+
+Fix session open in a new window actions",Human,,14,2025-10-24T05:58:49+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Disable `open in sidebar` action for non-native sessions
+
+We can only support this for sessions that use our native chat UI. We can't correctly support it for ones that use custom editors or terminals
+
+For now, I'm thinking we should just limit it to local sessions. In the future we could instead allow it for any session with a content provider",Human,,1,2025-10-24T05:36:55+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Fix session open in a new window actions,Human,,14,2025-10-24T05:28:00+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Use URIs to identify sessions (#272013)
+
+* Start work on using URIs to identify sessions
+
+This starts switching us from id+types to use uris to identify chat sessions. I already added very basic support for this but in this next step I think we need a breaking change so that we can avoid adding more and more hacks and complexity to support this
+
+* More work
+
+* Add docs
+
+* Fix indent
+
+* Bump api
+
+* Fix quotes
+
+* Fix tests
+
+* fix compile errors for mockChatSessionService
+
+* Fix mockChatSessionService
+
+* Update getChatSessionType
+
+* Make sure resolver also registers any initial schemes
+
+* add ChatSessionService.hasAnySessionOptions()
+
+---------
+
+Co-authored-by: Peng Lyu <penn.lv@gmail.com>
+Co-authored-by: Josh Spicer <23246594+joshspicer@users.noreply.github.com>",Human,,816,2025-10-23T22:16:46+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,chat - first cut of a agent sessions view in one list (#271927),Human,,990,2025-10-22T11:31:16+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,chat - rename actions that move a chat (#271884),Human,,18,2025-10-17T05:46:22+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"ChatSessions: Select Model (#271728)
+
+* fix merge conflicts
+
+* Modify LanguageModelsService to manage Chat Session ""contributed"" model identifiers
+
+* refactor to sessionModelPickerActionItem
+
+* add missed file
+
+* rename to IChatSessionProviderOptions
+
+* change to provideChatSessionProviderOptions",Human,,589,2025-10-17T03:20:13+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Fix cyclic dependency reporting in chat module (#269095)
+
+* fix cyclic dependency in chat land
+
+* make sure cyclic dependencies are correctly reported when running  complie-client task",Human,,19,2025-09-30T15:09:13+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Add Alt+Click support to New Chat button for opening chat in editor (#268490)
+
+* Initial plan
+
+* Add alternative action to New Chat button for opening chat in editor
+
+Co-authored-by: digitarald <8599+digitarald@users.noreply.github.com>
+
+* Use ACTION_ID_OPEN_CHAT constant instead of hardcoded string
+
+Co-authored-by: digitarald <8599+digitarald@users.noreply.github.com>
+
+* Replace remaining hardcoded workbench.action.openChat references with ACTION_ID_OPEN_CHAT constant
+
+Co-authored-by: digitarald <8599+digitarald@users.noreply.github.com>
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: digitarald <8599+digitarald@users.noreply.github.com>
+Co-authored-by: Harald Kirschner <hkirschner@microsoft.com>",AI,,22,2025-09-30T00:57:00+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Refactor: Splitting chat sessions file (#266273)
+
+* Splitting chat sessions class
+
+* Combininb delegate data source and tree renderer",Human,,3724,2025-09-12T02:17:06+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Refactor of chat sessions and actions (#266244),Human,,334,2025-09-11T19:13:59+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Fix chat session disposal error by preventing duplicate widget sessions (#265705)
+
+* Initial plan
+
+* Add duplicate session prevention to chat session actions
+
+Co-authored-by: roblourens <323878+roblourens@users.noreply.github.com>
+
+* Complete session duplication fix for both local and external sessions
+
+Co-authored-by: roblourens <323878+roblourens@users.noreply.github.com>
+
+* Add tests and edge case handling for session duplicate prevention
+
+Co-authored-by: roblourens <323878+roblourens@users.noreply.github.com>
+
+* More
+
+* Fixes to actions
+
+* Also check widget service to detect sessions in sidebar
+
+* Fix OpenChatSessionInSidebarAction
+
+* Remove this
+
+* remove todo
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: roblourens <323878+roblourens@users.noreply.github.com>
+Co-authored-by: Rob Lourens <roblourens@gmail.com>
+Co-authored-by: Osvaldo Ortega <osortega@microsoft.com>",AI,,272,2025-09-09T21:58:08+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Removing open chat in new window action (#265066),Human,,12,2025-09-04T03:24:45+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Merge pull request #264778 from microsoft/copilot/fix-264671
+
+Fix chat session ""Open to the Side"" to respect user's side-by-side direction preference",Human,,13,2025-09-04T01:05:56+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Fixes to chat sessions actionbar (#265008),Human,,22,2025-09-03T19:43:07+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Allow deleting and renaming history from chat session view (#264797)
+
+* Initial plan
+
+* Add DeleteChatSessionAction and menu registration for chat session history items
+
+Co-authored-by: rebornix <876920+rebornix@users.noreply.github.com>
+
+* Register DeleteChatSessionAction in chat.contribution.ts
+
+Co-authored-by: rebornix <876920+rebornix@users.noreply.github.com>
+
+* Fix delete icon and list refresh bug for chat session deletion
+
+- Changed delete icon from Codicon.trash to Codicon.x as requested
+- Fixed list view not updating after deletion by calling notifySessionItemsChanged('local')
+- Added IChatSessionsService injection to DeleteChatSessionAction
+
+Co-authored-by: rebornix <876920+rebornix@users.noreply.github.com>
+
+* Group should be context
+
+* Add rename functionality to chat history sessions
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Proper deletion
+
+* Fix rename functionality for chat history sessions
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Rename fix
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: rebornix <876920+rebornix@users.noreply.github.com>
+Co-authored-by: Osvaldo Ortega <osortega@microsoft.com>
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>",AI,,176,2025-09-03T04:31:28+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Fix chat session ""Open to the Side"" to use proper VS Code pattern
+
+Co-authored-by: mjbvz <12821956+mjbvz@users.noreply.github.com>",AI,,11,2025-09-02T23:43:39+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Update chat session menu label to match VS Code standard: ""Open to the Side""
+
+Co-authored-by: mjbvz <12821956+mjbvz@users.noreply.github.com>",AI,,2,2025-09-02T22:07:46+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Fix chat session menu label: change ""Open in New Editor Group"" to ""Open to Side""
+
+Co-authored-by: mjbvz <12821956+mjbvz@users.noreply.github.com>",AI,,2,2025-09-02T22:05:55+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Add toggle menu option for Chat Sessions view description display mode (#263862)
+
+* Initial plan
+
+* Add toggle command and configuration for Chat Sessions description display
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Show rich descriptions to container title
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+Co-authored-by: Osvaldo Ortega <osortega@microsoft.com>",AI,,67,2025-08-28T19:47:56+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Adding chat opening actions (#262997),Human,,268,2025-08-22T23:43:54+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Add hierarchical chat history tree view to LocalChatSessionsProvider (#262214)
+
+* Initial plan
+
+* Add dropdown option to show chat history in LocalChatSessionsProvider
+
+- Add IChatService dependency to LocalChatSessionsProvider
+- Add isHistoryExpanded state and toggleHistoryExpansion method
+- Enhanced provideChatSessionItems to include history dropdown and historical sessions
+- Added historyItem property to ILocalChatSessionItem interface
+- Modified SessionsViewPane onDidOpen to handle history interactions
+- Added visual improvements (chevron icons, labels, descriptions)
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Fix imports and add ACTIVE_GROUP for opening historical chat sessions
+
+- Add ACTIVE_GROUP import from editorService
+- Update editor opening call to use ACTIVE_GROUP parameter
+- Verify basic logic with simple test
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Restructure chat history as proper tree hierarchy with parent-child relationships
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Less customized tree
+
+* Revert removed changes
+
+* CSS updates
+
+* Open in editor
+
+* Rename fixes
+
+* Inline commands
+
+* CSS cleanup
+
+---------
+
+Co-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+Co-authored-by: Osvaldo Ortega <osortega@microsoft.com>",AI,,543,2025-08-21T06:35:59+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Using marshalled session context for chat session actions (#262363),Human,,66,2025-08-19T19:20:18+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,Chat sessions context contribution (#262208),Human,,71,2025-08-18T21:20:04+00:00
+microsoft/vscode,src/vs/workbench/contrib/chat/browser/actions/chatSessionActions.ts,AI,"Copilot, GitHub",97,2025-08-16T06:42:16+00:00,34,"Implement inline rename functionality for chat sessions (#261141)
+
+* Initial plan
+
+* Implement core chat session rename functionality
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Refine chat session rename implementation with proper input handling
+
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+
+* Compilation errors
+
+* MVP
+
+* E2E
+
+* Fix fallback naming mechanisms
+
+* Remove counts in use when using a custom title
+
+* Merge
+
+---------
+
+Co-authored-by: Copilot <198982749+Copilot@users.noreply.github.com>
+Co-authored-by: osortega <48293249+osortega@users.noreply.github.com>
+Co-authored-by: Osvaldo Ortega <osortega@microsoft.com>",AI,,572,2025-08-16T06:42:16+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,debt - move integrity service to workbench,Human,,18,2019-02-09T15:49:44+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Fix lgtm issues,Human,,43,2019-01-18T07:31:44+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Mark private service properties declarated in ctors as readonly,Human,,3282,2019-01-04T18:57:55+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,debt - Thenable -> Promise,Human,,4738,2018-12-13T10:30:26+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Organize imports,Human,,4123,2018-10-23T07:53:34+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,strict null checks (#60565),Human,,609,2018-10-15T13:19:37+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,sqlite - reduce changes,Human,,317,2018-10-14T07:19:13+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,sqlite - more renames,Human,,328,2018-10-13T16:04:02+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,sqlite - renames,Human,,227,2018-10-13T16:00:36+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,sqlite - rename to storage service,Human,,1330,2018-10-13T15:54:44+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,sqlite - more next storage service adoption,Human,,552,2018-10-12T09:30:16+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,fix #51013,Human,,299,2018-10-12T06:00:03+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,tpromise => promise (for #53526),Human,,638,2018-10-04T05:54:47+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,"Remove use strict directives in main vs code ts files (part 2)
+
+We compile using the alwaysStrict flag so these directives are not needed
+
+This part removes most `use strict` directives that are right after the file header",Human,,537,2018-10-02T23:11:05+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,uri - replace usages of default export with named export,Human,,830,2018-09-03T08:54:50+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Reduce usage of winjs promise progress,Human,,42,2018-07-03T11:45:47+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,debt - make notification#prompt() nicer to use,Human,,1272,2018-04-04T05:35:27+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,debt - add new prompt method to notification service,Human,,324,2018-03-07T10:44:03+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,notifications - hide when secondary action is invoked in some cases,Human,,170,2018-02-21T14:48:46+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,notifications - remove old message service and adopt new one,Human,,2709,2018-02-19T16:57:12+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,fix #40224,Human,,20,2018-01-16T17:04:46+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,adopt lifecycleservice in integrity check,Human,,21,2017-12-11T17:00:24+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Mark most private static constants as private static readonly,Human,,730,2017-11-20T23:18:52+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Break out of the loop on false.,Human,,1,2017-03-21T13:55:24+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,"fix layer breakers with product and package
+
+related to #15558",Human,,372,2016-12-12T11:02:38+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,some ts linting,Human,,225,2016-12-05T10:30:21+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,tsfmt - src,Human,,37233,2016-10-08T07:53:13+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Start integrity resolution after 10s,Human,,28,2016-09-27T17:51:58+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Don't use loader checksums in integrityService,Human,,38,2016-09-27T17:49:38+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Fix issue with missing IOpenerService,Human,,16,2016-09-26T20:19:41+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Add More information button,Human,,20,2016-09-26T20:00:22+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Cache integrity computation,Human,,7,2016-09-23T11:28:18+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Show a message when files are corrupt,Human,,100,2016-09-23T09:45:08+00:00
+microsoft/vscode,src/vs/platform/integrity/node/integrityServiceImpl.ts,Human,Alex Dima,101,2016-09-23T09:23:05+00:00,34,Add IntegrityService,Human,,139,2016-09-23T09:23:05+00:00
