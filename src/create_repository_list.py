@@ -2,16 +2,58 @@
 リポジトリ一覧作成プログラム
 dataset/repository.parquetからリポジトリ情報を読み込み、
 スター数順にソートしてCSVファイルに出力
+各リポジトリのコミット数も取得して表示
 """
 
 import pandas as pd
 import os
+from github import Github
+from dotenv import load_dotenv
+import time
+
+import time
+
+# srcフォルダ内の.envファイルを読み込む
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dotenv_path = os.path.join(script_dir, '.env')
+load_dotenv(dotenv_path)
+
+
+def get_commit_count(repo_full_name, github_token):
+    """
+    GitHubリポジトリのコミット数を取得
+    
+    Args:
+        repo_full_name: リポジトリのフルネーム (owner/repo)
+        github_token: GitHub API トークン
+        
+    Returns:
+        int: コミット数、取得失敗時は-1
+    """
+    try:
+        g = Github(github_token)
+        repo = g.get_repo(repo_full_name)
+        
+        # デフォルトブランチのコミット数を取得
+        commits = repo.get_commits()
+        commit_count = commits.totalCount
+        
+        return commit_count
+    except Exception as e:
+        print(f"  エラー ({repo_full_name}): {e}")
+        return -1
+
 
 def create_repository_list():
     """リポジトリ一覧をCSVで出力"""
     
+    # GitHub token取得
+    github_token = os.getenv('GITHUB_TOKEN')
+    if not github_token:
+        print("警告: GITHUB_TOKENが設定されていません。コミット数は取得されません。")
+        print("src/.envファイルにGITHUB_TOKEN=your_token_hereを設定してください")
+    
     # パス設定
-    script_dir = os.path.dirname(os.path.abspath(__file__))
     parquet_file = os.path.join(script_dir, "../dataset/repository.parquet")
     output_csv = os.path.join(script_dir, "../dataset/repository_list.csv")
     
@@ -65,6 +107,31 @@ def create_repository_list():
         available_columns = [col for col in output_columns if col in df_sorted.columns]
         df_output = df_sorted[available_columns].copy()
         
+        # コミット数を取得
+        if github_token:
+            print(f"\n=== コミット数取得中 ===")
+            commit_counts = []
+            
+            for idx, row in df_output.iterrows():
+                repo_full_name = f"{row['owner']}/{row['repository_name']}"
+                print(f"[{idx+1}/{len(df_output)}] {repo_full_name}...", end=' ')
+                
+                commit_count = get_commit_count(repo_full_name, github_token)
+                commit_counts.append(commit_count)
+                
+                if commit_count >= 0:
+                    print(f"{commit_count:,} commits")
+                else:
+                    print("取得失敗")
+                
+                # API rate limit対策
+                time.sleep(0.5)
+            
+            df_output['commit_count'] = commit_counts
+            print(f"✓ コミット数取得完了")
+        else:
+            print("\n✗ GitHub token未設定のためコミット数は取得されませんでした")
+        
         # CSV出力
         df_output.to_csv(output_csv, index=False, encoding='utf-8')
         
@@ -79,10 +146,21 @@ def create_repository_list():
         # 統計情報
         if star_column:
             print(f"\n=== スター数統計 ===")
-            print(f"最大: {df_output[star_column].max()}")
-            print(f"最小: {df_output[star_column].min()}")
+            print(f"最大: {df_output[star_column].max():,}")
+            print(f"最小: {df_output[star_column].min():,}")
             print(f"平均: {df_output[star_column].mean():.2f}")
             print(f"中央値: {df_output[star_column].median():.2f}")
+        
+        # コミット数統計
+        if 'commit_count' in df_output.columns:
+            valid_commits = df_output[df_output['commit_count'] >= 0]['commit_count']
+            if len(valid_commits) > 0:
+                print(f"\n=== コミット数統計 ===")
+                print(f"最大: {valid_commits.max():,}")
+                print(f"最小: {valid_commits.min():,}")
+                print(f"平均: {valid_commits.mean():.2f}")
+                print(f"中央値: {valid_commits.median():.2f}")
+                print(f"取得成功: {len(valid_commits)}/{len(df_output)}件")
         
     except FileNotFoundError:
         print(f"エラー: ファイルが見つかりません - {parquet_file}")

@@ -35695,3 +35695,1077 @@ FastLED/FastLED,.github/workflows/claude.yml,Human,"Zachary Vorhies, GitHub",64,
 FastLED/FastLED,ci/util/fake_compiler.py,Human,zackees,294,2025-08-06T22:09:34+00:00,3,update,Human,,434,2025-08-07T00:16:51+00:00
 FastLED/FastLED,ci/util/fake_compiler.py,Human,zackees,294,2025-08-06T22:09:34+00:00,3,optimize,Human,,630,2025-08-07T00:04:32+00:00
 FastLED/FastLED,ci/util/fake_compiler.py,Human,zackees,294,2025-08-06T22:09:34+00:00,3,update,Human,,520,2025-08-06T22:09:34+00:00
+mfts/papermark,pages/api/teams/[teamId]/documents/[id]/check-notion-accessibility.ts,AI,Cursor Agent,97,2025-07-28T12:42:16+00:00,2,feat: add notion indicator,Human,,308,2025-07-28T16:10:11+00:00
+mfts/papermark,pages/api/teams/[teamId]/documents/[id]/check-notion-accessibility.ts,AI,Cursor Agent,97,2025-07-28T12:42:16+00:00,2,"Add Notion document accessibility indicator and URL management
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,493,2025-07-28T12:42:16+00:00
+mfts/papermark,pages/api/teams/[teamId]/documents/[id]/update-notion-url.ts,AI,Cursor Agent,112,2025-07-28T12:42:16+00:00,2,feat: update notion parsing for custom domain,Human,,229,2025-08-26T14:24:49+00:00
+mfts/papermark,pages/api/teams/[teamId]/documents/[id]/update-notion-url.ts,AI,Cursor Agent,112,2025-07-28T12:42:16+00:00,2,"Add Notion document accessibility indicator and URL management
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,493,2025-07-28T12:42:16+00:00
+mfts/papermark,export_jobs_migration.sql,AI,,0,,0,,Human,,0,
+mfts/papermark,pages/api/file/s3/multipart.ts,AI,Cursor Agent,162,2025-07-30T09:09:58+00:00,3,feat: add abort multipart,Human,,39,2025-07-31T19:43:59+00:00
+mfts/papermark,pages/api/file/s3/multipart.ts,AI,Cursor Agent,162,2025-07-30T09:09:58+00:00,3,feat: add validation,Human,,132,2025-07-31T19:42:47+00:00
+mfts/papermark,pages/api/file/s3/multipart.ts,AI,Cursor Agent,162,2025-07-30T09:09:58+00:00,3,"Implement multipart S3 upload with parallel processing for large files
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,367,2025-07-30T09:09:58+00:00
+mfts/papermark,ee/features/conversations/components/conversation-document-context.tsx,AI,Marc Seitz,54,2025-08-03T17:27:23+00:00,2,chore: remove duplicate context component,Human,,57,2025-08-30T10:20:01+00:00
+mfts/papermark,ee/features/conversations/components/conversation-document-context.tsx,AI,Marc Seitz,54,2025-08-03T17:27:23+00:00,2,feat: v1 cancel,Human,,1649,2025-08-03T17:27:23+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,"Merge pull request #1920 from mfts/iuliia-fixes
+
+Iuliia fixes",Human,,1046,2025-10-30T18:56:15+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,fix,Human,,3,2025-10-27T13:11:59+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,"feat: small fixes
+
+1. visits to views
+2. name on dataroom from template
+3. trial days
+4. reactions to %. of views",Human,,338,2025-10-25T15:51:06+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,feat: improve dataroom view lookup,Human,,25,2025-08-07T07:27:27+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,fix: improve exports with nan,Human,,131,2025-08-07T07:11:54+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,"Refactor custom fields export to support dynamic and consistent column generation
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,235,2025-08-06T07:11:28+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,fix: csv row stringify,Human,,44,2025-07-19T07:15:04+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,feat: add export function and download option,Human,,1570,2025-07-18T12:03:27+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,"Replace database export jobs with Redis-based job storage
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,461,2025-07-15T21:29:13+00:00
+mfts/papermark,lib/trigger/export-visits.ts,AI,Cursor Agent,586,2025-07-15T21:08:45+00:00,10,"Implement background export jobs with Trigger.dev for visits data
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,2037,2025-07-15T21:08:45+00:00
+mfts/papermark,pages/api/teams/[teamId]/export-jobs.ts,AI,Cursor Agent,125,2025-07-15T21:08:45+00:00,3,"Add export job cancellation support for background tasks
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,164,2025-07-29T08:26:48+00:00
+mfts/papermark,pages/api/teams/[teamId]/export-jobs.ts,AI,Cursor Agent,125,2025-07-15T21:08:45+00:00,3,"Replace database export jobs with Redis-based job storage
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,461,2025-07-15T21:29:13+00:00
+mfts/papermark,pages/api/teams/[teamId]/export-jobs.ts,AI,Cursor Agent,125,2025-07-15T21:08:45+00:00,3,"Implement background export jobs with Trigger.dev for visits data
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,2037,2025-07-15T21:08:45+00:00
+mfts/papermark,ee/features/conversations/api/send-conversation-team-member-notification.ts,AI,Cursor Agent,169,2025-08-02T10:55:02+00:00,3,fix: validation,Human,,41,2025-08-02T16:20:34+00:00
+mfts/papermark,ee/features/conversations/api/send-conversation-team-member-notification.ts,AI,Cursor Agent,169,2025-08-02T10:55:02+00:00,3,feat(ee): update conversation notifications for team members,Human,,576,2025-08-02T14:18:53+00:00
+mfts/papermark,ee/features/conversations/api/send-conversation-team-member-notification.ts,AI,Cursor Agent,169,2025-08-02T10:55:02+00:00,3,"Add team member notifications for conversations in datarooms
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,306,2025-08-02T10:55:02+00:00
+mfts/papermark,EXPORT_VISITS_BACKGROUND_TASK.md,AI,,0,,0,,Human,,0,
+mfts/papermark,components/documents/notion-accessibility-indicator.tsx,AI,Cursor Agent,259,2025-07-28T12:42:16+00:00,4,fix,Human,,4,2025-07-28T17:15:09+00:00
+mfts/papermark,components/documents/notion-accessibility-indicator.tsx,AI,Cursor Agent,259,2025-07-28T12:42:16+00:00,4,fix,Human,,13,2025-07-28T16:39:44+00:00
+mfts/papermark,components/documents/notion-accessibility-indicator.tsx,AI,Cursor Agent,259,2025-07-28T12:42:16+00:00,4,feat: add notion indicator,Human,,308,2025-07-28T16:10:11+00:00
+mfts/papermark,components/documents/notion-accessibility-indicator.tsx,AI,Cursor Agent,259,2025-07-28T12:42:16+00:00,4,"Add Notion document accessibility indicator and URL management
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,493,2025-07-28T12:42:16+00:00
+mfts/papermark,lib/swr/use-passkeys.ts,Human,Marc Seitz,31,2025-07-28T17:12:46+00:00,1,feat: list passkeys,Human,,281,2025-07-28T17:12:46+00:00
+mfts/papermark,ee/features/billing/cancellation/components/reason-base-modal.tsx,Human,Marc Seitz,86,2025-08-06T16:55:13+00:00,1,feat(ee): add native billing flow,Human,,4641,2025-08-06T16:55:13+00:00
+mfts/papermark,ee/features/storage/config.ts,Human,Marc Seitz,108,2025-06-26T09:42:35+00:00,3,feat: add lambda name,Human,,13,2025-06-26T15:17:35+00:00
+mfts/papermark,ee/features/storage/config.ts,Human,Marc Seitz,108,2025-06-26T09:42:35+00:00,3,"Potential fix for code scanning alert no. 57: Use of externally-controlled format string
+
+Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>",Human,,2,2025-06-26T14:34:26+00:00
+mfts/papermark,ee/features/storage/config.ts,Human,Marc Seitz,108,2025-06-26T09:42:35+00:00,3,"feat: add team-aware multi-region S3 storage support
+
+Introduces team-specific S3 storage configuration and multi-region support, allowing teams to use either EU or US S3 buckets based on feature flags. Refactors file operations (upload, copy, delete, presigned URLs, Lambda invocations) to resolve storage region and credentials per team. Adds new storage config and multi-region S3Store, updates API routes and utility functions to use team-aware clients, and extends feature flags with 'usStorage'.",Human,,719,2025-06-26T09:42:35+00:00
+mfts/papermark,ee/features/billing/cancellation/api/reactivate-route.ts,Human,Marc Seitz,95,2025-08-06T16:55:13+00:00,1,feat(ee): add native billing flow,Human,,4641,2025-08-06T16:55:13+00:00
+mfts/papermark,lib/swr/use-dataroom-document-stats.ts,Human,Marc Seitz,35,2025-05-25T11:54:27+00:00,1,feat: add detailed analytics for data rooms plans,Human,,994,2025-05-25T11:54:27+00:00
+mfts/papermark,components/visitors/video-visitor-useragent.tsx,Human,,0,,0,,Human,,0,
+mfts/papermark,components/settings/slack-settings-skeleton.tsx,Human,Ashish Viradiya,82,2025-08-05T17:15:50+00:00,1,Feat: Slack native integration,Human,,5573,2025-08-05T17:15:50+00:00
+mfts/papermark,ee/features/access-notifications/components/blocked-email-attempt.tsx,Human,Marc Seitz,108,2025-07-25T17:09:57+00:00,2,fix: improvements,Human,,15,2025-07-25T17:24:20+00:00
+mfts/papermark,ee/features/access-notifications/components/blocked-email-attempt.tsx,Human,Marc Seitz,108,2025-07-25T17:09:57+00:00,2,feat(ee): send blocked access email notifications,Human,,449,2025-07-25T17:09:57+00:00
+mfts/papermark,ee/features/billing/cancellation/api/cancel-route.ts,Human,Marc Seitz,92,2025-08-06T16:55:13+00:00,1,feat(ee): add native billing flow,Human,,4641,2025-08-06T16:55:13+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,"feat: small fixes
+
+1. visits to views
+2. name on dataroom from template
+3. trial days
+4. reactions to %. of views",Human,,338,2025-10-25T15:51:06+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,feat: show recent exports,Human,,730,2025-07-29T10:46:43+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,"Add export job cancellation support for background tasks
+
+Co-authored-by: marcftone <marcftone@gmail.com>",AI,,164,2025-07-29T08:26:48+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,fix: avoid double renders,Human,,30,2025-07-19T08:00:14+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,refactor: cleanup startexport component,Human,,73,2025-07-19T07:37:46+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,Merge branch 'cursor/export-document-visits-to-tinybird-asynchronously-61ac' of github.com:mfts/papermark into cursor/export-document-visits-to-tinybird-asynchronously-61ac,Human,,3,2025-07-19T07:27:32+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,feat: add try catch to avoid blocking popups,Human,,62,2025-07-19T07:27:19+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,"Update components/datarooms/export-visits-modal.tsx
+
+Co-authored-by: coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>",Human,,3,2025-07-19T07:18:08+00:00
+mfts/papermark,components/datarooms/export-visits-modal.tsx,Human,Marc Seitz,295,2025-07-18T12:03:27+00:00,9,feat: add export function and download option,Human,,1570,2025-07-18T12:03:27+00:00
+wix/react-native-ui-lib,src/components/modal/modal.api.json,AI,"devin-ai-integration[bot], GitHub",54,2025-03-23T07:17:16+00:00,2,"V8 - DO NOT MERGE (#3718)
+
+* Remove old dialog
+
+* Move Incubator.Dialog to Dialog
+
+* Remove PanGestureView
+
+* Remove PanDismissibleView
+
+* Remove PanResponderView
+
+* Remove PanListenerView
+
+* Remove PanningProvider
+
+* Remove asPanViewConsumer
+
+* Remove PanningContext
+
+* Promote PanView and hooks from Incubator to standard components
+
+* Fix category
+
+* Add v8 doc
+
+* Move PanViewScreen and sort a little
+
+* Add StackAggregator doc (#3745)
+
+* Remove SharedTransition
+
+* StackAggregator - several fixes
+
+* Picker - migrate prop deprecation end (#3737)
+
+* Remove deprecated 'migrate' prop and related migration code from Picker component
+
+* refactor: PickerItem removed itemValue
+
+* docs: update Picker documentation to remove `migrate` prop and clarify value format
+
+* refactor: remove deprecated getItemLabel and getItemValue props from Picker components
+
+* refactor: simplify Picker API and enhance type safety by removing deprecated props and updating value handling
+
+* refactor: remove getItemLabel usage from Picker components and simplify label handling
+
+* docs: update Picker migration notes
+
+* refactor: remove unused getItemValue/Label
+
+---------
+
+Co-authored-by: Miki Leib <38354019+M-i-k-e-l@users.noreply.github.com>
+
+* Upgrade to react native 0.76.9 (#3720)
+
+* Upgrade to react native 0.76.9
+
+Some errors in native code that I did not want to commit fixes just yet
+docuilib has issues (hopefully will be solved in 0.77.2
+
+* Downgrading reanimated and gesture handler
+
+* Fix snapshot
+
+* Fix TS
+
+---------
+
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+
+* RN77 new arch (#3721)
+
+* Upgrade to react native 0.76.9
+
+Some errors in native code that I did not want to commit fixes just yet
+docuilib has issues (hopefully will be solved in 0.77.2
+
+* RN77 upgrade + new arch
+
+Android runs (still need to fix native)  |  iOS red screen  |  docuilib still has errors
+
+* Remove TextInputDelKeyHandlerPackage (Android)
+
+* KeyboardAccessoryView on Android - fix crash (one bug left)
+
+Pressing on dismiss (x) only fully works the second time
+
+* Pressing on dismiss (x) only fully works the second time - a very complex fix
+
+* Remove unused code
+
+* HighlighterViewManager - fix (use new API)
+
+* Fix gesture handler changed style
+
+* Fix images (unrelated)
+
+* Fix PanViewScreen (unrelated)
+
+* Fix dragging in SortableList and SortableGridList
+
+* Update navigation
+
+* Change iOS back to Objective-C
+
+* Fix screen - border color
+
+* Revert to older reanimated and gesture-handler versions
+
+* Drawer - fix animation flickering
+
+* Remove comment
+
+* StackAggregator - several fixes - see https://github.com/wix/react-native-ui-lib/pull/3210
+
+* Drawer - fix color not being shown with multiple buttons (RectButton bug)
+
+* Fix
+
+* Downgrading reanimated and gesture handler
+
+* Fix
+
+* Fix iOS (setimmediate)
+
+* remove UIManager.setLayoutAnimationEnabledExperimental
+
+* Update RNN
+
+* Fix snapshot
+
+* Fix TS
+
+* Fix TS
+
+* Fix snapshot
+
+* Native lib reorder and fix ios (#3750)
+
+* Native lib - reorganize components in folders for convenience + bump version to 5.0.0
+
+* pointing to index
+
+* revert naming change
+
+* fix api files
+
+* rename HighlighterOverlay web
+
+* Moving sub components to the parent
+
+* fix api file and move KeyboardUtils outside folder
+
+* Revert ""fix api file and move KeyboardUtils outside folder""
+
+This reverts commit ff6432786a0bd002b6f0926d942d42bcd2f1d76b.
+
+* fix api json
+
+* fix folder name to match component name
+
+* remove specs
+
+* fix highligther view native registration
+
+* fix for SafeAreaSpacerView
+
+* fix types
+
+* fix for KeyboardTrackingView
+
+* trying to fix failed CI build
+
+* SafeAreaSpacesView - moving to react implementation using native SafeAreaManager
+
+* manager changes
+
+* fix safe area
+
+* fix SafeAreaSpacerView again
+
+* removing logs
+
+* Fix highlightViewTag type
+
+* Fix TS error
+
+* Typescript fixes \ revert
+
+* Revert
+
+---------
+
+Co-authored-by: Miki Leib <38354019+M-i-k-e-l@users.noreply.github.com>
+Co-authored-by: M-i-k-e-l <michaelle@wix.com>
+
+* KeyboardAwareBase - fix error
+
+* Fix menu - ""native"" tag should show all (and only) native components
+
+* Update uilib-native to snapshot
+
+* Fix tests
+
+* Update uilib-native to snapshot
+
+* Fix TS error and web type
+
+* Change from codegenNativeComponent to requireNativeComponent in order to fix error after transpilation (#3768)
+
+* Change from codegenNativeComponent to requireNativeComponent
+
+* Update snapshot
+
+* Revert, move to specs and publish the typescript vesion (#3769)
+
+* Another try
+
+* Do not transpile specs
+
+* Another one
+
+* Update snapshot
+
+* SafeAreaSpacerView - fix race condition and a small refactor (#3770)
+
+* SafeAreaSpacerView - fix race condition and a small refactor
+
+* Update snapshot
+
+* Remove extra backgroundColor
+
+---------
+
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+Co-authored-by: Inbal Tish <33805983+Inbal-Tish@users.noreply.github.com>
+
+* Rn77 new arch fixes 2 (#3772)
+
+* Fix Constants.statusBarHeight on iOS
+
+* SafeAreaInsetsManager - add tests and small fixes
+
+* Fix typo
+
+* Fix type
+
+* Update iOS' project
+
+* Fix reanimated interaction with RN's Modal on Android
+
+* Remove (unused) AppDelegate.swift
+
+* Update react-native-navigation
+
+* Upgrade @react-native-community/datetimepicker (known issue in iOS)
+
+* UI-LIB scrollview fix for new arch
+#3775 (https://github.com/wix/react-native-ui-lib/issues/3775)
+
+* Revert ""UI-LIB scrollview fix for new arch""
+
+This reverts commit 083661ceeca5264e495598431cf6b617cfa4a7f6.
+
+* UI-LIB scrollview fix for new arch #3775 (#3776)
+
+* UI-LIB scrollview fix for new arch #3775
+
+* Update snapshot
+
+---------
+
+Co-authored-by: M-i-k-e-l <michaelle@wix.com>
+
+* Allow overriding includeHiddenElements in (some) drivers
+
+* Change some insets to consts
+
+---------
+
+Co-authored-by: Mark de Vocht <markd@wix.com>
+Co-authored-by: mark.dev <50657916+markdevocht@users.noreply.github.com>
+
+* Support includeHiddenElements in text
+
+* Update RNN to 8.1.2 and workaround for DateTimePicker's issue on iOS
+
+* UI-LIB Custom keyboard fix #3779 (#3787)
+
+* Update uilib-native to 7266 (fix AccessoryView and TrackingView)
+
+* chore(dependencies): update react-native-reanimated to 3.17.5 (#3803)
+
+* chore(dependencies): update react-native peer dependency to 0.77.0 (#3804)
+
+* chore(dependencies): update react-native-reanimated to 3.17.5
+
+* chore(dependencies): update react-native peer dependency to 0.77.0
+
+* yarn dedupe
+
+* Align reanimated and react-native-linear-gradient
+
+* Fix webDemo
+
+* Update to 0.77.3 and align
+
+* Prettify
+
+* AnimatedImage - use useEffect instead of onLoadStart (#3806)
+
+* AnimatedImage - use useEffect instead of onLoadStart
+
+* Fix snapshot
+
+* Replace nonexistent image
+
+* Fix test
+
+* Update snapshots
+
+* Update uilib-native to 5.0.0-snapshot.7358
+
+* Text - fix text default alignment (#3815)
+
+* Text - fix text default alignment
+
+* Fix tests
+
+* Add docs
+
+* Add iOS to doc
+
+* Update TODO
+
+* Image - fix showing errorSource when source is undefined (iOS) (#3820)
+
+* Move uilib-native to peerDependencies (#3819)
+
+* Move logs to terminal (add --client-logs) (#3821)
+
+* AnimatedImage - use useEffect instead of onLoadStart - revert for Android (#3823)
+
+* Keyboard Accessory View not appearing at right position (#3824)
+
+* Removal of RNNAppDelegate for public repo (#3825)
+
+* Remove auto-linking from react-native-ui-lib
+
+It is not needed as uilib-native is a peerDependency
+
+* Update uilib-native snapshot
+
+* Update uilib-native docs
+
+* Dialog - add disableAnimation (#3826)
+
+* TabController - fix touch events not triggered on real Android device when scrolling with zIndex change (#3829)
+
+* TabController - fix touch events not triggered on real Android device when scrolling with zIndex change
+
+* Do not return null, use opacity\zIndex in a regular style
+
+* Improve the comment
+
+* Fix warning (#3831)
+
+* Fix warning
+
+* fix: Update Hint component snapshots by removing unused props
+
+* ts ignore
+
+---------
+
+Co-authored-by: adids1221 <adids1221@gmail.com>
+
+* MADS-4855 ConnectedKeyboardAcc tracks incorrectly (#3830)
+
+* Infra/slider error improve data (#3836)
+
+* Slider (old) - allow equal values
+
+* Slider (incubator) - improve error
+
+* Remove Dialog from the Incubator package (#3837)
+
+* Remove Dialog from the Incubator package 2
+
+* Fix docs and web (#3838)
+
+* Update version to 8
+
+---------
+
+Co-authored-by: Adi Mordo <adids1221@gmail.com>
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+Co-authored-by: Inbal Tish <33805983+Inbal-Tish@users.noreply.github.com>
+Co-authored-by: Mark de Vocht <markd@wix.com>
+Co-authored-by: mark.dev <50657916+markdevocht@users.noreply.github.com>
+Co-authored-by: Nitzan Yizhar <nitzany@wix.com>
+Co-authored-by: Nikita Shavit <70704524+NikitaShavit@users.noreply.github.com>",Human,,11748,2025-11-18T09:48:04+00:00
+wix/react-native-ui-lib,src/components/modal/modal.api.json,AI,"devin-ai-integration[bot], GitHub",54,2025-03-23T07:17:16+00:00,2,"infra: create api.json files for components missing documentation (#3627)
+
+* infra: create api.json files for components missing documentation
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove TextFieldOld api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove Inputs api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove BaseInput api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: add api.json files for incubator components PanView and ExpandableOverlay
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove api.json for internal FadedScrollView component
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove api.json files for internal components
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove duplicate Picker api.json file
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove duplicate TabController api.json file
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update category to 'incubator' for incubator components
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: restore ScrollBar API JSON file with fixed snippet
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: add API JSON files for SharedTransition subcomponents and update display names
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON category and snippet
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON snippet to use _.times function
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON category to layouts
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove API JSON files for components that should not be exposed
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+---------
+
+Co-authored-by: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+Co-authored-by: inbalti@wix.com <inbalti@wix.com>",AI,,94,2025-03-23T07:17:16+00:00
+wix/react-native-ui-lib,src/components/KeyboardAwareScrollView/KeyboardAwareScrollView.api.json,AI,"devin-ai-integration[bot], GitHub",40,2025-03-23T07:17:16+00:00,1,"infra: create api.json files for components missing documentation (#3627)
+
+* infra: create api.json files for components missing documentation
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove TextFieldOld api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove Inputs api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove BaseInput api.json as requested
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: add api.json files for incubator components PanView and ExpandableOverlay
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove api.json for internal FadedScrollView component
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove api.json files for internal components
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove duplicate Picker api.json file
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove duplicate TabController api.json file
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update category to 'incubator' for incubator components
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: restore ScrollBar API JSON file with fixed snippet
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: add API JSON files for SharedTransition subcomponents and update display names
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON category and snippet
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON snippet to use _.times function
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: update ScrollBar API JSON category to layouts
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+* infra: remove API JSON files for components that should not be exposed
+
+Co-Authored-By: inbalti@wix.com <inbalti@wix.com>
+
+---------
+
+Co-authored-by: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+Co-authored-by: inbalti@wix.com <inbalti@wix.com>",AI,,94,2025-03-23T07:17:16+00:00
+wix/react-native-ui-lib,docuilib/versioned_docs/version-7.0.0/components/incubator/Dialog/Dialog.Header.md,Human,"Nitzan Yizhar, GitHub",72,2024-12-30T08:04:13+00:00,2,"Docs - Release new docs (#3730)
+
+* Removed versioning in docs
+
+* Bump docs version
+
+* Changed default components page",Human,,7050,2025-05-14T11:40:44+00:00
+wix/react-native-ui-lib,docuilib/versioned_docs/version-7.0.0/components/incubator/Dialog/Dialog.Header.md,Human,"Nitzan Yizhar, GitHub",72,2024-12-30T08:04:13+00:00,2,"Docs - Added versioning with the latest docs in production (#3466)
+
+* added versioning to docs where the new version has the latests changes we did in master
+
+* removed docs folder from docuilib
+
+* Renamed version from 7.34.0 to 7.0.0",Human,,7042,2024-12-30T08:04:13+00:00
+wix/react-native-ui-lib,src/components/picker/helpers/__tests__/usePickerLabel.spec.ts,Human,"Inbal Tish, GitHub",75,2024-07-07T09:56:20+00:00,3,"V8 - DO NOT MERGE (#3718)
+
+* Remove old dialog
+
+* Move Incubator.Dialog to Dialog
+
+* Remove PanGestureView
+
+* Remove PanDismissibleView
+
+* Remove PanResponderView
+
+* Remove PanListenerView
+
+* Remove PanningProvider
+
+* Remove asPanViewConsumer
+
+* Remove PanningContext
+
+* Promote PanView and hooks from Incubator to standard components
+
+* Fix category
+
+* Add v8 doc
+
+* Move PanViewScreen and sort a little
+
+* Add StackAggregator doc (#3745)
+
+* Remove SharedTransition
+
+* StackAggregator - several fixes
+
+* Picker - migrate prop deprecation end (#3737)
+
+* Remove deprecated 'migrate' prop and related migration code from Picker component
+
+* refactor: PickerItem removed itemValue
+
+* docs: update Picker documentation to remove `migrate` prop and clarify value format
+
+* refactor: remove deprecated getItemLabel and getItemValue props from Picker components
+
+* refactor: simplify Picker API and enhance type safety by removing deprecated props and updating value handling
+
+* refactor: remove getItemLabel usage from Picker components and simplify label handling
+
+* docs: update Picker migration notes
+
+* refactor: remove unused getItemValue/Label
+
+---------
+
+Co-authored-by: Miki Leib <38354019+M-i-k-e-l@users.noreply.github.com>
+
+* Upgrade to react native 0.76.9 (#3720)
+
+* Upgrade to react native 0.76.9
+
+Some errors in native code that I did not want to commit fixes just yet
+docuilib has issues (hopefully will be solved in 0.77.2
+
+* Downgrading reanimated and gesture handler
+
+* Fix snapshot
+
+* Fix TS
+
+---------
+
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+
+* RN77 new arch (#3721)
+
+* Upgrade to react native 0.76.9
+
+Some errors in native code that I did not want to commit fixes just yet
+docuilib has issues (hopefully will be solved in 0.77.2
+
+* RN77 upgrade + new arch
+
+Android runs (still need to fix native)  |  iOS red screen  |  docuilib still has errors
+
+* Remove TextInputDelKeyHandlerPackage (Android)
+
+* KeyboardAccessoryView on Android - fix crash (one bug left)
+
+Pressing on dismiss (x) only fully works the second time
+
+* Pressing on dismiss (x) only fully works the second time - a very complex fix
+
+* Remove unused code
+
+* HighlighterViewManager - fix (use new API)
+
+* Fix gesture handler changed style
+
+* Fix images (unrelated)
+
+* Fix PanViewScreen (unrelated)
+
+* Fix dragging in SortableList and SortableGridList
+
+* Update navigation
+
+* Change iOS back to Objective-C
+
+* Fix screen - border color
+
+* Revert to older reanimated and gesture-handler versions
+
+* Drawer - fix animation flickering
+
+* Remove comment
+
+* StackAggregator - several fixes - see https://github.com/wix/react-native-ui-lib/pull/3210
+
+* Drawer - fix color not being shown with multiple buttons (RectButton bug)
+
+* Fix
+
+* Downgrading reanimated and gesture handler
+
+* Fix
+
+* Fix iOS (setimmediate)
+
+* remove UIManager.setLayoutAnimationEnabledExperimental
+
+* Update RNN
+
+* Fix snapshot
+
+* Fix TS
+
+* Fix TS
+
+* Fix snapshot
+
+* Native lib reorder and fix ios (#3750)
+
+* Native lib - reorganize components in folders for convenience + bump version to 5.0.0
+
+* pointing to index
+
+* revert naming change
+
+* fix api files
+
+* rename HighlighterOverlay web
+
+* Moving sub components to the parent
+
+* fix api file and move KeyboardUtils outside folder
+
+* Revert ""fix api file and move KeyboardUtils outside folder""
+
+This reverts commit ff6432786a0bd002b6f0926d942d42bcd2f1d76b.
+
+* fix api json
+
+* fix folder name to match component name
+
+* remove specs
+
+* fix highligther view native registration
+
+* fix for SafeAreaSpacerView
+
+* fix types
+
+* fix for KeyboardTrackingView
+
+* trying to fix failed CI build
+
+* SafeAreaSpacesView - moving to react implementation using native SafeAreaManager
+
+* manager changes
+
+* fix safe area
+
+* fix SafeAreaSpacerView again
+
+* removing logs
+
+* Fix highlightViewTag type
+
+* Fix TS error
+
+* Typescript fixes \ revert
+
+* Revert
+
+---------
+
+Co-authored-by: Miki Leib <38354019+M-i-k-e-l@users.noreply.github.com>
+Co-authored-by: M-i-k-e-l <michaelle@wix.com>
+
+* KeyboardAwareBase - fix error
+
+* Fix menu - ""native"" tag should show all (and only) native components
+
+* Update uilib-native to snapshot
+
+* Fix tests
+
+* Update uilib-native to snapshot
+
+* Fix TS error and web type
+
+* Change from codegenNativeComponent to requireNativeComponent in order to fix error after transpilation (#3768)
+
+* Change from codegenNativeComponent to requireNativeComponent
+
+* Update snapshot
+
+* Revert, move to specs and publish the typescript vesion (#3769)
+
+* Another try
+
+* Do not transpile specs
+
+* Another one
+
+* Update snapshot
+
+* SafeAreaSpacerView - fix race condition and a small refactor (#3770)
+
+* SafeAreaSpacerView - fix race condition and a small refactor
+
+* Update snapshot
+
+* Remove extra backgroundColor
+
+---------
+
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+Co-authored-by: Inbal Tish <33805983+Inbal-Tish@users.noreply.github.com>
+
+* Rn77 new arch fixes 2 (#3772)
+
+* Fix Constants.statusBarHeight on iOS
+
+* SafeAreaInsetsManager - add tests and small fixes
+
+* Fix typo
+
+* Fix type
+
+* Update iOS' project
+
+* Fix reanimated interaction with RN's Modal on Android
+
+* Remove (unused) AppDelegate.swift
+
+* Update react-native-navigation
+
+* Upgrade @react-native-community/datetimepicker (known issue in iOS)
+
+* UI-LIB scrollview fix for new arch
+#3775 (https://github.com/wix/react-native-ui-lib/issues/3775)
+
+* Revert ""UI-LIB scrollview fix for new arch""
+
+This reverts commit 083661ceeca5264e495598431cf6b617cfa4a7f6.
+
+* UI-LIB scrollview fix for new arch #3775 (#3776)
+
+* UI-LIB scrollview fix for new arch #3775
+
+* Update snapshot
+
+---------
+
+Co-authored-by: M-i-k-e-l <michaelle@wix.com>
+
+* Allow overriding includeHiddenElements in (some) drivers
+
+* Change some insets to consts
+
+---------
+
+Co-authored-by: Mark de Vocht <markd@wix.com>
+Co-authored-by: mark.dev <50657916+markdevocht@users.noreply.github.com>
+
+* Support includeHiddenElements in text
+
+* Update RNN to 8.1.2 and workaround for DateTimePicker's issue on iOS
+
+* UI-LIB Custom keyboard fix #3779 (#3787)
+
+* Update uilib-native to 7266 (fix AccessoryView and TrackingView)
+
+* chore(dependencies): update react-native-reanimated to 3.17.5 (#3803)
+
+* chore(dependencies): update react-native peer dependency to 0.77.0 (#3804)
+
+* chore(dependencies): update react-native-reanimated to 3.17.5
+
+* chore(dependencies): update react-native peer dependency to 0.77.0
+
+* yarn dedupe
+
+* Align reanimated and react-native-linear-gradient
+
+* Fix webDemo
+
+* Update to 0.77.3 and align
+
+* Prettify
+
+* AnimatedImage - use useEffect instead of onLoadStart (#3806)
+
+* AnimatedImage - use useEffect instead of onLoadStart
+
+* Fix snapshot
+
+* Replace nonexistent image
+
+* Fix test
+
+* Update snapshots
+
+* Update uilib-native to 5.0.0-snapshot.7358
+
+* Text - fix text default alignment (#3815)
+
+* Text - fix text default alignment
+
+* Fix tests
+
+* Add docs
+
+* Add iOS to doc
+
+* Update TODO
+
+* Image - fix showing errorSource when source is undefined (iOS) (#3820)
+
+* Move uilib-native to peerDependencies (#3819)
+
+* Move logs to terminal (add --client-logs) (#3821)
+
+* AnimatedImage - use useEffect instead of onLoadStart - revert for Android (#3823)
+
+* Keyboard Accessory View not appearing at right position (#3824)
+
+* Removal of RNNAppDelegate for public repo (#3825)
+
+* Remove auto-linking from react-native-ui-lib
+
+It is not needed as uilib-native is a peerDependency
+
+* Update uilib-native snapshot
+
+* Update uilib-native docs
+
+* Dialog - add disableAnimation (#3826)
+
+* TabController - fix touch events not triggered on real Android device when scrolling with zIndex change (#3829)
+
+* TabController - fix touch events not triggered on real Android device when scrolling with zIndex change
+
+* Do not return null, use opacity\zIndex in a regular style
+
+* Improve the comment
+
+* Fix warning (#3831)
+
+* Fix warning
+
+* fix: Update Hint component snapshots by removing unused props
+
+* ts ignore
+
+---------
+
+Co-authored-by: adids1221 <adids1221@gmail.com>
+
+* MADS-4855 ConnectedKeyboardAcc tracks incorrectly (#3830)
+
+* Infra/slider error improve data (#3836)
+
+* Slider (old) - allow equal values
+
+* Slider (incubator) - improve error
+
+* Remove Dialog from the Incubator package (#3837)
+
+* Remove Dialog from the Incubator package 2
+
+* Fix docs and web (#3838)
+
+* Update version to 8
+
+---------
+
+Co-authored-by: Adi Mordo <adids1221@gmail.com>
+Co-authored-by: Inbal Tish <inbalti@wix.com>
+Co-authored-by: Inbal Tish <33805983+Inbal-Tish@users.noreply.github.com>
+Co-authored-by: Mark de Vocht <markd@wix.com>
+Co-authored-by: mark.dev <50657916+markdevocht@users.noreply.github.com>
+Co-authored-by: Nitzan Yizhar <nitzany@wix.com>
+Co-authored-by: Nikita Shavit <70704524+NikitaShavit@users.noreply.github.com>",Human,,11748,2025-11-18T09:48:04+00:00
+wix/react-native-ui-lib,src/components/picker/helpers/__tests__/usePickerLabel.spec.ts,Human,"Inbal Tish, GitHub",75,2024-07-07T09:56:20+00:00,3,Picker - usePickerLabel - revert fix fro string value (#3169),Human,,14,2024-07-09T12:43:51+00:00
+wix/react-native-ui-lib,src/components/picker/helpers/__tests__/usePickerLabel.spec.ts,Human,"Inbal Tish, GitHub",75,2024-07-07T09:56:20+00:00,3,"Picker - fix usePickerLabel (#3162)
+
+* Picker - usePickerLabel - fix 'value' is not returned in case the are no 'items'
+
+* format
+
+* change condition
+
+* check items first
+
+* spaces
+
+* remove redaundent check for undefined
+
+* add hook tests",Human,,106,2024-07-07T09:56:20+00:00

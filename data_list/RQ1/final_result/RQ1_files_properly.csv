@@ -455,3 +455,24 @@ FastLED/FastLED,FastLED,ci/ci/test_types.py,zackees,['zackees'],62,Human,2025-07
 FastLED/FastLED,FastLED,ci/util/cache_setup.py,zackees,['zackees'],226,Human,2025-08-06T22:09:34+00:00,5
 FastLED/FastLED,FastLED,.github/workflows/claude.yml,Zachary Vorhies,"['Zachary Vorhies', 'GitHub']",64,Human,2025-08-14T21:13:06+00:00,4
 FastLED/FastLED,FastLED,ci/util/fake_compiler.py,zackees,['zackees'],294,Human,2025-08-06T22:09:34+00:00,3
+mfts/papermark,mfts,pages/api/teams/[teamId]/documents/[id]/check-notion-accessibility.ts,Cursor Agent,['Cursor Agent'],97,AI,2025-07-28T12:42:16+00:00,2
+mfts/papermark,mfts,pages/api/teams/[teamId]/documents/[id]/update-notion-url.ts,Cursor Agent,['Cursor Agent'],112,AI,2025-07-28T12:42:16+00:00,2
+mfts/papermark,mfts,pages/api/file/s3/multipart.ts,Cursor Agent,['Cursor Agent'],162,AI,2025-07-30T09:09:58+00:00,3
+mfts/papermark,mfts,ee/features/conversations/components/conversation-document-context.tsx,Marc Seitz,['Marc Seitz'],54,AI,2025-08-03T17:27:23+00:00,2
+mfts/papermark,mfts,lib/trigger/export-visits.ts,Cursor Agent,['Cursor Agent'],586,AI,2025-07-15T21:08:45+00:00,10
+mfts/papermark,mfts,pages/api/teams/[teamId]/export-jobs.ts,Cursor Agent,['Cursor Agent'],125,AI,2025-07-15T21:08:45+00:00,3
+mfts/papermark,mfts,ee/features/conversations/api/send-conversation-team-member-notification.ts,Cursor Agent,['Cursor Agent'],169,AI,2025-08-02T10:55:02+00:00,3
+mfts/papermark,mfts,components/documents/notion-accessibility-indicator.tsx,Cursor Agent,['Cursor Agent'],259,AI,2025-07-28T12:42:16+00:00,4
+mfts/papermark,mfts,lib/swr/use-passkeys.ts,Marc Seitz,['Marc Seitz'],31,Human,2025-07-28T17:12:46+00:00,1
+mfts/papermark,mfts,ee/features/billing/cancellation/components/reason-base-modal.tsx,Marc Seitz,['Marc Seitz'],86,Human,2025-08-06T16:55:13+00:00,1
+mfts/papermark,mfts,ee/features/storage/config.ts,Marc Seitz,['Marc Seitz'],108,Human,2025-06-26T09:42:35+00:00,3
+mfts/papermark,mfts,ee/features/billing/cancellation/api/reactivate-route.ts,Marc Seitz,['Marc Seitz'],95,Human,2025-08-06T16:55:13+00:00,1
+mfts/papermark,mfts,lib/swr/use-dataroom-document-stats.ts,Marc Seitz,['Marc Seitz'],35,Human,2025-05-25T11:54:27+00:00,1
+mfts/papermark,mfts,components/settings/slack-settings-skeleton.tsx,Ashish Viradiya,['Ashish Viradiya'],82,Human,2025-08-05T17:15:50+00:00,1
+mfts/papermark,mfts,ee/features/access-notifications/components/blocked-email-attempt.tsx,Marc Seitz,['Marc Seitz'],108,Human,2025-07-25T17:09:57+00:00,2
+mfts/papermark,mfts,ee/features/billing/cancellation/api/cancel-route.ts,Marc Seitz,['Marc Seitz'],92,Human,2025-08-06T16:55:13+00:00,1
+mfts/papermark,mfts,components/datarooms/export-visits-modal.tsx,Marc Seitz,['Marc Seitz'],295,Human,2025-07-18T12:03:27+00:00,9
+wix/react-native-ui-lib,wix,src/components/modal/modal.api.json,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",54,AI,2025-03-23T07:17:16+00:00,2
+wix/react-native-ui-lib,wix,src/components/KeyboardAwareScrollView/KeyboardAwareScrollView.api.json,devin-ai-integration[bot],"['devin-ai-integration[bot]', 'GitHub']",40,AI,2025-03-23T07:17:16+00:00,1
+wix/react-native-ui-lib,wix,docuilib/versioned_docs/version-7.0.0/components/incubator/Dialog/Dialog.Header.md,Nitzan Yizhar,"['Nitzan Yizhar', 'GitHub']",72,Human,2024-12-30T08:04:13+00:00,2
+wix/react-native-ui-lib,wix,src/components/picker/helpers/__tests__/usePickerLabel.spec.ts,Inbal Tish,"['Inbal Tish', 'GitHub']",75,Human,2024-07-07T09:56:20+00:00,3

@@ -123,11 +123,15 @@ class RQ1AnalyzerAPI:
         AIコミット判定（全アカウントをチェック）
         
         Args:
-            all_authors: コミットに関与した全アカウント名のリスト
+            all_authors: コミットに関与した全アカウント名（文字列またはリスト）
             
         Returns:
             tuple: (bool, str) - AIかどうか, AIの種類またはhuman
         """
+        # 文字列の場合はリストに変換
+        if isinstance(all_authors, str):
+            all_authors = [all_authors]
+        
         # 全アカウントをチェック
         for author_name in all_authors:
             author_lower = author_name.lower()
@@ -142,11 +146,15 @@ class RQ1AnalyzerAPI:
         AIツール特定（全アカウントをチェック）
         
         Args:
-            all_authors: コミットに関与した全アカウント名のリスト
+            all_authors: コミットに関与した全アカウント名（文字列またはリスト）
             
         Returns:
             str: AIツール名、または'N/A'
         """
+        # 文字列の場合はリストに変換
+        if isinstance(all_authors, str):
+            all_authors = [all_authors]
+        
         tool_map = {
             'copilot': 'Copilot',
             'cursor': 'Cursor',
@@ -164,7 +172,7 @@ class RQ1AnalyzerAPI:
         return 'N/A'
 
     @retry_with_network_check
-    def get_commits_with_file_additions_api(self, max_commits=500):
+    def get_commits_with_file_additions_api(self, max_commits=1000):
         """GitHub APIで90日以前のファイル追加コミット取得"""
         print("=== GitHub APIでコミット取得中 ===")
         
@@ -435,6 +443,20 @@ class RQ1AnalyzerAPI:
                     'created_by': author_type,
                     'creation_date': creation_info['creation_date'],
                     'commit_count': creation_info['commit_count']
+                })
+            else:
+                # 情報取得失敗時も記録（エラーとしてマーク）
+                print(f"  警告: ファイル情報取得失敗 - {file_path}")
+                file_info_records.append({
+                    'repository_name': self.repo_name_full,
+                    'repository_owner': self.repo_name_full.split('/')[0],
+                    'file_name': file_path,
+                    'file_creator': 'ERROR',
+                    'all_creator_names': [],
+                    'line_count': 0,
+                    'created_by': author_type,
+                    'creation_date': '',
+                    'commit_count': 0
                 })
             
             commit_logs = self.get_file_commits_api(file_path)
@@ -764,7 +786,7 @@ class RQ1AnalyzerAPI:
         print("\n--- 詳細結果CSV保存中 ---")
         
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_result_v2.csv")
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_result_v3.csv")
         
         # CSVデータを作成
         csv_records = []
@@ -882,10 +904,6 @@ class RQ1AnalyzerAPI:
                 return None
             
             print(f"✓ ステップ3完了: {len(df_classified)}件のコミットを分類")
-            
-            # ファイル情報をCSVに保存
-            print("\n--- ファイル情報のCSV保存 ---")
-            self.save_files_info_to_csv()
             
             # 詳細結果をCSVに保存（全コミット情報）
             print("\n--- 詳細結果のCSV保存 ---")

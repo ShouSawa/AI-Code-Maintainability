@@ -1,6 +1,6 @@
 """
-60日以前のコミット分析プログラム
-機能: repository_listから上位100個のリポジトリの60日以前のコミットを分析
+90日以前のコミット分析プログラム
+機能: repository_listから上位100個のリポジトリの90日以前のコミットを分析（上限なし）
 """
 
 import os
@@ -84,7 +84,7 @@ def retry_with_network_check(func):
 
 
 class OldCommitAnalyzer:
-    """60日以前のコミットを分析するクラス"""
+    """90日以前のコミットを分析するクラス"""
     
     # AIボットアカウント定義（作成者名で判定）
     AI_BOT_ACCOUNTS = {
@@ -109,58 +109,70 @@ class OldCommitAnalyzer:
         # コミット情報を格納するリスト
         self.all_commits_data = []
         
-    def is_ai_generated_commit(self, author_name):
+    def is_ai_generated_commit(self, author_names):
         """
         コミットがAIによって生成されたかどうかを判定（作成者名のみで判定）
         
         Args:
-            author_name: コミット作成者名
+            author_names: コミット作成者名（文字列またはリスト）
             
         Returns:
             tuple: (bool, str) - AIかどうか, AIの種類またはhuman
         """
-        author_lower = author_name.lower()
+        # 文字列の場合はリストに変換
+        if isinstance(author_names, str):
+            author_names = [author_names]
         
-        # ボットアカウント名で判定
-        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
-            # bot_nameの中にauthor_lowerが含まれているかチェック
-            if any(bot_name.lower() in author_lower for bot_name in bot_names):
-                return True, ai_type
+        # 各作成者名をチェック
+        for author_name in author_names:
+            author_lower = author_name.lower()
+            
+            # ボットアカウント名で判定
+            for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+                # bot_nameの中にauthor_lowerが含まれているかチェック
+                if any(bot_name.lower() in author_lower for bot_name in bot_names):
+                    return True, ai_type
         
         return False, "human"
     
-    def detect_specific_ai_tool(self, author_name):
+    def detect_specific_ai_tool(self, author_names):
         """
         特定のAIツールを識別（作成者名のみで判定）
         
         Args:
-            author_name: コミット作成者名
+            author_names: コミット作成者名（文字列またはリスト）
             
         Returns:
             str: AIツール名、または'N/A'
         """
-        author_lower = author_name.lower()
+        # 文字列の場合はリストに変換
+        if isinstance(author_names, str):
+            author_names = [author_names]
         
-        # ボットアカウント名で特定のツールを識別
-        for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
-            if any(bot_name.lower() in author_lower for bot_name in bot_names):
-                tool_map = {
-                    'copilot': 'GitHub Copilot',
-                    'cursor': 'Cursor',
-                    'devin': 'Devin',
-                    'claude': 'Claude'
-                }
-                return tool_map.get(ai_type, 'N/A')
+        # 各作成者名をチェック
+        for author_name in author_names:
+            author_lower = author_name.lower()
+            
+            # ボットアカウント名で特定のツールを識別
+            for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
+                if any(bot_name.lower() in author_lower for bot_name in bot_names):
+                    tool_map = {
+                        'copilot': 'GitHub Copilot',
+                        'cursor': 'Cursor',
+                        'devin': 'Devin',
+                        'claude': 'Claude'
+                    }
+                    return tool_map.get(ai_type, 'N/A')
         
         return 'N/A'
     
     def check_repo_has_old_commits(self, repo_full_name):
-        """リポジトリに60日以前のコミットがあるかチェック"""
+        """リポジトリに90日以前のコミットがあるかチェック"""
         try:
             repo = self.g.get_repo(repo_full_name)
-            cutoff_date = datetime.now() - timedelta(days=60)
+            cutoff_date = datetime.now() - timedelta(days=90)
             
-            # 60日以前のコミットを取得（1件でも取得できればOK）
+            # 90日以前のコミットを取得（1件でも取得できればOK）
             commits = repo.get_commits(until=cutoff_date)
             
             # 最初の1件だけ確認
@@ -176,8 +188,8 @@ class OldCommitAnalyzer:
     
     @retry_with_network_check
     @retry_with_network_check
-    def analyze_repo_commits(self, repo_full_name, max_commits=500):
-        """リポジトリの60日以前のコミットを分析"""
+    def analyze_repo_commits(self, repo_full_name):
+        """リポジトリの90日以前のコミットを分析（上限なし）"""
         print(f"\n{'='*80}")
         print(f"分析中: {repo_full_name}")
         print(f"{'='*80}")
@@ -186,10 +198,10 @@ class OldCommitAnalyzer:
             repo = self.g.get_repo(repo_full_name)
             print(f"スター数: {repo.stargazers_count}, フォーク数: {repo.forks_count}")
             
-            cutoff_date = datetime.now() - timedelta(days=60)
+            cutoff_date = datetime.now() - timedelta(days=90)
             print(f"対象期間: ~{cutoff_date.date()}")
             
-            # 60日以前のコミットを取得
+            # 90日以前のコミットを全て取得（上限なし）
             commits = repo.get_commits(until=cutoff_date)
             
             ai_count = 0
@@ -198,10 +210,6 @@ class OldCommitAnalyzer:
             total_analyzed = 0
             
             for commit in commits:
-                if total_analyzed >= max_commits:
-                    print(f"最大コミット数({max_commits})に達しました")
-                    break
-                
                 total_analyzed += 1
                 if total_analyzed % 100 == 0:
                     print(f"  処理中: {total_analyzed}件...")
@@ -228,7 +236,7 @@ class OldCommitAnalyzer:
                     # RQ1_result_v2.csv形式でコミット情報を保存
                     commit_info = {
                         'repository_name': repo_full_name,
-                        'file_name': '',  # 60日以前のコミットではファイル情報なし
+                        'file_name': '',  # 90日以前のコミットではファイル情報なし
                         'file_created_by': '',
                         'file_line_count': 0,
                         'file_creation_date': '',
@@ -280,7 +288,7 @@ class OldCommitAnalyzer:
     def analyze_top_100_repos(self):
         """repository_listから上位100個のリポジトリを分析"""
         print("="*80)
-        print("60日以前のコミット分析開始")
+        print("90日以前のコミット分析開始")
         print("="*80)
         
         # repository_list.csvを読み込む
@@ -303,11 +311,11 @@ class OldCommitAnalyzer:
             
             print(f"\n[{analyzed_count + 1}/100] チェック中: {repo_full_name} (スター: {row['stars']})")
             
-            # 60日以前のコミットがあるかチェック
+            # 90日以前のコミットがあるかチェック
             has_old_commits = self.check_repo_has_old_commits(repo_full_name)
             
             if has_old_commits:
-                print(f"  ✓ 60日以前のコミットあり - 分析開始")
+                print(f"  ✓ 90日以前のコミットあり - 分析開始")
                 result = self.analyze_repo_commits(repo_full_name)
                 
                 if result:
@@ -318,7 +326,7 @@ class OldCommitAnalyzer:
                     print(f"  × 分析失敗 - スキップ")
                     skipped_count += 1
             else:
-                print(f"  × 60日以前のコミットなし - スキップ")
+                print(f"  × 90日以前のコミットなし - スキップ")
                 skipped_count += 1
             
             index += 1
@@ -343,7 +351,7 @@ class OldCommitAnalyzer:
     
     def save_final_results(self, results):
         """最終結果を保存"""
-        output_path = os.path.join(self.output_dir, "dataset_AI_60days.txt")
+        output_path = os.path.join(self.output_dir, "dataset_AI_90days.txt")
         
         # 全体統計を事前計算
         total_commits = sum(r['total_commits'] for r in results)
@@ -358,7 +366,7 @@ class OldCommitAnalyzer:
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write("="*80 + "\n")
-            f.write("60日以前のコミット分析 - 最終結果\n")
+            f.write("90日以前のコミット分析 - 最終結果\n")
             f.write(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"分析リポジトリ数: {len(results)}\n")
             f.write("="*80 + "\n\n")
@@ -399,7 +407,7 @@ class OldCommitAnalyzer:
         print(f"\n最終結果を保存しました: {output_path}")
         
         # JSON形式でも保存
-        json_path = os.path.join(self.output_dir, "dataset_AI_60days.json")
+        json_path = os.path.join(self.output_dir, "dataset_AI_90days.json")
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
         print(f"JSON形式でも保存しました: {json_path}")
