@@ -173,13 +173,13 @@ class RQ1AnalyzerAPI:
 
     @retry_with_network_check
     def get_commits_with_file_additions_api(self, max_commits=500, skip_commits=0):
-        """GitHub APIで90日以前のファイル追加コミット取得
+        """GitHub APIで90日以前のファイル追加コミット取得（ランダムサンプリング版）
         
         Args:
             max_commits: 取得する最大コミット数
             skip_commits: スキップするコミット数（オフセット）
         """
-        print(f"=== GitHub APIでコミット取得中 (skip={skip_commits}, max={max_commits}) ===")
+        print(f"=== GitHub APIでコミット取得中 (skip={skip_commits}, max={max_commits}, ランダムサンプリング) ===")
         
         commits_data = []
         total_commits_count = 0  # 90日以前のコミット総数
@@ -190,15 +190,35 @@ class RQ1AnalyzerAPI:
             print(f"90日以前のコミットを取得中 (until: {cutoff_date_90.date()})...")
             commits_90 = self.repo.get_commits(until=cutoff_date_90)
             
-            count = 0
-            skipped = 0
-            for commit in commits_90:
-                total_commits_count += 1  # すべてのコミットをカウント
+            # 初回呼び出し時のみ全コミットをリストに変換してランダム順序を生成
+            if not hasattr(self, '_all_commits_cache'):
+                print("全コミットをリストに変換中...")
+                self._all_commits_cache = list(commits_90)
+                total_commits_count = len(self._all_commits_cache)
+                print(f"総コミット数: {total_commits_count}件")
                 
-                # skip_commits分スキップ
-                if skipped < skip_commits:
-                    skipped += 1
-                    continue
+                # ランダムインデックスを生成（重複なし）
+                import random
+                self._random_indices = list(range(total_commits_count))
+                random.shuffle(self._random_indices)
+                print("ランダム順序を生成しました")
+            else:
+                total_commits_count = len(self._all_commits_cache)
+            
+            # ランダムインデックスに基づいてコミットを取得
+            end_index = min(skip_commits + max_commits, len(self._random_indices))
+            selected_indices = self._random_indices[skip_commits:end_index]
+            
+            if not selected_indices:
+                print(f"取得可能なコミットがありません（skip={skip_commits}, total={total_commits_count}）")
+                return commits_data, total_commits_count
+            
+            print(f"インデックス {skip_commits}～{end_index-1} からランダムに取得")
+            
+            count = 0
+            for idx in selected_indices:
+                commit = self._all_commits_cache[idx]
+                count += 1
                 
                 if count >= max_commits:
                     print(f"最大コミット数({max_commits})に達しました")
@@ -257,14 +277,15 @@ class RQ1AnalyzerAPI:
             return [], 0
 
     def step1_find_added_files(self, target_ai_files=10, target_human_files=10):
-        """ステップ1: ファイル追加分析（API版・段階的取得）
+        """ステップ1: ファイル追加分析（API版・ランダムサンプリング・段階的取得）
         
         Args:
             target_ai_files: 目標AI作成ファイル数
             target_human_files: 目標Human作成ファイル数
         """
-        print("\n=== ステップ1: ファイル追加分析 (API版・段階的取得) ===")
+        print("\n=== ステップ1: ファイル追加分析 (API版・ランダムサンプリング・段階的取得) ===")
         print(f"目標: AI={target_ai_files}件, Human={target_human_files}件")
+        print("※ 90日以前のコミットをランダム順序で重複なく取得します")
 
         # 段階的にコミット取得
         initial_batch = 500  # 最初の取得数
@@ -534,9 +555,7 @@ class RQ1AnalyzerAPI:
                 # ファイル情報を記録
                 file_info_records.append({
                     'repository_name': self.repo_name_full,
-                    'repository_owner': self.repo_name_full.split('/')[0],
                     'file_name': file_path,
-                    'file_creator': creation_info['author_name'],
                     'all_creator_names': creation_info['all_creator_names'],  # 全作成者名リスト
                     'line_count': line_count,
                     'created_by': author_type,
@@ -548,9 +567,7 @@ class RQ1AnalyzerAPI:
                 print(f"  警告: ファイル情報取得失敗 - {file_path}")
                 file_info_records.append({
                     'repository_name': self.repo_name_full,
-                    'repository_owner': self.repo_name_full.split('/')[0],
                     'file_name': file_path,
-                    'file_creator': 'ERROR',
                     'all_creator_names': [],
                     'line_count': 0,
                     'created_by': author_type,
