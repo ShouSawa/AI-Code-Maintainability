@@ -11,6 +11,7 @@ from transformers import pipeline # 事前学習したモデルを扱うため�
 import requests # HTTPリクエストを扱うためのライブラリ
 from github import Github # Github APIを扱うためのライブラリ
 from dotenv import load_dotenv # .envファイルを読み込むためのライブラリ
+from tqdm import tqdm # プログレスバーを表示するためのライブラリ
 import time
 import socket
 
@@ -194,7 +195,6 @@ class RQ1AnalyzerAPI:
             print(f"総コミット数: {total_commits_count}件")
             
             # 全コミットを処理
-            from tqdm import tqdm
             for commit in tqdm(commits_list, desc="コミット処理"):
                 try:
                     # コミット情報取得
@@ -463,19 +463,26 @@ class RQ1AnalyzerAPI:
         return ai_files + human_files
 
     def step2_find_commit_changed_files(self, df):
-        """ステップ2: コミット履歴分析（API版）"""
+        """ステップ2: コミット履歴分析（API版）- エラーファイルを除外して同数に調整"""
         print("\n=== ステップ2: コミット履歴分析 (API版) ===")
         
         selected_files = self.get_files_by_author_type(df)
         ai_count = sum(1 for f in selected_files if f['author_type'] == 'AI')
         print(f"選択ファイル: {len(selected_files)} (AI:{ai_count} Human:{len(selected_files)-ai_count})")
         
-        # ファイル情報記録用
+        # ファイル情報記録用（成功したファイルのみ）
         file_info_records = []
+        # 成功したファイルのリスト（AI/Human別に管理）
+        successful_ai_files = []
+        successful_human_files = []
         
         results = []
-        for idx, file_info in enumerate(selected_files):
-            print(f"処理中: {idx+1}/{len(selected_files)} - {file_info['added_file']}")
+        
+        # AI作成ファイルを先に処理
+        ai_files = [f for f in selected_files if f['author_type'] == 'AI']
+        print(f"\nAI作成ファイルの処理開始: {len(ai_files)}件")
+        
+        for file_info in tqdm(ai_files, desc="AI作成ファイル処理"):
             
             file_path = file_info['added_file']
             commit_hash = file_info['commit_hash']
@@ -487,60 +494,118 @@ class RQ1AnalyzerAPI:
                 line_count = self.get_file_line_count(file_path, commit_hash)
                 
                 # ファイル情報を記録
-                file_info_records.append({
+                file_info_record = {
                     'repository_name': self.repo_name_full,
                     'file_name': file_path,
-                    'all_creator_names': creation_info['all_creator_names'],  # 全作成者名リスト
+                    'all_creator_names': creation_info['all_creator_names'],
                     'line_count': line_count,
                     'created_by': author_type,
                     'creation_date': creation_info['creation_date'],
                     'commit_count': creation_info['commit_count']
-                })
+                }
+                file_info_records.append(file_info_record)
+                successful_ai_files.append(file_path)
+                
+                # コミット履歴取得
+                commit_logs = self.get_file_commits_api(file_path)
+                
+                if commit_logs:
+                    for log in commit_logs:
+                        is_ai, ai_type = self.is_ai_generated_commit(log['all_authors'])
+                        results.append({
+                            'original_commit_type': author_type,
+                            'original_commit_hash': commit_hash,
+                            'file_path': file_path,
+                            'commit_hash': log['hash'],
+                            'commit_date': log['date'],
+                            'author': log['author'],
+                            'all_authors': log['all_authors'],
+                            'commit_message': log['message'],
+                            'is_ai_generated': is_ai,
+                            'ai_type': ai_type,
+                            'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
+                        })
             else:
-                # 情報取得失敗時も記録（エラーとしてマーク）
-                print(f"  警告: ファイル情報取得失敗 - {file_path}")
-                file_info_records.append({
+                # 情報取得失敗時はスキップ
+                tqdm.write(f"  警告: ファイル情報取得失敗 - {file_path} (スキップ)")
+        
+        # 人間作成ファイルを処理（成功したAI作成ファイル数に合わせる）
+        human_files = [f for f in selected_files if f['author_type'] == 'Human']
+        target_human_count = len(successful_ai_files)  # AI成功数に合わせる
+        
+        print(f"\n人間作成ファイルの処理開始: {len(human_files)}件中{target_human_count}件を処理")
+        
+        human_processed = 0
+        for file_info in tqdm(human_files, desc="人間作成ファイル処理", total=target_human_count):
+            if human_processed >= target_human_count:
+                tqdm.write(f"  目標数{target_human_count}件に到達 - 残りの人間ファイルはスキップ")
+                break
+            
+            file_path = file_info['added_file']
+            commit_hash = file_info['commit_hash']
+            author_type = file_info['author_type']
+            
+            # ファイル作成情報を取得
+            creation_info = self.get_file_creation_info(file_path)
+            if creation_info:
+                line_count = self.get_file_line_count(file_path, commit_hash)
+                
+                # ファイル情報を記録
+                file_info_record = {
                     'repository_name': self.repo_name_full,
                     'file_name': file_path,
-                    'all_creator_names': [],
-                    'line_count': 0,
+                    'all_creator_names': creation_info['all_creator_names'],
+                    'line_count': line_count,
                     'created_by': author_type,
-                    'creation_date': '',
-                    'commit_count': 0
-                })
-            
-            commit_logs = self.get_file_commits_api(file_path)
-            
-            if not commit_logs:
-                results.append({
-                    'original_commit_type': author_type,
-                    'original_commit_hash': commit_hash,
-                    'file_path': file_path,
-                    'commit_hash': 'No commits found',
-                    'commit_date': '',
-                    'author': '',
-                    'all_authors': [],
-                    'commit_message': '',
-                    'is_ai_generated': False,
-                    'ai_type': 'N/A',
-                    'ai_tool': 'N/A'
-                })
+                    'creation_date': creation_info['creation_date'],
+                    'commit_count': creation_info['commit_count']
+                }
+                file_info_records.append(file_info_record)
+                successful_human_files.append(file_path)
+                human_processed += 1
+                
+                # コミット履歴取得
+                commit_logs = self.get_file_commits_api(file_path)
+                
+                if commit_logs:
+                    for log in commit_logs:
+                        is_ai, ai_type = self.is_ai_generated_commit(log['all_authors'])
+                        results.append({
+                            'original_commit_type': author_type,
+                            'original_commit_hash': commit_hash,
+                            'file_path': file_path,
+                            'commit_hash': log['hash'],
+                            'commit_date': log['date'],
+                            'author': log['author'],
+                            'all_authors': log['all_authors'],
+                            'commit_message': log['message'],
+                            'is_ai_generated': is_ai,
+                            'ai_type': ai_type,
+                            'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
+                        })
             else:
-                for log in commit_logs:
-                    is_ai, ai_type = self.is_ai_generated_commit(log['all_authors'])
-                    results.append({
-                        'original_commit_type': author_type,
-                        'original_commit_hash': commit_hash,
-                        'file_path': file_path,
-                        'commit_hash': log['hash'],
-                        'commit_date': log['date'],
-                        'author': log['author'],
-                        'all_authors': log['all_authors'],  # 全作成者リスト
-                        'commit_message': log['message'],
-                        'is_ai_generated': is_ai,
-                        'ai_type': ai_type,
-                        'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
-                    })
+                # 情報取得失敗時はスキップ
+                tqdm.write(f"  警告: ファイル情報取得失敗 - {file_path} (スキップ)")
+        
+        # 最終調整：AI/Humanの成功数を同数にする
+        final_count = min(len(successful_ai_files), len(successful_human_files))
+        
+        if final_count < len(successful_ai_files) or final_count < len(successful_human_files):
+            print(f"\n最終調整: AI={len(successful_ai_files)}件, Human={len(successful_human_files)}件 → 両方{final_count}件に調整")
+            
+            # 各タイプから最初のfinal_count件のみ残す
+            keep_ai_files = set(successful_ai_files[:final_count])
+            keep_human_files = set(successful_human_files[:final_count])
+            keep_files = keep_ai_files | keep_human_files
+            
+            # resultsをフィルタリング
+            results = [r for r in results if r['file_path'] in keep_files]
+            
+            # file_info_recordsをフィルタリング
+            file_info_records = [f for f in file_info_records if f['file_name'] in keep_files]
+        
+        print(f"\n最終結果: AI={final_count}件, Human={final_count}件, 総ファイル数={final_count*2}件")
+        print(f"総コミット数: {len(results)}件")
         
         # ファイル情報をインスタンス変数として保存
         self.file_info_records = file_info_records
@@ -668,12 +733,9 @@ class RQ1AnalyzerAPI:
             return df
         
         results = []
-        total = len(df)
         
         try:
-            for idx, row in df.iterrows():
-                print(f"進捗: {idx}/{total} ({idx/total*100:.0f}%)")
-                
+            for _, row in tqdm(df.iterrows(), total=len(df), desc="コミット分類"):
                 commit_sha = row['commit_hash']
                 base_result = {
                     'original_commit_type': row['original_commit_type'],
@@ -693,7 +755,7 @@ class RQ1AnalyzerAPI:
                         message, diff = self.fetch_message_and_diff(commit_sha)
                         base_result['classification_label'] = self.classify_commit(message, diff) if message and diff else 'fetch_error'
                     except Exception as e:
-                        print(f"エラー {commit_sha[:8]}: {e}")
+                        tqdm.write(f"エラー {commit_sha[:8]}: {e}")
                         base_result['classification_label'] = 'error'
                 
                 results.append(base_result)
