@@ -1,0 +1,17 @@
+repository_name,file_name,all_creator_names,"['alice-dev', 'bob-engineer']",line_count,created_by,creation_date,commit_count
+microsoft/vscode,src/vs/editor/contrib/ai-assistant.ts,"['copilot[bot]']",450,AI,2025-03-15T10:23:45,15
+microsoft/vscode,src/vs/workbench/services/themes/common/workbenchThemeService.ts,"['john-developer']",320,Human,2025-02-08T14:30:12,8
+openai/gpt-pilot,core/agents/code_generator.py,"['cursor[bot]']",680,AI,2025-04-22T09:15:33,22
+openai/gpt-pilot,utils/file_handler.py,"['emily-coder', 'frank-dev']",210,Human,2025-03-10T16:45:20,12
+AutoGPT/AutoGPT,autogpt/prompts/generator.py,"['devin-ai-integration[bot]']",530,AI,2025-05-01T11:20:05,18
+AutoGPT/AutoGPT,tests/unit/test_memory.py,"['sarah-tester']",180,Human,2025-04-15T13:55:40,6
+vercel/next.js,packages/next/src/server/ai-cache.ts,"['copilot[bot]']",720,AI,2025-06-10T08:30:25,25
+vercel/next.js,packages/next/src/lib/metadata/metadata-utils.ts,"['david-frontend']",440,Human,2025-05-20T10:10:15,14
+anthropic/claude-code,src/core/context_builder.py,"['claude[bot]']",890,AI,2025-07-05T15:40:50,31
+anthropic/claude-code,tests/integration/test_api.py,"['grace-qa', 'henry-dev']",260,Human,2025-06-25T12:25:33,9
+cursor-ai/cursor,src/ai/completion-engine.ts,"['cursor[bot]']",610,AI,2025-07-18T09:55:10,20
+cursor-ai/cursor,src/utils/settings-manager.ts,"['iris-engineer']",340,Human,2025-07-08T14:15:28,11
+deepmind/alphacode,models/transformer.py,"['copilot[bot]']",1050,AI,2025-07-28T11:30:45,28
+deepmind/alphacode,data/preprocessing.py,"['jack-ml', 'kate-scientist']",470,Human,2025-07-20T16:50:12,13
+github/copilot-cli,src/commands/suggest.ts,"['copilot[bot]']",390,AI,2025-07-30T10:05:20,16
+github/copilot-cli,tests/commands/test-suggest.ts,"['liam-dev']",220,Human,2025-07-29T13:40:55,7

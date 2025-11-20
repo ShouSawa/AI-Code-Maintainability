@@ -1,0 +1,23 @@
+repository_name,file_path,original_commit_type,original_commit_hash,commit_hash,commit_date,author,is_ai_generated,ai_tool,commit_message,classification_label,changed_lines
+microsoft/vscode,src/vs/editor/contrib/ai-assistant.ts,AI,a1b2c3d4e5f6,a1b2c3d4e5f6,2025-03-15T10:23:45,copilot[bot],True,Copilot,feat: Add AI-powered code completion,feat,450
+microsoft/vscode,src/vs/editor/contrib/ai-assistant.ts,AI,a1b2c3d4e5f6,b2c3d4e5f6a1,2025-03-18T14:30:20,john-developer,False,N/A,fix: Handle edge case in completion trigger,fix,25
+microsoft/vscode,src/vs/editor/contrib/ai-assistant.ts,AI,a1b2c3d4e5f6,c3d4e5f6a1b2,2025-03-22T09:15:10,copilot[bot],True,Copilot,refactor: Optimize completion algorithm,refactor,78
+microsoft/vscode,src/vs/editor/contrib/ai-assistant.ts,AI,a1b2c3d4e5f6,d4e5f6a1b2c3,2025-04-01T16:45:33,alice-dev,False,N/A,docs: Update API documentation,docs,12
+microsoft/vscode,src/vs/workbench/services/themes/common/workbenchThemeService.ts,Human,e5f6a1b2c3d4,e5f6a1b2c3d4,2025-02-08T14:30:12,john-developer,False,N/A,feat: Implement custom theme support,feat,320
+microsoft/vscode,src/vs/workbench/services/themes/common/workbenchThemeService.ts,Human,e5f6a1b2c3d4,f6a1b2c3d4e5,2025-02-15T11:20:45,emily-coder,False,N/A,fix: Fix theme color inconsistency,fix,18
+microsoft/vscode,src/vs/workbench/services/themes/common/workbenchThemeService.ts,Human,e5f6a1b2c3d4,a1b2c3d4e5f7,2025-03-05T13:55:28,john-developer,False,N/A,style: Format code with prettier,style,5
+openai/gpt-pilot,core/agents/code_generator.py,AI,b3c4d5e6f7a8,b3c4d5e6f7a8,2025-04-22T09:15:33,cursor[bot],True,Cursor,feat: Add multi-file generation,feat,680
+openai/gpt-pilot,core/agents/code_generator.py,AI,b3c4d5e6f7a8,c4d5e6f7a8b3,2025-04-25T10:30:15,cursor[bot],True,Cursor,perf: Improve generation speed,perf,42
+openai/gpt-pilot,core/agents/code_generator.py,AI,b3c4d5e6f7a8,d5e6f7a8b3c4,2025-05-02T14:20:50,frank-dev,False,N/A,fix: Handle timeout in generation,fix,31
+openai/gpt-pilot,utils/file_handler.py,Human,e6f7a8b3c4d5,e6f7a8b3c4d5,2025-03-10T16:45:20,emily-coder,False,N/A,feat: Add file validation,feat,210
+openai/gpt-pilot,utils/file_handler.py,Human,e6f7a8b3c4d5,f7a8b3c4d5e6,2025-03-18T09:10:40,frank-dev,False,N/A,test: Add unit tests for file handler,test,95
+AutoGPT/AutoGPT,autogpt/prompts/generator.py,AI,c5d6e7f8a9b0,c5d6e7f8a9b0,2025-05-01T11:20:05,devin-ai-integration[bot],True,Devin,feat: Implement dynamic prompt generation,feat,530
+AutoGPT/AutoGPT,autogpt/prompts/generator.py,AI,c5d6e7f8a9b0,d6e7f8a9b0c5,2025-05-08T15:35:22,devin-ai-integration[bot],True,Devin,refactor: Simplify prompt logic,refactor,88
+AutoGPT/AutoGPT,autogpt/prompts/generator.py,AI,c5d6e7f8a9b0,e7f8a9b0c5d6,2025-05-15T13:10:18,grace-qa,False,N/A,fix: Resolve prompt formatting bug,fix,24
+AutoGPT/AutoGPT,tests/unit/test_memory.py,Human,f8a9b0c5d6e7,f8a9b0c5d6e7,2025-04-15T13:55:40,sarah-tester,False,N/A,test: Add memory tests,test,180
+AutoGPT/AutoGPT,tests/unit/test_memory.py,Human,f8a9b0c5d6e7,a9b0c5d6e7f8,2025-04-22T10:25:33,sarah-tester,False,N/A,chore: Update test dependencies,chore,8
+vercel/next.js,packages/next/src/server/ai-cache.ts,AI,d7e8f9a0b1c2,d7e8f9a0b1c2,2025-06-10T08:30:25,copilot[bot],True,Copilot,feat: Add AI response caching,feat,720
+vercel/next.js,packages/next/src/server/ai-cache.ts,AI,d7e8f9a0b1c2,e8f9a0b1c2d7,2025-06-15T11:45:10,copilot[bot],True,Copilot,perf: Optimize cache lookup,perf,52
+vercel/next.js,packages/next/src/server/ai-cache.ts,AI,d7e8f9a0b1c2,f9a0b1c2d7e8,2025-06-20T14:20:35,henry-dev,False,N/A,fix: Fix cache invalidation,fix,18
+vercel/next.js,packages/next/src/lib/metadata/metadata-utils.ts,Human,a0b1c2d7e8f9,a0b1c2d7e8f9,2025-05-20T10:10:15,david-frontend,False,N/A,feat: Add metadata helpers,feat,440
+vercel/next.js,packages/next/src/lib/metadata/metadata-utils.ts,Human,a0b1c2d7e8f9,b1c2d7e8f9a0,2025-05-28T16:30:50,iris-engineer,False,N/A,refactor: Improve metadata structure,refactor,67

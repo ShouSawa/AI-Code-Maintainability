@@ -6,7 +6,6 @@ RQ1統合プログラム: AIコミット分析システム（GitHub API版）
 import os # ファイルパスを扱うためのライブラリ
 import pandas as pd # データフレームを扱うためのライブラリ
 from datetime import datetime, timedelta # 日付取得や時間の計算のためのライブラリ
-import re # 正規表現を扱うためのライブラリ
 import numpy as np # 数値計算を行うためのライブラリ
 from transformers import pipeline # 事前学習したモデルを扱うためのライブラリ
 import requests # HTTPリクエストを扱うためのライブラリ
@@ -63,8 +62,8 @@ def retry_with_network_check(func):
                 error_str = str(e).lower()
                 # DNS解決エラーやConnectionErrorを検出
                 if 'nameresolutionerror' in error_str or 'failed to resolve' in error_str or \
-                   'connectionerror' in error_str or 'connection error' in error_str or \
-                   'getaddrinfo failed' in error_str:
+                    'connectionerror' in error_str or 'connection error' in error_str or \
+                    'getaddrinfo failed' in error_str:
                     
                     print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ネットワークエラーを検出しました: {e}")
                     print(f"ネットワーク接続を確認中...")
@@ -172,62 +171,31 @@ class RQ1AnalyzerAPI:
         return 'N/A'
 
     @retry_with_network_check
-    def get_commits_with_file_additions_api(self, max_commits=500, skip_commits=0):
-        """GitHub APIで90日以前のファイル追加コミット取得（ランダムサンプリング版）
+    def get_all_commits_with_file_additions_api(self):
+        """GitHub APIで2025/1/1～2025/7/31の全コミットを取得（ファイル追加のみ）
         
-        Args:
-            max_commits: 取得する最大コミット数
-            skip_commits: スキップするコミット数（オフセット）
+        Returns:
+            tuple: (commits_data, total_commits_count)
         """
-        print(f"=== GitHub APIでコミット取得中 (skip={skip_commits}, max={max_commits}, ランダムサンプリング) ===")
+        print(f"=== GitHub APIで全コミット取得中 ===")
         
         commits_data = []
-        total_commits_count = 0  # 90日以前のコミット総数
         
         try:
-            # 90日以前のコミットを取得
-            cutoff_date_90 = datetime.now() - timedelta(days=90)
-            print(f"90日以前のコミットを取得中 (until: {cutoff_date_90.date()})...")
-            commits_90 = self.repo.get_commits(until=cutoff_date_90)
+            # 2025/1/1～2025/7/31の期間のコミットを取得
+            since_date = datetime(2025, 1, 1)
+            until_date = datetime(2025, 7, 31)
+            print(f"コミット取得期間: {since_date.date()} ～ {until_date.date()}")
+            print("全コミットを取得中...")
             
-            # 初回呼び出し時のみ全コミットをリストに変換してランダム順序を生成
-            if not hasattr(self, '_all_commits_cache'):
-                print("全コミットをリストに変換中...")
-                self._all_commits_cache = list(commits_90)
-                total_commits_count = len(self._all_commits_cache)
-                print(f"総コミット数: {total_commits_count}件")
-                
-                # ランダムインデックスを生成（重複なし）
-                import random
-                self._random_indices = list(range(total_commits_count))
-                random.shuffle(self._random_indices)
-                print("ランダム順序を生成しました")
-            else:
-                total_commits_count = len(self._all_commits_cache)
+            commits = self.repo.get_commits(since=since_date, until=until_date)
+            commits_list = list(commits)
+            total_commits_count = len(commits_list)
+            print(f"総コミット数: {total_commits_count}件")
             
-            # ランダムインデックスに基づいてコミットを取得
-            end_index = min(skip_commits + max_commits, len(self._random_indices))
-            selected_indices = self._random_indices[skip_commits:end_index]
-            
-            if not selected_indices:
-                print(f"取得可能なコミットがありません（skip={skip_commits}, total={total_commits_count}）")
-                return commits_data, total_commits_count
-            
-            print(f"インデックス {skip_commits}～{end_index-1} からランダムに取得")
-            
-            count = 0
-            for idx in selected_indices:
-                commit = self._all_commits_cache[idx]
-                count += 1
-                
-                if count >= max_commits:
-                    print(f"最大コミット数({max_commits})に達しました")
-                    break
-                
-                count += 1
-                if count % 50 == 0:
-                    print(f"処理中: {count}件...")
-                
+            # 全コミットを処理
+            from tqdm import tqdm
+            for commit in tqdm(commits_list, desc="コミット処理"):
                 try:
                     # コミット情報取得
                     commit_sha = commit.sha
@@ -263,13 +231,13 @@ class RQ1AnalyzerAPI:
                         })
                     
                     # API rate limit対策
-                    time.sleep(0.1)
+                    time.sleep(0.05)
                     
                 except Exception as e:
-                    print(f"コミット処理エラー {commit.sha[:8]}: {e}")
+                    print(f"\nコミット処理エラー {commit.sha[:8]}: {e}")
                     continue
             
-            print(f"コミット取得完了: 90日以前の総コミット数={total_commits_count}件, ファイル追加コミット={len(commits_data)}件")
+            print(f"\nコミット取得完了: 2025/1/1～2025/7/31の総コミット数={total_commits_count}件, ファイル追加コミット={len(commits_data)}件")
             return commits_data, total_commits_count
             
         except Exception as e:
@@ -277,37 +245,25 @@ class RQ1AnalyzerAPI:
             return [], 0
 
     def step1_find_added_files(self, target_ai_files=10, target_human_files=10):
-        """ステップ1: ファイル追加分析（API版・ランダムサンプリング・段階的取得）
+        """ステップ1: ファイル追加分析（全コミット取得 + ランダムサンプリング）
         
         Args:
-            target_ai_files: 目標AI作成ファイル数
-            target_human_files: 目標Human作成ファイル数
+            target_ai_files: 目標AI作成ファイル数（最大10）
+            target_human_files: 目標Human作成ファイル数（最大10）
         """
-        print("\n=== ステップ1: ファイル追加分析 (API版・ランダムサンプリング・段階的取得) ===")
+        print("\n=== ステップ1: ファイル追加分析 (全コミット取得 + ランダムサンプリング) ===")
         print(f"目標: AI={target_ai_files}件, Human={target_human_files}件")
-        print("※ 90日以前のコミットをランダム順序で重複なく取得します")
+        print("※ 2025/1/1～2025/7/31の全コミットを取得します")
 
-        # 段階的にコミット取得
-        initial_batch = 500  # 最初の取得数
-        additional_batch = 100  # 追加取得数
-        skip_commits = 0
-        all_csv_data = []
-        total_commits_checked = 0
-        
-        # 最初の500件取得
-        print(f"\n--- 第1回: {initial_batch}件のコミット取得 ---")
-        commits_data, total_commits = self.get_commits_with_file_additions_api(
-            max_commits=initial_batch, 
-            skip_commits=skip_commits
-        )
+        # 全コミット取得
+        commits_data, total_commits = self.get_all_commits_with_file_additions_api()
         
         if total_commits == 0:
-            print("90日以前のコミットが存在しません")
-            return None, 'no_commits_90days'
+            print("指定期間のコミットが存在しません")
+            return None, 'no_commits'
         
-        total_commits_checked += len(commits_data)
-        
-        # データ作成
+        # 全データ作成
+        all_csv_data = []
         for commit in commits_data:
             is_ai, ai_type = self.is_ai_generated_commit(commit['all_authors'])
             author_type = "AI" if is_ai else "Human"
@@ -326,76 +282,54 @@ class RQ1AnalyzerAPI:
                     'commit_message': commit['message']
                 })
         
-        # 現在の状況確認
+        # DataFrameに変換
         df = pd.DataFrame(all_csv_data)
-        ai_count = len(df[df['author_type']=='AI']) if len(df) > 0 else 0
-        human_count = len(df[df['author_type']=='Human']) if len(df) > 0 else 0
-        print(f"現在の状況 - 総計:{len(df)} AI:{ai_count} Human:{human_count}")
-        
-        # 追加取得が必要かチェック
-        skip_commits = initial_batch
-        round_count = 2
-        
-        while (ai_count < target_ai_files or human_count < target_human_files) and skip_commits < total_commits:
-            print(f"\n--- 第{round_count}回: さらに{additional_batch}件のコミット取得 (offset={skip_commits}) ---")
-            
-            additional_commits, _ = self.get_commits_with_file_additions_api(
-                max_commits=additional_batch,
-                skip_commits=skip_commits
-            )
-            
-            if not additional_commits:
-                print("これ以上コミットが取得できません")
-                break
-            
-            # 追加データ作成
-            for commit in additional_commits:
-                is_ai, ai_type = self.is_ai_generated_commit(commit['all_authors'])
-                author_type = "AI" if is_ai else "Human"
-                ai_tool = self.detect_specific_ai_tool(commit['all_authors']) if is_ai else "N/A"
-                
-                for file_path in commit['added_files']:
-                    all_csv_data.append({
-                        'commit_hash': commit['hash'],
-                        'commit_date': commit['date'],
-                        'added_file': file_path,
-                        'author_type': author_type,
-                        'ai_type': ai_type,
-                        'ai_tool': ai_tool,
-                        'author_name': commit['author_name'],
-                        'author_email': commit['author_email'],
-                        'commit_message': commit['message']
-                    })
-            
-            # 更新後の状況確認
-            df = pd.DataFrame(all_csv_data)
-            ai_count = len(df[df['author_type']=='AI'])
-            human_count = len(df[df['author_type']=='Human'])
-            print(f"現在の状況 - 総計:{len(df)} AI:{ai_count} Human:{human_count}")
-            
-            skip_commits += additional_batch
-            round_count += 1
-        
-        # 最終結果
-        print(f"\n--- 最終結果 ---")
-        print(f"分析完了 - 総計:{len(df)} AI:{ai_count} Human:{human_count}")
-        print(f"調査したコミット範囲: {skip_commits}件")
         
         if len(df) == 0:
-            print(f"ファイル追加コミット未発見（90日以前のコミット総数: {total_commits}件）")
+            print(f"ファイル追加コミット未発見（総コミット数: {total_commits}件）")
             return None, 'no_file_additions'
+        
+        # AI/人間ファイルを分離
+        ai_df = df[df['author_type'] == 'AI'].copy()
+        human_df = df[df['author_type'] == 'Human'].copy()
+        
+        ai_count = len(ai_df)
+        human_count = len(human_df)
+        
+        print(f"\n取得結果 - AI作成ファイル: {ai_count}件, 人間作成ファイル: {human_count}件")
         
         # AI作成ファイルが見つからなかった場合
         if ai_count == 0:
             print("警告: AI作成ファイルが見つかりませんでした")
             return df, 'no_ai_files'
         
-        # 目標数に達しなかった場合の警告
-        if ai_count < target_ai_files or human_count < target_human_files:
-            print(f"警告: 目標数に達しませんでした（AI: {ai_count}/{target_ai_files}, Human: {human_count}/{target_human_files}）")
-            print(f"見つかった数で分析を続行します")
+        # ランダムサンプリング
+        import random
         
-        return df, 'success'
+        # AI作成ファイルをランダムに最大10個選択
+        num_ai_files = min(target_ai_files, ai_count)
+        if ai_count > num_ai_files:
+            ai_sampled = ai_df.sample(n=num_ai_files, random_state=None)
+            print(f"AI作成ファイル: {ai_count}件から{num_ai_files}件をランダム選択")
+        else:
+            ai_sampled = ai_df
+            print(f"AI作成ファイル: 全{ai_count}件を使用")
+        
+        # 人間作成ファイルを同数ランダムに選択
+        num_human_files = num_ai_files  # AI作成ファイルと同数
+        if human_count >= num_human_files:
+            human_sampled = human_df.sample(n=num_human_files, random_state=None)
+            print(f"人間作成ファイル: {human_count}件から{num_human_files}件をランダム選択")
+        else:
+            human_sampled = human_df
+            print(f"警告: 人間作成ファイルが不足（{human_count}件のみ）")
+        
+        # 結合
+        sampled_df = pd.concat([ai_sampled, human_sampled], ignore_index=True)
+        
+        print(f"\n最終選択 - 総計: {len(sampled_df)}件 (AI: {len(ai_sampled)}件, 人間: {len(human_sampled)}件)")
+        
+        return sampled_df, 'success'
 
     @retry_with_network_check
     def get_file_commits_api(self, file_path):
@@ -664,6 +598,65 @@ class RQ1AnalyzerAPI:
         except Exception as e:
             print(f"変更行数取得エラー {commit_sha[:8]}: {e}")
             return 0
+    
+    def save_results_to_csv_v4(self, df_classified):
+        """結果をresults_v4.csvに保存（上書き・コミット単位）"""
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
+        os.makedirs(output_dir, exist_ok=True)
+        csv_path = os.path.join(output_dir, "results_v4.csv")
+        
+        # 既存のCSVを読み込む（存在する場合）
+        if os.path.exists(csv_path):
+            existing_df = pd.read_csv(csv_path)
+        else:
+            existing_df = pd.DataFrame()
+        
+        # 新しいデータを作成
+        csv_data = []
+        
+        for _, row in df_classified.iterrows():
+            file_path = row['file_path']
+            
+            # ファイル情報を取得
+            file_info = None
+            for record in self.file_info_records:
+                if record['file_name'] == file_path:
+                    file_info = record
+                    break
+            
+            if file_info is None:
+                continue
+            
+            # コミット変更行数を取得
+            commit_hash = row['commit_hash']
+            changed_lines = 0
+            if commit_hash != 'No commits found':
+                changed_lines = self.get_commit_changed_lines(commit_hash)
+            
+            csv_data.append({
+                'repository_name': self.repo_name_full,
+                'file_name': file_path,
+                'file_creators': ', '.join(file_info['all_creator_names']),
+                'file_created_by': file_info['created_by'],
+                'file_line_count': file_info['line_count'],
+                'file_creation_date': file_info['creation_date'],
+                'file_commit_count': file_info['commit_count'],
+                'commit_hash': commit_hash,
+                'commit_authors': ', '.join(row['all_authors']) if isinstance(row['all_authors'], list) else '',
+                'commit_created_by': 'AI' if row['is_ai_generated'] else 'Human',
+                'commit_changed_lines': changed_lines,
+                'commit_date': row['commit_date']
+            })
+        
+        # 新しいデータをDataFrameに変換
+        new_df = pd.DataFrame(csv_data)
+        
+        # 既存データと結合して上書き保存
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+        
+        print(f"CSV保存完了: {csv_path}（総行数: {len(combined_df)}行）")
 
     def step3_classify_commits(self, df):
         """ステップ3: コミット分類"""
@@ -807,187 +800,9 @@ class RQ1AnalyzerAPI:
                 f"最も活発なファイル - AI: {ai_cpf.idxmax()} ({ai_cpf.max()}件) 人間: {human_cpf.idxmax()} ({human_cpf.max()}件)"
             ])
         
-        # ファイル保存
-        output_file = os.path.join(self.final_output_dir, f"{self.repo_name}_commit_analysis_results_properly.txt")
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(results))
-        
-        print(f"分析完了: {output_file}")
+        print(f"分析完了: {self.repo_name}")
         print("\n".join(results[:10]) + "\n...")
         return results
-    
-    def save_individual_analysis(self, df, output_file):
-        """個別リポジトリの詳細分析をTXTファイルに保存"""
-        df['commit_date'] = pd.to_datetime(df['commit_date'])
-        ai_df = df[df['original_commit_type'] == 'AI']
-        human_df = df[df['original_commit_type'] == 'Human']
-        
-        results = [
-            "=" * 80,
-            f"{self.repo_name} - 個別リポジトリ分析結果",
-            "=" * 80,
-            "",
-            f"リポジトリ: {self.repo_name_full}",
-            f"スター数: {self.repo.stargazers_count:,}",
-            f"分析日時: {datetime.now().strftime('%Y年%m月%d日 %H:%M:%S')}",
-            "",
-            "=" * 80,
-            "■ 基本統計",
-            "-" * 40,
-            f"総コミット数: {len(df)}件",
-            f"AI作成ファイルへのコミット: {len(ai_df)}件 ({len(ai_df)/len(df)*100:.1f}%)",
-            f"人間作成ファイルへのコミット: {len(human_df)}件 ({len(human_df)/len(df)*100:.1f}%)",
-            f"ユニークファイル数: {df['file_path'].nunique()}件",
-            "",
-        ]
-        
-        # AI作成ファイルの統計
-        if len(ai_df) > 0:
-            results.extend([
-                "■ AI作成ファイルの統計",
-                "-" * 40,
-                f"ファイル数: {ai_df['file_path'].nunique()}件",
-                f"総コミット数: {len(ai_df)}件",
-                ""
-            ])
-            
-            # コミット作成者の内訳
-            ai_origin_ai = len(ai_df[ai_df['is_ai_generated'] == True])
-            ai_origin_human = len(ai_df[ai_df['is_ai_generated'] == False])
-            results.extend([
-                "コミット作成者:",
-                f"  AI: {ai_origin_ai}件 ({ai_origin_ai/len(ai_df)*100:.1f}%)",
-                f"  人間: {ai_origin_human}件 ({ai_origin_human/len(ai_df)*100:.1f}%)",
-                ""
-            ])
-            
-            # コミット分類
-            results.append("コミット分類:")
-            for label, count in ai_df['classification_label'].value_counts().head(10).items():
-                results.append(f"  {label}: {count}件 ({count/len(ai_df)*100:.1f}%)")
-            results.append("")
-        
-        # 人間作成ファイルの統計
-        if len(human_df) > 0:
-            results.extend([
-                "■ 人間作成ファイルの統計",
-                "-" * 40,
-                f"ファイル数: {human_df['file_path'].nunique()}件",
-                f"総コミット数: {len(human_df)}件",
-                ""
-            ])
-            
-            # コミット作成者の内訳
-            human_origin_ai = len(human_df[human_df['is_ai_generated'] == True])
-            human_origin_human = len(human_df[human_df['is_ai_generated'] == False])
-            results.extend([
-                "コミット作成者:",
-                f"  AI: {human_origin_ai}件 ({human_origin_ai/len(human_df)*100:.1f}%)",
-                f"  人間: {human_origin_human}件 ({human_origin_human/len(human_df)*100:.1f}%)",
-                ""
-            ])
-            
-            # コミット分類
-            results.append("コミット分類:")
-            for label, count in human_df['classification_label'].value_counts().head(10).items():
-                results.append(f"  {label}: {count}件 ({count/len(human_df)*100:.1f}%)")
-            results.append("")
-        
-        # ファイルに保存
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(results))
-
-    def save_detailed_results_to_csv(self, df_classified):
-        """全コミット情報を詳細CSVに保存（累積更新版）"""
-        print("\n--- 詳細結果CSV保存中 ---")
-        
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/result_v3.csv")
-        
-        # CSVデータを作成
-        csv_records = []
-        
-        for _, row in df_classified.iterrows():
-            file_path = row['file_path']
-            
-            # ファイル情報を取得
-            file_info = None
-            if hasattr(self, 'file_info_records'):
-                for record in self.file_info_records:
-                    if record['file_name'] == file_path:
-                        file_info = record
-                        break
-            
-            # コミットの変更行数を取得
-            changed_lines = 0
-            if row['commit_hash'] != 'No commits found':
-                changed_lines = self.get_commit_changed_lines(row['commit_hash'])
-            
-            # ファイル作成者名を取得（全アカウント）
-            file_creator_names = ''
-            if file_info and 'all_creator_names' in file_info:
-                file_creator_names = ', '.join(file_info['all_creator_names'])
-            
-            # コミット作成者名を取得（全アカウント）
-            commit_author_names = ''
-            if 'all_authors' in row and row['all_authors']:
-                if isinstance(row['all_authors'], list):
-                    commit_author_names = ', '.join(row['all_authors'])
-                else:
-                    commit_author_names = str(row['all_authors'])
-            
-            csv_records.append({
-                'repository_name': self.repo_name_full,
-                'file_name': file_path,
-                'file_created_by': row['original_commit_type'],
-                'file_creator_names': file_creator_names,
-                'file_line_count': file_info['line_count'] if file_info else 0,
-                'file_creation_date': file_info['creation_date'] if file_info else '',
-                'file_commit_count': file_info['commit_count'] if file_info else 0,
-                'commit_message': row['commit_message'],
-                'commit_created_by': 'AI' if row['is_ai_generated'] else 'Human',
-                'commit_author_names': commit_author_names,
-                'commit_changed_lines': changed_lines,
-                'commit_date': row['commit_date']
-            })
-        
-        new_df = pd.DataFrame(csv_records)
-        
-        # 既存のCSVがあれば読み込んで結合
-        if os.path.exists(csv_path):
-            existing_df = pd.read_csv(csv_path)
-            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
-        else:
-            combined_df = new_df
-        
-        # CSVに保存
-        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
-        print(f"✓ 詳細結果CSV保存完了: {csv_path}")
-        print(f"  今回追加: {len(new_df)}件, 合計: {len(combined_df)}件")
-
-    def save_files_info_to_csv(self):
-        """ファイル情報をCSVに保存（累積更新版）"""
-        if not hasattr(self, 'file_info_records') or not self.file_info_records:
-            print("保存するファイル情報がありません")
-            return
-        
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/RQ1_files_properly.csv")
-        
-        # 新しいデータをDataFrameに変換
-        new_df = pd.DataFrame(self.file_info_records)
-        
-        # 既存のCSVがあれば読み込んで結合
-        if os.path.exists(csv_path):
-            existing_df = pd.read_csv(csv_path)
-            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
-        else:
-            combined_df = new_df
-        
-        # CSVに保存
-        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
-        print(f"✓ ファイル情報をCSVに保存: {csv_path}")
-        print(f"  今回追加: {len(new_df)}件, 合計: {len(combined_df)}件")
 
     def run_full_analysis(self):
         """全分析実行（API版）- エラーハンドリング強化版"""
@@ -1033,9 +848,10 @@ class RQ1AnalyzerAPI:
             
             print(f"✓ ステップ3完了: {len(df_classified)}件のコミットを分類")
             
-            # 詳細結果をCSVに保存（全コミット情報）
-            print("\n--- 詳細結果のCSV保存 ---")
-            self.save_detailed_results_to_csv(df_classified)
+            # results_v4.csvに保存
+            print("\n--- CSV保存 (results_v4.csv) ---")
+            self.save_results_to_csv_v4(df_classified)
+            print("✓ CSV保存完了")
             
             # 個別レポートは出力せず、統合分析でまとめて出力
             print(f"\n✓✓✓ 完了: {self.repo_name} ✓✓✓")
@@ -1172,7 +988,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
     # ファイル名を固定して上書き更新
-    output_file = os.path.join(output_dir, f"results_v3.txt")
+    output_file = os.path.join(output_dir, f"results_v4.txt")
     
     # 全データを統合
     combined_df = pd.concat(all_classifications, ignore_index=True)
