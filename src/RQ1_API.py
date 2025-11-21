@@ -141,35 +141,64 @@ class RQ1AnalyzerAPI:
         
         return False, "human"
 
-    def detect_specific_ai_tool(self, all_authors):
-        """
-        AIツール特定（全アカウントをチェック）
+    def save_committers_to_csv(self, commit_data):
+        """ファイル追加コミットのコミッター情報をCSVに記録
         
         Args:
-            all_authors: コミットに関与した全アカウント名（文字列またはリスト）
-            
-        Returns:
-            str: AIツール名、または'N/A'
+            commit_data: コミット情報の辞書（all_authors, added_files含む）
         """
-        # 文字列の場合はリストに変換
-        if isinstance(all_authors, str):
-            all_authors = [all_authors]
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
+        os.makedirs(output_dir, exist_ok=True)
+        csv_path = os.path.join(output_dir, "commiter_v4.csv")
         
-        tool_map = {
-            'copilot': 'Copilot',
-            'cursor': 'Cursor',
-            'devin': 'Devin',
-            'claude': 'Claude'
-        }
+        # 既存のCSVを読み込む（存在する場合）
+        if os.path.exists(csv_path):
+            existing_df = pd.read_csv(csv_path)
+        else:
+            existing_df = pd.DataFrame(columns=['repository_name', 'file_path', 'all_committers'])
         
-        # 全アカウントをチェック
-        for author_name in all_authors:
-            author_lower = author_name.lower()
-            for ai_type, bot_names in self.AI_BOT_ACCOUNTS.items():
-                if any(bot_name.lower() in author_lower for bot_name in bot_names):
-                    return tool_map.get(ai_type, 'N/A')
+        # 新しいデータを作成
+        new_records = []
+        for file_path in commit_data['added_files']:
+            new_records.append({
+                'repository_name': self.repo_name_full,
+                'file_path': file_path,
+                'all_committers': ', '.join(commit_data['all_authors'])
+            })
         
-        return 'N/A'
+        # 新しいデータをDataFrameに変換
+        new_df = pd.DataFrame(new_records)
+        
+        # 既存データと結合して上書き保存
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        combined_df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+
+    def should_record_committers(self):
+        """コミッター記録が必要かを判定
+        
+        Returns:
+            bool: results_v4.csvに記録されているリポジトリが3種類未満ならTrue
+        """
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/results_v4.csv")
+        
+        # results_v4.csvが存在しない場合は記録する
+        if not os.path.exists(csv_path):
+            return True
+        
+        try:
+            # CSVを読み込んで、ユニークなリポジトリ数をカウント
+            df = pd.read_csv(csv_path)
+            if 'repository_name' in df.columns:
+                unique_repos = df['repository_name'].nunique()
+                # 3種類未満なら記録を続ける
+                return unique_repos < 3
+            else:
+                return True
+        except Exception as e:
+            print(f"results_v4.csv読み込みエラー: {e}")
+            return True  # エラー時は記録する
 
     @retry_with_network_check
     def get_all_commits_with_file_additions_api(self):
@@ -181,6 +210,13 @@ class RQ1AnalyzerAPI:
         print(f"=== GitHub APIで全コミット取得中 ===")
         
         commits_data = []
+        
+        # コミッター記録が必要かを判定
+        record_committers = self.should_record_committers()
+        if record_committers:
+            print("※ コミッター情報を記録します（AI作成ファイル検出確認用）")
+        else:
+            print("※ コミッター記録スキップ（3リポジトリ以上分析済み）")
         
         try:
             # 2025/1/1～2025/7/31の期間のコミットを取得
@@ -220,7 +256,7 @@ class RQ1AnalyzerAPI:
                             added_files.append(file.filename)
                     
                     if added_files:
-                        commits_data.append({
+                        commit_info = {
                             'hash': commit_sha,
                             'author_name': author_name,
                             'author_email': author_email,
@@ -228,7 +264,12 @@ class RQ1AnalyzerAPI:
                             'date': commit_date,
                             'message': message,
                             'added_files': added_files
-                        })
+                        }
+                        commits_data.append(commit_info)
+                        
+                        # コミッター情報をCSVに記録（3リポジトリ未満の場合のみ）
+                        if record_committers:
+                            self.save_committers_to_csv(commit_info)
                     
                     # API rate limit対策
                     time.sleep(0.05)
@@ -238,6 +279,8 @@ class RQ1AnalyzerAPI:
                     continue
             
             print(f"\nコミット取得完了: 2025/1/1～2025/7/31の総コミット数={total_commits_count}件, ファイル追加コミット={len(commits_data)}件")
+            if record_committers:
+                print(f"コミッター情報を commiter_v4.csv に記録しました")
             return commits_data, total_commits_count
             
         except Exception as e:
@@ -260,14 +303,13 @@ class RQ1AnalyzerAPI:
         
         if total_commits == 0:
             print("指定期間のコミットが存在しません")
-            return None, 'no_commits'
+            return None, 'no_commits_90days'
         
         # 全データ作成
         all_csv_data = []
         for commit in commits_data:
             is_ai, ai_type = self.is_ai_generated_commit(commit['all_authors'])
             author_type = "AI" if is_ai else "Human"
-            ai_tool = self.detect_specific_ai_tool(commit['all_authors']) if is_ai else "N/A"
             
             for file_path in commit['added_files']:
                 all_csv_data.append({
@@ -276,7 +318,6 @@ class RQ1AnalyzerAPI:
                     'added_file': file_path,
                     'author_type': author_type,
                     'ai_type': ai_type,
-                    'ai_tool': ai_tool,
                     'author_name': commit['author_name'],
                     'author_email': commit['author_email'],
                     'commit_message': commit['message']
@@ -302,9 +343,6 @@ class RQ1AnalyzerAPI:
         if ai_count == 0:
             print("警告: AI作成ファイルが見つかりませんでした")
             return df, 'no_ai_files'
-        
-        # ランダムサンプリング
-        import random
         
         # AI作成ファイルをランダムに最大10個選択
         num_ai_files = min(target_ai_files, ai_count)
@@ -333,9 +371,11 @@ class RQ1AnalyzerAPI:
 
     @retry_with_network_check
     def get_file_commits_api(self, file_path):
-        """GitHub APIで特定ファイルのコミット履歴取得"""
+        """GitHub APIで特定ファイルのコミット履歴取得（2025/10/31まで）"""
         try:
-            commits = self.repo.get_commits(path=file_path)
+            # 2025/10/31までのコミットを取得
+            until_date = datetime(2025, 10, 31, 23, 59, 59)
+            commits = self.repo.get_commits(path=file_path, until=until_date)
             commit_logs = []
             
             for commit in commits:
@@ -358,10 +398,6 @@ class RQ1AnalyzerAPI:
                     'email': commit.commit.author.email or "unknown@example.com",
                     'message': commit.commit.message
                 })
-                
-                # 最大100件まで
-                if len(commit_logs) >= 100:
-                    break
                 
                 time.sleep(0.05)  # API rate limit対策
             
@@ -437,7 +473,7 @@ class RQ1AnalyzerAPI:
                     'commit_hash': row['commit_hash'],
                     'added_file': row['added_file'],
                     'author_type': row['author_type'],
-                    'ai_tool': row['ai_tool']
+                    'ai_type': row['ai_type']
                 })
         
         # 人間作成ファイルをランダムに選択
@@ -450,7 +486,7 @@ class RQ1AnalyzerAPI:
                     'commit_hash': row['commit_hash'],
                     'added_file': row['added_file'],
                     'author_type': row['author_type'],
-                    'ai_tool': row['ai_tool']
+                    'ai_type': row['ai_type']
                 })
         
         # 同数に調整（数が小さい方合わせる）
@@ -520,10 +556,8 @@ class RQ1AnalyzerAPI:
                             'commit_date': log['date'],
                             'author': log['author'],
                             'all_authors': log['all_authors'],
-                            'commit_message': log['message'],
                             'is_ai_generated': is_ai,
-                            'ai_type': ai_type,
-                            'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
+                            'ai_type': ai_type
                         })
             else:
                 # 情報取得失敗時はスキップ
@@ -578,10 +612,8 @@ class RQ1AnalyzerAPI:
                             'commit_date': log['date'],
                             'author': log['author'],
                             'all_authors': log['all_authors'],
-                            'commit_message': log['message'],
                             'is_ai_generated': is_ai,
-                            'ai_type': ai_type,
-                            'ai_tool': self.detect_specific_ai_tool(log['all_authors']) if is_ai else 'N/A'
+                            'ai_type': ai_type
                         })
             else:
                 # 情報取得失敗時はスキップ
@@ -711,7 +743,8 @@ class RQ1AnalyzerAPI:
                 'commit_authors': ', '.join(row['all_authors']) if isinstance(row['all_authors'], list) else '',
                 'commit_created_by': 'AI' if row['is_ai_generated'] else 'Human',
                 'commit_changed_lines': changed_lines,
-                'commit_date': row['commit_date']
+                'commit_date': row['commit_date'],
+                'commit_classification': row.get('classification_label', 'not_classified')
             })
         
         # 新しいデータをDataFrameに変換
@@ -737,6 +770,7 @@ class RQ1AnalyzerAPI:
         try:
             for _, row in tqdm(df.iterrows(), total=len(df), desc="コミット分類"):
                 commit_sha = row['commit_hash']
+                
                 base_result = {
                     'original_commit_type': row['original_commit_type'],
                     'commit_hash': commit_sha,
@@ -744,8 +778,7 @@ class RQ1AnalyzerAPI:
                     'commit_date': row['commit_date'],
                     'author': row['author'],
                     'is_ai_generated': row['is_ai_generated'],
-                    'ai_tool': row.get('ai_tool', 'N/A'),
-                    'commit_message': row['commit_message']
+                    'ai_type': row['ai_type']
                 }
                 
                 if commit_sha == 'No commits found':
@@ -817,11 +850,11 @@ class RQ1AnalyzerAPI:
         ])
         
         # 5. AIツール/モデルの分布（AI起源の場合のみ）
-        if label == "AI起源" and 'ai_tool' in subset_df.columns:
+        if label == "AI起源" and 'ai_type' in subset_df.columns:
             analysis.append("5. 使用されたAIツール/モデルの分布:")
             first_commits = subset_df.drop_duplicates(subset=['file_path'], keep='first')
-            ai_tool_counts = first_commits['ai_tool'].value_counts()
-            for tool, count in ai_tool_counts.items():
+            ai_type_counts = first_commits['ai_type'].value_counts()
+            for tool, count in ai_type_counts.items():
                 if tool != 'N/A':
                     analysis.append(f"   {tool}: {count}件 ({count/len(first_commits)*100:.1f}%)")
             analysis.append("")
@@ -876,7 +909,7 @@ class RQ1AnalyzerAPI:
             df_additions, step1_status = self.step1_find_added_files()
             if df_additions is None or len(df_additions) == 0:
                 if step1_status == 'no_commits_90days':
-                    print("⚠ ステップ1失敗: 90日以前のコミットが存在しません")
+                    print("⚠ ステップ1失敗: 7/31以前のコミットが存在しません")
                     return None, 'no_commits_90days'
                 elif step1_status == 'no_file_additions':
                     print("⚠ ステップ1失敗: ファイル追加コミットが見つかりませんでした")
@@ -933,7 +966,7 @@ class RQ1AnalyzerAPI:
             return None, f'exception: {type(e).__name__}'
 
 
-def analyze_multiple_repositories(repo_list, start_index=0, num_repos=3):
+def analyze_multiple_repositories(repo_list, start_index=0, num_repos=100):
     """複数リポジトリの分析を実行 - 成功数ベース版"""
     github_token = os.getenv("GITHUB_TOKEN")
     
@@ -1043,6 +1076,45 @@ def analyze_multiple_repositories(repo_list, start_index=0, num_repos=3):
     print(f"{'='*80}")
 
 
+def calculate_period_commit_frequency(file_commits_df, period_days):
+    """
+    ファイル生成からの指定期間ごとのコミット数の中央値を計算
+    
+    Args:
+        file_commits_df: 1つのファイルのコミット履歴DataFrame（commit_date列を含む）
+        period_days: 期間の日数（7=1週間, 14=2週間, 30=1ヶ月, 90=3ヶ月）
+        
+    Returns:
+        float: 期間ごとのコミット数の中央値（データ不足の場合はNone）
+    """
+    if len(file_commits_df) == 0:
+        return None
+    
+    dates = pd.to_datetime(file_commits_df['commit_date']).sort_values()
+    first_date = dates.iloc[0]
+    last_date = dates.iloc[-1]
+    
+    period_commits = []
+    current_period_start = first_date
+    
+    # 完全な期間のみカウント（端数は除外）
+    while current_period_start + pd.Timedelta(days=period_days) <= last_date:
+        period_end = current_period_start + pd.Timedelta(days=period_days)
+        
+        # その期間のコミット数をカウント
+        commits_in_period = dates[(dates >= current_period_start) & (dates < period_end)]
+        period_commits.append(len(commits_in_period))
+        
+        # 次の期間へ
+        current_period_start = period_end
+    
+    # 完全な期間が少なくとも1つある場合のみ中央値を返す
+    if len(period_commits) > 0:
+        return np.median(period_commits)
+    else:
+        return None
+
+
 def generate_combined_analysis(all_results, all_classifications, elapsed_time, failed_repos=None):
     """複数リポジトリの統合分析結果を生成（累積更新版）"""
     print("\n=== 統合分析結果生成中 ===")
@@ -1142,8 +1214,8 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
             ""
         ])
         
-        # コミット頻度分析（AI）- 期間あたりのコミット回数
-        ai_commit_rates = {
+        # コミット頻度分析（AI）- 正規化版（期間ごとのコミット数の中央値）
+        ai_commit_frequencies = {
             '1week': [],
             '2weeks': [],
             '1month': [],
@@ -1152,43 +1224,63 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         
         for file_path in ai_df['file_path'].unique():
             file_commits = ai_df[ai_df['file_path'] == file_path].copy()
-            if len(file_commits) > 0:
-                dates = file_commits['commit_date'].sort_values()
-                first_date = dates.iloc[0]
-                last_date = dates.iloc[-1]
-                total_days = (last_date - first_date).days
-                
-                if total_days > 0:
-                    total_commits = len(file_commits)
-                    
-                    # 各期間でのコミット回数を計算
-                    ai_commit_rates['1week'].append(total_commits / (total_days / 7.0))
-                    ai_commit_rates['2weeks'].append(total_commits / (total_days / 14.0))
-                    ai_commit_rates['1month'].append(total_commits / (total_days / 30.0))
-                    ai_commit_rates['3months'].append(total_commits / (total_days / 90.0))
+            
+            # 各期間ごとのコミット数の中央値を計算
+            freq_1week = calculate_period_commit_frequency(file_commits, 7)
+            freq_2weeks = calculate_period_commit_frequency(file_commits, 14)
+            freq_1month = calculate_period_commit_frequency(file_commits, 30)
+            freq_3months = calculate_period_commit_frequency(file_commits, 90)
+            
+            if freq_1week is not None:
+                ai_commit_frequencies['1week'].append(freq_1week)
+            if freq_2weeks is not None:
+                ai_commit_frequencies['2weeks'].append(freq_2weeks)
+            if freq_1month is not None:
+                ai_commit_frequencies['1month'].append(freq_1month)
+            if freq_3months is not None:
+                ai_commit_frequencies['3months'].append(freq_3months)
         
-        if ai_commit_rates['1week']:
+        if ai_commit_frequencies['1week']:
             results.extend([
-                "コミット頻度（期間あたりのコミット回数）:",
-                "  [1週間あたり]",
-                f"    平均: {np.mean(ai_commit_rates['1week']):.2f}回",
-                f"    中央値: {np.median(ai_commit_rates['1week']):.2f}回",
-                f"    最小: {np.min(ai_commit_rates['1week']):.2f}回",
-                f"    最大: {np.max(ai_commit_rates['1week']):.2f}回",
-                f"    標準偏差: {np.std(ai_commit_rates['1week']):.2f}回",
-                "  [2週間あたり]",
-                f"    平均: {np.mean(ai_commit_rates['2weeks']):.2f}回",
-                f"    中央値: {np.median(ai_commit_rates['2weeks']):.2f}回",
-                "  [1ヶ月あたり]",
-                f"    平均: {np.mean(ai_commit_rates['1month']):.2f}回",
-                f"    中央値: {np.median(ai_commit_rates['1month']):.2f}回",
-                "  [3ヶ月あたり]",
-                f"    平均: {np.mean(ai_commit_rates['3months']):.2f}回",
-                f"    中央値: {np.median(ai_commit_rates['3months']):.2f}回",
+                "コミット頻度（期間ごとのコミット数の中央値、正規化版）:",
+                "  ※各ファイルで期間ごとのコミット数の中央値を計算し、全ファイルで集計",
+                "  ※端数期間は計算から除外",
+                "",
+                "  [1週間ごと]",
+                f"    全ファイルの中央値の平均: {np.mean(ai_commit_frequencies['1week']):.2f}回/週",
+                f"    全ファイルの中央値の中央値: {np.median(ai_commit_frequencies['1week']):.2f}回/週",
+                f"    最小: {np.min(ai_commit_frequencies['1week']):.2f}回",
+                f"    最大: {np.max(ai_commit_frequencies['1week']):.2f}回",
+                f"    標準偏差: {np.std(ai_commit_frequencies['1week']):.2f}回",
+                f"    データ数: {len(ai_commit_frequencies['1week'])}ファイル",
+                "",
+                "  [2週間ごと]",
+                f"    全ファイルの平均: {np.mean(ai_commit_frequencies['2weeks']):.2f}回/2週",
+                f"    全ファイルの中央値: {np.median(ai_commit_frequencies['2weeks']):.2f}回/2週",
+                f"    最小: {np.min(ai_commit_frequencies['2weeks']):.2f}回",
+                f"    最大: {np.max(ai_commit_frequencies['2weeks']):.2f}回",
+                f"    標準偏差: {np.std(ai_commit_frequencies['2weeks']):.2f}回",
+                f"    データ数: {len(ai_commit_frequencies['2weeks'])}ファイル",
+                "",
+                "  [1ヶ月ごと]",
+                f"    全ファイルの平均: {np.mean(ai_commit_frequencies['1month']):.2f}回/月",
+                f"    全ファイルの中央値: {np.median(ai_commit_frequencies['1month']):.2f}回/月",
+                f"    最小: {np.min(ai_commit_frequencies['1month']):.2f}回",
+                f"    最大: {np.max(ai_commit_frequencies['1month']):.2f}回",
+                f"    標準偏差: {np.std(ai_commit_frequencies['1month']):.2f}回",
+                f"    データ数: {len(ai_commit_frequencies['1month'])}ファイル",
+                "",
+                "  [3ヶ月ごと]",
+                f"    全ファイルの平均: {np.mean(ai_commit_frequencies['3months']):.2f}回/3ヶ月",
+                f"    全ファイルの中央値: {np.median(ai_commit_frequencies['3months']):.2f}回/3ヶ月",
+                f"    最小: {np.min(ai_commit_frequencies['3months']):.2f}回",
+                f"    最大: {np.max(ai_commit_frequencies['3months']):.2f}回",
+                f"    標準偏差: {np.std(ai_commit_frequencies['3months']):.2f}回",
+                f"    データ数: {len(ai_commit_frequencies['3months'])}ファイル",
                 ""
             ])
         else:
-            results.append("コミット頻度: データ不足\n")
+            results.append("コミット頻度: データ不足（完全な期間を持つファイルなし）\n")
         
         # AI作成ファイルのコミット分類
         results.append("コミット分類の分布:")
@@ -1228,8 +1320,8 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
             ""
         ])
         
-        # コミット頻度分析（人間）- 期間あたりのコミット回数
-        human_commit_rates = {
+        # コミット頻度分析（人間）- 正規化版（期間ごとのコミット数の中央値）
+        human_commit_frequencies = {
             '1week': [],
             '2weeks': [],
             '1month': [],
@@ -1238,43 +1330,63 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         
         for file_path in human_df['file_path'].unique():
             file_commits = human_df[human_df['file_path'] == file_path].copy()
-            if len(file_commits) > 0:
-                dates = file_commits['commit_date'].sort_values()
-                first_date = dates.iloc[0]
-                last_date = dates.iloc[-1]
-                total_days = (last_date - first_date).days
-                
-                if total_days > 0:
-                    total_commits = len(file_commits)
-                    
-                    # 各期間でのコミット回数を計算
-                    human_commit_rates['1week'].append(total_commits / (total_days / 7.0))
-                    human_commit_rates['2weeks'].append(total_commits / (total_days / 14.0))
-                    human_commit_rates['1month'].append(total_commits / (total_days / 30.0))
-                    human_commit_rates['3months'].append(total_commits / (total_days / 90.0))
+            
+            # 各期間ごとのコミット数の中央値を計算
+            freq_1week = calculate_period_commit_frequency(file_commits, 7)
+            freq_2weeks = calculate_period_commit_frequency(file_commits, 14)
+            freq_1month = calculate_period_commit_frequency(file_commits, 30)
+            freq_3months = calculate_period_commit_frequency(file_commits, 90)
+            
+            if freq_1week is not None:
+                human_commit_frequencies['1week'].append(freq_1week)
+            if freq_2weeks is not None:
+                human_commit_frequencies['2weeks'].append(freq_2weeks)
+            if freq_1month is not None:
+                human_commit_frequencies['1month'].append(freq_1month)
+            if freq_3months is not None:
+                human_commit_frequencies['3months'].append(freq_3months)
         
-        if human_commit_rates['1week']:
+        if human_commit_frequencies['1week']:
             results.extend([
-                "コミット頻度（期間あたりのコミット回数）:",
-                "  [1週間あたり]",
-                f"    平均: {np.mean(human_commit_rates['1week']):.2f}回",
-                f"    中央値: {np.median(human_commit_rates['1week']):.2f}回",
-                f"    最小: {np.min(human_commit_rates['1week']):.2f}回",
-                f"    最大: {np.max(human_commit_rates['1week']):.2f}回",
-                f"    標準偏差: {np.std(human_commit_rates['1week']):.2f}回",
-                "  [2週間あたり]",
-                f"    平均: {np.mean(human_commit_rates['2weeks']):.2f}回",
-                f"    中央値: {np.median(human_commit_rates['2weeks']):.2f}回",
-                "  [1ヶ月あたり]",
-                f"    平均: {np.mean(human_commit_rates['1month']):.2f}回",
-                f"    中央値: {np.median(human_commit_rates['1month']):.2f}回",
-                "  [3ヶ月あたり]",
-                f"    平均: {np.mean(human_commit_rates['3months']):.2f}回",
-                f"    中央値: {np.median(human_commit_rates['3months']):.2f}回",
+                "コミット頻度（期間ごとのコミット数の中央値、正規化版）:",
+                "  ※各ファイルで期間ごとのコミット数の中央値を計算し、全ファイルで集計",
+                "  ※端数期間は計算から除外",
+                "",
+                "  [1週間ごと]",
+                f"    全ファイルの中央値の平均: {np.mean(human_commit_frequencies['1week']):.2f}回/週",
+                f"    全ファイルの中央値の中央値: {np.median(human_commit_frequencies['1week']):.2f}回/週",
+                f"    最小: {np.min(human_commit_frequencies['1week']):.2f}回",
+                f"    最大: {np.max(human_commit_frequencies['1week']):.2f}回",
+                f"    標準偏差: {np.std(human_commit_frequencies['1week']):.2f}回",
+                f"    データ数: {len(human_commit_frequencies['1week'])}ファイル",
+                "",
+                "  [2週間ごと]",
+                f"    全ファイルの平均: {np.mean(human_commit_frequencies['2weeks']):.2f}回/2週",
+                f"    全ファイルの中央値: {np.median(human_commit_frequencies['2weeks']):.2f}回/2週",
+                f"    最小: {np.min(human_commit_frequencies['2weeks']):.2f}回",
+                f"    最大: {np.max(human_commit_frequencies['2weeks']):.2f}回",
+                f"    標準偏差: {np.std(human_commit_frequencies['2weeks']):.2f}回",
+                f"    データ数: {len(human_commit_frequencies['2weeks'])}ファイル",
+                "",
+                "  [1ヶ月ごと]",
+                f"    全ファイルの平均: {np.mean(human_commit_frequencies['1month']):.2f}回/月",
+                f"    全ファイルの中央値: {np.median(human_commit_frequencies['1month']):.2f}回/月",
+                f"    最小: {np.min(human_commit_frequencies['1month']):.2f}回",
+                f"    最大: {np.max(human_commit_frequencies['1month']):.2f}回",
+                f"    標準偏差: {np.std(human_commit_frequencies['1month']):.2f}回",
+                f"    データ数: {len(human_commit_frequencies['1month'])}ファイル",
+                "",
+                "  [3ヶ月ごと]",
+                f"    全ファイルの平均: {np.mean(human_commit_frequencies['3months']):.2f}回/3ヶ月",
+                f"    全ファイルの中央値: {np.median(human_commit_frequencies['3months']):.2f}回/3ヶ月",
+                f"    最小: {np.min(human_commit_frequencies['3months']):.2f}回",
+                f"    最大: {np.max(human_commit_frequencies['3months']):.2f}回",
+                f"    標準偏差: {np.std(human_commit_frequencies['3months']):.2f}回",
+                f"    データ数: {len(human_commit_frequencies['3months'])}ファイル",
                 ""
             ])
         else:
-            results.append("コミット頻度: データ不足\n")
+            results.append("コミット頻度: データ不足（完全な期間を持つファイルなし）\n")
         
         # 人間作成ファイルのコミット分類
         results.append("コミット分類の分布:")
@@ -1304,7 +1416,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         
         # 各ファイルの最初のコミット（ファイル作成時）のAIツールを取得
         first_commits = ai_df.drop_duplicates(subset=['file_path'], keep='first')
-        tool_counts = first_commits['ai_tool'].value_counts()
+        tool_counts = first_commits['ai_type'].value_counts()
         
         results.append(f"AI作成ファイル数: {len(first_commits)}件")
         results.append("")
