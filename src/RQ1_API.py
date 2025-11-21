@@ -1109,7 +1109,7 @@ def generate_combined_analysis(all_results, all_classifications, elapsed_time, f
         f"総ファイル数: {combined_df['file_path'].nunique()}件",
         f"AI起源コミット（AI作成ファイルに対するコミット）: {total_ai}件 ({total_ai/len(combined_df)*100:.1f}%)",
         f"人間起源コミット（人間作成ファイルに対するコミット）: {total_human}件 ({total_human/len(combined_df)*100:.1f}%)",
-        f"AI生成判定コミット: {total_ai_generated}件 ({total_ai_generated/len(combined_df)*100:.1f}%)",
+        f"AI生成判定コミット（全てのコミットのうちのAI率）: {total_ai_generated}件 ({total_ai_generated/len(combined_df)*100:.1f}%)",
         ""
     ])
     
