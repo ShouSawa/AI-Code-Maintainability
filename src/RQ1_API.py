@@ -348,6 +348,8 @@ class RQ1AnalyzerAPI:
                     'added_file': file_path,
                     'author_type': author_type,
                     'ai_type': ai_type,
+                    'is_ai_generated': is_ai,
+                    'all_authors': commit['all_authors'],  # ← この行を追加
                     'author_name': commit['author_name'],
                     'author_email': commit['author_email'],
                     'commit_message': commit['message']
