@@ -115,6 +115,11 @@ class RQ1AnalyzerAPI:
         self.final_output_dir = os.path.join(script_dir, "../data_list/RQ1/final_result")
         os.makedirs(self.final_output_dir, exist_ok=True)
         
+        # 成功リポジトリリストのCSVパス
+        dataset_dir = os.path.join(script_dir, "../dataset")
+        os.makedirs(dataset_dir, exist_ok=True)
+        self.successful_repos_csv = os.path.join(dataset_dir, "successful_repository_list.csv")
+        
         print(f"リポジトリ接続成功: {repo_name_full}")
         print(f"スター数: {self.repo.stargazers_count}, フォーク数: {self.repo.forks_count}")
 
@@ -140,6 +145,31 @@ class RQ1AnalyzerAPI:
                     return True, ai_type
         
         return False, "human"
+
+    def save_successful_repository(self, ai_file_count):
+        """分析成功したリポジトリ情報をCSVに記録
+        
+        Args:
+            ai_file_count: AI作成ファイル数
+        """
+        owner, repo_name = self.repo_name_full.split('/')
+        
+        # 既存のCSVを読み込むか、新規作成
+        if os.path.exists(self.successful_repos_csv):
+            df = pd.read_csv(self.successful_repos_csv)
+        else:
+            df = pd.DataFrame(columns=['owner', 'repository_name', 'ai_file_count'])
+        
+        # 新しいレコードを追加
+        new_record = pd.DataFrame([{
+            'owner': owner,
+            'repository_name': repo_name,
+            'ai_file_count': ai_file_count
+        }])
+        
+        df = pd.concat([df, new_record], ignore_index=True)
+        df.to_csv(self.successful_repos_csv, index=False, encoding='utf-8-sig')
+        print(f"✓ 成功リポジトリを記録: {self.successful_repos_csv}")
 
     def save_committers_to_csv(self, commit_data):
         """ファイル追加コミットのコミッター情報をCSVに記録
@@ -777,6 +807,7 @@ class RQ1AnalyzerAPI:
                     'file_path': row['file_path'],
                     'commit_date': row['commit_date'],
                     'author': row['author'],
+                    'all_authors': row['all_authors'],  # ← この行を追加
                     'is_ai_generated': row['is_ai_generated'],
                     'ai_type': row['ai_type']
                 }
@@ -947,6 +978,13 @@ class RQ1AnalyzerAPI:
             print("\n--- CSV保存 (results_v4.csv) ---")
             self.save_results_to_csv_v4(df_classified)
             print("✓ CSV保存完了")
+            
+            # AI作成ファイル数をカウント
+            ai_file_count = len(df_additions[df_additions['is_ai_generated'] == True])
+            
+            # 成功リポジトリ情報を記録
+            print("\n--- 成功リポジトリ記録 ---")
+            self.save_successful_repository(ai_file_count)
             
             # 個別レポートは出力せず、統合分析でまとめて出力
             print(f"\n✓✓✓ 完了: {self.repo_name} ✓✓✓")
@@ -1494,7 +1532,7 @@ def main():
 
     # 開始位置（上から何番目のリポジトリから始めるか）
     # 例: start_repo = 0 なら1番目から、start_repo = 100 なら101番目から開始
-    start_repo = 0
+    start_repo = 2
     
     # 分析対象リポジトリ数
     num_repos = 100
