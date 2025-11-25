@@ -23,3 +23,16 @@ remotion-dev,remotion,10
 dotnet,maui,10
 Tencent,ncnn,7
 dotnet,core,1
+microsoft,typescript-go,10
+mlflow,mlflow,6
+onlook-dev,onlook,10
+elastic,kibana,3
+QL-Win,QuickLook,1
+microsoft,fluentui,1
+onnx,onnx,6
+airbytehq,airbyte,10
+yamadashy,repomix,1
+github,docs,4
+kortix-ai,suna,2
+rqlite,rqlite,3
+dotnet,runtime,1
