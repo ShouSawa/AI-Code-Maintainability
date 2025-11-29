@@ -4,12 +4,12 @@
 
 ■ 分析概要
 ----------------------------------------
-分析日時: 2025年11月27日 17:24:06
-分析対象リポジトリ数: 390件
-分析成功リポジトリ数: 65件
-分析失敗リポジトリ数: 325件
-総コミット数: 2240件
-分析所要時間: 2時間8分7秒
+分析日時: 2025年11月30日 06:24:52
+分析対象リポジトリ数: 593件
+分析成功リポジトリ数: 100件
+分析失敗リポジトリ数: 493件
+総コミット数: 3727件
+分析所要時間: 7 days, 15時間8分53秒
 
 ■ 分析失敗リポジトリ
 ----------------------------------------
@@ -663,24 +663,360 @@
   理由: AI作成ファイルが見つからない
 × jnsahaj/tweakcn
   理由: AI作成ファイルが見つからない
+× aniyomiorg/aniyomi
+  理由: AI作成ファイルが見つからない
+× traccar/traccar
+  理由: AI作成ファイルが見つからない
+× thedevdojo/wave
+  理由: AI作成ファイルが見つからない
+× traceloop/openllmetry
+  理由: AI作成ファイルが見つからない
+× ethereum-optimism/optimism
+  理由: AI作成ファイルが見つからない
+× unisonweb/unison
+  理由: AI作成ファイルが見つからない
+× microsoft/vscode-docs
+  理由: AI作成ファイルが見つからない
+× openai/openai-realtime-agents
+  理由: AI作成ファイルが見つからない
+× BasedHardware/omi
+  理由: AI作成ファイルが見つからない
+× Kilo-Org/kilocode
+  理由: AI作成ファイルが見つからない
+× konvajs/react-konva
+  理由: AI作成ファイルが見つからない
+× espressif/esptool
+  理由: AI作成ファイルが見つからない
+× microsoft/mcp-for-beginners
+  理由: AI作成ファイルが見つからない
+× EricLBuehler/mistral.rs
+  理由: AI作成ファイルが見つからない
+× metowolf/vCards
+  理由: AI作成ファイルが見つからない
+× Freika/dawarich
+  理由: AI作成ファイルが見つからない
+× microsoft/vscode-cpptools
+  理由: AI作成ファイルが見つからない
+× cvxpy/cvxpy
+  理由: AI作成ファイルが見つからない
+× anyproto/anytype-ts
+  理由: AI作成ファイルが見つからない
+× apache/pinot
+  理由: AI作成ファイルが見つからない
+× pardeike/Harmony
+  理由: AI作成ファイルが見つからない
+× PrefectHQ/marvin
+  理由: AI作成ファイルが見つからない
+× Flagsmith/flagsmith
+  理由: AI作成ファイルが見つからない
+× fujiapple852/trippy
+  理由: AI作成ファイルが見つからない
+× hathach/tinyusb
+  理由: AI作成ファイルが見つからない
+× sanity-io/sanity
+  理由: AI作成ファイルが見つからない
+× BLAKE3-team/BLAKE3
+  理由: AI作成ファイルが見つからない
+× e2b-dev/fragments
+  理由: AI作成ファイルが見つからない
+× mebjas/html5-qrcode
+  理由: 90日以前のコミットが存在しない
+× folke/snacks.nvim
+  理由: AI作成ファイルが見つからない
+× julep-ai/julep
+  理由: AI作成ファイルが見つからない
+× ryoppippi/ccusage
+  理由: AI作成ファイルが見つからない
+× timber/timber
+  理由: AI作成ファイルが見つからない
+× Zipstack/unstract
+  理由: AI作成ファイルが見つからない
+× t3-oss/create-t3-turbo
+  理由: AI作成ファイルが見つからない
+× BeehiveInnovations/zen-mcp-server
+  理由: AI作成ファイルが見つからない
+× dotnet/msbuild
+  理由: AI作成ファイルが見つからない
+× actions/toolkit
+  理由: ステップ2失敗
+× microsoft/Windows-classic-samples
+  理由: AI作成ファイルが見つからない
+× thebuilder/react-intersection-observer
+  理由: ステップ2失敗
+× modelcontextprotocol/inspector
+  理由: ステップ2失敗
+× epicweb-dev/react-fundamentals
+  理由: AI作成ファイルが見つからない
+× Keldos-Li/typora-latex-theme
+  理由: 90日以前にファイル追加コミットなし
+× PySpur-Dev/pyspur
+  理由: AI作成ファイルが見つからない
+× afadil/wealthfolio
+  理由: AI作成ファイルが見つからない
+× subzeroid/instagrapi
+  理由: AI作成ファイルが見つからない
+× Uniswap/interface
+  理由: AI作成ファイルが見つからない
+× ikarus23/MifareClassicTool
+  理由: 90日以前にファイル追加コミットなし
+× jedisct1/dsvpn
+  理由: 90日以前にファイル追加コミットなし
+× meshtastic/firmware
+  理由: AI作成ファイルが見つからない
+× Azure/Azure-Sentinel
+  理由: AI作成ファイルが見つからない
+× pterm/pterm
+  理由: AI作成ファイルが見つからない
+× fonsp/Pluto.jl
+  理由: AI作成ファイルが見つからない
+× DeepLabCut/DeepLabCut
+  理由: AI作成ファイルが見つからない
+× microsoft/presidio
+  理由: AI作成ファイルが見つからない
+× leoafarias/fvm
+  理由: AI作成ファイルが見つからない
+× devtron-labs/devtron
+  理由: AI作成ファイルが見つからない
+× logancyang/obsidian-copilot
+  理由: AI作成ファイルが見つからない
+× mono/SkiaSharp
+  理由: AI作成ファイルが見つからない
+× BoundaryML/baml
+  理由: AI作成ファイルが見つからない
+× modelcontextprotocol/modelcontextprotocol
+  理由: AI作成ファイルが見つからない
+× developersdigest/llm-answer-engine
+  理由: 90日以前のコミットが存在しない
+× opal/opal
+  理由: AI作成ファイルが見つからない
+× microsoft/FluidFramework
+  理由: AI作成ファイルが見つからない
+× pingdotgg/uploadthing
+  理由: AI作成ファイルが見つからない
+× paradigmxyz/reth
+  理由: AI作成ファイルが見つからない
+× potpie-ai/potpie
+  理由: AI作成ファイルが見つからない
+× home-assistant/frontend
+  理由: AI作成ファイルが見つからない
+× pickle-com/glass
+  理由: ステップ2失敗
+× ckan/ckan
+  理由: AI作成ファイルが見つからない
+× zenml-io/zenml
+  理由: AI作成ファイルが見つからない
+× Azure/autorest
+  理由: AI作成ファイルが見つからない
+× spack/spack
+  理由: AI作成ファイルが見つからない
+× PyO3/maturin
+  理由: AI作成ファイルが見つからない
+× beeradmoore/dlss-swapper
+  理由: AI作成ファイルが見つからない
+× facebook/idb
+  理由: 90日以前にファイル追加コミットなし
+× cordx56/rustowl
+  理由: AI作成ファイルが見つからない
+× dotnet/dotnet-docker
+  理由: AI作成ファイルが見つからない
+× tinyplex/tinybase
+  理由: AI作成ファイルが見つからない
+× sct/overseerr
+  理由: AI作成ファイルが見つからない
+× dotnet/winforms
+  理由: AI作成ファイルが見つからない
+× ruvnet/claude-flow
+  理由: AI作成ファイルが見つからない
+× diggerhq/digger
+  理由: AI作成ファイルが見つからない
+× reacherhq/check-if-email-exists
+  理由: AI作成ファイルが見つからない
+× distribworks/dkron
+  理由: AI作成ファイルが見つからない
+× ydb-platform/ydb
+  理由: AI作成ファイルが見つからない
+× czlonkowski/n8n-mcp
+  理由: AI作成ファイルが見つからない
+× microsoft/BotBuilder-Samples
+  理由: AI作成ファイルが見つからない
+× microsoft/azurelinux
+  理由: AI作成ファイルが見つからない
+× apostrophecms/apostrophe
+  理由: AI作成ファイルが見つからない
+× Kanaries/Rath
+  理由: 90日以前にファイル追加コミットなし
+× hahwul/dalfox
+  理由: AI作成ファイルが見つからない
+× microsoft/msquic
+  理由: AI作成ファイルが見つからない
+× nikolaydubina/go-recipes
+  理由: 90日以前にファイル追加コミットなし
+× pomerium/pomerium
+  理由: AI作成ファイルが見つからない
+× Expensify/App
+  理由: AI作成ファイルが見つからない
+× strawberry-graphql/strawberry
+  理由: AI作成ファイルが見つからない
+× dotnet/docfx
+  理由: AI作成ファイルが見つからない
+× optiscaler/OptiScaler
+  理由: AI作成ファイルが見つからない
+× github/awesome-copilot
+  理由: AI作成ファイルが見つからない
+× dotnet/Open-XML-SDK
+  理由: AI作成ファイルが見つからない
+× Helicone/helicone
+  理由: AI作成ファイルが見つからない
+× amber-lang/amber
+  理由: AI作成ファイルが見つからない
+× kubernetes-sigs/headlamp
+  理由: AI作成ファイルが見つからない
+× metalbear-co/mirrord
+  理由: AI作成ファイルが見つからない
+× xlite-dev/lite.ai.toolkit
+  理由: AI作成ファイルが見つからない
+× Cysharp/MagicOnion
+  理由: AI作成ファイルが見つからない
+× PriorLabs/TabPFN
+  理由: AI作成ファイルが見つからない
+× EasyCorp/EasyAdminBundle
+  理由: AI作成ファイルが見つからない
+× TheWover/donut
+  理由: 90日以前のコミットが存在しない
+× geoserver/geoserver
+  理由: AI作成ファイルが見つからない
+× blockscout/blockscout
+  理由: AI作成ファイルが見つからない
+× liveblocks/liveblocks
+  理由: ステップ2失敗
+× lightvector/KataGo
+  理由: AI作成ファイルが見つからない
+× johnlindquist/kit
+  理由: AI作成ファイルが見つからない
+× wonderwhy-er/DesktopCommanderMCP
+  理由: AI作成ファイルが見つからない
+× Open-LLM-VTuber/Open-LLM-VTuber
+  理由: AI作成ファイルが見つからない
+× Kiln-AI/Kiln
+  理由: AI作成ファイルが見つからない
+× GradleUp/shadow
+  理由: AI作成ファイルが見つからない
+× microsoft/RulesEngine
+  理由: 90日以前にファイル追加コミットなし
+× mendableai/firecrawl-mcp-server
+  理由: AI作成ファイルが見つからない
+× mikepenz/AboutLibraries
+  理由: AI作成ファイルが見つからない
+× rfjakob/gocryptfs
+  理由: AI作成ファイルが見つからない
+× dlt-hub/dlt
+  理由: AI作成ファイルが見つからない
+× openfga/openfga
+  理由: AI作成ファイルが見つからない
+× gptme/gptme
+  理由: AI作成ファイルが見つからない
+× clusterzx/paperless-ai
+  理由: AI作成ファイルが見つからない
+× microsoft/vscode-remote-release
+  理由: 90日以前のコミットが存在しない
+× GlitchEnzo/NuGetForUnity
+  理由: AI作成ファイルが見つからない
+× andialbrecht/sqlparse
+  理由: 90日以前にファイル追加コミットなし
+× AzureAD/microsoft-authentication-library-for-js
+  理由: AI作成ファイルが見つからない
+× fundamentalvision/BEVFormer
+  理由: 90日以前のコミットが存在しない
+× microsoft/react-native-macos
+  理由: AI作成ファイルが見つからない
+× happi/theBeamBook
+  理由: AI作成ファイルが見つからない
+× github/choosealicense.com
+  理由: 90日以前にファイル追加コミットなし
+× electricitymaps/electricitymaps-contrib
+  理由: AI作成ファイルが見つからない
+× acacode/swagger-typescript-api
+  理由: AI作成ファイルが見つからない
+× LuaLS/lua-language-server
+  理由: AI作成ファイルが見つからない
+× DistroAV/DistroAV
+  理由: AI作成ファイルが見つからない
+× smtg-ai/claude-squad
+  理由: AI作成ファイルが見つからない
+× theturtle32/WebSocket-Node
+  理由: 90日以前にファイル追加コミットなし
+× Yacht-sh/Yacht
+  理由: AI作成ファイルが見つからない
+× parse-community/parse-dashboard
+  理由: AI作成ファイルが見つからない
+× open-telemetry/opentelemetry-collector-contrib
+  理由: AI作成ファイルが見つからない
+× VRSEN/agency-swarm
+  理由: AI作成ファイルが見つからない
+× llm-workflow-engine/llm-workflow-engine
+  理由: AI作成ファイルが見つからない
+× KilledByAPixel/LittleJS
+  理由: AI作成ファイルが見つからない
+× kubernetes/enhancements
+  理由: AI作成ファイルが見つからない
+× artsy/eigen
+  理由: AI作成ファイルが見つからない
+× iNavFlight/inav
+  理由: AI作成ファイルが見つからない
+× Maciek-roboblog/Claude-Code-Usage-Monitor
+  理由: AI作成ファイルが見つからない
+× Kotlin/dokka
+  理由: AI作成ファイルが見つからない
+× whoiskatrin/chart-gpt
+  理由: 90日以前のコミットが存在しない
+× ant-design/x
+  理由: AI作成ファイルが見つからない
+× microsoft/azure-pipelines-tasks
+  理由: AI作成ファイルが見つからない
+× google-deepmind/gemma
+  理由: AI作成ファイルが見つからない
+× FluidGroup/Brightroom
+  理由: AI作成ファイルが見つからない
+× microsoft/torchgeo
+  理由: AI作成ファイルが見つからない
+× open-telemetry/opentelemetry-dotnet
+  理由: AI作成ファイルが見つからない
+× odigos-io/odigos
+  理由: AI作成ファイルが見つからない
+× cartography-cncf/cartography
+  理由: AI作成ファイルが見つからない
+× SylphAI-Inc/AdalFlow
+  理由: AI作成ファイルが見つからない
+× SchemaStore/schemastore
+  理由: AI作成ファイルが見つからない
+× deepflowio/deepflow
+  理由: AI作成ファイルが見つからない
+× okteto/okteto
+  理由: AI作成ファイルが見つからない
+× MM2-0/Kvaesitso
+  理由: AI作成ファイルが見つからない
+× Azure/bicep
+  理由: AI作成ファイルが見つからない
+× longbridge/gpui-component
+  理由: AI作成ファイルが見つからない
 
 ■ 全体統計
 ----------------------------------------
-総ファイル数: 618件
-AI起源コミット（AI作成ファイルに対するコミット）: 1185件 (52.9%)
-人間起源コミット（人間作成ファイルに対するコミット）: 1055件 (47.1%)
-AI生成判定コミット（全てのコミットのうちのAI率）: 433件 (19.3%)
+総ファイル数: 1016件
+AI起源コミット（AI作成ファイルに対するコミット）: 1737件 (46.6%)
+人間起源コミット（人間作成ファイルに対するコミット）: 1990件 (53.4%)
+AI生成判定コミット（全てのコミットのうちのAI率）: 753件 (20.2%)
 
 ■ AI作成ファイルの統計
 ----------------------------------------
-ファイル数: 308件
-総コミット数: 1185件
+ファイル数: 507件
+総コミット数: 1737件
 
 コミット作成者の内訳:
-  AIによるコミット: 410件 (34.6%)
-  人間によるコミット: 775件 (65.4%)
+  AIによるコミット: 671件 (38.6%)
+  人間によるコミット: 1066件 (61.4%)
 
-1ファイルあたりの平均コミット数: 3.85件
+1ファイルあたりの平均コミット数: 3.43件
 1ファイルあたりの最小コミット数: 1件
 1ファイルあたりの最大コミット数: 194件
 1ファイルあたりの中央値コミット数: 2.0件
@@ -690,65 +1026,65 @@ AI生成判定コミット（全てのコミットのうちのAI率）: 433件 (
   ※端数期間は計算から除外
 
   [1週間ごと]
-    全ファイルの中央値の平均: 0.34回/週
+    全ファイルの中央値の平均: 0.36回/週
     全ファイルの中央値の中央値: 0.00回/週
     最小: 0.00回
-    最大: 3.00回
-    標準偏差: 0.65回
-    データ数: 153ファイル
+    最大: 5.00回
+    標準偏差: 0.73回
+    データ数: 220ファイル
 
   [2週間ごと]
-    全ファイルの平均: 0.73回/2週
+    全ファイルの平均: 0.72回/2週
     全ファイルの中央値: 0.00回/2週
     最小: 0.00回
-    最大: 7.00回
-    標準偏差: 1.22回
-    データ数: 140ファイル
+    最大: 8.00回
+    標準偏差: 1.24回
+    データ数: 200ファイル
 
   [1ヶ月ごと]
-    全ファイルの平均: 1.61回/月
+    全ファイルの平均: 2.04回/月
     全ファイルの中央値: 1.00回/月
     最小: 0.00回
-    最大: 18.00回
-    標準偏差: 2.53回
-    データ数: 118ファイル
+    最大: 80.00回
+    標準偏差: 6.62回
+    データ数: 167ファイル
 
   [3ヶ月ごと]
-    全ファイルの平均: 4.55回/3ヶ月
-    全ファイルの中央値: 2.00回/3ヶ月
+    全ファイルの平均: 3.94回/3ヶ月
+    全ファイルの中央値: 1.50回/3ヶ月
     最小: 0.00回
     最大: 43.00回
-    標準偏差: 7.97回
-    データ数: 54ファイル
+    標準偏差: 7.35回
+    データ数: 79ファイル
 
 コミット分類の分布:
-  feat: 316件 (26.7%)
-  fix: 164件 (13.8%)
-  docs: 161件 (13.6%)
-  refactor: 138件 (11.6%)
-  build: 121件 (10.2%)
-  chore: 96件 (8.1%)
-  ci: 69件 (5.8%)
-  test: 52件 (4.4%)
-  style: 39件 (3.3%)
-  perf: 22件 (1.9%)
-  revert: 2件 (0.2%)
-  fetch_error: 2件 (0.2%)
-  fe: 2件 (0.2%)
+  feat: 443件 (25.5%)
+  fix: 239件 (13.8%)
+  refactor: 210件 (12.1%)
+  docs: 208件 (12.0%)
+  build: 173件 (10.0%)
+  chore: 160件 (9.2%)
+  test: 109件 (6.3%)
+  ci: 84件 (4.8%)
+  style: 68件 (3.9%)
+  perf: 33件 (1.9%)
+  revert: 5件 (0.3%)
+  fetch_error: 2件 (0.1%)
+  fe: 2件 (0.1%)
   i18: 1件 (0.1%)
 
 ■ 人間作成ファイルの統計
 ----------------------------------------
-ファイル数: 312件
-総コミット数: 1055件
+ファイル数: 512件
+総コミット数: 1990件
 
 コミット作成者の内訳:
-  AIによるコミット: 23件 (2.2%)
-  人間によるコミット: 1032件 (97.8%)
+  AIによるコミット: 82件 (4.1%)
+  人間によるコミット: 1908件 (95.9%)
 
-1ファイルあたりの平均コミット数: 3.38件
+1ファイルあたりの平均コミット数: 3.89件
 1ファイルあたりの最小コミット数: 1件
-1ファイルあたりの最大コミット数: 62件
+1ファイルあたりの最大コミット数: 74件
 1ファイルあたりの中央値コミット数: 2.0件
 
 コミット頻度（期間ごとのコミット数の中央値、正規化版）:
@@ -756,80 +1092,80 @@ AI生成判定コミット（全てのコミットのうちのAI率）: 433件 (
   ※端数期間は計算から除外
 
   [1週間ごと]
-    全ファイルの中央値の平均: 0.16回/週
+    全ファイルの中央値の平均: 0.31回/週
     全ファイルの中央値の中央値: 0.00回/週
     最小: 0.00回
-    最大: 2.00回
-    標準偏差: 0.43回
-    データ数: 175ファイル
+    最大: 12.00回
+    標準偏差: 0.91回
+    データ数: 281ファイル
 
   [2週間ごと]
-    全ファイルの平均: 0.47回/2週
+    全ファイルの平均: 0.66回/2週
     全ファイルの中央値: 0.00回/2週
     最小: 0.00回
-    最大: 5.00回
-    標準偏差: 0.84回
-    データ数: 166ファイル
+    最大: 20.00回
+    標準偏差: 1.56回
+    データ数: 259ファイル
 
   [1ヶ月ごと]
-    全ファイルの平均: 1.18回/月
-    全ファイルの中央値: 0.50回/月
+    全ファイルの平均: 1.80回/月
+    全ファイルの中央値: 1.00回/月
     最小: 0.00回
-    最大: 14.00回
-    標準偏差: 2.17回
-    データ数: 144ファイル
+    最大: 65.00回
+    標準偏差: 5.00回
+    データ数: 222ファイル
 
   [3ヶ月ごと]
-    全ファイルの平均: 3.60回/3ヶ月
+    全ファイルの平均: 4.72回/3ヶ月
     全ファイルの中央値: 2.00回/3ヶ月
     最小: 0.00回
-    最大: 29.00回
-    標準偏差: 5.19回
-    データ数: 86ファイル
+    最大: 62.00回
+    標準偏差: 8.76回
+    データ数: 129ファイル
 
 コミット分類の分布:
-  feat: 204件 (19.3%)
-  refactor: 143件 (13.6%)
-  docs: 139件 (13.2%)
-  chore: 131件 (12.4%)
-  fix: 128件 (12.1%)
-  test: 97件 (9.2%)
-  ci: 76件 (7.2%)
-  build: 69件 (6.5%)
-  style: 41件 (3.9%)
-  perf: 14件 (1.3%)
-  fetch_error: 10件 (0.9%)
-  i18: 2件 (0.2%)
+  feat: 375件 (18.8%)
+  docs: 328件 (16.5%)
+  refactor: 288件 (14.5%)
+  fix: 277件 (13.9%)
+  chore: 218件 (11.0%)
+  build: 159件 (8.0%)
+  test: 127件 (6.4%)
+  ci: 108件 (5.4%)
+  style: 60件 (3.0%)
+  perf: 37件 (1.9%)
+  fetch_error: 10件 (0.5%)
+  i18: 2件 (0.1%)
   tests: 1件 (0.1%)
 
 ■ 全体のコミット分類の統計（参考）
 ----------------------------------------
-feat: 520件 (23.2%)
-docs: 300件 (13.4%)
-fix: 292件 (13.0%)
-refactor: 281件 (12.5%)
-chore: 227件 (10.1%)
-build: 190件 (8.5%)
-test: 149件 (6.7%)
-ci: 145件 (6.5%)
-style: 80件 (3.6%)
-perf: 36件 (1.6%)
-fetch_error: 12件 (0.5%)
+feat: 818件 (21.9%)
+docs: 536件 (14.4%)
+fix: 516件 (13.8%)
+refactor: 498件 (13.4%)
+chore: 378件 (10.1%)
+build: 332件 (8.9%)
+test: 236件 (6.3%)
+ci: 192件 (5.2%)
+style: 128件 (3.4%)
+perf: 70件 (1.9%)
+fetch_error: 12件 (0.3%)
+revert: 5件 (0.1%)
 i18: 3件 (0.1%)
-revert: 2件 (0.1%)
 fe: 2件 (0.1%)
 tests: 1件 (0.0%)
 
 ■ AI作成ファイルで使用されたAIツール
 ----------------------------------------
-AI作成ファイル数: 308件
+AI作成ファイル数: 507件
 
 使用ツールの内訳:
-  human: 174件 (56.5%)
-  copilot: 96件 (31.2%)
-  devin: 29件 (9.4%)
-  cursor: 8件 (2.6%)
-  claude: 1件 (0.3%)
+  human: 255件 (50.3%)
+  copilot: 184件 (36.3%)
+  devin: 55件 (10.8%)
+  cursor: 8件 (1.6%)
+  claude: 5件 (1.0%)
 
 ■ リポジトリ別サマリー
 ----------------------------------------
@@ -1691,11 +2027,479 @@ AI作成ファイル数: 308件
     - chore: 3件 (9.1%)
     - fix: 3件 (9.1%)
 
+【66】 stack-auth/stack-auth
+  スター数: 6,033
+  総コミット数: 44件
+  AI起源: 20件 (45.5%) / 人間起源: 24件 (54.5%)
+  AI生成判定: 10件 (22.7%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - chore: 14件 (31.8%)
+    - ci: 10件 (22.7%)
+    - docs: 6件 (13.6%)
+    - feat: 5件 (11.4%)
+    - refactor: 3件 (6.8%)
+
+【67】 Azure/azure-sdk-for-net
+  スター数: 5,827
+  総コミット数: 42件
+  AI起源: 22件 (52.4%) / 人間起源: 20件 (47.6%)
+  AI生成判定: 10件 (23.8%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - build: 16件 (38.1%)
+    - refactor: 10件 (23.8%)
+    - feat: 6件 (14.3%)
+    - fix: 2件 (4.8%)
+    - ci: 2件 (4.8%)
+
+【68】 assistant-ui/assistant-ui
+  スター数: 5,475
+  総コミット数: 20件
+  AI起源: 6件 (30.0%) / 人間起源: 14件 (70.0%)
+  AI生成判定: 3件 (15.0%)
+  ユニークファイル数: 6件
+
+  コミット分類:
+    - chore: 6件 (30.0%)
+    - refactor: 3件 (15.0%)
+    - feat: 3件 (15.0%)
+    - docs: 2件 (10.0%)
+    - perf: 2件 (10.0%)
+
+【69】 NangoHQ/nango
+  スター数: 5,463
+  総コミット数: 22件
+  AI起源: 7件 (31.8%) / 人間起源: 15件 (68.2%)
+  AI生成判定: 3件 (13.6%)
+  ユニークファイル数: 6件
+
+  コミット分類:
+    - docs: 19件 (86.4%)
+    - feat: 2件 (9.1%)
+    - style: 1件 (4.5%)
+
+【70】 microsoft/typespec
+  スター数: 5,285
+  総コミット数: 45件
+  AI起源: 13件 (28.9%) / 人間起源: 32件 (71.1%)
+  AI生成判定: 10件 (22.2%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - build: 22件 (48.9%)
+    - chore: 6件 (13.3%)
+    - feat: 5件 (11.1%)
+    - refactor: 4件 (8.9%)
+    - fix: 3件 (6.7%)
+
+【71】 MervinPraison/PraisonAI
+  スター数: 5,243
+  総コミット数: 46件
+  AI起源: 12件 (26.1%) / 人間起源: 34件 (73.9%)
+  AI生成判定: 14件 (30.4%)
+  ユニークファイル数: 12件
+
+  コミット分類:
+    - refactor: 12件 (26.1%)
+    - feat: 10件 (21.7%)
+    - fix: 7件 (15.2%)
+    - ci: 5件 (10.9%)
+    - build: 4件 (8.7%)
+
+【72】 chrxh/alien
+  スター数: 5,211
+  総コミット数: 140件
+  AI起源: 81件 (57.9%) / 人間起源: 59件 (42.1%)
+  AI生成判定: 33件 (23.6%)
+  ユニークファイル数: 6件
+
+  コミット分類:
+    - feat: 45件 (32.1%)
+    - refactor: 34件 (24.3%)
+    - fix: 21件 (15.0%)
+    - test: 16件 (11.4%)
+    - style: 15件 (10.7%)
+
+【73】 reown-com/appkit
+  スター数: 5,202
+  総コミット数: 46件
+  AI起源: 30件 (65.2%) / 人間起源: 16件 (34.8%)
+  AI生成判定: 10件 (21.7%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - fix: 11件 (23.9%)
+    - feat: 10件 (21.7%)
+    - docs: 8件 (17.4%)
+    - chore: 8件 (17.4%)
+    - refactor: 5件 (10.9%)
+
+【74】 antiwork/shortest
+  スター数: 5,179
+  総コミット数: 19件
+  AI起源: 4件 (21.1%) / 人間起源: 15件 (78.9%)
+  AI生成判定: 5件 (26.3%)
+  ユニークファイル数: 8件
+
+  コミット分類:
+    - build: 4件 (21.1%)
+    - feat: 3件 (15.8%)
+    - style: 2件 (10.5%)
+    - test: 2件 (10.5%)
+    - chore: 2件 (10.5%)
+
+【75】 kyegomez/swarms
+  スター数: 5,073
+  総コミット数: 12件
+  AI起源: 2件 (16.7%) / 人間起源: 10件 (83.3%)
+  AI生成判定: 1件 (8.3%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - docs: 10件 (83.3%)
+    - refactor: 1件 (8.3%)
+    - fix: 1件 (8.3%)
+
+【76】 Azure/azure-sdk-for-python
+  スター数: 5,011
+  総コミット数: 11件
+  AI起源: 5件 (45.5%) / 人間起源: 6件 (54.5%)
+  AI生成判定: 5件 (45.5%)
+  ユニークファイル数: 10件
+
+  コミット分類:
+    - docs: 9件 (81.8%)
+    - fix: 1件 (9.1%)
+    - feat: 1件 (9.1%)
+
+【77】 lightdash/lightdash
+  スター数: 4,935
+  総コミット数: 20件
+  AI起源: 5件 (25.0%) / 人間起源: 15件 (75.0%)
+  AI生成判定: 2件 (10.0%)
+  ユニークファイル数: 4件
+
+  コミット分類:
+    - feat: 8件 (40.0%)
+    - refactor: 6件 (30.0%)
+    - fix: 5件 (25.0%)
+    - style: 1件 (5.0%)
+
+【78】 dotnet/aspire
+  スター数: 4,723
+  総コミット数: 95件
+  AI起源: 27件 (28.4%) / 人間起源: 68件 (71.6%)
+  AI生成判定: 26件 (27.4%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - feat: 35件 (36.8%)
+    - refactor: 18件 (18.9%)
+    - chore: 15件 (15.8%)
+    - build: 13件 (13.7%)
+    - fix: 6件 (6.3%)
+
+【79】 AgentOps-AI/agentops
+  スター数: 4,722
+  総コミット数: 46件
+  AI起源: 20件 (43.5%) / 人間起源: 26件 (56.5%)
+  AI生成判定: 10件 (21.7%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - feat: 15件 (32.6%)
+    - docs: 14件 (30.4%)
+    - ci: 5件 (10.9%)
+    - refactor: 4件 (8.7%)
+    - test: 3件 (6.5%)
+
+【80】 jina-ai/node-DeepResearch
+  スター数: 4,693
+  総コミット数: 303件
+  AI起源: 39件 (12.9%) / 人間起源: 264件 (87.1%)
+  AI生成判定: 33件 (10.9%)
+  ユニークファイル数: 17件
+
+  コミット分類:
+    - fix: 90件 (29.7%)
+    - docs: 77件 (25.4%)
+    - refactor: 46件 (15.2%)
+    - feat: 35件 (11.6%)
+    - perf: 17件 (5.6%)
+
+【81】 NewFuture/DDNS
+  スター数: 4,528
+  総コミット数: 90件
+  AI起源: 28件 (31.1%) / 人間起源: 62件 (68.9%)
+  AI生成判定: 38件 (42.2%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - docs: 27件 (30.0%)
+    - feat: 25件 (27.8%)
+    - test: 10件 (11.1%)
+    - ci: 7件 (7.8%)
+    - style: 6件 (6.7%)
+
+【82】 dotnet/docs
+  スター数: 4,500
+  総コミット数: 52件
+  AI起源: 10件 (19.2%) / 人間起源: 42件 (80.8%)
+  AI生成判定: 10件 (19.2%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - build: 21件 (40.4%)
+    - docs: 20件 (38.5%)
+    - chore: 9件 (17.3%)
+    - style: 1件 (1.9%)
+    - feat: 1件 (1.9%)
+
+【83】 microsoft/perfview
+  スター数: 4,477
+  総コミット数: 12件
+  AI起源: 6件 (50.0%) / 人間起源: 6件 (50.0%)
+  AI生成判定: 4件 (33.3%)
+  ユニークファイル数: 8件
+
+  コミット分類:
+    - feat: 6件 (50.0%)
+    - fix: 3件 (25.0%)
+    - perf: 1件 (8.3%)
+    - refactor: 1件 (8.3%)
+    - docs: 1件 (8.3%)
+
+【84】 aipotheosis-labs/aci
+  スター数: 4,464
+  総コミット数: 7件
+  AI起源: 3件 (42.9%) / 人間起源: 4件 (57.1%)
+  AI生成判定: 2件 (28.6%)
+  ユニークファイル数: 4件
+
+  コミット分類:
+    - refactor: 3件 (42.9%)
+    - feat: 3件 (42.9%)
+    - build: 1件 (14.3%)
+
+【85】 microsoft/vscode-python
+  スター数: 4,457
+  総コミット数: 21件
+  AI起源: 3件 (14.3%) / 人間起源: 18件 (85.7%)
+  AI生成判定: 3件 (14.3%)
+  ユニークファイル数: 6件
+
+  コミット分類:
+    - feat: 6件 (28.6%)
+    - fix: 6件 (28.6%)
+    - refactor: 5件 (23.8%)
+    - build: 3件 (14.3%)
+    - style: 1件 (4.8%)
+
+【86】 microsoft/fluentui-blazor
+  スター数: 4,456
+  総コミット数: 7件
+  AI起源: 3件 (42.9%) / 人間起源: 4件 (57.1%)
+  AI生成判定: 3件 (42.9%)
+  ユニークファイル数: 6件
+
+  コミット分類:
+    - fix: 4件 (57.1%)
+    - build: 1件 (14.3%)
+    - feat: 1件 (14.3%)
+    - docs: 1件 (14.3%)
+
+【87】 shader-slang/slang
+  スター数: 4,349
+  総コミット数: 31件
+  AI起源: 11件 (35.5%) / 人間起源: 20件 (64.5%)
+  AI生成判定: 11件 (35.5%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - fix: 13件 (41.9%)
+    - feat: 7件 (22.6%)
+    - test: 6件 (19.4%)
+    - build: 1件 (3.2%)
+    - ci: 1件 (3.2%)
+
+【88】 liam-hq/liam
+  スター数: 4,194
+  総コミット数: 49件
+  AI起源: 18件 (36.7%) / 人間起源: 31件 (63.3%)
+  AI生成判定: 4件 (8.2%)
+  ユニークファイル数: 16件
+
+  コミット分類:
+    - refactor: 18件 (36.7%)
+    - feat: 8件 (16.3%)
+    - fix: 7件 (14.3%)
+    - chore: 7件 (14.3%)
+    - style: 5件 (10.2%)
+
+【89】 jamesmh/coravel
+  スター数: 4,176
+  総コミット数: 2件
+  AI起源: 1件 (50.0%) / 人間起源: 1件 (50.0%)
+  AI生成判定: 1件 (50.0%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - feat: 2件 (100.0%)
+
+【90】 kerryjiang/SuperSocket
+  スター数: 4,128
+  総コミット数: 36件
+  AI起源: 12件 (33.3%) / 人間起源: 24件 (66.7%)
+  AI生成判定: 11件 (30.6%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - feat: 9件 (25.0%)
+    - build: 8件 (22.2%)
+    - docs: 7件 (19.4%)
+    - fix: 4件 (11.1%)
+    - chore: 3件 (8.3%)
+
+【91】 dotenvx/dotenvx
+  スター数: 4,114
+  総コミット数: 16件
+  AI起源: 13件 (81.2%) / 人間起源: 3件 (18.8%)
+  AI生成判定: 5件 (31.2%)
+  ユニークファイル数: 4件
+
+  コミット分類:
+    - test: 12件 (75.0%)
+    - style: 2件 (12.5%)
+    - fix: 1件 (6.2%)
+    - feat: 1件 (6.2%)
+
+【92】 dotnet/fsharp
+  スター数: 4,110
+  総コミット数: 30件
+  AI起源: 10件 (33.3%) / 人間起源: 20件 (66.7%)
+  AI生成判定: 9件 (30.0%)
+  ユニークファイル数: 18件
+
+  コミット分類:
+    - fix: 9件 (30.0%)
+    - build: 9件 (30.0%)
+    - docs: 7件 (23.3%)
+    - feat: 3件 (10.0%)
+    - chore: 1件 (3.3%)
+
+【93】 OpenPipe/ART
+  スター数: 4,108
+  総コミット数: 100件
+  AI起源: 84件 (84.0%) / 人間起源: 16件 (16.0%)
+  AI生成判定: 10件 (10.0%)
+  ユニークファイル数: 3件
+
+  コミット分類:
+    - chore: 30件 (30.0%)
+    - feat: 28件 (28.0%)
+    - refactor: 22件 (22.0%)
+    - fix: 8件 (8.0%)
+    - build: 5件 (5.0%)
+
+【94】 hyperlight-dev/hyperlight
+  スター数: 3,763
+  総コミット数: 2件
+  AI起源: 1件 (50.0%) / 人間起源: 1件 (50.0%)
+  AI生成判定: 1件 (50.0%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - ci: 1件 (50.0%)
+    - chore: 1件 (50.0%)
+
+【95】 camunda/camunda
+  スター数: 3,746
+  総コミット数: 25件
+  AI起源: 7件 (28.0%) / 人間起源: 18件 (72.0%)
+  AI生成判定: 7件 (28.0%)
+  ユニークファイル数: 14件
+
+  コミット分類:
+    - test: 7件 (28.0%)
+    - feat: 7件 (28.0%)
+    - refactor: 4件 (16.0%)
+    - style: 3件 (12.0%)
+    - fix: 2件 (8.0%)
+
+【96】 OHIF/Viewers
+  スター数: 3,740
+  総コミット数: 4件
+  AI起源: 1件 (25.0%) / 人間起源: 3件 (75.0%)
+  AI生成判定: 1件 (25.0%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - build: 2件 (50.0%)
+    - test: 1件 (25.0%)
+    - refactor: 1件 (25.0%)
+
+【97】 taiga-family/taiga-ui
+  スター数: 3,672
+  総コミット数: 5件
+  AI起源: 2件 (40.0%) / 人間起源: 3件 (60.0%)
+  AI生成判定: 1件 (20.0%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - chore: 2件 (40.0%)
+    - fix: 2件 (40.0%)
+    - feat: 1件 (20.0%)
+
+【98】 primer/react
+  スター数: 3,613
+  総コミット数: 53件
+  AI起源: 31件 (58.5%) / 人間起源: 22件 (41.5%)
+  AI生成判定: 10件 (18.9%)
+  ユニークファイル数: 20件
+
+  コミット分類:
+    - test: 12件 (22.6%)
+    - chore: 12件 (22.6%)
+    - refactor: 8件 (15.1%)
+    - fix: 7件 (13.2%)
+    - docs: 6件 (11.3%)
+
+【99】 microsoft/kiota
+  スター数: 3,446
+  総コミット数: 5件
+  AI起源: 3件 (60.0%) / 人間起源: 2件 (40.0%)
+  AI生成判定: 2件 (40.0%)
+  ユニークファイル数: 2件
+
+  コミット分類:
+    - chore: 2件 (40.0%)
+    - test: 2件 (40.0%)
+    - perf: 1件 (20.0%)
+
+【100】 pdfme/pdfme
+  スター数: 3,389
+  総コミット数: 29件
+  AI起源: 12件 (41.4%) / 人間起源: 17件 (58.6%)
+  AI生成判定: 12件 (41.4%)
+  ユニークファイル数: 18件
+
+  コミット分類:
+    - build: 13件 (44.8%)
+    - chore: 5件 (17.2%)
+    - feat: 3件 (10.3%)
+    - test: 3件 (10.3%)
+    - docs: 2件 (6.9%)
+
 ■ リポジトリ間比較
 ----------------------------------------
 
 AI起源コミット率:
   onlook-dev/onlook: 86.6%
+  OpenPipe/ART: 84.0%
+  dotenvx/dotenvx: 81.2%
   yamadashy/repomix: 75.0%
   dotnet/runtime: 75.0%
   browser-use/browser-use: 71.3%
@@ -1704,6 +2508,7 @@ AI起源コミット率:
   QL-Win/QuickLook: 66.7%
   marimo-team/marimo: 66.0%
   jxxghp/MoviePilot: 65.2%
+  reown-com/appkit: 65.2%
   antiwork/gumroad: 64.7%
   invoke-ai/InvokeAI: 63.0%
   langbot-app/LangBot: 62.1%
@@ -1712,11 +2517,15 @@ AI起源コミット率:
   567-labs/instructor: 61.5%
   langchain-ai/langchain: 60.0%
   calcom/cal.com: 60.0%
+  microsoft/kiota: 60.0%
+  primer/react: 58.5%
+  chrxh/alien: 57.9%
   gradio-app/gradio: 57.1%
   midudev/preguntas-entrevista-react: 57.1%
   airbytehq/airbyte: 54.2%
   microsoft/graphrag: 53.8%
   mfts/papermark: 52.9%
+  Azure/azure-sdk-for-net: 52.4%
   remotion-dev/remotion: 52.2%
   elizaOS/eliza: 52.1%
   dotnet/maui: 51.7%
@@ -1732,31 +2541,59 @@ AI起源コミット率:
   risingwavelabs/risingwave: 50.0%
   Azure-Samples/azure-search-openai-demo: 50.0%
   microsoft/GSL: 50.0%
+  microsoft/perfview: 50.0%
+  jamesmh/coravel: 50.0%
+  hyperlight-dev/hyperlight: 50.0%
   microsoft/TypeScript: 48.1%
   elastic/kibana: 45.5%
+  stack-auth/stack-auth: 45.5%
+  Azure/azure-sdk-for-python: 45.5%
   Z3Prover/z3: 44.4%
   dotnet/orleans: 43.5%
+  AgentOps-AI/agentops: 43.5%
   onnx/onnx: 42.9%
+  aipotheosis-labs/aci: 42.9%
+  microsoft/fluentui-blazor: 42.9%
   github/docs: 42.1%
   elsa-workflows/elsa-core: 41.9%
   mendableai/firecrawl: 41.8%
+  pdfme/pdfme: 41.4%
   microsoft/autogen: 41.2%
   ComposioHQ/composio: 40.3%
   elie222/inbox-zero: 40.0%
+  taiga-family/taiga-ui: 40.0%
   Tencent/ncnn: 38.5%
+  liam-hq/liam: 36.7%
+  shader-slang/slang: 35.5%
   appsmithorg/appsmith: 33.3%
   microsoft/windows-rs: 33.3%
   wix/react-native-ui-lib: 33.3%
+  kerryjiang/SuperSocket: 33.3%
+  dotnet/fsharp: 33.3%
   microsoft/vscode: 32.7%
   dotnet/aspnetcore: 32.6%
   mlflow/mlflow: 32.3%
+  NangoHQ/nango: 31.8%
   promptfoo/promptfoo: 31.7%
+  NewFuture/DDNS: 31.1%
+  assistant-ui/assistant-ui: 30.0%
+  microsoft/typespec: 28.9%
   activepieces/activepieces: 28.6%
   onyx-dot-app/onyx: 28.6%
   OWASP/mastg: 28.6%
+  dotnet/aspire: 28.4%
+  camunda/camunda: 28.0%
   microsoft/typescript-go: 27.5%
+  MervinPraison/PraisonAI: 26.1%
   docling-project/docling: 25.0%
   github/codeql: 25.0%
+  lightdash/lightdash: 25.0%
+  OHIF/Viewers: 25.0%
+  antiwork/shortest: 21.1%
+  dotnet/docs: 19.2%
   Mail-0/Zero: 17.6%
+  kyegomez/swarms: 16.7%
   microsoft/playwright-mcp: 14.3%
+  microsoft/vscode-python: 14.3%
+  jina-ai/node-DeepResearch: 12.9%
   oraios/serena: 3.0%
