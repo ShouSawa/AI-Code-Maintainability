@@ -257,11 +257,11 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path):
         x='Dummy', 
         y='Value', 
         hue='Type',
-        width=0.2, # 幅を狭く設定
+        width=1, # 幅を狭く設定
         fliersize=0, # 外れ値（点）は表示しない（バイオリンで分布が見えるため）
         palette={"AI": "#FF9999", "Human": "#99CCFF"},
         ax=ax,
-        boxprops={'alpha': 0.5} # 半透明
+        boxprops={'alpha': 0.8} # 半透明
     )
     
     plt.title(title)
