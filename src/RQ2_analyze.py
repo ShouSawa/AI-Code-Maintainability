@@ -107,7 +107,7 @@ def create_pie_chart(counts, labels, title, output_path):
     """
     円グラフを作成して保存する
     """
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(12, 12))
     
     # 色の設定 (AI: 赤系, Human: 青系)
     colors = ['#FF9999', '#99CCFF']
@@ -144,10 +144,10 @@ def create_pie_chart(counts, labels, title, output_path):
         startangle=90, 
         counterclock=False,
         wedgeprops={'edgecolor': 'white'},
-        textprops={'fontsize': 16}
+        textprops={'fontsize': 35}
     )
     
-    plt.title(title, fontsize=20)
+    plt.title(title, fontsize=40)
     plt.tight_layout()
     plt.savefig(output_path)
     plt.close()

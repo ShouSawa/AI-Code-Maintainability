@@ -100,7 +100,7 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=ai_commit_counts,
         data_human=human_commit_counts,
-        title="Distribution of Commit Counts\nper File",
+        title="Commit Counts",
         ylabel="Number of Commits",
         output_path=os.path.join(output_dir, "RQ1_violinPlot_count.png"),
         ylim=20
@@ -172,7 +172,7 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=pd.Series(ai_weekly_medians),
         data_human=pd.Series(human_weekly_medians),
-        title="Distribution of Weekly Commit Frequency\n(Median per File)",
+        title="Weekly Commit Frequency",
         ylabel="Median Commits per Week",
         output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_weekly.png"),
         ylim=0.2
@@ -182,7 +182,7 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=pd.Series(ai_monthly_medians),
         data_human=pd.Series(human_monthly_medians),
-        title="Distribution of Monthly Commit Frequency\n(Median per File)",
+        title="Monthly Commit Frequency",
         ylabel="Median Commits per Month",
         output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_monthly.png"),
         ylim=3
@@ -223,8 +223,8 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
     """
     バイオリンプロットを作成して保存する
     """
-    # 縦長に変更 (幅6, 高さ12)
-    plt.figure(figsize=(6, 12))
+    # 縦長に変更 (幅6, 高さ10)
+    plt.figure(figsize=(6, 10))
     
     # データフレーム形式に変換（seaborn用）
     df_ai = pd.DataFrame({'Value': data_ai, 'Type': 'AI'})
@@ -239,34 +239,83 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
     # スタイル設定
     sns.set_style("whitegrid")
     
-    # ダミーのx軸を設定
+    # ダミーのx軸を設定（split=Trueで左右に結合させるため）
     df_plot['Dummy'] = "All Files"
     
-    # 1. バイオリンプロット（中身なし、split=True）
+    # 1. バイオリンプロット
+    # split=True で左右に結合, inner=None で中身を消す (boxplotを重ねるため)
     ax = sns.violinplot(
         data=df_plot, 
         x='Dummy', 
         y='Value', 
         hue='Type', 
-        split=True, 
-        inner=None, # 中身を描かない
+        split=True,     # AIと人間を左右にくっつける
+        inner=None,     # 中身を描かない
         palette={"AI": "#FF9999", "Human": "#99CCFF"},
-        cut=0 # 範囲外の表示をしない
+        cut=0, # 範囲外の表示をしない
     )
+    
+    # 2. 箱ひげ図を重ねる (ax.boxplotを使用)
+    # 位置調整: split=Trueの場合、x=0を中心に左右に分かれる
+    # AI (左側): positions=[-0.05], Human (右側): positions=[0.05] 程度に配置
+    box_width = 0.1
+    
+    # AIの箱ひげ図
+    ax.boxplot(
+        [data_ai], 
+        positions=[-0.1], 
+        widths=box_width,
+        patch_artist=True,
+        boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
+        whiskerprops=dict(color='black'),
+        capprops=dict(color='black'),
+        medianprops=dict(color='black'),
+        showfliers=False, # 外れ値はバイオリンで表現されているので省略
+        manage_ticks=False # x軸の目盛りを自動追加しない
+    )
+    
+    # Humanの箱ひげ図
+    ax.boxplot(
+        [data_human], 
+        positions=[0.1], 
+        widths=box_width,
+        patch_artist=True,
+        boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
+        whiskerprops=dict(color='black'),
+        capprops=dict(color='black'),
+        medianprops=dict(color='black'),
+        showfliers=False,
+        manage_ticks=False # x軸の目盛りを自動追加しない
+    )
+    
+    # 平均値を計算してプロットに追加 (白抜きの菱形)
+    means = df_plot.groupby('Type')['Value'].mean()
+    
+    # split=Trueの場合、左側(AI)と右側(Human)に平均値を配置
+    # 箱ひげ図の位置に合わせる
+    if 'AI' in means:
+        plt.scatter(x=[-0.1], y=[means['AI']], color='white', marker='D', s=60, zorder=10, edgecolor='black', label='Mean')
+    if 'Human' in means:
+        plt.scatter(x=[0.1], y=[means['Human']], color='white', marker='D', s=60, zorder=10, edgecolor='black')
     
     if ylim is not None:
         plt.ylim(0, ylim)
     
-    plt.title(title, fontsize=18)
-    plt.ylabel(ylabel, fontsize=16)
-    plt.xlabel("", fontsize=16) # x軸ラベルは不要
+    # plt.title(title, fontsize=24) # タイトルを上部から削除
+    plt.ylabel(ylabel, fontsize=20)
+    plt.xlabel("", fontsize=20) 
+    
+    # x軸の目盛りとしてタイトルを表示
+    plt.xticks([0], [title], fontsize=24) 
     
     # 目盛りの文字サイズ変更
-    plt.tick_params(axis='both', which='major', labelsize=14)
+    plt.tick_params(axis='y', which='major', labelsize=18) # x軸は消したのでy軸のみ設定
     
-    # 凡例の整理（重複を防ぐため、最初の2つだけ表示）
+    # 凡例
+    # violinplotの凡例とMeanの凡例を統合
     handles, labels = ax.get_legend_handles_labels()
-    plt.legend(handles[:2], labels[:2], title="", fontsize=14)
+    # handlesには [Violin_AI, Violin_Human, Mean_Scatter] が含まれるはず
+    plt.legend(handles, labels, loc='upper right', fontsize=14)
     
     plt.tight_layout()
     plt.savefig(output_path)
