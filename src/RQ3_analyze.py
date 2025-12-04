@@ -28,6 +28,12 @@ def analyze_commit_classification():
     ai_total = len(ai_df)
     human_total = len(human_df)
 
+    # 統一されたカラーマップの作成
+    all_categories = set(ai_counts.index) | set(human_counts.index)
+    # tab20カラーパレットを使用して、各カテゴリに固定の色を割り当て
+    cmap = plt.get_cmap('tab20')
+    colors_map = {cat: cmap(i % 20) for i, cat in enumerate(sorted(list(all_categories)))}
+
     # 出力テキストの準備
     output_lines = []
     
@@ -49,7 +55,7 @@ def analyze_commit_classification():
     print(f"Results written to {output_txt}")
 
     # 円グラフの生成
-    def create_pie_chart(counts, title, output_path):
+    def create_pie_chart(counts, title, output_path, colors_map):
         if counts.empty:
             print(f"No data for {title}")
             return
@@ -61,6 +67,7 @@ def analyze_commit_classification():
         plot_values = []
         plot_labels = []
         legend_labels = [] # 凡例用の全ラベルリスト
+        slice_colors = []  # スライス用の色リスト
         
         # 表示閾値（3%未満は表示しない）
         threshold = 0.03
@@ -68,6 +75,7 @@ def analyze_commit_classification():
         for i, (index, value) in enumerate(zip(counts.index, counts.values)):
             plot_values.append(value)
             percentage = value / total_val
+            slice_colors.append(colors_map.get(index, 'gray')) # マップから色を取得
             
             # 凡例用には全ての項目を作成（個別にパーセンテージ表示）
             legend_labels.append(f'{index} ({percentage*100:.1f}%)')
@@ -93,6 +101,7 @@ def analyze_commit_classification():
         patches, texts, autotexts = plt.pie(
             plot_values, 
             labels=plot_labels, # 円グラフの外側にラベル（名前）
+            colors=slice_colors, # 固定色を適用
             startangle=90,
             counterclock=False,
             textprops={'fontsize': 25}, # 外側のラベルのフォントサイズを拡大
@@ -115,8 +124,8 @@ def analyze_commit_classification():
         plt.close()
         print(f"Pie chart saved to {output_path}")
 
-    create_pie_chart(ai_counts, 'AI Created Files', output_img_ai)
-    create_pie_chart(human_counts, 'Human Created Files', output_img_human)
+    create_pie_chart(ai_counts, 'AI Created Files', output_img_ai, colors_map)
+    create_pie_chart(human_counts, 'Human Created Files', output_img_human, colors_map)
 
 if __name__ == "__main__":
     analyze_commit_classification()
