@@ -1,0 +1,32 @@
+AI Created Files
+Total Commits: 1731
+feat: 442 (25.53%)
+fix: 238 (13.75%)
+refactor: 210 (12.13%)
+docs: 207 (11.96%)
+build: 173 (9.99%)
+chore: 159 (9.19%)
+test: 108 (6.24%)
+ci: 83 (4.79%)
+style: 68 (3.93%)
+perf: 33 (1.91%)
+revert: 5 (0.29%)
+fetch_error: 2 (0.12%)
+fe: 2 (0.12%)
+i18: 1 (0.06%)
+
+Human Created Files Commit Classification:
+Total Commits: 1982
+feat: 374 (18.87%)
+docs: 328 (16.55%)
+refactor: 288 (14.53%)
+fix: 277 (13.98%)
+chore: 215 (10.85%)
+build: 158 (7.97%)
+test: 127 (6.41%)
+ci: 105 (5.30%)
+style: 60 (3.03%)
+perf: 37 (1.87%)
+fetch_error: 10 (0.50%)
+i18: 2 (0.10%)
+tests: 1 (0.05%)

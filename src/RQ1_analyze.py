@@ -100,9 +100,10 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=ai_commit_counts,
         data_human=human_commit_counts,
-        title="Distribution of Commit Counts per File",
+        title="Distribution of Commit Counts\nper File",
         ylabel="Number of Commits",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_count.png")
+        output_path=os.path.join(output_dir, "RQ1_violinPlot_count.png"),
+        ylim=20
     )
 
     # ---------------------------------------------------------
@@ -171,18 +172,20 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=pd.Series(ai_weekly_medians),
         data_human=pd.Series(human_weekly_medians),
-        title="Distribution of Weekly Commit Frequency (Median per File)",
+        title="Distribution of Weekly Commit Frequency\n(Median per File)",
         ylabel="Median Commits per Week",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_weekly.png")
+        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_weekly.png"),
+        ylim=0.2
     )
     
     # バイオリンプロット作成 (月間頻度)
     create_violin_plot(
         data_ai=pd.Series(ai_monthly_medians),
         data_human=pd.Series(human_monthly_medians),
-        title="Distribution of Monthly Commit Frequency (Median per File)",
+        title="Distribution of Monthly Commit Frequency\n(Median per File)",
         ylabel="Median Commits per Month",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_monthly.png")
+        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_monthly.png"),
+        ylim=3
     )
 
     # 結果保存
@@ -216,7 +219,7 @@ def calculate_period_median(commit_dates, start_date, end_date, days):
         
     return np.median(counts)
 
-def create_violin_plot(data_ai, data_human, title, ylabel, output_path):
+def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None):
     """
     バイオリンプロットを作成して保存する
     """
@@ -247,30 +250,23 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path):
         hue='Type', 
         split=True, 
         inner=None, # 中身を描かない
-        palette={"AI": "#FF9999", "Human": "#99CCFF"}
-    )
-    
-    # 2. 箱ひげ図を重ねる
-    # widthを小さくしてバイオリンの中に収まるようにする
-    sns.boxplot(
-        data=df_plot, 
-        x='Dummy', 
-        y='Value', 
-        hue='Type',
-        width=0.2, # 幅を狭く設定
-        fliersize=0, # 外れ値（点）は表示しない（バイオリンで分布が見えるため）
         palette={"AI": "#FF9999", "Human": "#99CCFF"},
-        ax=ax,
-        boxprops={'alpha': 0.5} # 半透明
+        cut=0 # 範囲外の表示をしない
     )
     
-    plt.title(title)
-    plt.ylabel(ylabel)
-    plt.xlabel("") # x軸ラベルは不要
+    if ylim is not None:
+        plt.ylim(0, ylim)
+    
+    plt.title(title, fontsize=18)
+    plt.ylabel(ylabel, fontsize=16)
+    plt.xlabel("", fontsize=16) # x軸ラベルは不要
+    
+    # 目盛りの文字サイズ変更
+    plt.tick_params(axis='both', which='major', labelsize=14)
     
     # 凡例の整理（重複を防ぐため、最初の2つだけ表示）
     handles, labels = ax.get_legend_handles_labels()
-    plt.legend(handles[:2], labels[:2], title="")
+    plt.legend(handles[:2], labels[:2], title="", fontsize=14)
     
     plt.tight_layout()
     plt.savefig(output_path)
