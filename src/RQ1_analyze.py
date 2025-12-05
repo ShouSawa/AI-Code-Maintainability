@@ -64,6 +64,7 @@ def analyze_rq1():
     # ただし、作成時のコミットが含まれていない場合（履歴取得の仕様による）は0になる可能性があるが、
     # 今回のデータセットはコミット履歴から作られているので、ここに現れるファイルは少なくとも1コミットある。
     
+    # AI作成ファイルと人間作成ファイルのコミット数を取得
     ai_commit_counts = commit_counts[commit_counts['file_created_by'] == 'AI']['commit_count']
     human_commit_counts = commit_counts[commit_counts['file_created_by'] == 'Human']['commit_count']
     
