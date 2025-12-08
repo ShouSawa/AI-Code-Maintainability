@@ -195,6 +195,96 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  標準偏差: {stats['std']:.4f}")
         results_text.append("")
 
+    # ---------------------------------------------------------
+    # 3. 時系列でのコミット数推移 (追加)
+    # ---------------------------------------------------------
+    print(f"[{suffix}] 時系列推移の分析中...")
+    
+    # 経過日数を計算
+    df_ts = df.copy()
+    df_ts['days_diff'] = (df_ts['commit_date'] - df_ts['file_creation_date']).dt.days
+    
+    # 週番号 (0始まり: 0-6日がWeek 1)
+    df_ts['week_num'] = df_ts['days_diff'] // 7
+    # 月番号 (0始まり: 0-29日がMonth 1)
+    df_ts['month_num'] = df_ts['days_diff'] // 30
+    
+    # ユニークなファイルIDを作成
+    df_ts['file_id'] = df_ts['repository_name'] + "::" + df_ts['file_name']
+    
+    # 全ファイルリストと作成者情報のマッピング
+    file_creators = df_ts[['file_id', 'file_created_by']].drop_duplicates().set_index('file_id')['file_created_by']
+    
+    # --- 週次集計 ---
+    # ファイルごと、週ごとのコミット数
+    weekly_counts = df_ts.groupby(['file_id', 'week_num']).size().unstack(fill_value=0)
+    
+    # 期間制限がある場合はその期間まで、ない場合はデータが存在する最大まで
+    # 3ヶ月限定なら13週程度、全期間なら最大52週(1年)まで表示するように制限
+    max_week_limit = 13 if is_limited_period else 52
+    max_week_data = weekly_counts.columns.max() if not weekly_counts.empty else 0
+    max_week = min(max_week_limit, max_week_data)
+    
+    target_weeks = range(int(max_week) + 1)
+    weekly_counts = weekly_counts.reindex(columns=target_weeks, fill_value=0)
+    
+    # AI/Humanに分割
+    ai_files = file_creators[file_creators == 'AI'].index
+    human_files = file_creators[file_creators == 'Human'].index
+    
+    ai_weekly_df = weekly_counts.loc[weekly_counts.index.intersection(ai_files)]
+    human_weekly_df = weekly_counts.loc[weekly_counts.index.intersection(human_files)]
+    
+    results_text.append("3. 時系列でのコミット数推移")
+    results_text.append("-" * 40)
+    
+    results_text.append(f"■ 週次推移 (Week 1 = 最初の7日間, 最大Week {max_week+1}まで表示)")
+    results_text.append(f"{'Week':<6} | {'AI Mean':<10} | {'AI Median':<10} | {'Human Mean':<10} | {'Human Median':<10}")
+    results_text.append("-" * 60)
+    
+    for w in target_weeks:
+        ai_col = ai_weekly_df[w] if w in ai_weekly_df.columns else pd.Series([], dtype=float)
+        human_col = human_weekly_df[w] if w in human_weekly_df.columns else pd.Series([], dtype=float)
+        
+        ai_mean = ai_col.mean() if not ai_col.empty else 0
+        ai_median = ai_col.median() if not ai_col.empty else 0
+        human_mean = human_col.mean() if not human_col.empty else 0
+        human_median = human_col.median() if not human_col.empty else 0
+        
+        results_text.append(f"{w+1:<2}週間目| {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
+    results_text.append("")
+
+    # --- 月次集計 ---
+    # ファイルごと、月ごとのコミット数
+    monthly_counts = df_ts.groupby(['file_id', 'month_num']).size().unstack(fill_value=0)
+    
+    # 3ヶ月限定なら3ヶ月、全期間なら最大24ヶ月(2年)まで表示
+    max_month_limit = 3 if is_limited_period else 24
+    max_month_data = monthly_counts.columns.max() if not monthly_counts.empty else 0
+    max_month = min(max_month_limit, max_month_data)
+    
+    target_months = range(int(max_month) + 1)
+    monthly_counts = monthly_counts.reindex(columns=target_months, fill_value=0)
+    
+    ai_monthly_df = monthly_counts.loc[monthly_counts.index.intersection(ai_files)]
+    human_monthly_df = monthly_counts.loc[monthly_counts.index.intersection(human_files)]
+    
+    results_text.append(f"■ 月次推移 (Month 1 = 最初の30日間, 最大Month {max_month+1}まで表示)")
+    results_text.append(f"{'Month':<6} | {'AI Mean':<10} | {'AI Median':<10} | {'Human Mean':<10} | {'Human Median':<10}")
+    results_text.append("-" * 60)
+    
+    for m in target_months:
+        ai_col = ai_monthly_df[m] if m in ai_monthly_df.columns else pd.Series([], dtype=float)
+        human_col = human_monthly_df[m] if m in human_monthly_df.columns else pd.Series([], dtype=float)
+        
+        ai_mean = ai_col.mean() if not ai_col.empty else 0
+        ai_median = ai_col.median() if not ai_col.empty else 0
+        human_mean = human_col.mean() if not human_col.empty else 0
+        human_median = human_col.median() if not human_col.empty else 0
+        
+        results_text.append(f"{m+1:<6} | {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
+    results_text.append("")
+
     # バイオリンプロット作成 (週間頻度) - 単体出力はスキップ
     # create_violin_plot(
     #     data_ai=pd.Series(ai_weekly_medians),
