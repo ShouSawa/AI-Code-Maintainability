@@ -115,15 +115,15 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  標準偏差: {stats['std']:.2f}")
         results_text.append("")
 
-    # バイオリンプロット作成 (コミット数)
-    create_violin_plot(
-        data_ai=ai_commit_counts,
-        data_human=human_commit_counts,
-        title="Counts",
-        ylabel="Number of Commits",
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_count{suffix}.png"),
-        ylim=20
-    )
+    # バイオリンプロット作成 (コミット数) - 単体出力はスキップ
+    # create_violin_plot(
+    #     data_ai=ai_commit_counts,
+    #     data_human=human_commit_counts,
+    #     title="Counts",
+    #     ylabel="Number of Commits",
+    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_count{suffix}.png"),
+    #     ylim=20
+    # )
 
     # ---------------------------------------------------------
     # 2. コミット頻度の分析 (1週間ごと & 1か月ごと)
@@ -195,30 +195,35 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  標準偏差: {stats['std']:.4f}")
         results_text.append("")
 
-    # バイオリンプロット作成 (週間頻度)
-    create_violin_plot(
-        data_ai=pd.Series(ai_weekly_medians),
-        data_human=pd.Series(human_weekly_medians),
-        title="Frequency\n(Week)",
-        ylabel="Median Commits per Week",
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_weekly{suffix}.png"),
-        ylim=0.2
-    )
+    # バイオリンプロット作成 (週間頻度) - 単体出力はスキップ
+    # create_violin_plot(
+    #     data_ai=pd.Series(ai_weekly_medians),
+    #     data_human=pd.Series(human_weekly_medians),
+    #     title="Frequency\n(Week)",
+    #     ylabel="Median Commits per Week",
+    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_weekly{suffix}.png"),
+    #     ylim=0.2
+    # )
     
-    # バイオリンプロット作成 (月間頻度)
-    create_violin_plot(
-        data_ai=pd.Series(ai_monthly_medians),
-        data_human=pd.Series(human_monthly_medians),
-        title="Frequency\n(Month)",
-        ylabel="Median Commits per Month",
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_monthly{suffix}.png"),
-        ylim=3
-    )
+    # バイオリンプロット作成 (月間頻度) - 単体出力はスキップ
+    # create_violin_plot(
+    #     data_ai=pd.Series(ai_monthly_medians),
+    #     data_human=pd.Series(human_monthly_medians),
+    #     title="Frequency\n(Month)",
+    #     ylabel="Median Commits per Month",
+    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_monthly{suffix}.png"),
+    #     ylim=3
+    # )
 
     # ---------------------------------------------------------
     # 3. まとめたバイオリンプロットの作成
     # ---------------------------------------------------------
     print(f"[{suffix}] 結合グラフの作成中...")
+    
+    # ylimの設定
+    ylim_weekly = 0.6 if is_limited_period else 0.2
+    ylim_monthly = 5.0 if is_limited_period else 3.0
+    
     combined_data = [
         {
             'ai': ai_commit_counts,
@@ -232,14 +237,14 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
             'human': pd.Series(human_weekly_medians),
             'xlabel': "Frequency\n(Week)",
             'ylabel': "Median Commits per Week",
-            'ylim': 0.2
+            'ylim': ylim_weekly
         },
         {
             'ai': pd.Series(ai_monthly_medians),
             'human': pd.Series(human_monthly_medians),
             'xlabel': "Frequency\n(Month)",
             'ylabel': "Median Commits per Month",
-            'ylim': 3
+            'ylim': ylim_monthly
         }
     ]
     
