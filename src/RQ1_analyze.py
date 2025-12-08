@@ -23,7 +23,7 @@ def analyze_rq1():
     output_dir = os.path.join(script_dir, "../results")
     os.makedirs(output_dir, exist_ok=True)
     
-    output_txt_path = os.path.join(output_dir, "RQ1_results.txt")
+    output_txt_path = os.path.join(output_dir, "RQ1_results_3months.txt")
     
     print(f"読み込み中: {csv_path}")
     try:
@@ -39,30 +39,48 @@ def analyze_rq1():
     # 分析終了日
     analysis_end_date = pd.to_datetime("2025-10-31")
 
-    # ファイル単位のデータフレーム作成
-    # file_name, repository_name, file_created_by でユニークにする
-    files_df = df[['repository_name', 'file_name', 'file_created_by', 'file_creation_date']].drop_duplicates()
+    # ---------------------------------------------------------
+    # 1. 全期間の分析
+    # ---------------------------------------------------------
+    print("\n=== 全期間の分析を開始します ===")
+    run_analysis_process(df, output_dir, analysis_end_date, suffix="")
+
+    # ---------------------------------------------------------
+    # 2. 3ヶ月（90日）以内のデータに限定した分析
+    # ---------------------------------------------------------
+    print("\n=== 3ヶ月以内の分析を開始します ===")
+    print("分析対象をファイル作成から3ヶ月以内に限定します。")
+    df_3months = df.copy()
+    df_3months['days_diff'] = (df_3months['commit_date'] - df_3months['file_creation_date']).dt.days
+    # 作成日(0日)〜90日後まで
+    df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] <= 90)].copy()
+    
+    run_analysis_process(df_3months, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True)
+
+def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limited_period=False):
+    """
+    分析プロセスを実行する関数
+    """
+    output_txt_path = os.path.join(output_dir, f"RQ1_results{suffix}.txt")
     
     # 結果格納用リスト
     results_text = []
-    results_text.append("RQ1 分析結果: AI生成ファイルの保守性分析")
+    title_suffix = " (作成から3ヶ月間限定)" if is_limited_period else ""
+    period_text = "作成日 ～ 作成日+90日" if is_limited_period else "～ 2025/10/31"
+    
+    results_text.append(f"RQ1 分析結果: AI生成ファイルの保守性分析{title_suffix}")
     results_text.append("=" * 60)
     results_text.append(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    results_text.append(f"分析対象期間: ～ 2025/10/31")
+    results_text.append(f"分析対象期間: {period_text}")
     results_text.append("")
 
     # ---------------------------------------------------------
     # 1. コミット数の分析
     # ---------------------------------------------------------
-    print("コミット数の分析中...")
+    print(f"[{suffix}] コミット数の分析中...")
     
     # 各ファイルのコミット数を計算
     commit_counts = df.groupby(['repository_name', 'file_name', 'file_created_by']).size().reset_index(name='commit_count')
-    
-    # コミット数が0のファイルも考慮する必要があるが、results_v4.csvはコミット履歴ベースなので、
-    # 少なくとも1回（作成時）のコミットが含まれているはず。
-    # ただし、作成時のコミットが含まれていない場合（履歴取得の仕様による）は0になる可能性があるが、
-    # 今回のデータセットはコミット履歴から作られているので、ここに現れるファイルは少なくとも1コミットある。
     
     # AI作成ファイルと人間作成ファイルのコミット数を取得
     ai_commit_counts = commit_counts[commit_counts['file_created_by'] == 'AI']['commit_count']
@@ -101,16 +119,16 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=ai_commit_counts,
         data_human=human_commit_counts,
-        title="Commit Counts",
+        title="Counts",
         ylabel="Number of Commits",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_count.png"),
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_count{suffix}.png"),
         ylim=20
     )
 
     # ---------------------------------------------------------
     # 2. コミット頻度の分析 (1週間ごと & 1か月ごと)
     # ---------------------------------------------------------
-    print("コミット頻度の分析中...")
+    print(f"[{suffix}] コミット頻度の分析中...")
     
     # 各ファイルごとの期間別コミット数の中央値を計算
     ai_weekly_medians = []
@@ -127,8 +145,16 @@ def analyze_rq1():
         commit_dates = group['commit_date'].sort_values()
         
         # 期間ごとの集計
-        weekly_median = calculate_period_median(commit_dates, creation_date, analysis_end_date, days=7)
-        monthly_median = calculate_period_median(commit_dates, creation_date, analysis_end_date, days=30)
+        if is_limited_period:
+            # 3ヶ月限定の場合: 終了日は作成日+90日、ただし分析全体の終了日を超えないようにする
+            target_end_date = creation_date + timedelta(days=90)
+            actual_end_date = min(target_end_date, analysis_end_date)
+        else:
+            # 全期間の場合
+            actual_end_date = analysis_end_date
+        
+        weekly_median = calculate_period_median(commit_dates, creation_date, actual_end_date, days=7)
+        monthly_median = calculate_period_median(commit_dates, creation_date, actual_end_date, days=30)
         
         if creator == 'AI':
             if weekly_median is not None: ai_weekly_medians.append(weekly_median)
@@ -173,9 +199,9 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=pd.Series(ai_weekly_medians),
         data_human=pd.Series(human_weekly_medians),
-        title="Weekly Commit Frequency",
+        title="Frequency\n(Week)",
         ylabel="Median Commits per Week",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_weekly.png"),
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_weekly{suffix}.png"),
         ylim=0.2
     )
     
@@ -183,10 +209,56 @@ def analyze_rq1():
     create_violin_plot(
         data_ai=pd.Series(ai_monthly_medians),
         data_human=pd.Series(human_monthly_medians),
-        title="Monthly Commit Frequency",
+        title="Frequency\n(Month)",
         ylabel="Median Commits per Month",
-        output_path=os.path.join(output_dir, "RQ1_violinPlot_frequency_monthly.png"),
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_monthly{suffix}.png"),
         ylim=3
+    )
+
+    # ---------------------------------------------------------
+    # 3. まとめたバイオリンプロットの作成
+    # ---------------------------------------------------------
+    print(f"[{suffix}] 結合グラフの作成中...")
+    combined_data = [
+        {
+            'ai': ai_commit_counts,
+            'human': human_commit_counts,
+            'xlabel': "Count",
+            'ylabel': "Number of Commits",
+            'ylim': 20
+        },
+        {
+            'ai': pd.Series(ai_weekly_medians),
+            'human': pd.Series(human_weekly_medians),
+            'xlabel': "Frequency\n(Week)",
+            'ylabel': "Median Commits per Week",
+            'ylim': 0.2
+        },
+        {
+            'ai': pd.Series(ai_monthly_medians),
+            'human': pd.Series(human_monthly_medians),
+            'xlabel': "Frequency\n(Month)",
+            'ylabel': "Median Commits per Month",
+            'ylim': 3
+        }
+    ]
+    
+    create_combined_violin_plot(
+        dataset_list=combined_data,
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}.png")
+    )
+
+    # ylabelなしバージョンの作成
+    print(f"[{suffix}] 結合グラフ（ylabelなし）の作成中...")
+    combined_data_no_ylabel = []
+    for item in combined_data:
+        new_item = item.copy()
+        new_item['ylabel'] = "" # ylabelを空にする
+        combined_data_no_ylabel.append(new_item)
+
+    create_combined_violin_plot(
+        dataset_list=combined_data_no_ylabel,
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel.png")
     )
 
     # 結果保存
@@ -220,13 +292,10 @@ def calculate_period_median(commit_dates, start_date, end_date, days):
         
     return np.median(counts)
 
-def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None):
+def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_legend=True):
     """
-    バイオリンプロットを作成して保存する
+    指定されたAxesオブジェクトにバイオリンプロットを描画する
     """
-    # 縦長に変更 (幅6, 高さ10)
-    plt.figure(figsize=(6, 10))
-    
     # データフレーム形式に変換（seaborn用）
     df_ai = pd.DataFrame({'Value': data_ai, 'Type': 'AI'})
     df_human = pd.DataFrame({'Value': data_human, 'Type': 'Human'})
@@ -234,18 +303,13 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
     
     # データが空の場合はスキップ
     if len(df_plot) == 0:
-        print(f"警告: プロット用データがありません - {output_path}")
         return
 
-    # スタイル設定
-    sns.set_style("whitegrid")
-    
     # ダミーのx軸を設定（split=Trueで左右に結合させるため）
     df_plot['Dummy'] = "All Files"
     
     # 1. バイオリンプロット
-    # split=True で左右に結合, inner=None で中身を消す (boxplotを重ねるため)
-    ax = sns.violinplot(
+    sns.violinplot(
         data=df_plot, 
         x='Dummy', 
         y='Value', 
@@ -254,11 +318,14 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
         inner=None,     # 中身を描かない
         palette={"AI": "#FF9999", "Human": "#99CCFF"},
         cut=0, # 範囲外の表示をしない
+        ax=ax
     )
     
+    # Seabornが自動的に追加した凡例を削除 (手動で制御するため)
+    if ax.get_legend() is not None:
+        ax.get_legend().remove()
+    
     # 2. 箱ひげ図を重ねる (ax.boxplotを使用)
-    # 位置調整: split=Trueの場合、x=0を中心に左右に分かれる
-    # AI (左側): positions=[-0.05], Human (右側): positions=[0.05] 程度に配置
     box_width = 0.1
     
     # AIの箱ひげ図
@@ -271,8 +338,8 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
         whiskerprops=dict(color='black'),
         capprops=dict(color='black'),
         medianprops=dict(color='black'),
-        showfliers=False, # 外れ値はバイオリンで表現されているので省略
-        manage_ticks=False # x軸の目盛りを自動追加しない
+        showfliers=False,
+        manage_ticks=False
     )
     
     # Humanの箱ひげ図
@@ -286,40 +353,81 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
         capprops=dict(color='black'),
         medianprops=dict(color='black'),
         showfliers=False,
-        manage_ticks=False # x軸の目盛りを自動追加しない
+        manage_ticks=False
     )
     
     # 平均値を計算してプロットに追加 (白抜きの菱形)
     means = df_plot.groupby('Type')['Value'].mean()
     
-    # split=Trueの場合、左側(AI)と右側(Human)に平均値を配置
-    # 箱ひげ図の位置に合わせる
     if 'AI' in means:
-        plt.scatter(x=[-0.1], y=[means['AI']], color='white', marker='D', s=60, zorder=10, edgecolor='black', label='Mean')
+        ax.scatter(x=[-0.1], y=[means['AI']], color='white', marker='D', s=60, zorder=10, edgecolor='black', label='Mean')
     if 'Human' in means:
-        plt.scatter(x=[0.1], y=[means['Human']], color='white', marker='D', s=60, zorder=10, edgecolor='black')
+        ax.scatter(x=[0.1], y=[means['Human']], color='white', marker='D', s=60, zorder=10, edgecolor='black')
     
     if ylim is not None:
-        plt.ylim(0, ylim)
+        ax.set_ylim(0, ylim)
     
-    # plt.title(title, fontsize=24) # タイトルを上部から削除
-    plt.ylabel(ylabel, fontsize=20)
-    plt.xlabel("", fontsize=20) 
+    # 文字サイズを大きく設定
+    ax.set_ylabel(ylabel, fontsize=28) # 24 -> 28
+    ax.set_xlabel("", fontsize=28) 
     
     # x軸の目盛りとしてタイトルを表示
-    plt.xticks([0], [title], fontsize=24) 
+    ax.set_xticks([0])
+    ax.set_xticklabels([xlabel], fontsize=32) # 28 -> 32
     
     # 目盛りの文字サイズ変更
-    plt.tick_params(axis='y', which='major', labelsize=18) # x軸は消したのでy軸のみ設定
+    ax.tick_params(axis='y', which='major', labelsize=24) # 22 -> 24
     
     # 凡例
-    # violinplotの凡例とMeanの凡例を統合
-    handles, labels = ax.get_legend_handles_labels()
-    # handlesには [Violin_AI, Violin_Human, Mean_Scatter] が含まれるはず
-    plt.legend(handles, labels, loc='upper right', fontsize=14)
+    if show_legend:
+        handles, labels = ax.get_legend_handles_labels()
+        ax.legend(handles, labels, loc='upper right', fontsize=20) # 18 -> 20
+
+def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None):
+    """
+    バイオリンプロットを作成して保存する (単体用ラッパー)
+    """
+    # 縦長に変更 (幅5, 高さ8) -> (幅5, 高さ8)
+    plt.figure(figsize=(5, 8))
+    ax = plt.gca()
+    
+    # スタイル設定
+    sns.set_style("whitegrid")
+    
+    draw_violin_on_ax(ax, data_ai, data_human, title, ylabel, ylim, show_legend=True)
     
     plt.tight_layout()
     plt.savefig(output_path)
+    plt.close()
+
+def create_combined_violin_plot(dataset_list, output_path):
+    """
+    3つのバイオリンプロットを横に並べて保存する
+    """
+    # 横長 (幅15, 高さ8) -> (幅14, 高さ8)
+    fig, axes = plt.subplots(1, 3, figsize=(14, 8))
+    
+    # スタイル設定
+    sns.set_style("whitegrid")
+    
+    for i, data in enumerate(dataset_list):
+        draw_violin_on_ax(
+            ax=axes[i],
+            data_ai=data['ai'],
+            data_human=data['human'],
+            xlabel=data['xlabel'],
+            ylabel=data['ylabel'],
+            ylim=data['ylim'],
+            show_legend=False
+        )
+    
+    # 共通の凡例を作成 (最初のプロットからハンドルとラベルを取得)
+    handles, labels = axes[0].get_legend_handles_labels()
+    # 図全体の上部に凡例を表示
+    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.08), ncol=3, fontsize=24) # 20 -> 24
+    
+    plt.tight_layout()
+    plt.savefig(output_path, bbox_inches='tight')
     plt.close()
 
 if __name__ == "__main__":
