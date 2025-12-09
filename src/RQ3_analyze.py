@@ -17,6 +17,28 @@ def analyze_commit_classification():
         print(f"Error: File not found at {input_file}")
         return
 
+    # --- 追加: ファイル作成コミットを除外する処理 ---
+    # 日付比較のためにdatetime型に変換
+    df['commit_date'] = pd.to_datetime(df['commit_date'])
+    df['file_creation_date'] = pd.to_datetime(df['file_creation_date'])
+    
+    # 作成日時とコミット日時が一致する行（作成コミット）を除外
+    # 一致する行をすべて削除するのではなく、各ファイルにつき1つだけ（最初の1つ）を除外する
+    original_count = len(df)
+    
+    # 条件に一致する行を特定
+    mask_creation = df['commit_date'] == df['file_creation_date']
+    
+    # 除外対象のインデックスを特定するための処理
+    # repository_nameとfile_nameでグループ化し、条件に合う最初の行のインデックスを取得
+    creation_commit_indices = df[mask_creation].groupby(['repository_name', 'file_name']).head(1).index
+    
+    # 特定したインデックスを除外
+    df = df.drop(creation_commit_indices)
+    
+    print(f"作成コミットを除外しました: {original_count} -> {len(df)} 件")
+    # --------------------------------------------
+
     # AIと人間が作成したファイルのデータをフィルタリング
     ai_df = df[df['file_created_by'] == 'AI']
     human_df = df[df['file_created_by'] == 'Human']
@@ -67,7 +89,7 @@ def analyze_commit_classification():
         plot_values = []
         plot_labels = []
         legend_labels = [] # 凡例用の全ラベルリスト
-        slice_colors = []  # スライス用の色リスト
+        slice_colors = [] # スライス用の色リスト
         
         # 表示閾値（3%未満は表示しない）
         threshold = 0.03

@@ -29,11 +29,50 @@ def analyze_rq2():
         print(f"CSV読み込みエラー: {e}")
         return
 
+    # --- 全ファイル数のカウント（フィルタリング前） ---
+    all_files_count = df[['repository_name', 'file_name']].drop_duplicates().shape[0]
+    all_commits_count_raw = len(df)
+    
+    ai_files_total_df = df[df['file_created_by'] == 'AI']
+    ai_files_total_count = ai_files_total_df[['repository_name', 'file_name']].drop_duplicates().shape[0]
+    ai_commits_count_raw = len(ai_files_total_df)
+
+    human_files_total_df = df[df['file_created_by'] == 'Human']
+    human_files_total_count = human_files_total_df[['repository_name', 'file_name']].drop_duplicates().shape[0]
+    human_commits_count_raw = len(human_files_total_df)
+    # ----------------------------------------------
+
+    # --- 追加: ファイル作成コミットを除外する処理 ---
+    # 日付比較のためにdatetime型に変換
+    df['commit_date'] = pd.to_datetime(df['commit_date'])
+    df['file_creation_date'] = pd.to_datetime(df['file_creation_date'])
+    
+    # 作成日時とコミット日時が一致する行（作成コミット）を除外
+    # 修正: 一致する行をすべて削除するのではなく、各ファイルにつき1つだけ（最初の1つ）を除外する
+    original_count = len(df)
+    
+    # 条件に一致する行を特定
+    mask_creation = df['commit_date'] == df['file_creation_date']
+    
+    # 除外対象のインデックスを特定するための処理
+    # repository_nameとfile_nameでグループ化し、条件に合う最初の行のインデックスを取得
+    creation_commit_indices = df[mask_creation].groupby(['repository_name', 'file_name']).head(1).index
+    
+    # 特定したインデックスを除外
+    df = df.drop(creation_commit_indices)
+    
+    print(f"作成コミットを除外しました: {original_count} -> {len(df)} 件")
+    # --------------------------------------------
+
     # 結果格納用リスト
     results_text = []
     results_text.append("RQ2 分析結果: AI作成ファイルの保守主体分析")
     results_text.append("=" * 60)
     results_text.append(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # 全体のファイル数
+    results_text.append(f"総ファイル数: {all_files_count}")
+    results_text.append(f"総コミット数 (CSV全体): {all_commits_count_raw}")
     results_text.append("")
 
     # ---------------------------------------------------------
@@ -53,7 +92,9 @@ def analyze_rq2():
     
     results_text.append("1. AI作成ファイルに対するコミット内訳")
     results_text.append("-" * 40)
-    results_text.append(f"総コミット数: {ai_total_commits}")
+    results_text.append(f"対象ファイル数: {ai_files_total_count}")
+    results_text.append(f"総コミット数 (CSV全体): {ai_commits_count_raw}")
+    results_text.append(f"分析対象コミット数 (作成除外後): {ai_total_commits}")
     results_text.append(f"AIによるコミット: {ai_ai_commits} ({ai_ai_ratio:.2f}%)")
     results_text.append(f"人間によるコミット: {ai_human_commits} ({ai_human_ratio:.2f}%)")
     results_text.append("")
@@ -83,7 +124,9 @@ def analyze_rq2():
     
     results_text.append("2. 人間作成ファイルに対するコミット内訳")
     results_text.append("-" * 40)
-    results_text.append(f"総コミット数: {human_total_commits}")
+    results_text.append(f"対象ファイル数: {human_files_total_count}")
+    results_text.append(f"総コミット数 (CSV全体): {human_commits_count_raw}")
+    results_text.append(f"分析対象コミット数 (作成除外後): {human_total_commits}")
     results_text.append(f"AIによるコミット: {human_ai_commits} ({human_ai_ratio:.2f}%)")
     results_text.append(f"人間によるコミット: {human_human_commits} ({human_human_ratio:.2f}%)")
     results_text.append("")
