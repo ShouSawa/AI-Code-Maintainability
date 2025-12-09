@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns # Pythonデータを可視化するためのライブラリ，バイオリンプロットに使用
 import os
 from datetime import datetime, timedelta
+from scipy.stats import mannwhitneyu
 
 def analyze_rq1():
     """
@@ -56,6 +57,27 @@ def analyze_rq1():
     df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] <= 90)].copy()
     
     run_analysis_process(df_3months, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True)
+
+def perform_mannwhitneyu(data1, data2, label):
+    """Mann-Whitney U検定を実行して結果文字列を返す"""
+    try:
+        # データが空の場合は検定できない
+        if len(data1) == 0 or len(data2) == 0:
+            return f"■ {label}の検定: データ不足のため実行不可\n"
+            
+        statistic, p_value = mannwhitneyu(data1, data2, alternative='two-sided')
+        result = f"■ {label}のMann-Whitney U検定結果\n"
+        result += f"  検定統計量 U: {statistic}\n"
+        result += f"  p値: {p_value}\n"
+        if p_value < 0.01:
+            result += "  判定: ** 1%水準で有意差あり\n"
+        elif p_value < 0.05:
+            result += "  判定: * 5%水準で有意差あり\n"
+        else:
+            result += "  判定: 有意差なし\n"
+        return result
+    except Exception as e:
+        return f"■ {label}の検定エラー: {e}\n"
 
 def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limited_period=False):
     """
@@ -114,6 +136,10 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  中央値: {stats['median']}")
         results_text.append(f"  標準偏差: {stats['std']:.2f}")
         results_text.append("")
+
+    # 有意差検定 (コミット数)
+    results_text.append(perform_mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
+    results_text.append("")
 
     # バイオリンプロット作成 (コミット数) - 単体出力はスキップ
     # create_violin_plot(
@@ -183,6 +209,10 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  中央値: {stats['median']}")
         results_text.append(f"  標準偏差: {stats['std']:.4f}")
         results_text.append("")
+
+    # 有意差検定 (週間頻度)
+    results_text.append(perform_mannwhitneyu(ai_weekly_medians, human_weekly_medians, "週間コミット頻度"))
+    results_text.append("")
         
     results_text.append("■ 1か月ごとの頻度")
     for stats in [ai_monthly_stats, human_monthly_stats]:
@@ -194,6 +224,10 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"  中央値: {stats['median']}")
         results_text.append(f"  標準偏差: {stats['std']:.4f}")
         results_text.append("")
+
+    # 有意差検定 (月間頻度)
+    results_text.append(perform_mannwhitneyu(ai_monthly_medians, human_monthly_medians, "月間コミット頻度"))
+    results_text.append("")
 
     # ---------------------------------------------------------
     # 3. 時系列でのコミット数推移 (追加)
