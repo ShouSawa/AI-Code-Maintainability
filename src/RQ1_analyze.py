@@ -288,6 +288,14 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"{w+1:<2}週間目| {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
     results_text.append("")
 
+    # 週次推移の箱ひげ図を作成
+    print(f"[{suffix}] 週次推移グラフの作成中...")
+    create_weekly_trend_boxplot(
+        ai_weekly_df, 
+        human_weekly_df, 
+        os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}.png")
+    )
+
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
     monthly_counts = df_ts.groupby(['file_id', 'month_num']).size().unstack(fill_value=0)
@@ -557,6 +565,49 @@ def create_combined_violin_plot(dataset_list, output_path):
     
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight')
+    plt.close()
+
+def create_weekly_trend_boxplot(ai_df, human_df, output_path):
+    """
+    週ごとのコミット数推移を箱ひげ図で可視化する
+    """
+    # データをロング形式に変換
+    # ai_df, human_dfは columns=WeekNum, index=FileID, values=CommitCount
+    ai_long = ai_df.melt(var_name='Week', value_name='CommitCount')
+    ai_long['Type'] = 'AI'
+    
+    human_long = human_df.melt(var_name='Week', value_name='CommitCount')
+    human_long['Type'] = 'Human'
+    
+    df_plot = pd.concat([ai_long, human_long], ignore_index=True)
+    
+    # Weekを1始まりにする (0 -> 1)
+    df_plot['Week'] = df_plot['Week'] + 1
+    
+    plt.figure(figsize=(14, 8))
+    sns.set_style("whitegrid")
+    
+    # 箱ひげ図
+    ax = sns.boxplot(
+        data=df_plot,
+        x='Week',
+        y='CommitCount',
+        hue='Type',
+        palette={"AI": "#FF9999", "Human": "#99CCFF"},
+        showfliers=True
+    )
+    
+    plt.title("Weekly Commit Count Trend", fontsize=16)
+    plt.xlabel("Period (Week)", fontsize=14)
+    plt.ylabel("Commit Count", fontsize=14)
+    plt.legend(title="Creator", fontsize=12)
+    
+    # X軸のラベルが見やすくなるように調整
+    if df_plot['Week'].nunique() > 20:
+        plt.xticks(rotation=90)
+    
+    plt.tight_layout()
+    plt.savefig(output_path)
     plt.close()
 
 if __name__ == "__main__":
