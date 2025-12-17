@@ -594,8 +594,11 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
         y='CommitCount',
         hue='Type',
         palette={"AI": "#FF9999", "Human": "#99CCFF"},
-        showfliers=True
+        showfliers=False
     )
+    
+    # Y軸の範囲を制限（3以上のコミット数は表示しない）
+    plt.ylim(0, 5)
     
     plt.title("Weekly Commit Count Trend", fontsize=16)
     plt.xlabel("Period (Week)", fontsize=14)
