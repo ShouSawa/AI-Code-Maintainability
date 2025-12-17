@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
 import os
 
 def analyze_commit_classification():
@@ -7,8 +8,8 @@ def analyze_commit_classification():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     input_file = os.path.join(base_dir, '..', 'results', 'results_v4.csv')
     output_txt = os.path.join(base_dir, '..', 'results', 'RQ3_results.txt')
-    output_img_ai = os.path.join(base_dir, '..', 'results', 'RQ3_pieChart_AI.png')
-    output_img_human = os.path.join(base_dir, '..', 'results', 'RQ3_pieChart_Human.png')
+    output_pdf_h = os.path.join(base_dir, '..', 'results', 'RQ3_pieCharts_horizontal.pdf')
+    output_pdf_v = os.path.join(base_dir, '..', 'results', 'RQ3_pieCharts_vertical.pdf')
 
     # CSVファイルの読み込み
     try:
@@ -77,7 +78,7 @@ def analyze_commit_classification():
     print(f"Results written to {output_txt}")
 
     # 円グラフの生成
-    def create_pie_chart(counts, title, output_path, colors_map):
+    def create_pie_chart(counts, title, ax, colors_map):
         if counts.empty:
             print(f"No data for {title}")
             return
@@ -88,7 +89,6 @@ def analyze_commit_classification():
         
         plot_values = []
         plot_labels = []
-        legend_labels = [] # 凡例用の全ラベルリスト
         slice_colors = [] # スライス用の色リスト
         
         # 表示閾値（3%未満は表示しない）
@@ -99,9 +99,6 @@ def analyze_commit_classification():
             percentage = value / total_val
             slice_colors.append(colors_map.get(index, 'gray')) # マップから色を取得
             
-            # 凡例用には全ての項目を作成（個別にパーセンテージ表示）
-            legend_labels.append(f'{index} ({percentage*100:.1f}%)')
-
             # 3%未満はラベルを表示しない（まとめる機能は削除）
             if percentage >= threshold:
                 plot_labels.append(index)
@@ -116,38 +113,50 @@ def analyze_commit_classification():
             val = int(round(pct * total_val / 100.0))
             return f'{val}\n({pct:.1f}%)'
 
-        plt.figure(figsize=(14, 10)) # 図のサイズを拡大
-        
         # 円グラフのプロット
         # autopctを追加し、戻り値を受け取る変数を変更
-        patches, texts, autotexts = plt.pie(
+        patches, texts, autotexts = ax.pie(
             plot_values, 
             labels=plot_labels, # 円グラフの外側にラベル（名前）
             colors=slice_colors, # 固定色を適用
             startangle=90,
             counterclock=False,
-            textprops={'fontsize': 25}, # 外側のラベルのフォントサイズを拡大
+            textprops={'fontsize': 45}, # 外側のラベルのフォントサイズを拡大
             autopct=autopct_format,     # 内側に件数とパーセンテージを表示
             pctdistance=0.75,           # 内側のテキストの位置
-            labeldistance=1.1           # 外側のラベルの位置
+            labeldistance=1.15          # 外側のラベルの位置
         )
         
         # 内側のテキスト（autotexts）のスタイル調整
         for autotext in autotexts:
-            autotext.set_fontsize(23) # 内側のテキストのフォントサイズを拡大
+            autotext.set_fontsize(30) # 内側のテキストのフォントサイズを拡大
             autotext.set_color('black')
         
-        # 凡例には全ての項目を表示
-        plt.legend(patches, legend_labels, loc="best", fontsize=12, bbox_to_anchor=(1, 0.5))
-        plt.title(title, fontsize=25, pad=40) # タイトルのフォントサイズを拡大、グラフとの間隔を広げる
-        plt.axis('equal')  # アスペクト比を等しくして円グラフを円形に描画
-        plt.tight_layout()
-        plt.savefig(output_path)
-        plt.close()
-        print(f"Pie chart saved to {output_path}")
+        # 凡例は表示しない
+        # ax.legend(patches, legend_labels, loc="center left", fontsize=18, bbox_to_anchor=(1, 0.5))
+        
+        ax.set_title(title, fontsize=50, pad=40) # タイトルのフォントサイズを拡大、グラフとの間隔を広げる
+        ax.axis('equal')  # アスペクト比を等しくして円グラフを円形に描画
 
-    create_pie_chart(ai_counts, 'AI Created Files', output_img_ai, colors_map)
-    create_pie_chart(human_counts, 'Human Created Files', output_img_human, colors_map)
+    # PDF作成 (横並び)
+    with PdfPages(output_pdf_h) as pdf:
+        fig_h, axes_h = plt.subplots(1, 2, figsize=(28, 14))
+        create_pie_chart(ai_counts, 'AI Created Files', axes_h[0], colors_map)
+        create_pie_chart(human_counts, 'Human Created Files', axes_h[1], colors_map)
+        plt.tight_layout()
+        pdf.savefig(fig_h)
+        plt.close(fig_h)
+    print(f"Pie charts (Horizontal) saved to {output_pdf_h}")
+
+    # PDF作成 (縦並び)
+    with PdfPages(output_pdf_v) as pdf:
+        fig_v, axes_v = plt.subplots(2, 1, figsize=(14, 28))
+        create_pie_chart(ai_counts, 'AI Created Files', axes_v[0], colors_map)
+        create_pie_chart(human_counts, 'Human Created Files', axes_v[1], colors_map)
+        plt.tight_layout()
+        pdf.savefig(fig_v)
+        plt.close(fig_v)
+    print(f"Pie charts (Vertical) saved to {output_pdf_v}")
 
 if __name__ == "__main__":
     analyze_commit_classification()
