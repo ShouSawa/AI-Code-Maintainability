@@ -20,18 +20,38 @@ def analyze_rq1():
     
     # パス設定
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "../results/results_v4.csv")
+    
+    # results_v5.csv (ファイル単位の変更行数あり) があればそちらを優先
+    csv_path_v5 = os.path.join(script_dir, "../results/results_v5.csv")
+    csv_path_v4 = os.path.join(script_dir, "../results/results_v4.csv")
+    
+    use_file_specific_changes = False
+    
+    if os.path.exists(csv_path_v5):
+        print(f"読み込み中: {csv_path_v5}")
+        try:
+            df = pd.read_csv(csv_path_v5)
+            if 'file_specific_changed_lines' in df.columns:
+                use_file_specific_changes = True
+                print("★ ファイル単位の変更行数データを使用します。")
+            else:
+                print("注意: results_v5.csvに 'file_specific_changed_lines' カラムがありません。")
+        except Exception as e:
+            print(f"CSV読み込みエラー: {e}")
+            return
+    else:
+        print(f"読み込み中: {csv_path_v4}")
+        try:
+            df = pd.read_csv(csv_path_v4)
+            print("注意: results_v4.csvを使用します。変更行数はコミット全体の合計値となります。")
+        except Exception as e:
+            print(f"CSV読み込みエラー: {e}")
+            return
+
     output_dir = os.path.join(script_dir, "../results")
     os.makedirs(output_dir, exist_ok=True)
     
     output_txt_path = os.path.join(output_dir, "RQ1_results_3months.txt")
-    
-    print(f"読み込み中: {csv_path}")
-    try:
-        df = pd.read_csv(csv_path)
-    except Exception as e:
-        print(f"CSV読み込みエラー: {e}")
-        return
 
     # 日付変換（タイムゾーンを削除して統一）
     df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
@@ -44,7 +64,7 @@ def analyze_rq1():
     # 1. 全期間の分析
     # ---------------------------------------------------------
     print("\n=== 全期間の分析を開始します ===")
-    run_analysis_process(df, output_dir, analysis_end_date, suffix="")
+    run_analysis_process(df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
 
     # ---------------------------------------------------------
     # 2. 3ヶ月（90日）以内のデータに限定した分析
@@ -56,7 +76,7 @@ def analyze_rq1():
     # 作成日(0日)〜90日後まで
     df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] <= 90)].copy()
     
-    run_analysis_process(df_3months, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True)
+    run_analysis_process(df_3months, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes)
 
 def perform_mannwhitneyu(data1, data2, label):
     """Mann-Whitney U検定を実行して結果文字列を返す"""
@@ -79,7 +99,7 @@ def perform_mannwhitneyu(data1, data2, label):
     except Exception as e:
         return f"■ {label}の検定エラー: {e}\n"
 
-def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limited_period=False):
+def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False):
     """
     分析プロセスを実行する関数
     """
@@ -94,6 +114,10 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     results_text.append("=" * 60)
     results_text.append(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     results_text.append(f"分析対象期間: {period_text}")
+    if use_file_specific_changes:
+        results_text.append("※ 変更規模の分析には「ファイル単位の変更行数」を使用しています。")
+    else:
+        results_text.append("※ 変更規模の分析には「コミット全体の変更行数」を使用しています（ファイル単位データ未取得のため）。")
     results_text.append("")
 
     # ---------------------------------------------------------
@@ -140,16 +164,6 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     # 有意差検定 (コミット数)
     results_text.append(perform_mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
     results_text.append("")
-
-    # バイオリンプロット作成 (コミット数) - 単体出力はスキップ
-    # create_violin_plot(
-    #     data_ai=ai_commit_counts,
-    #     data_human=human_commit_counts,
-    #     title="Counts",
-    #     ylabel="Number of Commits",
-    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_count{suffix}.png"),
-    #     ylim=20
-    # )
 
     # ---------------------------------------------------------
     # 2. コミット頻度の分析 (1週間ごと & 1か月ごと)
@@ -327,28 +341,71 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
         results_text.append(f"{m+1:<6} | {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
     results_text.append("")
 
-    # バイオリンプロット作成 (週間頻度) - 単体出力はスキップ
-    # create_violin_plot(
-    #     data_ai=pd.Series(ai_weekly_medians),
-    #     data_human=pd.Series(human_weekly_medians),
-    #     title="Frequency\n(Week)",
-    #     ylabel="Median Commits per Week",
-    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_weekly{suffix}.png"),
-    #     ylim=0.2
-    # )
+    # ---------------------------------------------------------
+    # 4. 変更規模の分析 (追加)
+    # ---------------------------------------------------------
+    print(f"[{suffix}] 変更規模の分析中...")
     
-    # バイオリンプロット作成 (月間頻度) - 単体出力はスキップ
-    # create_violin_plot(
-    #     data_ai=pd.Series(ai_monthly_medians),
-    #     data_human=pd.Series(human_monthly_medians),
-    #     title="Frequency\n(Month)",
-    #     ylabel="Median Commits per Month",
-    #     output_path=os.path.join(output_dir, f"RQ1_violinPlot_frequency_monthly{suffix}.png"),
-    #     ylim=3
-    # )
+    # 変更行数と割合の計算
+    df_size = df.copy()
+    df_size = df_size[df_size['file_line_count'] > 0]
+    
+    # 変更行数のカラムを選択
+    if use_file_specific_changes:
+        # file_specific_changed_linesが0の場合は変更なしとみなすか、あるいはそのまま使う
+        # -1の場合はデータなしだが、update_dataset_with_file_changes.pyを実行していれば-1はないはず
+        # もし-1が残っている場合は除外するか、commit_changed_linesを使うか...
+        # ここでは、-1のデータは除外する
+        df_size = df_size[df_size['file_specific_changed_lines'] != -1]
+        target_col = 'file_specific_changed_lines'
+    else:
+        target_col = 'commit_changed_lines'
+
+    df_size['change_ratio'] = (df_size[target_col] / df_size['file_line_count']) * 100
+    
+    # AI/Humanに分割
+    ai_size_df = df_size[df_size['file_created_by'] == 'AI']
+    human_size_df = df_size[df_size['file_created_by'] == 'Human']
+    
+    results_text.append("4. 変更規模の分析")
+    results_text.append("-" * 40)
+    
+    # 変更行数
+    ai_lines = ai_size_df[target_col]
+    human_lines = human_size_df[target_col]
+    
+    results_text.append("■ 1コミットあたりの変更行数")
+    results_text.append(f"  [AI作成ファイル]")
+    results_text.append(f"  平均値: {ai_lines.mean():.2f}")
+    results_text.append(f"  中央値: {ai_lines.median():.2f}")
+    results_text.append(f"  [人間作成ファイル]")
+    results_text.append(f"  平均値: {human_lines.mean():.2f}")
+    results_text.append(f"  中央値: {human_lines.median():.2f}")
+    results_text.append("")
+    
+    # 有意差検定 (変更行数)
+    results_text.append(perform_mannwhitneyu(ai_lines, human_lines, "変更行数"))
+    results_text.append("")
+    
+    # 変更割合
+    ai_ratio = ai_size_df['change_ratio']
+    human_ratio = human_size_df['change_ratio']
+    
+    results_text.append("■ 1コミットあたりの変更割合 (%)")
+    results_text.append(f"  [AI作成ファイル]")
+    results_text.append(f"  平均値: {ai_ratio.mean():.2f}%")
+    results_text.append(f"  中央値: {ai_ratio.median():.2f}%")
+    results_text.append(f"  [人間作成ファイル]")
+    results_text.append(f"  平均値: {human_ratio.mean():.2f}%")
+    results_text.append(f"  中央値: {human_ratio.median():.2f}%")
+    results_text.append("")
+
+    # 有意差検定 (変更割合)
+    results_text.append(perform_mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
+    results_text.append("")
 
     # ---------------------------------------------------------
-    # 3. まとめたバイオリンプロットの作成
+    # 5. まとめたバイオリンプロットの作成
     # ---------------------------------------------------------
     print(f"[{suffix}] 結合グラフの作成中...")
     
