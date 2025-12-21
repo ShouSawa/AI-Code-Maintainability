@@ -369,6 +369,26 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     
     results_text.append("4. 変更規模の分析")
     results_text.append("-" * 40)
+
+    # --- ファイル行数の分析 (追加) ---
+    # df_sizeはコミット単位なので、ファイル単位に集約してファイルサイズを取得
+    unique_files_df = df_size.drop_duplicates(subset=['repository_name', 'file_name'])
+    ai_file_sizes = unique_files_df[unique_files_df['file_created_by'] == 'AI']['file_line_count']
+    human_file_sizes = unique_files_df[unique_files_df['file_created_by'] == 'Human']['file_line_count']
+
+    results_text.append("■ ファイル行数 (ファイルサイズ)")
+    results_text.append(f"  [AI作成ファイル]")
+    results_text.append(f"  平均値: {ai_file_sizes.mean():.2f}")
+    results_text.append(f"  中央値: {ai_file_sizes.median():.2f}")
+    results_text.append(f"  [人間作成ファイル]")
+    results_text.append(f"  平均値: {human_file_sizes.mean():.2f}")
+    results_text.append(f"  中央値: {human_file_sizes.median():.2f}")
+    results_text.append("")
+    
+    # 有意差検定 (ファイル行数)
+    results_text.append(perform_mannwhitneyu(ai_file_sizes, human_file_sizes, "ファイル行数"))
+    results_text.append("")
+    # -----------------------------
     
     # 変更行数
     ai_lines = ai_size_df[target_col]
