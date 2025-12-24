@@ -374,6 +374,44 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append(f"{m+1:<6} | {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
     results_text.append("")
 
+    # --- リポジトリごとの月次コミット数推移 (追加) ---
+    print(f"[{suffix}] リポジトリごとの月次コミット数推移グラフを作成中...")
+    
+    # monthly_counts (ファイル単位) をリポジトリ単位に集約
+    # index: file_id, columns: month_num (0, 1, 2...)
+    
+    if not monthly_counts.empty:
+        # file_id から repository_name と file_created_by を取得するためのマッピング
+        repo_map = all_files_df.set_index('file_id')[['repository_name', 'file_created_by']]
+        
+        # joinしてリポジトリ情報を付与
+        repo_monthly = monthly_counts.join(repo_map)
+        
+        # 数値カラム（月番号）のみを抽出
+        numeric_cols = [c for c in repo_monthly.columns if isinstance(c, int)]
+        
+        # リポジトリと作成者タイプごとに合計
+        repo_monthly_sum = repo_monthly.groupby(['repository_name', 'file_created_by'])[numeric_cols].sum()
+        
+        # ロング形式に変換
+        repo_long = repo_monthly_sum.reset_index().melt(
+            id_vars=['repository_name', 'file_created_by'], 
+            value_vars=numeric_cols,
+            var_name='month_num', 
+            value_name='commit_count'
+        )
+        
+        # グラフ作成
+        create_monthly_trend_lineplot(
+            repo_long,
+            'commit_count',
+            "Monthly Trend of Commits per Repository",
+            "Commits per Repository",
+            os.path.join(output_dir, f"RQ1_monthly_commits_per_repo_trend{suffix}.png"),
+            max_month
+        )
+
+
     # ---------------------------------------------------------
     # 4. 変更規模の分析 (追加)
     # ---------------------------------------------------------
