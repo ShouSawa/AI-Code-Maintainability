@@ -57,6 +57,19 @@ def analyze_rq1():
     df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
     df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
     
+    # 全ファイルリストを作成（作成コミット除外前に確保）
+    # repository_name, file_name でユニークにする
+    print("全ファイルリストを作成中...")
+    all_files_df = df.sort_values('commit_date', ascending=False).groupby(['repository_name', 'file_name']).first().reset_index()
+    all_files_df = all_files_df[['repository_name', 'file_name', 'file_created_by', 'file_creation_date', 'file_line_count']]
+    print(f"総ファイル数: {len(all_files_df)}")
+
+    # ファイル作成コミットを除外
+    # 作成日とコミット日が完全に一致するものを除外する
+    print(f"除外前のデータ数: {len(df)}")
+    df = df[df['commit_date'] != df['file_creation_date']].copy()
+    print(f"ファイル作成コミットを除外後のデータ数: {len(df)}")
+
     # 分析終了日
     analysis_end_date = pd.to_datetime("2025-10-31")
 
@@ -64,7 +77,7 @@ def analyze_rq1():
     # 1. 全期間の分析
     # ---------------------------------------------------------
     print("\n=== 全期間の分析を開始します ===")
-    run_analysis_process(df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
+    run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
 
     # ---------------------------------------------------------
     # 2. 3ヶ月（90日）以内のデータに限定した分析
@@ -73,10 +86,10 @@ def analyze_rq1():
     print("分析対象をファイル作成から3ヶ月以内に限定します。")
     df_3months = df.copy()
     df_3months['days_diff'] = (df_3months['commit_date'] - df_3months['file_creation_date']).dt.days
-    # 作成日(0日)〜90日後まで
-    df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] <= 90)].copy()
+    # 作成日(0日)〜90日未満(89日後)まで
+    df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] < 90)].copy()
     
-    run_analysis_process(df_3months, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes)
+    run_analysis_process(df_3months, all_files_df, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes)
 
 def perform_mannwhitneyu(data1, data2, label):
     """Mann-Whitney U検定を実行して結果文字列を返す"""
@@ -99,7 +112,7 @@ def perform_mannwhitneyu(data1, data2, label):
     except Exception as e:
         return f"■ {label}の検定エラー: {e}\n"
 
-def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False):
+def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False):
     """
     分析プロセスを実行する関数
     """
@@ -127,6 +140,10 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     
     # 各ファイルのコミット数を計算
     commit_counts = df.groupby(['repository_name', 'file_name', 'file_created_by']).size().reset_index(name='commit_count')
+    
+    # 全ファイルリストとマージして、コミットがないファイルを0にする
+    commit_counts = pd.merge(all_files_df, commit_counts, on=['repository_name', 'file_name', 'file_created_by'], how='left')
+    commit_counts['commit_count'] = commit_counts['commit_count'].fillna(0)
     
     # AI作成ファイルと人間作成ファイルのコミット数を取得
     ai_commit_counts = commit_counts[commit_counts['file_created_by'] == 'AI']['commit_count']
@@ -177,12 +194,21 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     human_monthly_medians = []
     
     # ファイルごとに処理
-    # repository_nameとfile_nameでグルーピングして処理
-    grouped = df.groupby(['repository_name', 'file_name', 'file_created_by', 'file_creation_date'])
+    # all_files_df をベースにループする
+    # df を groupby して辞書にする (高速化)
+    commit_groups = {k: v for k, v in df.groupby(['repository_name', 'file_name'])}
     
-    for (repo, file_name, creator, creation_date), group in grouped:
-        # コミット日付のリスト
-        commit_dates = group['commit_date'].sort_values()
+    for _, row in all_files_df.iterrows():
+        repo = row['repository_name']
+        file_name = row['file_name']
+        creator = row['file_created_by']
+        creation_date = row['file_creation_date']
+        
+        key = (repo, file_name)
+        if key in commit_groups:
+            commit_dates = commit_groups[key]['commit_date'].sort_values()
+        else:
+            commit_dates = pd.Series([], dtype='datetime64[ns]')
         
         # 期間ごとの集計
         if is_limited_period:
@@ -260,12 +286,16 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     # ユニークなファイルIDを作成
     df_ts['file_id'] = df_ts['repository_name'] + "::" + df_ts['file_name']
     
-    # 全ファイルリストと作成者情報のマッピング
-    file_creators = df_ts[['file_id', 'file_created_by']].drop_duplicates().set_index('file_id')['file_created_by']
+    # 全ファイルリストと作成者情報のマッピング (all_files_dfを使用)
+    all_files_df['file_id'] = all_files_df['repository_name'] + "::" + all_files_df['file_name']
+    file_creators = all_files_df.set_index('file_id')['file_created_by']
     
     # --- 週次集計 ---
     # ファイルごと、週ごとのコミット数
     weekly_counts = df_ts.groupby(['file_id', 'week_num']).size().unstack(fill_value=0)
+    
+    # 全ファイルを含めるようにreindex
+    weekly_counts = weekly_counts.reindex(index=file_creators.index, fill_value=0)
     
     # 期間制限がある場合はその期間まで、ない場合はデータが存在する最大まで
     # 3ヶ月限定なら13週程度、全期間なら最大52週(1年)まで表示するように制限
@@ -313,6 +343,9 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
     monthly_counts = df_ts.groupby(['file_id', 'month_num']).size().unstack(fill_value=0)
+    
+    # 全ファイルを含めるようにreindex
+    monthly_counts = monthly_counts.reindex(index=file_creators.index, fill_value=0)
     
     # 3ヶ月限定なら3ヶ月、全期間なら最大24ヶ月(2年)まで表示
     max_month_limit = 3 if is_limited_period else 24
@@ -371,10 +404,9 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
     results_text.append("-" * 40)
 
     # --- ファイル行数の分析 (追加) ---
-    # df_sizeはコミット単位なので、ファイル単位に集約してファイルサイズを取得
-    unique_files_df = df_size.drop_duplicates(subset=['repository_name', 'file_name'])
-    ai_file_sizes = unique_files_df[unique_files_df['file_created_by'] == 'AI']['file_line_count']
-    human_file_sizes = unique_files_df[unique_files_df['file_created_by'] == 'Human']['file_line_count']
+    # all_files_df を使用して、変更がないファイルも含めた全ファイルのサイズを分析
+    ai_file_sizes = all_files_df[all_files_df['file_created_by'] == 'AI']['file_line_count']
+    human_file_sizes = all_files_df[all_files_df['file_created_by'] == 'Human']['file_line_count']
 
     results_text.append("■ ファイル行数 (ファイルサイズ)")
     results_text.append(f"  [AI作成ファイル]")
@@ -422,6 +454,76 @@ def run_analysis_process(df, output_dir, analysis_end_date, suffix="", is_limite
 
     # 有意差検定 (変更割合)
     results_text.append(perform_mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
+    results_text.append("")
+
+    # --- 変更規模の月次推移 (追加) ---
+    print(f"[{suffix}] 変更規模の推移グラフを作成中...")
+    
+    # 月番号の計算
+    df_size['days_diff'] = (df_size['commit_date'] - df_size['file_creation_date']).dt.days
+    df_size['month_num'] = df_size['days_diff'] // 30
+    
+    # 表示期間の制限
+    max_month_limit = 3 if is_limited_period else 24
+    df_size_filtered = df_size[df_size['month_num'] <= max_month_limit]
+    
+    # 1. 変更行数の推移
+    create_monthly_trend_lineplot(
+        df_size_filtered,
+        target_col,
+        "Monthly Trend of Lines Changed per Commit",
+        "Lines Changed per Commit",
+        os.path.join(output_dir, f"RQ1_monthly_lines_changed_trend{suffix}.png"),
+        max_month_limit
+    )
+    
+    # 2. 変更割合の推移
+    create_monthly_trend_lineplot(
+        df_size_filtered,
+        'change_ratio',
+        "Monthly Trend of Change Ratio per Commit",
+        "Change Ratio per Commit (%)",
+        os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.png"),
+        max_month_limit
+    )
+
+    # --- 変更規模の月次推移 (テキスト出力) ---
+    results_text.append("■ 月次推移 (変更行数の中央値)")
+    results_text.append(f"{'Month':<6} | {'AI Median':<10} | {'Human Median':<10}")
+    results_text.append("-" * 40)
+    
+    # 月ごとに集計
+    for m in range(int(max_month_limit) + 1):
+        month_data = df_size_filtered[df_size_filtered['month_num'] == m]
+        if month_data.empty:
+            continue
+            
+        ai_median = month_data[month_data['file_created_by'] == 'AI'][target_col].median()
+        human_median = month_data[month_data['file_created_by'] == 'Human'][target_col].median()
+        
+        # NaNの場合は0または-にする
+        ai_str = f"{ai_median:.1f}" if not pd.isna(ai_median) else "-"
+        human_str = f"{human_median:.1f}" if not pd.isna(human_median) else "-"
+        
+        results_text.append(f"{m+1:<6} | {ai_str:<10} | {human_str:<10}")
+    results_text.append("")
+
+    results_text.append("■ 月次推移 (変更割合の中央値 %)")
+    results_text.append(f"{'Month':<6} | {'AI Median':<10} | {'Human Median':<10}")
+    results_text.append("-" * 40)
+    
+    for m in range(int(max_month_limit) + 1):
+        month_data = df_size_filtered[df_size_filtered['month_num'] == m]
+        if month_data.empty:
+            continue
+            
+        ai_median = month_data[month_data['file_created_by'] == 'AI']['change_ratio'].median()
+        human_median = month_data[month_data['file_created_by'] == 'Human']['change_ratio'].median()
+        
+        ai_str = f"{ai_median:.2f}" if not pd.isna(ai_median) else "-"
+        human_str = f"{human_median:.2f}" if not pd.isna(human_median) else "-"
+        
+        results_text.append(f"{m+1:<6} | {ai_str:<10} | {human_str:<10}")
     results_text.append("")
 
     # ---------------------------------------------------------
@@ -685,6 +787,54 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
     # X軸のラベルが見やすくなるように調整
     if df_plot['Week'].nunique() > 20:
         plt.xticks(rotation=90)
+    
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max_month):
+    """
+    月ごとの変更規模の推移を折れ線グラフで可視化する (中央値)
+    """
+    # データが空の場合はスキップ
+    if df.empty:
+        print(f"Warning: No data available for {title}")
+        return
+
+    # 月番号が負のものを除外
+    df = df[df['month_num'] >= 0].copy()
+    
+    # 月を1始まりにする
+    df['Month'] = df['month_num'] + 1
+    
+    plt.figure(figsize=(10, 6))
+    sns.set_style("whitegrid")
+    
+    # 折れ線グラフ (中央値)
+    # estimator=np.median を指定して中央値をプロット
+    # errorbar=None にして信頼区間を表示しない（中央値の推移を見やすくするため）
+    sns.lineplot(
+        data=df,
+        x='Month',
+        y=value_col,
+        hue='file_created_by',
+        palette={"AI": "#FF9999", "Human": "#99CCFF"},
+        marker='o',
+        estimator=np.median,
+        errorbar=None
+    )
+    
+    plt.title(title, fontsize=16)
+    plt.xlabel("Period (Month)", fontsize=14)
+    plt.ylabel(ylabel + " (Median)", fontsize=14)
+    plt.legend(title="Creator", fontsize=12)
+    
+    # X軸の範囲設定
+    plt.xlim(0.5, max_month + 1.5)
+    # X軸の目盛りを整数にする
+    # 月数が多い場合は間引く
+    if max_month <= 24:
+        plt.xticks(range(1, int(max_month) + 2))
     
     plt.tight_layout()
     plt.savefig(output_path)

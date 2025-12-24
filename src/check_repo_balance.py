@@ -3,87 +3,68 @@ import os
 
 def check_repository_balance():
     """
-    results_v4.csvを読み込み、各リポジトリのAI作成ファイル数とHuman作成ファイル数をカウントし、
-    バランスが取れていない（数が異なる）リポジトリを特定して表示する。
+    successful_repository_list.csv の ai_file_count (目標AIファイル数) と
+    results_v4.csv に含まれる Human 作成ファイル数 (分析済みHumanファイル数) を比較し、
+    Humanファイル数が目標AIファイル数より少ないリポジトリを特定する。
     """
     # パス設定
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "../data_list/RQ1/final_result/results_v4.csv")
+    success_list_path = os.path.join(script_dir, "../dataset/successful_repository_list.csv")
+    results_path = os.path.join(script_dir, "../results/results_v4.csv")
     
-    if not os.path.exists(csv_path):
-        print(f"エラー: ファイルが見つかりません: {csv_path}")
+    # ファイル存在確認
+    if not os.path.exists(success_list_path):
+        print(f"エラー: ファイルが見つかりません: {success_list_path}")
+        return
+    if not os.path.exists(results_path):
+        print(f"エラー: ファイルが見つかりません: {results_path}")
         return
 
-    print(f"読み込み中: {csv_path}")
+    print(f"読み込み中: {success_list_path}")
     try:
-        df = pd.read_csv(csv_path)
+        df_success = pd.read_csv(success_list_path)
     except Exception as e:
-        print(f"CSV読み込みエラー: {e}")
+        print(f"CSV読み込みエラー (successful_repository_list.csv): {e}")
         return
 
-    # 必要なカラムの確認
-    required_columns = ['repository_name', 'file_name', 'file_created_by']
-    for col in required_columns:
-        if col not in df.columns:
-            print(f"エラー: 必要なカラム '{col}' がCSVに含まれていません。")
-            print(f"存在するカラム: {df.columns.tolist()}")
-            return
+    print(f"読み込み中: {results_path}")
+    try:
+        df_results = pd.read_csv(results_path)
+    except Exception as e:
+        print(f"CSV読み込みエラー (results_v4.csv): {e}")
+        return
 
-    # リポジトリごとに集計
-    # ファイル単位でユニークにする（1つのファイルが複数のコミット行を持つため）
-    # file_nameとfile_created_byの組み合わせでユニーク化
-    unique_files = df[['repository_name', 'file_name', 'file_created_by']].drop_duplicates()
+    # successful_repository_list.csv の処理
+    # owner と repository_name を結合してキーにする
+    df_success['full_name'] = df_success['owner'] + '/' + df_success['repository_name']
+    target_ai_counts = df_success.set_index('full_name')['ai_file_count']
 
-    # 集計
-    # groupbyでリポジトリと作成者タイプごとにカウント
-    repo_stats = unique_files.groupby(['repository_name', 'file_created_by']).size().unstack(fill_value=0)
+    # results_v4.csv の処理
+    # ファイル単位でユニークにする
+    unique_files = df_results[['repository_name', 'file_name', 'file_created_by']].drop_duplicates()
     
-    # カラムが存在しない場合の対応（AIのみ、Humanのみのリポジトリがある場合）
-    if 'AI' not in repo_stats.columns:
-        repo_stats['AI'] = 0
-    if 'Human' not in repo_stats.columns:
-        repo_stats['Human'] = 0
+    # Human作成ファイルをカウント
+    human_files = unique_files[unique_files['file_created_by'] == 'Human']
+    human_counts = human_files.groupby('repository_name').size()
 
-    # バランスチェック
-    repo_stats['is_balanced'] = repo_stats['AI'] == repo_stats['Human']
-    repo_stats['diff'] = repo_stats['AI'] - repo_stats['Human']
+    print("\n" + "="*100)
+    print(f"{'Repository Name':<40} | {'Target AI Count':<15} | {'Actual Human Count':<18} | {'Diff':<5}")
+    print("-" * 100)
 
-    # 結果表示
-    print("\n" + "="*90)
-    print(f"{'Repository Name':<45} | {'AI Files':<10} | {'Human Files':<12} | {'Diff':<5} | {'Status'}")
-    print("-" * 90)
-
-    unbalanced_count = 0
-    # 全リポジトリを表示するのではなく、アンバランスなものだけを目立たせるか、全て表示するか。
-    # ここでは全て表示しつつ、アンバランスなものを強調する形にする。
+    found_repos_count = 0
     
-    for repo_name, row in repo_stats.iterrows():
-        ai_count = row['AI']
-        human_count = row['Human']
-        diff = row['diff']
-        is_balanced = row['is_balanced']
+    # 比較
+    for repo_name, target_ai in target_ai_counts.items():
+        actual_human = human_counts.get(repo_name, 0)
         
-        status = "OK" if is_balanced else "UNBALANCED"
-        
-        # アンバランスなものだけ表示する場合は以下のif文を有効にする
-        if not is_balanced:
-            unbalanced_count += 1
-            print(f"{repo_name:<45} | {ai_count:<10} | {human_count:<12} | {diff:<5} | {status}")
+        if actual_human < target_ai:
+            diff = target_ai - actual_human
+            print(f"{repo_name:<40} | {target_ai:<15} | {actual_human:<18} | -{diff:<5}")
+            found_repos_count += 1
 
-    print("-" * 90)
-    print(f"分析対象リポジトリ総数: {len(repo_stats)}")
-    print(f"バランスが取れていないリポジトリ数: {unbalanced_count}")
-    print("="*90)
-
-    # バランスが取れていないリポジトリの詳細リスト
-    if unbalanced_count > 0:
-        print("\n【バランス調整が必要なリポジトリ一覧】")
-        unbalanced_repos = repo_stats[~repo_stats['is_balanced']].index.tolist()
-        for repo in unbalanced_repos:
-            row = repo_stats.loc[repo]
-            print(f"- {repo} (AI: {row['AI']}, Human: {row['Human']})")
-    else:
-        print("\n全てのリポジトリでAIファイル数とHumanファイル数が一致しています。")
+    print("-" * 100)
+    print(f"条件に該当するリポジトリ数 (Human < Target AI): {found_repos_count}")
+    print("="*100)
 
 if __name__ == "__main__":
     check_repository_balance()
