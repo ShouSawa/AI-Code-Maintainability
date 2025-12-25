@@ -407,7 +407,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             'commit_count',
             "Commits per Repository",
             "Commits",
-            os.path.join(output_dir, f"RQ1_monthly_commits_per_repo_trend{suffix}.pdf"),
+            os.path.join(output_dir, f"RQ1_commits_per_repo{suffix}.pdf"),
             max_month
         )
 
@@ -513,7 +513,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         target_col,
         "Lines Changed per Commit",
         "Lines Changed",
-        os.path.join(output_dir, f"RQ1_monthly_lines_changed_trend{suffix}.pdf"),
+        os.path.join(output_dir, f"RQ1_lines_changed_per_commit{suffix}.pdf"),
         max_month_limit,
         ylim=200
     )
@@ -530,7 +530,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         'change_ratio',
         "Change Ratio per File",
         "Change Ratio(%)",
-        os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.pdf"),
+        os.path.join(output_dir, f"RQ1_change_ratio_per_file{suffix}.pdf"),
         max_month_limit
     )
 
