@@ -521,14 +521,14 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # 2. 変更割合の推移
     # ファイルごとに月ごとの平均変更割合を計算
     df_size['file_id'] = df_size['repository_name'] + "::" + df_size['file_name']
-    df_ratio_monthly = df_size.groupby(['file_id', 'month_num', 'file_created_by'])['change_ratio'].mean().reset_index()
+    df_ratio_monthly = df_size.groupby(['file_id', 'month_num', 'file_created_by'])['change_ratio'].median().reset_index()
     
     df_ratio_filtered = df_ratio_monthly[df_ratio_monthly['month_num'] <= max_month_limit]
 
     create_monthly_trend_violinplot(
         df_ratio_filtered,
         'change_ratio',
-        "Average Change Ratio per File per Month",
+        "Change Ratio per File",
         "Change Ratio(%)",
         os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.png"),
         max_month_limit
@@ -827,7 +827,7 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
     plt.ylim(0, 5)
     
     plt.title("Weekly Commit Count Trend", fontsize=16)
-    plt.xlabel("Period (Week)", fontsize=14)
+    plt.xlabel("Week", fontsize=14)
     plt.ylabel("Commit Count", fontsize=14)
     plt.legend(title="Creator", fontsize=12)
     
@@ -854,6 +854,12 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
     # 月を1始まりにする
     df['Month'] = df['month_num'] + 1
     
+    # 凡例用の名前変更
+    df['Type'] = df['file_created_by'].map({
+        'AI': 'Agent-created files',
+        'Human': 'Human-created files'
+    })
+
     plt.figure(figsize=(10, 6))
     sns.set_style("whitegrid")
     
@@ -864,16 +870,16 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
         data=df,
         x='Month',
         y=value_col,
-        hue='file_created_by',
-        palette={"AI": "#FF9999", "Human": "#99CCFF"},
+        hue='Type',
+        palette={"Agent-created files": "#FF9999", "Human-created files": "#99CCFF"},
         marker='o',
         estimator=np.median,
         errorbar=None
     )
     
     plt.title(title, fontsize=16)
-    plt.xlabel("Period (Month)", fontsize=14)
-    plt.ylabel(ylabel + " (Median)", fontsize=14)
+    plt.xlabel("Month", fontsize=14)
+    plt.ylabel(ylabel, fontsize=14)
     plt.legend(title="Creator", fontsize=12)
     
     # X軸の範囲設定
@@ -978,7 +984,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         ax.set_ylim(0, ylim)
 
     plt.title(title, fontsize=20)
-    plt.xlabel("Period (Month)", fontsize=18)
+    plt.xlabel("Month", fontsize=18)
     plt.ylabel(ylabel, fontsize=18)
     plt.legend(title="", fontsize=16, loc='upper right')
     ax.tick_params(axis='both', which='major', labelsize=14)
