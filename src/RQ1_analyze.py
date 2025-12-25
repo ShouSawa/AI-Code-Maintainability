@@ -13,9 +13,9 @@ def analyze_rq1():
     入力: results_v4.csv
     出力: 
         - results/RQ1_results.txt
-        - results/RQ1_violinPlot_count.png
-        - results/RQ1_violinPlot_frequency_weekly.png
-        - results/RQ1_violinPlot_frequency_monthly.png
+        - results/RQ1_violinPlot_count.pdf
+        - results/RQ1_violinPlot_frequency_weekly.pdf
+        - results/RQ1_violinPlot_frequency_monthly.pdf
     """
     
     # パス設定
@@ -337,7 +337,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     create_weekly_trend_boxplot(
         ai_weekly_df, 
         human_weekly_df, 
-        os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}.png")
+        os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}.pdf")
     )
 
     # --- 月次集計 ---
@@ -407,7 +407,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             'commit_count',
             "Commits per Repository",
             "Commits",
-            os.path.join(output_dir, f"RQ1_monthly_commits_per_repo_trend{suffix}.png"),
+            os.path.join(output_dir, f"RQ1_monthly_commits_per_repo_trend{suffix}.pdf"),
             max_month
         )
 
@@ -513,7 +513,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         target_col,
         "Lines Changed per Commit",
         "Lines Changed",
-        os.path.join(output_dir, f"RQ1_monthly_lines_changed_trend{suffix}.png"),
+        os.path.join(output_dir, f"RQ1_monthly_lines_changed_trend{suffix}.pdf"),
         max_month_limit,
         ylim=200
     )
@@ -530,7 +530,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         'change_ratio',
         "Change Ratio per File",
         "Change Ratio(%)",
-        os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.png"),
+        os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.pdf"),
         max_month_limit
     )
 
@@ -608,7 +608,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     
     create_combined_violin_plot(
         dataset_list=combined_data,
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}.png")
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}.pdf")
     )
 
     # ylabelなしバージョンの作成
@@ -621,7 +621,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
 
     create_combined_violin_plot(
         dataset_list=combined_data_no_ylabel,
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel.png")
+        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel.pdf")
     )
 
     # 結果保存
@@ -718,14 +718,6 @@ def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_l
         showfliers=False,
         manage_ticks=False
     )
-    
-    # 平均値を計算してプロットに追加 (白抜きの菱形)
-    means = df_plot.groupby('Type')['Value'].mean()
-    
-    if 'AI' in means:
-        ax.scatter(x=[-0.1], y=[means['AI']], color='white', marker='D', s=60, zorder=10, edgecolor='black', label='Mean')
-    if 'Human' in means:
-        ax.scatter(x=[0.1], y=[means['Human']], color='white', marker='D', s=60, zorder=10, edgecolor='black')
     
     if ylim is not None:
         ax.set_ylim(0, ylim)
@@ -963,7 +955,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
                 showfliers=False,
                 manage_ticks=False
             )
-            ax.scatter(x=[i - offset], y=[data_ai.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
+            # ax.scatter(x=[i - offset], y=[data_ai.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
 
         if not data_human.empty:
             ax.boxplot(
@@ -978,7 +970,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
                 showfliers=False,
                 manage_ticks=False
             )
-            ax.scatter(x=[i + offset], y=[data_human.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
+            # ax.scatter(x=[i + offset], y=[data_human.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
 
     if ylim is not None:
         ax.set_ylim(0, ylim)
