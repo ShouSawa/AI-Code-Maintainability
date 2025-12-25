@@ -723,20 +723,20 @@ def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_l
         ax.set_ylim(0, ylim)
     
     # 文字サイズを大きく設定
-    ax.set_ylabel(ylabel, fontsize=28) # 24 -> 28
-    ax.set_xlabel("", fontsize=28) 
+    ax.set_ylabel(ylabel, fontsize=32) # 28 -> 32
+    ax.set_xlabel("", fontsize=32) 
     
     # x軸の目盛りとしてタイトルを表示
     ax.set_xticks([0])
-    ax.set_xticklabels([xlabel], fontsize=32) # 28 -> 32
+    ax.set_xticklabels([xlabel], fontsize=32) # 32 -> 36
     
     # 目盛りの文字サイズ変更
-    ax.tick_params(axis='y', which='major', labelsize=24) # 22 -> 24
+    ax.tick_params(axis='y', which='major', labelsize=32) # 28 -> 32
     
     # 凡例
     if show_legend:
         handles, labels = ax.get_legend_handles_labels()
-        ax.legend(handles, labels, loc='upper right', fontsize=20) # 18 -> 20
+        ax.legend(handles, labels, loc='upper right', fontsize=32) # 24 -> 32
 
 def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None):
     """
@@ -779,7 +779,7 @@ def create_combined_violin_plot(dataset_list, output_path):
     # 共通の凡例を作成 (最初のプロットからハンドルとラベルを取得)
     handles, labels = axes[0].get_legend_handles_labels()
     # 図全体の上部に凡例を表示
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.08), ncol=3, fontsize=24) # 20 -> 24
+    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.08), ncol=3, fontsize=28) # 24 -> 28
     
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight')
@@ -818,10 +818,10 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
     # Y軸の範囲を制限（3以上のコミット数は表示しない）
     plt.ylim(0, 5)
     
-    plt.title("Weekly Commit Count Trend", fontsize=16)
-    plt.xlabel("Week", fontsize=14)
-    plt.ylabel("Commit Count", fontsize=14)
-    plt.legend(title="Creator", fontsize=12)
+    # plt.title("Weekly Commit Count Trend", fontsize=16)
+    plt.xlabel("Week", fontsize=18)
+    plt.ylabel("Commit Count", fontsize=18)
+    plt.legend(title="Creator", fontsize=16)
     
     # X軸のラベルが見やすくなるように調整
     if df_plot['Week'].nunique() > 20:
@@ -869,10 +869,11 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
         errorbar=None
     )
     
-    plt.title(title, fontsize=16)
-    plt.xlabel("Month", fontsize=14)
-    plt.ylabel(ylabel, fontsize=14)
-    plt.legend(title="Creator", fontsize=12)
+    # plt.title(title, fontsize=16)
+    plt.xlabel("Month", fontsize=24)
+    plt.ylabel(ylabel, fontsize=24)
+    plt.legend(title="Creator", fontsize=20)
+    plt.tick_params(axis='both', which='major', labelsize=18)
     
     # X軸の範囲設定
     plt.xlim(0.5, max_month + 1.5)
@@ -975,11 +976,11 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
     if ylim is not None:
         ax.set_ylim(0, ylim)
 
-    plt.title(title, fontsize=20)
-    plt.xlabel("Month", fontsize=18)
-    plt.ylabel(ylabel, fontsize=18)
-    plt.legend(title="", fontsize=16, loc='upper right')
-    ax.tick_params(axis='both', which='major', labelsize=14)
+    # plt.title(title, fontsize=20)
+    plt.xlabel("Month", fontsize=32)
+    plt.ylabel(ylabel, fontsize=32)
+    plt.legend(title="", fontsize=28, loc='upper right')
+    ax.tick_params(axis='both', which='major', labelsize=28)
     
     plt.tight_layout()
     plt.savefig(output_path)
