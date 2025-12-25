@@ -405,8 +405,8 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         create_monthly_trend_lineplot(
             repo_long,
             'commit_count',
-            "Monthly Trend of Commits per Repository",
             "Commits per Repository",
+            "Commits",
             os.path.join(output_dir, f"RQ1_monthly_commits_per_repo_trend{suffix}.png"),
             max_month
         )
@@ -433,6 +433,8 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         target_col = 'commit_changed_lines'
 
     df_size['change_ratio'] = (df_size[target_col] / df_size['file_line_count']) * 100
+    # 100%を超える場合は100%にクリップする
+    df_size['change_ratio'] = df_size['change_ratio'].clip(upper=100.0)
     
     # AI/Humanに分割
     ai_size_df = df_size[df_size['file_created_by'] == 'AI']
@@ -506,21 +508,28 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     df_size_filtered = df_size[df_size['month_num'] <= max_month_limit]
     
     # 1. 変更行数の推移
-    create_monthly_trend_lineplot(
+    create_monthly_trend_violinplot(
         df_size_filtered,
         target_col,
-        "Monthly Trend of Lines Changed per Commit",
         "Lines Changed per Commit",
+        "Lines Changed",
         os.path.join(output_dir, f"RQ1_monthly_lines_changed_trend{suffix}.png"),
-        max_month_limit
+        max_month_limit,
+        ylim=200
     )
     
     # 2. 変更割合の推移
-    create_monthly_trend_lineplot(
-        df_size_filtered,
+    # ファイルごとに月ごとの平均変更割合を計算
+    df_size['file_id'] = df_size['repository_name'] + "::" + df_size['file_name']
+    df_ratio_monthly = df_size.groupby(['file_id', 'month_num', 'file_created_by'])['change_ratio'].mean().reset_index()
+    
+    df_ratio_filtered = df_ratio_monthly[df_ratio_monthly['month_num'] <= max_month_limit]
+
+    create_monthly_trend_violinplot(
+        df_ratio_filtered,
         'change_ratio',
-        "Monthly Trend of Change Ratio per Commit",
-        "Change Ratio per Commit (%)",
+        "Average Change Ratio per File per Month",
+        "Change Ratio(%)",
         os.path.join(output_dir, f"RQ1_monthly_change_ratio_trend{suffix}.png"),
         max_month_limit
     )
@@ -551,7 +560,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("-" * 40)
     
     for m in range(int(max_month_limit) + 1):
-        month_data = df_size_filtered[df_size_filtered['month_num'] == m]
+        month_data = df_ratio_filtered[df_ratio_filtered['month_num'] == m]
         if month_data.empty:
             continue
             
@@ -873,6 +882,106 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
     # 月数が多い場合は間引く
     if max_month <= 24:
         plt.xticks(range(1, int(max_month) + 2))
+    
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, max_month, ylim=None):
+    """
+    月ごとの変更規模の推移をバイオリンプロットで可視化する
+    """
+    # データが空の場合はスキップ
+    if df.empty:
+        print(f"Warning: No data available for {title}")
+        return
+
+    # 月番号が負のものを除外
+    df = df[df['month_num'] >= 0].copy()
+    
+    # 月を1始まりにする
+    df['Month'] = df['month_num'] + 1
+    
+    # 凡例用の名前変更
+    df['Type'] = df['file_created_by'].map({
+        'AI': 'Agent-created files',
+        'Human': 'Human-created files'
+    })
+    
+    # プロット用データ作成
+    df_plot = df[['Month', value_col, 'Type']].rename(columns={value_col: 'Value'})
+    
+    plt.figure(figsize=(14, 8))
+    ax = plt.gca()
+    sns.set_style("whitegrid")
+    
+    # 月の順序を指定
+    month_order = range(1, int(max_month) + 2)
+    
+    # バイオリンプロット
+    sns.violinplot(
+        data=df_plot,
+        x='Month',
+        y='Value',
+        hue='Type',
+        split=True,
+        inner=None,
+        palette={"Agent-created files": "#FF9999", "Human-created files": "#99CCFF"},
+        cut=0,
+        order=month_order,
+        ax=ax
+    )
+    
+    # 箱ひげ図と平均値を重ねる
+    box_width = 0.1
+    offset = 0.1
+    
+    for i, m in enumerate(month_order):
+        month_data = df_plot[df_plot['Month'] == m]
+        if month_data.empty:
+            continue
+            
+        data_ai = month_data[month_data['Type'] == 'Agent-created files']['Value']
+        data_human = month_data[month_data['Type'] == 'Human-created files']['Value']
+        
+        if not data_ai.empty:
+            ax.boxplot(
+                [data_ai],
+                positions=[i - offset],
+                widths=box_width,
+                patch_artist=True,
+                boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
+                whiskerprops=dict(color='black'),
+                capprops=dict(color='black'),
+                medianprops=dict(color='black'),
+                showfliers=False,
+                manage_ticks=False
+            )
+            ax.scatter(x=[i - offset], y=[data_ai.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
+
+        if not data_human.empty:
+            ax.boxplot(
+                [data_human],
+                positions=[i + offset],
+                widths=box_width,
+                patch_artist=True,
+                boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
+                whiskerprops=dict(color='black'),
+                capprops=dict(color='black'),
+                medianprops=dict(color='black'),
+                showfliers=False,
+                manage_ticks=False
+            )
+            ax.scatter(x=[i + offset], y=[data_human.mean()], color='white', marker='D', s=30, zorder=10, edgecolor='black')
+
+    if ylim is not None:
+        ax.set_ylim(0, ylim)
+
+    plt.title(title, fontsize=20)
+    plt.xlabel("Period (Month)", fontsize=18)
+    plt.ylabel(ylabel, fontsize=18)
+    plt.legend(title="", fontsize=16, loc='upper right')
+    ax.tick_params(axis='both', which='major', labelsize=14)
     
     plt.tight_layout()
     plt.savefig(output_path)
