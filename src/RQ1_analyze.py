@@ -519,18 +519,15 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     )
     
     # 2. 変更割合の推移
-    # ファイルごとに月ごとの平均変更割合を計算
-    df_size['file_id'] = df_size['repository_name'] + "::" + df_size['file_name']
-    df_ratio_monthly = df_size.groupby(['file_id', 'month_num', 'file_created_by'])['change_ratio'].median().reset_index()
-    
-    df_ratio_filtered = df_ratio_monthly[df_ratio_monthly['month_num'] <= max_month_limit]
+    # ファイル単位の集計をやめて、コミット単位(ファイルごとのコミット)のデータをそのまま使う
+    df_ratio_filtered = df_size[df_size['month_num'] <= max_month_limit].copy()
 
     create_monthly_trend_violinplot(
         df_ratio_filtered,
         'change_ratio',
-        "Change Ratio per File",
+        "Change Ratio per Commit",
         "Change Ratio(%)",
-        os.path.join(output_dir, f"RQ1_change_ratio_per_file{suffix}.pdf"),
+        os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}.pdf"),
         max_month_limit
     )
 
