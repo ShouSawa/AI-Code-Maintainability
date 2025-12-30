@@ -332,13 +332,32 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append(f"{w+1:<2}週間目| {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
     results_text.append("")
 
+    # グラフ生成用の設定リスト
+    graph_configs = [
+        {
+            'suffix_extra': "",
+            'labels': None # デフォルト (AI/Human, Agent-created files/Human-created files)
+        },
+        {
+            'suffix_extra': "_generated",
+            'labels': {
+                'AI': 'Agent-generated files', 
+                'Human': 'Human-generated files',
+                'AI_long': 'Agent-generated files',
+                'Human_long': 'Human-generated files'
+            }
+        }
+    ]
+
     # 週次推移の箱ひげ図を作成
     print(f"[{suffix}] 週次推移グラフの作成中...")
-    create_weekly_trend_boxplot(
-        ai_weekly_df, 
-        human_weekly_df, 
-        os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}.pdf")
-    )
+    for config in graph_configs:
+        create_weekly_trend_boxplot(
+            ai_weekly_df, 
+            human_weekly_df, 
+            os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}{config['suffix_extra']}.pdf"),
+            labels=config['labels']
+        )
 
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
@@ -401,15 +420,18 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             value_name='commit_count'
         )
         
-        # グラフ作成
-        create_monthly_trend_lineplot(
-            repo_long,
-            'commit_count',
-            "Commits per Repository",
-            "Commits",
-            os.path.join(output_dir, f"RQ1_commits_per_repo{suffix}.pdf"),
-            max_month
-        )
+        # バイオリンプロットとして出力
+        for config in graph_configs:
+            create_monthly_trend_violinplot(
+                repo_long,
+                'commit_count',
+                "Commits per Repository",
+                "Commits",
+                os.path.join(output_dir, f"RQ1_commits_per_repo_violin{suffix}{config['suffix_extra']}.pdf"),
+                max_month,
+                ylim=25, # 必要に応じて調整
+                labels=config['labels']
+            )
 
 
     # ---------------------------------------------------------
@@ -508,28 +530,32 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     df_size_filtered = df_size[df_size['month_num'] <= max_month_limit]
     
     # 1. 変更行数の推移
-    create_monthly_trend_violinplot(
-        df_size_filtered,
-        target_col,
-        "Lines Changed per Commit",
-        "Lines Changed",
-        os.path.join(output_dir, f"RQ1_lines_changed_per_commit{suffix}.pdf"),
-        max_month_limit,
-        ylim=200
-    )
+    for config in graph_configs:
+        create_monthly_trend_violinplot(
+            df_size_filtered,
+            target_col,
+            "Lines Changed per Commit",
+            "Lines Changed",
+            os.path.join(output_dir, f"RQ1_lines_changed_per_commit{suffix}{config['suffix_extra']}.pdf"),
+            max_month_limit,
+            ylim=200,
+            labels=config['labels']
+        )
     
     # 2. 変更割合の推移
     # ファイル単位の集計をやめて、コミット単位(ファイルごとのコミット)のデータをそのまま使う
     df_ratio_filtered = df_size[df_size['month_num'] <= max_month_limit].copy()
 
-    create_monthly_trend_violinplot(
-        df_ratio_filtered,
-        'change_ratio',
-        "Change Ratio per Commit",
-        "Change Ratio(%)",
-        os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}.pdf"),
-        max_month_limit
-    )
+    for config in graph_configs:
+        create_monthly_trend_violinplot(
+            df_ratio_filtered,
+            'change_ratio',
+            "Change Ratio per Commit",
+            "Change Ratio(%)",
+            os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}{config['suffix_extra']}.pdf"),
+            max_month_limit,
+            labels=config['labels']
+        )
 
     # --- 変更規模の月次推移 (テキスト出力) ---
     results_text.append("■ 月次推移 (変更行数の中央値)")
@@ -597,16 +623,18 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         {
             'ai': pd.Series(ai_monthly_medians),
             'human': pd.Series(human_monthly_medians),
-            'xlabel': "Frequency\n(Month)",
+            'xlabel': "Frequency\n(Months)",
             'ylabel': "Median Commits per Month",
             'ylim': ylim_monthly
         }
     ]
     
-    create_combined_violin_plot(
-        dataset_list=combined_data,
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}.pdf")
-    )
+    for config in graph_configs:
+        create_combined_violin_plot(
+            dataset_list=combined_data,
+            output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}{config['suffix_extra']}.pdf"),
+            labels=config['labels']
+        )
 
     # ylabelなしバージョンの作成
     print(f"[{suffix}] 結合グラフ（ylabelなし）の作成中...")
@@ -616,10 +644,12 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         new_item['ylabel'] = "" # ylabelを空にする
         combined_data_no_ylabel.append(new_item)
 
-    create_combined_violin_plot(
-        dataset_list=combined_data_no_ylabel,
-        output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel.pdf")
-    )
+    for config in graph_configs:
+        create_combined_violin_plot(
+            dataset_list=combined_data_no_ylabel,
+            output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel{config['suffix_extra']}.pdf"),
+            labels=config['labels']
+        )
 
     # 結果保存
     with open(output_txt_path, 'w', encoding='utf-8') as f:
@@ -652,13 +682,16 @@ def calculate_period_median(commit_dates, start_date, end_date, days):
         
     return np.median(counts)
 
-def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_legend=True):
+def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_legend=True, labels=None):
     """
     指定されたAxesオブジェクトにバイオリンプロットを描画する
     """
+    if labels is None:
+        labels = {'AI': 'AI', 'Human': 'Human'}
+
     # データフレーム形式に変換（seaborn用）
-    df_ai = pd.DataFrame({'Value': data_ai, 'Type': 'AI'})
-    df_human = pd.DataFrame({'Value': data_human, 'Type': 'Human'})
+    df_ai = pd.DataFrame({'Value': data_ai, 'Type': labels['AI']})
+    df_human = pd.DataFrame({'Value': data_human, 'Type': labels['Human']})
     df_plot = pd.concat([df_ai, df_human], ignore_index=True)
     
     # データが空の場合はスキップ
@@ -676,7 +709,7 @@ def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_l
         hue='Type', 
         split=True,     # AIと人間を左右にくっつける
         inner=None,     # 中身を描かない
-        palette={"AI": "#FF9999", "Human": "#99CCFF"},
+        palette={labels['AI']: "#FF9999", labels['Human']: "#99CCFF"},
         cut=0, # 範囲外の表示をしない
         ax=ax
     )
@@ -735,7 +768,7 @@ def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_l
         handles, labels = ax.get_legend_handles_labels()
         ax.legend(handles, labels, loc='upper right', fontsize=32) # 24 -> 32
 
-def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None):
+def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None, labels=None):
     """
     バイオリンプロットを作成して保存する (単体用ラッパー)
     """
@@ -746,13 +779,13 @@ def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=Non
     # スタイル設定
     sns.set_style("whitegrid")
     
-    draw_violin_on_ax(ax, data_ai, data_human, title, ylabel, ylim, show_legend=True)
+    draw_violin_on_ax(ax, data_ai, data_human, title, ylabel, ylim, show_legend=True, labels=labels)
     
     plt.tight_layout()
     plt.savefig(output_path)
     plt.close()
 
-def create_combined_violin_plot(dataset_list, output_path):
+def create_combined_violin_plot(dataset_list, output_path, labels=None):
     """
     3つのバイオリンプロットを横に並べて保存する
     """
@@ -770,7 +803,8 @@ def create_combined_violin_plot(dataset_list, output_path):
             xlabel=data['xlabel'],
             ylabel=data['ylabel'],
             ylim=data['ylim'],
-            show_legend=False
+            show_legend=False,
+            labels=labels
         )
     
     # 共通の凡例を作成 (最初のプロットからハンドルとラベルを取得)
@@ -782,17 +816,20 @@ def create_combined_violin_plot(dataset_list, output_path):
     plt.savefig(output_path, bbox_inches='tight')
     plt.close()
 
-def create_weekly_trend_boxplot(ai_df, human_df, output_path):
+def create_weekly_trend_boxplot(ai_df, human_df, output_path, labels=None):
     """
     週ごとのコミット数推移を箱ひげ図で可視化する
     """
+    if labels is None:
+        labels = {'AI': 'AI', 'Human': 'Human'}
+
     # データをロング形式に変換
     # ai_df, human_dfは columns=WeekNum, index=FileID, values=CommitCount
     ai_long = ai_df.melt(var_name='Week', value_name='CommitCount')
-    ai_long['Type'] = 'AI'
+    ai_long['Type'] = labels['AI']
     
     human_long = human_df.melt(var_name='Week', value_name='CommitCount')
-    human_long['Type'] = 'Human'
+    human_long['Type'] = labels['Human']
     
     df_plot = pd.concat([ai_long, human_long], ignore_index=True)
     
@@ -808,7 +845,7 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
         x='Week',
         y='CommitCount',
         hue='Type',
-        palette={"AI": "#FF9999", "Human": "#99CCFF"},
+        palette={labels['AI']: "#FF9999", labels['Human']: "#99CCFF"},
         showfliers=False
     )
     
@@ -828,10 +865,13 @@ def create_weekly_trend_boxplot(ai_df, human_df, output_path):
     plt.savefig(output_path)
     plt.close()
 
-def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max_month):
+def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max_month, labels=None):
     """
     月ごとの変更規模の推移を折れ線グラフで可視化する (中央値)
     """
+    if labels is None:
+        labels = {'AI_long': 'Agent-created files', 'Human_long': 'Human-created files'}
+
     # データが空の場合はスキップ
     if df.empty:
         print(f"Warning: No data available for {title}")
@@ -845,8 +885,8 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
     
     # 凡例用の名前変更
     df['Type'] = df['file_created_by'].map({
-        'AI': 'Agent-created files',
-        'Human': 'Human-created files'
+        'AI': labels['AI_long'],
+        'Human': labels['Human_long']
     })
 
     plt.figure(figsize=(10, 6))
@@ -860,14 +900,14 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
         x='Month',
         y=value_col,
         hue='Type',
-        palette={"Agent-created files": "#FF9999", "Human-created files": "#99CCFF"},
+        palette={labels['AI_long']: "#FF9999", labels['Human_long']: "#99CCFF"},
         marker='o',
         estimator=np.median,
         errorbar=None
     )
     
     # plt.title(title, fontsize=16)
-    plt.xlabel("Month", fontsize=24)
+    plt.xlabel("Months", fontsize=24)
     plt.ylabel(ylabel, fontsize=24)
     plt.legend(title="Creator", fontsize=20)
     plt.tick_params(axis='both', which='major', labelsize=18)
@@ -883,10 +923,13 @@ def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max
     plt.savefig(output_path)
     plt.close()
 
-def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, max_month, ylim=None):
+def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, max_month, ylim=None, labels=None):
     """
     月ごとの変更規模の推移をバイオリンプロットで可視化する
     """
+    if labels is None:
+        labels = {'AI_long': 'Agent-created files', 'Human_long': 'Human-created files'}
+
     # データが空の場合はスキップ
     if df.empty:
         print(f"Warning: No data available for {title}")
@@ -900,8 +943,8 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
     
     # 凡例用の名前変更
     df['Type'] = df['file_created_by'].map({
-        'AI': 'Agent-created files',
-        'Human': 'Human-created files'
+        'AI': labels['AI_long'],
+        'Human': labels['Human_long']
     })
     
     # プロット用データ作成
@@ -922,7 +965,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         hue='Type',
         split=True,
         inner=None,
-        palette={"Agent-created files": "#FF9999", "Human-created files": "#99CCFF"},
+        palette={labels['AI_long']: "#FF9999", labels['Human_long']: "#99CCFF"},
         cut=0,
         order=month_order,
         ax=ax
@@ -937,8 +980,8 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         if month_data.empty:
             continue
             
-        data_ai = month_data[month_data['Type'] == 'Agent-created files']['Value']
-        data_human = month_data[month_data['Type'] == 'Human-created files']['Value']
+        data_ai = month_data[month_data['Type'] == labels['AI_long']]['Value']
+        data_human = month_data[month_data['Type'] == labels['Human_long']]['Value']
         
         if not data_ai.empty:
             ax.boxplot(
@@ -974,7 +1017,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         ax.set_ylim(0, ylim)
 
     # plt.title(title, fontsize=20)
-    plt.xlabel("Month", fontsize=32)
+    plt.xlabel("Months", fontsize=32)
     plt.ylabel(ylabel, fontsize=32)
     plt.legend(title="", fontsize=28, loc='upper right')
     ax.tick_params(axis='both', which='major', labelsize=28)
