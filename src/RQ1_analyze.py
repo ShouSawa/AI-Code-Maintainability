@@ -22,7 +22,7 @@ def analyze_rq1():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
     # results_v5.csv (ファイル単位の変更行数あり) があればそちらを優先
-    csv_path_v5 = os.path.join(script_dir, "../results/results_v5.csv")
+    csv_path_v5 = os.path.join(script_dir, "../results/results_v6.csv")
     csv_path_v4 = os.path.join(script_dir, "../results/results_v4.csv")
     
     use_file_specific_changes = False
@@ -57,6 +57,13 @@ def analyze_rq1():
     df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
     df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
     
+    # --- 追加: ファイル作成日が 2025/06/22 までのファイルのみを対象にする ---
+    filter_date = pd.to_datetime("2025-06-22")
+    print(f"ファイル作成日が {filter_date.strftime('%Y-%m-%d')} までのファイルを分析対象とします。")
+    df = df[df['file_creation_date'] <= filter_date].copy()
+    print(f"フィルタリング後のデータ数: {len(df)}")
+    # -------------------------------------------------------------------
+
     # 全ファイルリストを作成（作成コミット除外前に確保）
     # repository_name, file_name でユニークにする
     print("全ファイルリストを作成中...")
@@ -77,7 +84,7 @@ def analyze_rq1():
     # 1. 全期間の分析
     # ---------------------------------------------------------
     print("\n=== 全期間の分析を開始します ===")
-    run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
+    # run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
 
     # ---------------------------------------------------------
     # 2. 3ヶ月（90日）以内のデータに限定した分析
@@ -89,7 +96,19 @@ def analyze_rq1():
     # 作成日(0日)〜90日未満(89日後)まで
     df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] < 90)].copy()
     
-    run_analysis_process(df_3months, all_files_df, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes)
+    run_analysis_process(df_3months, all_files_df, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes, period_months=3)
+
+    # ---------------------------------------------------------
+    # 3. 4ヶ月（120日）以内のデータに限定した分析
+    # ---------------------------------------------------------
+    print("\n=== 4ヶ月以内の分析を開始します ===")
+    print("分析対象をファイル作成から4ヶ月以内に限定します。")
+    df_4months = df.copy()
+    df_4months['days_diff'] = (df_4months['commit_date'] - df_4months['file_creation_date']).dt.days
+    # 作成日(0日)〜120日未満(119日後)まで
+    df_4months = df_4months[(df_4months['days_diff'] >= 0) & (df_4months['days_diff'] < 120)].copy()
+    
+    run_analysis_process(df_4months, all_files_df, output_dir, analysis_end_date, suffix="_4months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes, period_months=4)
 
 def perform_mannwhitneyu(data1, data2, label):
     """Mann-Whitney U検定を実行して結果文字列を返す"""
@@ -112,7 +131,7 @@ def perform_mannwhitneyu(data1, data2, label):
     except Exception as e:
         return f"■ {label}の検定エラー: {e}\n"
 
-def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False):
+def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False, period_months=None):
     """
     分析プロセスを実行する関数
     """
@@ -120,8 +139,15 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     
     # 結果格納用リスト
     results_text = []
-    title_suffix = " (作成から3ヶ月間限定)" if is_limited_period else ""
-    period_text = "作成日 ～ 作成日+90日" if is_limited_period else "～ 2025/10/31"
+    if period_months:
+        title_suffix = f" (作成から{period_months}ヶ月間限定)"
+        period_text = f"作成日 ～ 作成日+{period_months*30}日"
+    elif is_limited_period:
+        title_suffix = " (作成から3ヶ月間限定)"
+        period_text = "作成日 ～ 作成日+90日"
+    else:
+        title_suffix = ""
+        period_text = "～ 2025/10/31"
     
     results_text.append(f"RQ1 分析結果: AI生成ファイルの保守性分析{title_suffix}")
     results_text.append("=" * 60)
@@ -211,7 +237,10 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             commit_dates = pd.Series([], dtype='datetime64[ns]')
         
         # 期間ごとの集計
-        if is_limited_period:
+        if period_months:
+            target_end_date = creation_date + timedelta(days=period_months*30)
+            actual_end_date = min(target_end_date, analysis_end_date)
+        elif is_limited_period:
             # 3ヶ月限定の場合: 終了日は作成日+90日、ただし分析全体の終了日を超えないようにする
             target_end_date = creation_date + timedelta(days=90)
             actual_end_date = min(target_end_date, analysis_end_date)
@@ -299,7 +328,11 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     
     # 期間制限がある場合はその期間まで、ない場合はデータが存在する最大まで
     # 3ヶ月限定なら13週程度、全期間なら最大52週(1年)まで表示するように制限
-    max_week_limit = 13 if is_limited_period else 52
+    if period_months:
+        max_week_limit = int(period_months * 4.3)
+    else:
+        max_week_limit = 13 if is_limited_period else 52
+    
     max_week_data = weekly_counts.columns.max() if not weekly_counts.empty else 0
     max_week = min(max_week_limit, max_week_data)
     
@@ -350,14 +383,14 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     ]
 
     # 週次推移の箱ひげ図を作成
-    print(f"[{suffix}] 週次推移グラフの作成中...")
-    for config in graph_configs:
-        create_weekly_trend_boxplot(
-            ai_weekly_df, 
-            human_weekly_df, 
-            os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}{config['suffix_extra']}.pdf"),
-            labels=config['labels']
-        )
+    # print(f"[{suffix}] 週次推移グラフの作成中...")
+    # for config in graph_configs:
+    #     create_weekly_trend_boxplot(
+    #         ai_weekly_df, 
+    #         human_weekly_df, 
+    #         os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}{config['suffix_extra']}.pdf"),
+    #         labels=config['labels']
+    #     )
 
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
@@ -367,7 +400,11 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     monthly_counts = monthly_counts.reindex(index=file_creators.index, fill_value=0)
     
     # 3ヶ月限定なら3ヶ月、全期間なら最大24ヶ月(2年)まで表示
-    max_month_limit = 3 if is_limited_period else 24
+    if period_months:
+        max_month_limit = period_months
+    else:
+        max_month_limit = 3 if is_limited_period else 24
+    
     max_month_data = monthly_counts.columns.max() if not monthly_counts.empty else 0
     max_month = min(max_month_limit, max_month_data)
     
@@ -526,7 +563,11 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     df_size['month_num'] = df_size['days_diff'] // 30
     
     # 表示期間の制限
-    max_month_limit = 3 if is_limited_period else 24
+    if period_months:
+        max_month_limit = period_months
+    else:
+        max_month_limit = 3 if is_limited_period else 24
+    
     df_size_filtered = df_size[df_size['month_num'] <= max_month_limit]
     
     # 1. 変更行数の推移
@@ -599,7 +640,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # ---------------------------------------------------------
     # 5. まとめたバイオリンプロットの作成
     # ---------------------------------------------------------
-    print(f"[{suffix}] 結合グラフの作成中...")
+    # print(f"[{suffix}] 結合グラフの作成中...")
     
     # ylimの設定
     ylim_weekly = 0.6 if is_limited_period else 0.2
@@ -629,27 +670,27 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         }
     ]
     
-    for config in graph_configs:
-        create_combined_violin_plot(
-            dataset_list=combined_data,
-            output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}{config['suffix_extra']}.pdf"),
-            labels=config['labels']
-        )
+    # for config in graph_configs:
+    #     create_combined_violin_plot(
+    #         dataset_list=combined_data,
+    #         output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}{config['suffix_extra']}.pdf"),
+    #         labels=config['labels']
+    #     )
 
     # ylabelなしバージョンの作成
-    print(f"[{suffix}] 結合グラフ（ylabelなし）の作成中...")
+    # print(f"[{suffix}] 結合グラフ（ylabelなし）の作成中...")
     combined_data_no_ylabel = []
     for item in combined_data:
         new_item = item.copy()
         new_item['ylabel'] = "" # ylabelを空にする
         combined_data_no_ylabel.append(new_item)
 
-    for config in graph_configs:
-        create_combined_violin_plot(
-            dataset_list=combined_data_no_ylabel,
-            output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel{config['suffix_extra']}.pdf"),
-            labels=config['labels']
-        )
+    # for config in graph_configs:
+    #     create_combined_violin_plot(
+    #         dataset_list=combined_data_no_ylabel,
+    #         output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel{config['suffix_extra']}.pdf"),
+    #         labels=config['labels']
+    #     )
 
     # 結果保存
     with open(output_txt_path, 'w', encoding='utf-8') as f:

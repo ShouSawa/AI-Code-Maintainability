@@ -6,21 +6,30 @@ from datetime import datetime
 def analyze_rq2():
     """
     RQ2: AI作成ファイルの保守は誰が行っているのかを分析
+    """
+    # 2つの期間で分析を実行
+    # 1. 2025/09/22まで
+    run_analysis(end_date="2025-09-22", suffix="_until_0922")
+    
+    # 2. 2025/10/22まで
+    run_analysis(end_date="2025-10-22", suffix="_until_1022")
+
+def run_analysis(end_date=None, suffix=""):
+    """
+    分析実行関数
     
     入力: results_v4.csv
     出力: 
-        - results/RQ2_results.txt
-        - results/RQ2_pieChart_AI.png
-        - results/RQ2_pieChart_Human.png
+        - results/RQ2_results{suffix}.txt
     """
     
     # パス設定
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "../results/results_v4.csv")
+    csv_path = os.path.join(script_dir, "../results/results_v6.csv")
     output_dir = os.path.join(script_dir, "../results")
     os.makedirs(output_dir, exist_ok=True)
     
-    output_txt_path = os.path.join(output_dir, "RQ2_results.txt")
+    output_txt_path = os.path.join(output_dir, f"RQ2_results{suffix}.txt")
     
     print(f"読み込み中: {csv_path}")
     try:
@@ -28,6 +37,21 @@ def analyze_rq2():
     except Exception as e:
         print(f"CSV読み込みエラー: {e}")
         return
+
+    # 日付フィルタリング
+    df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
+    df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
+
+    # --- 追加: ファイル作成日が 2025/06/22 までのファイルのみを対象にする ---
+    filter_date = pd.to_datetime("2025-06-22")
+    print(f"ファイル作成日が {filter_date.strftime('%Y-%m-%d')} までのファイルを分析対象とします。")
+    df = df[df['file_creation_date'] <= filter_date].copy()
+    # -------------------------------------------------------------------
+
+    if end_date:
+        end_date_dt = pd.to_datetime(end_date)
+        print(f"分析期間: ～ {end_date}")
+        df = df[df['commit_date'] <= end_date_dt].copy()
 
     # --- 全ファイル数のカウント（フィルタリング前） ---
     all_files_count = df[['repository_name', 'file_name']].drop_duplicates().shape[0]
@@ -43,9 +67,6 @@ def analyze_rq2():
     # ----------------------------------------------
 
     # --- 追加: ファイル作成コミットを除外する処理 ---
-    # 日付比較のためにdatetime型に変換
-    df['commit_date'] = pd.to_datetime(df['commit_date'])
-    df['file_creation_date'] = pd.to_datetime(df['file_creation_date'])
     
     # 作成日時とコミット日時が一致する行（作成コミット）を除外
     # 修正: 一致する行をすべて削除するのではなく、各ファイルにつき1つだけ（最初の1つ）を除外する
@@ -66,7 +87,7 @@ def analyze_rq2():
 
     # 結果格納用リスト
     results_text = []
-    results_text.append("RQ2 分析結果: AI作成ファイルの保守主体分析")
+    results_text.append(f"RQ2 分析結果: AI作成ファイルの保守主体分析 (期間: ～ {end_date if end_date else '全期間'})")
     results_text.append("=" * 60)
     results_text.append(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
@@ -99,13 +120,13 @@ def analyze_rq2():
     results_text.append(f"人間によるコミット: {ai_human_commits} ({ai_human_ratio:.2f}%)")
     results_text.append("")
 
-    # 円グラフ作成 (AI作成ファイル)
-    create_pie_chart(
-        counts=[ai_ai_commits, ai_human_commits],
-        labels=['AI', 'Human'],
-        title="AI-Created Files",
-        output_path=os.path.join(output_dir, "RQ2_pieChart_AI.png")
-    )
+    # 円グラフ作成 (AI作成ファイル) - 無効化
+    # create_pie_chart(
+    #     counts=[ai_ai_commits, ai_human_commits],
+    #     labels=['AI', 'Human'],
+    #     title="AI-Created Files",
+    #     output_path=os.path.join(output_dir, f"RQ2_pieChart_AI{suffix}.png")
+    # )
 
     # ---------------------------------------------------------
     # 2. 人間作成ファイルに対するコミット分析
@@ -131,20 +152,20 @@ def analyze_rq2():
     results_text.append(f"人間によるコミット: {human_human_commits} ({human_human_ratio:.2f}%)")
     results_text.append("")
 
-    # 円グラフ作成 (人間作成ファイル)
-    create_pie_chart(
-        counts=[human_ai_commits, human_human_commits],
-        labels=['AI', 'Human'],
-        title="Human-Created Files",
-        output_path=os.path.join(output_dir, "RQ2_pieChart_Human.png")
-    )
+    # 円グラフ作成 (人間作成ファイル) - 無効化
+    # create_pie_chart(
+    #     counts=[human_ai_commits, human_human_commits],
+    #     labels=['AI', 'Human'],
+    #     title="Human-Created Files",
+    #     output_path=os.path.join(output_dir, f"RQ2_pieChart_Human{suffix}.png")
+    # )
 
     # 結果保存
     with open(output_txt_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(results_text))
     
     print(f"分析完了。結果を保存しました: {output_txt_path}")
-    print(f"グラフを保存しました: {output_dir}")
+    # print(f"グラフを保存しました: {output_dir}")
 
 def create_pie_chart(counts, labels, title, output_path):
     """
