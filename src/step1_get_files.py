@@ -52,7 +52,7 @@ class FileAdditionCollector:
             since_date = datetime(2025, 1, 1)
             until_date = datetime(2025, 12, 31)
             
-            commits = self.repo.get_commits(since=since_date, until=until_date)
+            commits = tqdm(self.repo.get_commits(since=since_date, until=until_date))
             commits_list = list(commits)
             
             # 全コミットを処理
@@ -166,7 +166,7 @@ def main():
     print("=" * 80)
     print(f"入力: {input_csv}")
     print(f"出力: {output_csv}")
-    print(f"期間: 2025/1/1 ～ 2025/7/31")
+    print(f"期間: 2025/1/1 ～ 2025/12/31")
     print("=" * 80)
     
     # リポジトリリスト読み込み
@@ -183,12 +183,20 @@ def main():
         print(f"\n[{idx}/{len(repo_list)}] {repo_info['owner']}/{repo_info['repository_name']}")
         file_records = process_repository(repo_info, github_token)
         all_files.extend(file_records)
+        
+        # 1リポジトリごとにCSVに追記保存
+        if file_records:
+            df_temp = pd.DataFrame(file_records)
+            if idx == 1:  # 初回は新規作成
+                df_temp.to_csv(output_csv, index=False, encoding='utf-8-sig', mode='w')
+            else:  # 2回目以降は追記
+                df_temp.to_csv(output_csv, index=False, encoding='utf-8-sig', mode='a', header=False)
+            print(f"  → CSV更新: {len(file_records)}件追加 (累計: {len(all_files)}件)")
     
-    # CSV保存
+    # 最終結果表示
     if all_files:
-        df = pd.DataFrame(all_files)
-        df.to_csv(output_csv, index=False, encoding='utf-8-sig')
-        print(f"\n✓ 保存完了: {len(df)}件のファイル")
+        print(f"\n✓ 保存完了: {len(all_files)}件のファイル")
+        print(f"出力先: {output_csv}")
     else:
         print("\n✗ ファイルが見つかりませんでした")
     
