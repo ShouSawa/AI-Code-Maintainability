@@ -159,9 +159,12 @@ class CommitExpansion:
         df_v5 = pd.read_csv(self.input_csv)
         print(f"入力データ: {len(df_v5)}行")
         
-        # リポジトリ×ファイル単位でグループ化
-        grouped = df_v5.groupby(['repository_name', 'file_name'])
-        total_files = len(grouped)
+        # リポジトリ×ファイル単位でグループ化（CSV上の順序を保持）
+        grouped = df_v5.groupby(['repository_name', 'file_name'], sort=False)
+        # 元のCSVの順序でグループをソート
+        group_first_idx = {key: group.index.min() for key, group in grouped}
+        sorted_groups = sorted(grouped, key=lambda x: group_first_idx[x[0]])
+        total_files = len(sorted_groups)
         print(f"処理対象: {total_files}ファイル")
         
         # 出力用データフレーム初期化
@@ -175,8 +178,8 @@ class CommitExpansion:
             df_output = pd.DataFrame()
             processed = set()
         
-        # 各ファイルを処理
-        for (repo_name, file_name), group in tqdm(grouped, desc="ファイル処理"):
+        # 各ファイルを処理（CSV上の順序で）
+        for (repo_name, file_name), group in tqdm(sorted_groups, desc="ファイル処理"):
             # 処理済みならスキップ
             if (repo_name, file_name) in processed:
                 continue
@@ -201,7 +204,6 @@ class CommitExpansion:
                 # 2. 新しいコミット取得
                 repo = self.get_repo(repo_name)
                 new_commits = self.get_new_commits(repo, file_name)
-                print(f"  新規コミット: {len(new_commits)}件")
                 
                 # 3. 既存のコミットハッシュセット
                 existing_hashes = set(group['commit_hash'].values)
@@ -214,7 +216,6 @@ class CommitExpansion:
                         if commit_data:
                             new_data.append(commit_data)
                 
-                print(f"  追加コミット: {len(new_data)}件")
                 
                 # 5. データ結合（既存+新規）
                 if new_data:
@@ -228,7 +229,6 @@ class CommitExpansion:
                 
                 # 7. 即座に保存（動作1と4のタイミング）
                 df_output.to_csv(self.output_csv, index=False, encoding='utf-8-sig')
-                print(f"  保存完了: {len(df_output)}行")
                 
             except Exception as e:
                 print(f"  エラー（ファイル処理）: {e}")
