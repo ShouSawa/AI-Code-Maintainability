@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# EASEの出力ファイル
+results\**
+
+>>>>>>> 01feb99 (first commit)
 # blame_analysis内の.env
 blame_analysis/.env
 
@@ -19,3 +25,8 @@ FirstLook-at-CCS/**
 .vscode/
 
 src/.env
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 01feb99 (first commit)

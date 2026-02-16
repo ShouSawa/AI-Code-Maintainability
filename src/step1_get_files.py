@@ -13,6 +13,10 @@ import time
 
 # componentsフォルダからインポート
 from components.check_network import retry_with_network_check
+<<<<<<< HEAD
+=======
+from components.prepere_csv import prepere_csv
+>>>>>>> 01feb99 (first commit)
 
 # .envファイルを読み込む
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +25,10 @@ load_dotenv(dotenv_path)
 
 
 class FileAdditionCollector:
+<<<<<<< HEAD
+=======
+    @retry_with_network_check
+>>>>>>> 01feb99 (first commit)
     def __init__(self, repo_name_full, github_token):
         """
         Args:
@@ -48,9 +56,14 @@ class FileAdditionCollector:
         commits_data = []
         
         try:
+<<<<<<< HEAD
             # 2025/1/1～2025/12/31の期間のコミットを取得
             since_date = datetime(2025, 1, 1)
             until_date = datetime(2025, 12, 31)
+=======
+            since_date = datetime(2025, 1, 1)
+            until_date = datetime(2025, 7, 31)
+>>>>>>> 01feb99 (first commit)
             
             commits = tqdm(self.repo.get_commits(since=since_date, until=until_date))
             commits_list = list(commits)
@@ -63,7 +76,11 @@ class FileAdditionCollector:
                     author_name = commit.commit.author.name or "Unknown"
                     author_email = commit.commit.author.email or "unknown@example.com"
                     commit_date = commit.commit.author.date.isoformat()
+<<<<<<< HEAD
                     message = commit.commit.message
+=======
+                    message = commit.commit.message.replace('\n', ' ').replace('\r', '').replace('\u2028', ' ').replace('\u2029', ' ')
+>>>>>>> 01feb99 (first commit)
                     
                     # コミットアカウント取得（author + committer）
                     all_authors = [author_name]
@@ -106,7 +123,11 @@ class FileAdditionCollector:
             print(f"  GitHub API エラー: {e}")
             return []
 
+<<<<<<< HEAD
 
+=======
+@retry_with_network_check
+>>>>>>> 01feb99 (first commit)
 def process_repository(repo_info, github_token):
     """単一リポジトリの処理
     
@@ -161,6 +182,7 @@ def main():
     # 出力ディレクトリ作成
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     
+<<<<<<< HEAD
     print("=" * 80)
     print("Step1: ファイル追加情報取得")
     print("=" * 80)
@@ -169,27 +191,70 @@ def main():
     print(f"期間: 2025/1/1 ～ 2025/12/31")
     print("=" * 80)
     
+=======
+>>>>>>> 01feb99 (first commit)
     # リポジトリリスト読み込み
     repo_df = pd.read_csv(input_csv)
     repo_list = repo_df.to_dict('records')
     
+<<<<<<< HEAD
+=======
+    # 処理を開始するリポジトリを設定
+    start_repo = "neondatabase/neon"  # 空白の場合は最初から処理
+    
+    # start_repoが指定されている場合、そのリポジトリ以降のみを処理
+    if start_repo and start_repo.strip():
+        prepere_csv(1, start_repo)  # step1_all_files.csvから該当リポジトリを削除
+        
+        # start_repoのインデックスを探す
+        start_index = 0
+        for idx, repo_info in enumerate(repo_list):
+            repo_full_name = f"{repo_info['owner']}/{repo_info['repository_name']}"
+            if repo_full_name == start_repo:
+                start_index = idx
+                print(f"開始リポジトリ: {start_repo} (インデックス: {start_index + 1}/{len(repo_list)})")
+                break
+        else:
+            print(f"警告: 開始リポジトリ '{start_repo}' が見つかりません。最初から処理を開始します。")
+            start_index = 0
+        
+        # start_repo以降のリポジトリのみに絞り込む
+        repo_list = repo_list[start_index:]
+    
+>>>>>>> 01feb99 (first commit)
     print(f"\n総リポジトリ数: {len(repo_list)}件")
     
     # 処理開始
     start_time = datetime.now()
     all_files = []
     
+<<<<<<< HEAD
     for idx, repo_info in enumerate(repo_list, 1):
         print(f"\n[{idx}/{len(repo_list)}] {repo_info['owner']}/{repo_info['repository_name']}")
+=======
+    # CSVが既に存在するかチェック（追記モードの判定用）
+    csv_exists = os.path.exists(output_csv)
+    
+    for idx, repo_info in enumerate(repo_list, 1):
+        repo_full_name = f"{repo_info['owner']}/{repo_info['repository_name']}"
+        print(f"\n[{idx}/{len(repo_list)}] {repo_full_name}")
+>>>>>>> 01feb99 (first commit)
         file_records = process_repository(repo_info, github_token)
         all_files.extend(file_records)
         
         # 1リポジトリごとにCSVに追記保存
         if file_records:
             df_temp = pd.DataFrame(file_records)
+<<<<<<< HEAD
             if idx == 1:  # 初回は新規作成
                 df_temp.to_csv(output_csv, index=False, encoding='utf-8-sig', mode='w')
             else:  # 2回目以降は追記
+=======
+            if not csv_exists and idx == 1:  # CSVが存在せず、かつ初回の場合は新規作成
+                df_temp.to_csv(output_csv, index=False, encoding='utf-8-sig', mode='w')
+                csv_exists = True
+            else:  # それ以外は追記
+>>>>>>> 01feb99 (first commit)
                 df_temp.to_csv(output_csv, index=False, encoding='utf-8-sig', mode='a', header=False)
             print(f"  → CSV更新: {len(file_records)}件追加 (累計: {len(all_files)}件)")
     
