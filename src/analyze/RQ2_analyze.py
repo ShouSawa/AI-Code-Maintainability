@@ -32,8 +32,6 @@ def run_analysis(end_date=None, suffix=""):
     # 日付フィルタリング
     df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
     df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
-    filter_date = pd.to_datetime("2025-06-22")
-    df = df[df['file_creation_date'] <= filter_date].copy()
 
     if end_date:
         end_date_dt = pd.to_datetime(end_date)
