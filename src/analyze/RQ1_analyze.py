@@ -3,135 +3,51 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns # Pythonデータを可視化するためのライブラリ，バイオリンプロットに使用
 import os
+import sys
 from datetime import datetime, timedelta
-from scipy.stats import mannwhitneyu
+
+# src ディレクトリをパスに追加
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from components.mannwhitneyu import mannwhitneyu
 
 def analyze_rq1():
-    """
-    RQ1: AIが生成したファイルはどの程度保守されているのかを分析
-    
-    入力: results_v4.csv
-    出力: 
-        - results/RQ1_results.txt
-        - results/RQ1_violinPlot_count.pdf
-        - results/RQ1_violinPlot_frequency_weekly.pdf
-        - results/RQ1_violinPlot_frequency_monthly.pdf
-    """
-    
     # パス設定
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # results_v5.csv (ファイル単位の変更行数あり) があればそちらを優先
-    csv_path_v5 = os.path.join(script_dir, "../results/results_v6.csv")
-    csv_path_v4 = os.path.join(script_dir, "../results/results_v4.csv")
-    
-    use_file_specific_changes = False
-    
-    if os.path.exists(csv_path_v5):
-        print(f"読み込み中: {csv_path_v5}")
-        try:
-            df = pd.read_csv(csv_path_v5)
-            if 'file_specific_changed_lines' in df.columns:
-                use_file_specific_changes = True
-                print("★ ファイル単位の変更行数データを使用します。")
-            else:
-                print("注意: results_v5.csvに 'file_specific_changed_lines' カラムがありません。")
-        except Exception as e:
-            print(f"CSV読み込みエラー: {e}")
-            return
-    else:
-        print(f"読み込み中: {csv_path_v4}")
-        try:
-            df = pd.read_csv(csv_path_v4)
-            print("注意: results_v4.csvを使用します。変更行数はコミット全体の合計値となります。")
-        except Exception as e:
-            print(f"CSV読み込みエラー: {e}")
-            return
+    input_dir = os.path.join(script_dir, "../../results/EASE-results/csv/results_v7_released_commits_restriction.csv")
+    output_dir = os.path.join(script_dir, "../../results/EASE-results/summary")
 
-    output_dir = os.path.join(script_dir, "../results")
     os.makedirs(output_dir, exist_ok=True)
-    
-    output_txt_path = os.path.join(output_dir, "RQ1_results_3months.txt")
 
-    # 日付変換（タイムゾーンを削除して統一）
-    df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
-    df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
-    
-    # --- 追加: ファイル作成日が 2025/06/22 までのファイルのみを対象にする ---
-    filter_date = pd.to_datetime("2025-06-22")
-    print(f"ファイル作成日が {filter_date.strftime('%Y-%m-%d')} までのファイルを分析対象とします。")
-    df = df[df['file_creation_date'] <= filter_date].copy()
-    print(f"フィルタリング後のデータ数: {len(df)}")
-    # -------------------------------------------------------------------
+    # CSVファイルを読み込む
+    df = pd.read_csv(input_dir)
+    print(f"読み込み完了: {input_dir}")
+    print(f"データ数: {len(df)}")
 
     # 全ファイルリストを作成（作成コミット除外前に確保）
-    # repository_name, file_name でユニークにする
     print("全ファイルリストを作成中...")
     all_files_df = df.sort_values('commit_date', ascending=False).groupby(['repository_name', 'file_name']).first().reset_index()
     all_files_df = all_files_df[['repository_name', 'file_name', 'file_created_by', 'file_creation_date', 'file_line_count']]
     print(f"総ファイル数: {len(all_files_df)}")
 
-    # ファイル作成コミットを除外
-    # 作成日とコミット日が完全に一致するものを除外する
-    print(f"除外前のデータ数: {len(df)}")
+    # ファイル作成コミットを除外 作成日とコミット日が完全に一致するものを除外する
     df = df[df['commit_date'] != df['file_creation_date']].copy()
-    print(f"ファイル作成コミットを除外後のデータ数: {len(df)}")
+
+    # 日付列を日付型に変換（タイムゾーン情報を削除してtz-naiveに統一）
+    df['commit_date'] = pd.to_datetime(df['commit_date']).dt.tz_localize(None)
+    df['file_creation_date'] = pd.to_datetime(df['file_creation_date']).dt.tz_localize(None)
+    all_files_df['file_creation_date'] = pd.to_datetime(all_files_df['file_creation_date']).dt.tz_localize(None)
 
     # 分析終了日
-    analysis_end_date = pd.to_datetime("2025-10-31")
+    analysis_end_date = pd.to_datetime("2026-1-31")
 
-    # ---------------------------------------------------------
-    # 1. 全期間の分析
-    # ---------------------------------------------------------
-    print("\n=== 全期間の分析を開始します ===")
-    # run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", use_file_specific_changes=use_file_specific_changes)
-
-    # ---------------------------------------------------------
-    # 2. 3ヶ月（90日）以内のデータに限定した分析
-    # ---------------------------------------------------------
-    print("\n=== 3ヶ月以内の分析を開始します ===")
-    print("分析対象をファイル作成から3ヶ月以内に限定します。")
-    df_3months = df.copy()
-    df_3months['days_diff'] = (df_3months['commit_date'] - df_3months['file_creation_date']).dt.days
+    # 6ヶ月以内のデータに限定した分析
+    df['days_diff'] = (df['commit_date'] - df['file_creation_date']).dt.days
     # 作成日(0日)〜90日未満(89日後)まで
-    df_3months = df_3months[(df_3months['days_diff'] >= 0) & (df_3months['days_diff'] < 90)].copy()
-    
-    run_analysis_process(df_3months, all_files_df, output_dir, analysis_end_date, suffix="_3months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes, period_months=3)
+    df = df[(df['days_diff'] >= 0) & (df['days_diff'] < 180)].copy()
+    run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="_6months", period_months=6)
 
-    # ---------------------------------------------------------
-    # 3. 4ヶ月（120日）以内のデータに限定した分析
-    # ---------------------------------------------------------
-    print("\n=== 4ヶ月以内の分析を開始します ===")
-    print("分析対象をファイル作成から4ヶ月以内に限定します。")
-    df_4months = df.copy()
-    df_4months['days_diff'] = (df_4months['commit_date'] - df_4months['file_creation_date']).dt.days
-    # 作成日(0日)〜120日未満(119日後)まで
-    df_4months = df_4months[(df_4months['days_diff'] >= 0) & (df_4months['days_diff'] < 120)].copy()
-    
-    run_analysis_process(df_4months, all_files_df, output_dir, analysis_end_date, suffix="_4months", is_limited_period=True, use_file_specific_changes=use_file_specific_changes, period_months=4)
-
-def perform_mannwhitneyu(data1, data2, label):
-    """Mann-Whitney U検定を実行して結果文字列を返す"""
-    try:
-        # データが空の場合は検定できない
-        if len(data1) == 0 or len(data2) == 0:
-            return f"■ {label}の検定: データ不足のため実行不可\n"
-            
-        statistic, p_value = mannwhitneyu(data1, data2, alternative='two-sided')
-        result = f"■ {label}のMann-Whitney U検定結果\n"
-        result += f"  検定統計量 U: {statistic}\n"
-        result += f"  p値: {p_value}\n"
-        if p_value < 0.01:
-            result += "  判定: ** 1%水準で有意差あり\n"
-        elif p_value < 0.05:
-            result += "  判定: * 5%水準で有意差あり\n"
-        else:
-            result += "  判定: 有意差なし\n"
-        return result
-    except Exception as e:
-        return f"■ {label}の検定エラー: {e}\n"
-
-def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", is_limited_period=False, use_file_specific_changes=False, period_months=None):
+def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix="", period_months=None):
     """
     分析プロセスを実行する関数
     """
@@ -139,31 +55,19 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     
     # 結果格納用リスト
     results_text = []
-    if period_months:
-        title_suffix = f" (作成から{period_months}ヶ月間限定)"
-        period_text = f"作成日 ～ 作成日+{period_months*30}日"
-    elif is_limited_period:
-        title_suffix = " (作成から3ヶ月間限定)"
-        period_text = "作成日 ～ 作成日+90日"
-    else:
-        title_suffix = ""
-        period_text = "～ 2025/10/31"
+    title_suffix = f" (作成から{period_months}ヶ月間限定)"
+    period_text = f"作成日 ～ 作成日+{period_months*30}日"
     
     results_text.append(f"RQ1 分析結果: AI生成ファイルの保守性分析{title_suffix}")
     results_text.append("=" * 60)
     results_text.append(f"分析日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     results_text.append(f"分析対象期間: {period_text}")
-    if use_file_specific_changes:
-        results_text.append("※ 変更規模の分析には「ファイル単位の変更行数」を使用しています。")
-    else:
-        results_text.append("※ 変更規模の分析には「コミット全体の変更行数」を使用しています（ファイル単位データ未取得のため）。")
+    results_text.append("※ 変更規模の分析には「ファイル単位の変更行数」を使用しています。")
     results_text.append("")
 
     # ---------------------------------------------------------
     # 1. コミット数の分析
     # ---------------------------------------------------------
-    print(f"[{suffix}] コミット数の分析中...")
-    
     # 各ファイルのコミット数を計算
     commit_counts = df.groupby(['repository_name', 'file_name', 'file_created_by']).size().reset_index(name='commit_count')
     
@@ -189,7 +93,6 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
 
     ai_stats_count = get_stats(ai_commit_counts, "AI作成ファイル")
     human_stats_count = get_stats(human_commit_counts, "人間作成ファイル")
-    
     results_text.append("1. コミット数の分析")
     results_text.append("-" * 40)
     
@@ -205,14 +108,12 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (コミット数)
-    results_text.append(perform_mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
+    results_text.append(mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
     results_text.append("")
 
     # ---------------------------------------------------------
     # 2. コミット頻度の分析 (1週間ごと & 1か月ごと)
     # ---------------------------------------------------------
-    print(f"[{suffix}] コミット頻度の分析中...")
-    
     # 各ファイルごとの期間別コミット数の中央値を計算
     ai_weekly_medians = []
     ai_monthly_medians = []
@@ -236,17 +137,8 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         else:
             commit_dates = pd.Series([], dtype='datetime64[ns]')
         
-        # 期間ごとの集計
-        if period_months:
-            target_end_date = creation_date + timedelta(days=period_months*30)
-            actual_end_date = min(target_end_date, analysis_end_date)
-        elif is_limited_period:
-            # 3ヶ月限定の場合: 終了日は作成日+90日、ただし分析全体の終了日を超えないようにする
-            target_end_date = creation_date + timedelta(days=90)
-            actual_end_date = min(target_end_date, analysis_end_date)
-        else:
-            # 全期間の場合
-            actual_end_date = analysis_end_date
+        target_end_date = creation_date + timedelta(days=period_months*30)
+        actual_end_date = min(target_end_date, analysis_end_date)
         
         weekly_median = calculate_period_median(commit_dates, creation_date, actual_end_date, days=7)
         monthly_median = calculate_period_median(commit_dates, creation_date, actual_end_date, days=30)
@@ -280,7 +172,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (週間頻度)
-    results_text.append(perform_mannwhitneyu(ai_weekly_medians, human_weekly_medians, "週間コミット頻度"))
+    results_text.append(mannwhitneyu(ai_weekly_medians, human_weekly_medians, "週間コミット頻度"))
     results_text.append("")
         
     results_text.append("■ 1か月ごとの頻度")
@@ -295,13 +187,12 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (月間頻度)
-    results_text.append(perform_mannwhitneyu(ai_monthly_medians, human_monthly_medians, "月間コミット頻度"))
+    results_text.append(mannwhitneyu(ai_monthly_medians, human_monthly_medians, "月間コミット頻度"))
     results_text.append("")
 
     # ---------------------------------------------------------
     # 3. 時系列でのコミット数推移 (追加)
     # ---------------------------------------------------------
-    print(f"[{suffix}] 時系列推移の分析中...")
     
     # 経過日数を計算
     df_ts = df.copy()
@@ -318,79 +209,19 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # 全ファイルリストと作成者情報のマッピング (all_files_dfを使用)
     all_files_df['file_id'] = all_files_df['repository_name'] + "::" + all_files_df['file_name']
     file_creators = all_files_df.set_index('file_id')['file_created_by']
-    
-    # --- 週次集計 ---
-    # ファイルごと、週ごとのコミット数
-    weekly_counts = df_ts.groupby(['file_id', 'week_num']).size().unstack(fill_value=0)
-    
-    # 全ファイルを含めるようにreindex
-    weekly_counts = weekly_counts.reindex(index=file_creators.index, fill_value=0)
-    
-    # 期間制限がある場合はその期間まで、ない場合はデータが存在する最大まで
-    # 3ヶ月限定なら13週程度、全期間なら最大52週(1年)まで表示するように制限
-    if period_months:
-        max_week_limit = int(period_months * 4.3)
-    else:
-        max_week_limit = 13 if is_limited_period else 52
-    
-    max_week_data = weekly_counts.columns.max() if not weekly_counts.empty else 0
-    max_week = min(max_week_limit, max_week_data)
-    
-    target_weeks = range(int(max_week) + 1)
-    weekly_counts = weekly_counts.reindex(columns=target_weeks, fill_value=0)
-    
     # AI/Humanに分割
     ai_files = file_creators[file_creators == 'AI'].index
     human_files = file_creators[file_creators == 'Human'].index
-    
-    ai_weekly_df = weekly_counts.loc[weekly_counts.index.intersection(ai_files)]
-    human_weekly_df = weekly_counts.loc[weekly_counts.index.intersection(human_files)]
-    
-    results_text.append("3. 時系列でのコミット数推移")
-    results_text.append("-" * 40)
-    
-    results_text.append(f"■ 週次推移 (Week 1 = 最初の7日間, 最大Week {max_week+1}まで表示)")
-    results_text.append(f"{'Week':<6} | {'AI Mean':<10} | {'AI Median':<10} | {'Human Mean':<10} | {'Human Median':<10}")
-    results_text.append("-" * 60)
-    
-    for w in target_weeks:
-        ai_col = ai_weekly_df[w] if w in ai_weekly_df.columns else pd.Series([], dtype=float)
-        human_col = human_weekly_df[w] if w in human_weekly_df.columns else pd.Series([], dtype=float)
-        
-        ai_mean = ai_col.mean() if not ai_col.empty else 0
-        ai_median = ai_col.median() if not ai_col.empty else 0
-        human_mean = human_col.mean() if not human_col.empty else 0
-        human_median = human_col.median() if not human_col.empty else 0
-        
-        results_text.append(f"{w+1:<2}週間目| {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
-    results_text.append("")
 
     # グラフ生成用の設定リスト
     graph_configs = [
         {
-            'suffix_extra': "",
-            'labels': None # デフォルト (AI/Human, Agent-created files/Human-created files)
-        },
-        {
-            'suffix_extra': "_generated",
             'labels': {
-                'AI': 'Agent-generated files', 
+                'AI': 'AI-generated files', 
                 'Human': 'Human-generated files',
-                'AI_long': 'Agent-generated files',
-                'Human_long': 'Human-generated files'
             }
         }
     ]
-
-    # 週次推移の箱ひげ図を作成
-    # print(f"[{suffix}] 週次推移グラフの作成中...")
-    # for config in graph_configs:
-    #     create_weekly_trend_boxplot(
-    #         ai_weekly_df, 
-    #         human_weekly_df, 
-    #         os.path.join(output_dir, f"RQ1_weekly_trend_boxplot{suffix}{config['suffix_extra']}.pdf"),
-    #         labels=config['labels']
-    #     )
 
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
@@ -398,13 +229,8 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     
     # 全ファイルを含めるようにreindex
     monthly_counts = monthly_counts.reindex(index=file_creators.index, fill_value=0)
-    
-    # 3ヶ月限定なら3ヶ月、全期間なら最大24ヶ月(2年)まで表示
-    if period_months:
-        max_month_limit = period_months
-    else:
-        max_month_limit = 3 if is_limited_period else 24
-    
+
+    max_month_limit = period_months
     max_month_data = monthly_counts.columns.max() if not monthly_counts.empty else 0
     max_month = min(max_month_limit, max_month_data)
     
@@ -430,12 +256,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append(f"{m+1:<6} | {ai_mean:<10.4f} | {ai_median:<10.1f} | {human_mean:<10.4f} | {human_median:<10.1f}")
     results_text.append("")
 
-    # --- リポジトリごとの月次コミット数推移 (追加) ---
-    print(f"[{suffix}] リポジトリごとの月次コミット数推移グラフを作成中...")
-    
-    # monthly_counts (ファイル単位) をリポジトリ単位に集約
-    # index: file_id, columns: month_num (0, 1, 2...)
-    
+    # --- リポジトリごとの月次コミット数推移 ---
     if not monthly_counts.empty:
         # file_id から repository_name と file_created_by を取得するためのマッピング
         repo_map = all_files_df.set_index('file_id')[['repository_name', 'file_created_by']]
@@ -458,38 +279,26 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         )
         
         # バイオリンプロットとして出力
-        for config in graph_configs:
-            create_monthly_trend_violinplot(
-                repo_long,
-                'commit_count',
-                "Commits per Repository",
-                "Commits",
-                os.path.join(output_dir, f"RQ1_commits_per_repo_violin{suffix}{config['suffix_extra']}.pdf"),
-                max_month,
-                ylim=25, # 必要に応じて調整
-                labels=config['labels']
-            )
+        create_monthly_trend_violinplot(
+            repo_long,
+            'commit_count',
+            "Commits per Repository",
+            "Commits",
+            os.path.join(output_dir, f"RQ1_commits_per_repo_violin{suffix}.pdf"),
+            max_month,
+            ylim=25, # 必要に応じて調整
+        )
 
 
     # ---------------------------------------------------------
-    # 4. 変更規模の分析 (追加)
+    # 4. 変更規模の分析 
     # ---------------------------------------------------------
-    print(f"[{suffix}] 変更規模の分析中...")
-    
     # 変更行数と割合の計算
     df_size = df.copy()
     df_size = df_size[df_size['file_line_count'] > 0]
     
-    # 変更行数のカラムを選択
-    if use_file_specific_changes:
-        # file_specific_changed_linesが0の場合は変更なしとみなすか、あるいはそのまま使う
-        # -1の場合はデータなしだが、update_dataset_with_file_changes.pyを実行していれば-1はないはず
-        # もし-1が残っている場合は除外するか、commit_changed_linesを使うか...
-        # ここでは、-1のデータは除外する
-        df_size = df_size[df_size['file_specific_changed_lines'] != -1]
-        target_col = 'file_specific_changed_lines'
-    else:
-        target_col = 'commit_changed_lines'
+    df_size = df_size[df_size['file_specific_changed_lines'] != -1]
+    target_col = 'file_specific_changed_lines'
 
     df_size['change_ratio'] = (df_size[target_col] / df_size['file_line_count']) * 100
     # 100%を超える場合は100%にクリップする
@@ -517,7 +326,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
     
     # 有意差検定 (ファイル行数)
-    results_text.append(perform_mannwhitneyu(ai_file_sizes, human_file_sizes, "ファイル行数"))
+    results_text.append(mannwhitneyu(ai_file_sizes, human_file_sizes, "ファイル行数"))
     results_text.append("")
     # -----------------------------
     
@@ -535,7 +344,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
     
     # 有意差検定 (変更行数)
-    results_text.append(perform_mannwhitneyu(ai_lines, human_lines, "変更行数"))
+    results_text.append(mannwhitneyu(ai_lines, human_lines, "変更行数"))
     results_text.append("")
     
     # 変更割合
@@ -552,51 +361,42 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
 
     # 有意差検定 (変更割合)
-    results_text.append(perform_mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
+    results_text.append(mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
     results_text.append("")
 
-    # --- 変更規模の月次推移 (追加) ---
-    print(f"[{suffix}] 変更規模の推移グラフを作成中...")
-    
+    # --- 変更規模の月次推移 ---
     # 月番号の計算
     df_size['days_diff'] = (df_size['commit_date'] - df_size['file_creation_date']).dt.days
     df_size['month_num'] = df_size['days_diff'] // 30
     
     # 表示期間の制限
-    if period_months:
-        max_month_limit = period_months
-    else:
-        max_month_limit = 3 if is_limited_period else 24
+    max_month_limit = period_months
     
     df_size_filtered = df_size[df_size['month_num'] <= max_month_limit]
     
     # 1. 変更行数の推移
-    for config in graph_configs:
-        create_monthly_trend_violinplot(
-            df_size_filtered,
-            target_col,
-            "Lines Changed per Commit",
-            "Lines Changed",
-            os.path.join(output_dir, f"RQ1_lines_changed_per_commit{suffix}{config['suffix_extra']}.pdf"),
-            max_month_limit,
-            ylim=200,
-            labels=config['labels']
-        )
+    create_monthly_trend_violinplot(
+        df_size_filtered,
+        target_col,
+        "Lines Changed per Commit",
+        "Lines Changed",
+        os.path.join(output_dir, f"RQ1_lines_changed_per_commit{suffix}.pdf"),
+        max_month_limit,
+        ylim=200,
+    )
     
     # 2. 変更割合の推移
     # ファイル単位の集計をやめて、コミット単位(ファイルごとのコミット)のデータをそのまま使う
     df_ratio_filtered = df_size[df_size['month_num'] <= max_month_limit].copy()
 
-    for config in graph_configs:
-        create_monthly_trend_violinplot(
-            df_ratio_filtered,
-            'change_ratio',
-            "Change Ratio per Commit",
-            "Change Ratio(%)",
-            os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}{config['suffix_extra']}.pdf"),
-            max_month_limit,
-            labels=config['labels']
-        )
+    create_monthly_trend_violinplot(
+        df_ratio_filtered,
+        'change_ratio',
+        "Change Ratio per Commit",
+        "Change Ratio(%)",
+        os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}.pdf"),
+        max_month_limit,
+    )
 
     # --- 変更規模の月次推移 (テキスト出力) ---
     results_text.append("■ 月次推移 (変更行数の中央値)")
@@ -640,11 +440,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # ---------------------------------------------------------
     # 5. まとめたバイオリンプロットの作成
     # ---------------------------------------------------------
-    # print(f"[{suffix}] 結合グラフの作成中...")
-    
-    # ylimの設定
-    ylim_weekly = 0.6 if is_limited_period else 0.2
-    ylim_monthly = 5.0 if is_limited_period else 3.0
+    ylim_monthly = 5.0
     
     combined_data = [
         {
@@ -655,13 +451,6 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             'ylim': 20
         },
         {
-            'ai': pd.Series(ai_weekly_medians),
-            'human': pd.Series(human_weekly_medians),
-            'xlabel': "Frequency\n(Week)",
-            'ylabel': "Median Commits per Week",
-            'ylim': ylim_weekly
-        },
-        {
             'ai': pd.Series(ai_monthly_medians),
             'human': pd.Series(human_monthly_medians),
             'xlabel': "Frequency\n(Months)",
@@ -669,35 +458,10 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             'ylim': ylim_monthly
         }
     ]
-    
-    # for config in graph_configs:
-    #     create_combined_violin_plot(
-    #         dataset_list=combined_data,
-    #         output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}{config['suffix_extra']}.pdf"),
-    #         labels=config['labels']
-    #     )
-
-    # ylabelなしバージョンの作成
-    # print(f"[{suffix}] 結合グラフ（ylabelなし）の作成中...")
-    combined_data_no_ylabel = []
-    for item in combined_data:
-        new_item = item.copy()
-        new_item['ylabel'] = "" # ylabelを空にする
-        combined_data_no_ylabel.append(new_item)
-
-    # for config in graph_configs:
-    #     create_combined_violin_plot(
-    #         dataset_list=combined_data_no_ylabel,
-    #         output_path=os.path.join(output_dir, f"RQ1_violinPlot_combined{suffix}_no_ylabel{config['suffix_extra']}.pdf"),
-    #         labels=config['labels']
-    #     )
 
     # 結果保存
     with open(output_txt_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(results_text))
-    
-    print(f"分析完了。結果を保存しました: {output_txt_path}")
-    print(f"グラフを保存しました: {output_dir}")
 
 def calculate_period_median(commit_dates, start_date, end_date, days):
     """
@@ -809,167 +573,12 @@ def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_l
         handles, labels = ax.get_legend_handles_labels()
         ax.legend(handles, labels, loc='upper right', fontsize=32) # 24 -> 32
 
-def create_violin_plot(data_ai, data_human, title, ylabel, output_path, ylim=None, labels=None):
-    """
-    バイオリンプロットを作成して保存する (単体用ラッパー)
-    """
-    # 縦長に変更 (幅5, 高さ8) -> (幅5, 高さ8)
-    plt.figure(figsize=(5, 8))
-    ax = plt.gca()
-    
-    # スタイル設定
-    sns.set_style("whitegrid")
-    
-    draw_violin_on_ax(ax, data_ai, data_human, title, ylabel, ylim, show_legend=True, labels=labels)
-    
-    plt.tight_layout()
-    plt.savefig(output_path)
-    plt.close()
-
-def create_combined_violin_plot(dataset_list, output_path, labels=None):
-    """
-    3つのバイオリンプロットを横に並べて保存する
-    """
-    # 横長 (幅15, 高さ8) -> (幅14, 高さ8)
-    fig, axes = plt.subplots(1, 3, figsize=(14, 8))
-    
-    # スタイル設定
-    sns.set_style("whitegrid")
-    
-    for i, data in enumerate(dataset_list):
-        draw_violin_on_ax(
-            ax=axes[i],
-            data_ai=data['ai'],
-            data_human=data['human'],
-            xlabel=data['xlabel'],
-            ylabel=data['ylabel'],
-            ylim=data['ylim'],
-            show_legend=False,
-            labels=labels
-        )
-    
-    # 共通の凡例を作成 (最初のプロットからハンドルとラベルを取得)
-    handles, labels = axes[0].get_legend_handles_labels()
-    # 図全体の上部に凡例を表示
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.08), ncol=3, fontsize=28) # 24 -> 28
-    
-    plt.tight_layout()
-    plt.savefig(output_path, bbox_inches='tight')
-    plt.close()
-
-def create_weekly_trend_boxplot(ai_df, human_df, output_path, labels=None):
-    """
-    週ごとのコミット数推移を箱ひげ図で可視化する
-    """
-    if labels is None:
-        labels = {'AI': 'AI', 'Human': 'Human'}
-
-    # データをロング形式に変換
-    # ai_df, human_dfは columns=WeekNum, index=FileID, values=CommitCount
-    ai_long = ai_df.melt(var_name='Week', value_name='CommitCount')
-    ai_long['Type'] = labels['AI']
-    
-    human_long = human_df.melt(var_name='Week', value_name='CommitCount')
-    human_long['Type'] = labels['Human']
-    
-    df_plot = pd.concat([ai_long, human_long], ignore_index=True)
-    
-    # Weekを1始まりにする (0 -> 1)
-    df_plot['Week'] = df_plot['Week'] + 1
-    
-    plt.figure(figsize=(14, 8))
-    sns.set_style("whitegrid")
-    
-    # 箱ひげ図
-    ax = sns.boxplot(
-        data=df_plot,
-        x='Week',
-        y='CommitCount',
-        hue='Type',
-        palette={labels['AI']: "#FF9999", labels['Human']: "#99CCFF"},
-        showfliers=False
-    )
-    
-    # Y軸の範囲を制限（3以上のコミット数は表示しない）
-    plt.ylim(0, 5)
-    
-    # plt.title("Weekly Commit Count Trend", fontsize=16)
-    plt.xlabel("Week", fontsize=18)
-    plt.ylabel("Commit Count", fontsize=18)
-    plt.legend(title="Creator", fontsize=16)
-    
-    # X軸のラベルが見やすくなるように調整
-    if df_plot['Week'].nunique() > 20:
-        plt.xticks(rotation=90)
-    
-    plt.tight_layout()
-    plt.savefig(output_path)
-    plt.close()
-
-def create_monthly_trend_lineplot(df, value_col, title, ylabel, output_path, max_month, labels=None):
-    """
-    月ごとの変更規模の推移を折れ線グラフで可視化する (中央値)
-    """
-    if labels is None:
-        labels = {'AI_long': 'Agent-created files', 'Human_long': 'Human-created files'}
-
-    # データが空の場合はスキップ
-    if df.empty:
-        print(f"Warning: No data available for {title}")
-        return
-
-    # 月番号が負のものを除外
-    df = df[df['month_num'] >= 0].copy()
-    
-    # 月を1始まりにする
-    df['Month'] = df['month_num'] + 1
-    
-    # 凡例用の名前変更
-    df['Type'] = df['file_created_by'].map({
-        'AI': labels['AI_long'],
-        'Human': labels['Human_long']
-    })
-
-    plt.figure(figsize=(10, 6))
-    sns.set_style("whitegrid")
-    
-    # 折れ線グラフ (中央値)
-    # estimator=np.median を指定して中央値をプロット
-    # errorbar=None にして信頼区間を表示しない（中央値の推移を見やすくするため）
-    sns.lineplot(
-        data=df,
-        x='Month',
-        y=value_col,
-        hue='Type',
-        palette={labels['AI_long']: "#FF9999", labels['Human_long']: "#99CCFF"},
-        marker='o',
-        estimator=np.median,
-        errorbar=None
-    )
-    
-    # plt.title(title, fontsize=16)
-    plt.xlabel("Months", fontsize=24)
-    plt.ylabel(ylabel, fontsize=24)
-    plt.legend(title="Creator", fontsize=20)
-    plt.tick_params(axis='both', which='major', labelsize=18)
-    
-    # X軸の範囲設定
-    plt.xlim(0.5, max_month + 1.5)
-    # X軸の目盛りを整数にする
-    # 月数が多い場合は間引く
-    if max_month <= 24:
-        plt.xticks(range(1, int(max_month) + 2))
-    
-    plt.tight_layout()
-    plt.savefig(output_path)
-    plt.close()
-
 def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, max_month, ylim=None, labels=None):
     """
     月ごとの変更規模の推移をバイオリンプロットで可視化する
     """
     if labels is None:
-        labels = {'AI_long': 'Agent-created files', 'Human_long': 'Human-created files'}
+        labels = {'AI': 'Agent-created files', 'Human': 'Human-created files'}
 
     # データが空の場合はスキップ
     if df.empty:
@@ -984,8 +593,8 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
     
     # 凡例用の名前変更
     df['Type'] = df['file_created_by'].map({
-        'AI': labels['AI_long'],
-        'Human': labels['Human_long']
+        'AI': labels['AI'],
+        'Human': labels['Human']
     })
     
     # プロット用データ作成
@@ -1006,7 +615,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         hue='Type',
         split=True,
         inner=None,
-        palette={labels['AI_long']: "#FF9999", labels['Human_long']: "#99CCFF"},
+        palette={labels['AI']: "#FF9999", labels['Human']: "#99CCFF"},
         cut=0,
         order=month_order,
         ax=ax
@@ -1021,8 +630,8 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
         if month_data.empty:
             continue
             
-        data_ai = month_data[month_data['Type'] == labels['AI_long']]['Value']
-        data_human = month_data[month_data['Type'] == labels['Human_long']]['Value']
+        data_ai = month_data[month_data['Type'] == labels['AI']]['Value']
+        data_human = month_data[month_data['Type'] == labels['Human']]['Value']
         
         if not data_ai.empty:
             ax.boxplot(
