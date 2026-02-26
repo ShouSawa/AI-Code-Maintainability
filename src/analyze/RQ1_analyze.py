@@ -286,7 +286,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
             "Commits",
             os.path.join(output_dir, f"RQ1_commits_per_repo_violin{suffix}.pdf"),
             max_month,
-            ylim=15,
+            ylim=10,
         )
 
 
