@@ -51,7 +51,6 @@ def run_analysis(end_date=None, suffix=""):
     human_commits_count_raw = len(human_files_total_df)
 
     # ファイル作成コミットを除外する
-    original_count = len(df)
     mask_creation = df['commit_date'] == df['file_creation_date']
     creation_commit_indices = df[mask_creation].groupby(['repository_name', 'file_name']).head(1).index
     df = df.drop(creation_commit_indices)
@@ -70,8 +69,6 @@ def run_analysis(end_date=None, suffix=""):
     # ---------------------------------------------------------
     # 1. AI作成ファイルに対するコミット分析
     # ---------------------------------------------------------
-    print("AI作成ファイルの分析中...")
-    
     ai_files_df = df[df['file_created_by'] == 'AI']
     ai_commit_counts = ai_files_df['commit_created_by'].value_counts()
     
@@ -94,10 +91,10 @@ def run_analysis(end_date=None, suffix=""):
     # ---------------------------------------------------------
     # 2. 人間作成ファイルに対するコミット分析
     # ---------------------------------------------------------
-    print("人間作成ファイルの分析中...")
-    
     human_files_df = df[df['file_created_by'] == 'Human']
     human_commit_counts = human_files_df['commit_created_by'].value_counts()
+
+    print(human_commit_counts)
     
     human_total_commits = human_commit_counts.sum()
     human_ai_commits = human_commit_counts.get('AI', 0)

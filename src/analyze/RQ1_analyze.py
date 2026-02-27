@@ -78,7 +78,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # AI作成ファイルと人間作成ファイルのコミット数を取得
     ai_commit_counts = commit_counts[commit_counts['file_created_by'] == 'AI']['commit_count']
     human_commit_counts = commit_counts[commit_counts['file_created_by'] == 'Human']['commit_count']
-    
+
     def get_stats(data, label):
         return {
             'label': label,
@@ -93,6 +93,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
 
     ai_stats_count = get_stats(ai_commit_counts, "AI作成ファイル")
     human_stats_count = get_stats(human_commit_counts, "人間作成ファイル")
+
     results_text.append("1. コミット数の分析")
     results_text.append("-" * 40)
     
@@ -212,16 +213,6 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     # AI/Humanに分割
     ai_files = file_creators[file_creators == 'AI'].index
     human_files = file_creators[file_creators == 'Human'].index
-
-    # グラフ生成用の設定リスト
-    graph_configs = [
-        {
-            'labels': {
-                'AI': 'AI-generated files', 
-                'Human': 'Human-generated files',
-            }
-        }
-    ]
 
     # --- 月次集計 ---
     # ファイルごと、月ごとのコミット数
@@ -396,7 +387,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         "Change Ratio(%)",
         os.path.join(output_dir, f"RQ1_change_ratio_per_commit{suffix}.pdf"),
         max_month_limit,
-        ylim=70,
+        ylim=100,
     )
 
     # --- 変更規模の月次推移 (テキスト出力) ---
