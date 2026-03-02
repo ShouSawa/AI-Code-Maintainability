@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 # src ディレクトリをパスに追加
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from components.mannwhitneyu import mannwhitneyu
+from components.mannwhitneyu import perform_mannwhitneyu
 
 def analyze_rq1():
     # パス設定
@@ -109,7 +109,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (コミット数)
-    results_text.append(mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
+    results_text.append(perform_mannwhitneyu(ai_commit_counts, human_commit_counts, "コミット数"))
     results_text.append("")
 
     # ---------------------------------------------------------
@@ -173,7 +173,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (週間頻度)
-    results_text.append(mannwhitneyu(ai_weekly_medians, human_weekly_medians, "週間コミット頻度"))
+    results_text.append(perform_mannwhitneyu(ai_weekly_medians, human_weekly_medians, "週間コミット頻度"))
     results_text.append("")
         
     results_text.append("■ 1か月ごとの頻度")
@@ -188,7 +188,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append("")
 
     # 有意差検定 (月間頻度)
-    results_text.append(mannwhitneyu(ai_monthly_medians, human_monthly_medians, "月間コミット頻度"))
+    results_text.append(perform_mannwhitneyu(ai_monthly_medians, human_monthly_medians, "月間コミット頻度"))
     results_text.append("")
 
     # ---------------------------------------------------------
@@ -317,7 +317,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
     
     # 有意差検定 (ファイル行数)
-    results_text.append(mannwhitneyu(ai_file_sizes, human_file_sizes, "ファイル行数"))
+    results_text.append(perform_mannwhitneyu(ai_file_sizes, human_file_sizes, "ファイル行数"))
     results_text.append("")
     # -----------------------------
     
@@ -335,7 +335,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
     
     # 有意差検定 (変更行数)
-    results_text.append(mannwhitneyu(ai_lines, human_lines, "変更行数"))
+    results_text.append(perform_mannwhitneyu(ai_lines, human_lines, "変更行数"))
     results_text.append("")
     
     # 変更割合
@@ -352,7 +352,7 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
     results_text.append("")
 
     # 有意差検定 (変更割合)
-    results_text.append(mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
+    results_text.append(perform_mannwhitneyu(ai_ratio, human_ratio, "変更割合"))
     results_text.append("")
 
     # --- 変更規模の月次推移 ---
@@ -429,28 +429,6 @@ def run_analysis_process(df, all_files_df, output_dir, analysis_end_date, suffix
         results_text.append(f"{m+1:<6} | {ai_str:<10} | {human_str:<10}")
     results_text.append("")
 
-    # ---------------------------------------------------------
-    # 5. まとめたバイオリンプロットの作成
-    # ---------------------------------------------------------
-    ylim_monthly = 5.0
-    
-    combined_data = [
-        {
-            'ai': ai_commit_counts,
-            'human': human_commit_counts,
-            'xlabel': "Count",
-            'ylabel': "Number of Commits",
-            'ylim': 20
-        },
-        {
-            'ai': pd.Series(ai_monthly_medians),
-            'human': pd.Series(human_monthly_medians),
-            'xlabel': "Frequency\n(Months)",
-            'ylabel': "Median Commits per Month",
-            'ylim': ylim_monthly
-        }
-    ]
-
     # 結果保存
     with open(output_txt_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(results_text))
@@ -478,92 +456,6 @@ def calculate_period_median(commit_dates, start_date, end_date, days):
         return None
         
     return np.median(counts)
-
-def draw_violin_on_ax(ax, data_ai, data_human, xlabel, ylabel, ylim=None, show_legend=True, labels=None):
-    """
-    指定されたAxesオブジェクトにバイオリンプロットを描画する
-    """
-    if labels is None:
-        labels = {'AI': 'AI', 'Human': 'Human'}
-
-    # データフレーム形式に変換（seaborn用）
-    df_ai = pd.DataFrame({'Value': data_ai, 'Type': labels['AI']})
-    df_human = pd.DataFrame({'Value': data_human, 'Type': labels['Human']})
-    df_plot = pd.concat([df_ai, df_human], ignore_index=True)
-    
-    # データが空の場合はスキップ
-    if len(df_plot) == 0:
-        return
-
-    # ダミーのx軸を設定（split=Trueで左右に結合させるため）
-    df_plot['Dummy'] = "All Files"
-    
-    # 1. バイオリンプロット
-    sns.violinplot(
-        data=df_plot, 
-        x='Dummy', 
-        y='Value', 
-        hue='Type', 
-        split=True,     # AIと人間を左右にくっつける
-        inner=None,     # 中身を描かない
-        palette={labels['AI']: "#FF9999", labels['Human']: "#99CCFF"},
-        cut=0, # 範囲外の表示をしない
-        ax=ax
-    )
-    
-    # Seabornが自動的に追加した凡例を削除 (手動で制御するため)
-    if ax.get_legend() is not None:
-        ax.get_legend().remove()
-    
-    # 2. 箱ひげ図を重ねる (ax.boxplotを使用)
-    box_width = 0.1
-    
-    # AIの箱ひげ図
-    ax.boxplot(
-        [data_ai], 
-        positions=[-0.1], 
-        widths=box_width,
-        patch_artist=True,
-        boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
-        whiskerprops=dict(color='black'),
-        capprops=dict(color='black'),
-        medianprops=dict(color='black'),
-        showfliers=False,
-        manage_ticks=False
-    )
-    
-    # Humanの箱ひげ図
-    ax.boxplot(
-        [data_human], 
-        positions=[0.1], 
-        widths=box_width,
-        patch_artist=True,
-        boxprops=dict(facecolor='white', alpha=0.5, edgecolor='black'),
-        whiskerprops=dict(color='black'),
-        capprops=dict(color='black'),
-        medianprops=dict(color='black'),
-        showfliers=False,
-        manage_ticks=False
-    )
-    
-    if ylim is not None:
-        ax.set_ylim(0, ylim)
-    
-    # 文字サイズを大きく設定
-    ax.set_ylabel(ylabel, fontsize=32) # 28 -> 32
-    ax.set_xlabel("", fontsize=32) 
-    
-    # x軸の目盛りとしてタイトルを表示
-    ax.set_xticks([0])
-    ax.set_xticklabels([xlabel], fontsize=32) # 32 -> 36
-    
-    # 目盛りの文字サイズ変更
-    ax.tick_params(axis='y', which='major', labelsize=32) # 28 -> 32
-    
-    # 凡例
-    if show_legend:
-        handles, labels = ax.get_legend_handles_labels()
-        ax.legend(handles, labels, loc='upper right', fontsize=32) # 24 -> 32
 
 def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, max_month, ylim=None, labels=None):
     """
@@ -594,7 +486,7 @@ def create_monthly_trend_violinplot(df, value_col, title, ylabel, output_path, m
     
     plt.figure(figsize=(14, 8))
     ax = plt.gca()
-    sns.set_style("whitegrid")
+    sns.set_style("white")
     
     # 月の順序を指定
     month_order = range(1, int(max_month) + 2)

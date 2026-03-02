@@ -1,6 +1,6 @@
 RQ1 分析結果: AI生成ファイルの保守性分析 (作成から6ヶ月間限定)
 ============================================================
-分析日時: 2026-02-27 13:17:27
+分析日時: 2026-03-02 15:12:21
 分析対象期間: 作成日 ～ 作成日+180日
 ※ 変更規模の分析には「ファイル単位の変更行数」を使用しています。
 
@@ -24,7 +24,10 @@ RQ1 分析結果: AI生成ファイルの保守性分析 (作成から6ヶ月間
   中央値: 1.0
   標準偏差: 7.37
 
-■ コミット数の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ コミット数のMann-Whitney U検定結果
+  検定統計量 U: 125055.0
+  p値: 0.3758275215648198
+  判定: 有意差なし
 
 
 2. コミット頻度の分析 (各ファイルの期間ごとのコミット数の中央値の統計)
@@ -46,7 +49,10 @@ RQ1 分析結果: AI生成ファイルの保守性分析 (作成から6ヶ月間
   中央値: 0.0
   標準偏差: 0.0988
 
-■ 週間コミット頻度の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ 週間コミット頻度のMann-Whitney U検定結果
+  検定統計量 U: 129288.5
+  p値: 0.760067553219839
+  判定: 有意差なし
 
 
 ■ 1か月ごとの頻度
@@ -66,7 +72,10 @@ RQ1 分析結果: AI生成ファイルの保守性分析 (作成から6ヶ月間
   中央値: 0.0
   標準偏差: 0.7924
 
-■ 月間コミット頻度の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ 月間コミット頻度のMann-Whitney U検定結果
+  検定統計量 U: 124373.5
+  p値: 0.06257881140860913
+  判定: 有意差なし
 
 
 ■ 月次推移 (Month 1 = 最初の30日間, 最大Month 6まで表示)
@@ -89,7 +98,10 @@ Month  | AI Mean    | AI Median  | Human Mean | Human Median
   平均値: 355.53
   中央値: 61.00
 
-■ ファイル行数の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ ファイル行数のMann-Whitney U検定結果
+  検定統計量 U: 131453.5
+  p値: 0.6046703498495254
+  判定: 有意差なし
 
 
 ■ 1コミットあたりの変更行数
@@ -100,7 +112,10 @@ Month  | AI Mean    | AI Median  | Human Mean | Human Median
   平均値: 38.46
   中央値: 8.00
 
-■ 変更行数の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ 変更行数のMann-Whitney U検定結果
+  検定統計量 U: 853594.0
+  p値: 0.003040360307211538
+  判定: ** 1%水準で有意差あり
 
 
 ■ 1コミットあたりの変更割合 (%)
@@ -111,7 +126,10 @@ Month  | AI Mean    | AI Median  | Human Mean | Human Median
   平均値: 28.92%
   中央値: 10.31%
 
-■ 変更割合の検定エラー: mannwhitneyu() got an unexpected keyword argument 'alternative'
+■ 変更割合のMann-Whitney U検定結果
+  検定統計量 U: 799952.0
+  p値: 2.0636463609120036e-08
+  判定: ** 1%水準で有意差あり
 
 
 ■ 月次推移 (変更行数の中央値)

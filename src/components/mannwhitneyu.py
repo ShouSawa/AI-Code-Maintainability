@@ -1,6 +1,6 @@
 from scipy.stats import mannwhitneyu
 
-def mannwhitneyu(data1, data2, label):
+def perform_mannwhitneyu(data1, data2, label):
     """Mann-Whitney U検定を実行して結果文字列を返す"""
     try:
         # データが空の場合は検定できない
