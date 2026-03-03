@@ -47,11 +47,11 @@ def check_parquet(df):
     # print()
 
 if __name__ == '__main__':
-    # df = pd.read_parquet("../dataset/all_pull_request_local.parquet")
-    # df = pd.read_parquet("../dataset/all_repository_local.parquet")
-    # df = pd.read_parquet("../dataset/pr_commits_local.parquet")
-    # df = pd.read_parquet("../dataset/pr_commit_details_local.parquet")
-    df = pd.read_parquet("../dataset/repository.parquet")
+    # df = pd.read_parquet("dataset/all_pull_request_local.parquet")
+    # df = pd.read_parquet("dataset/all_repository_local.parquet")
+    # df = pd.read_parquet("dataset/pr_commits_local.parquet")
+    # df = pd.read_parquet("dataset/pr_commit_details_local.parquet")
+    df = pd.read_parquet("dataset/repository.parquet")
 
 
     check_parquet(df)
