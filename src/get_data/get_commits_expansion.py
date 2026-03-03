@@ -36,7 +36,7 @@ class CommitExpansion:
         
         # 入出力パス
         project_root = os.path.join(script_dir, '../..')
-        self.input_csv = os.path.join(project_root, 'results/MSR-results/results_v5.csv')
+        self.input_csv = os.path.join(project_root, 'results/EASE-results/results_v5.csv')
         self.output_csv = os.path.join(project_root, 'results/EASE-results/csv/results_v7_released_commits_restriction.csv')
         
         # 出力ディレクトリ作成
