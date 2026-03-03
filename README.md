@@ -8,13 +8,13 @@ Download the following files from AIDev-full dataset on Hugging Face and place t
 
 or you can get this dataset by running get-dataset.py:
 ```
-python src/get-dataset.py
+python src/get_data/get-dataset.py
 ```
 
 ## How to run
 1. Download the dataset:
 ```
-python src/get-dataset.py
+python src/get_data/get-dataset.py
 ```
 
 2. Make sure the parquet files are in dataset/:
@@ -23,27 +23,37 @@ python src/get-dataset.py
 
 3. Generate the repository list used to get data:
 ```
-python src/create_repository_list.py
+python src/get_data/create_repository_list.py
 ```
 
 4. Get commits data to created files by AI and Human referring repository list:
 ```
-python src/get-AI-files.py
+python src/get_data/get-AI-files.py
 ```
 
-5. RQ1：Analyze commit frequency and line changed ratio:
+5. Get an additional three months' worth of data
 ```
-python src/RQ1_analyze.py
+python src/get_data/get_commits_expansion.py
 ```
 
-6. RQ2：Analyze committer:
+6. Adjust the output file
 ```
-python src/RQ2_analyze.py
+python src/analyze/adjust_results.py
+```
+
+7. RQ1：Analyze commit frequency and line changed ratio:
+```
+python src/analyze/RQ1_analyze.py
+```
+
+8. RQ2：Analyze committer:
+```
+python src/analyze/RQ2_analyze.py
 ```
    
-7. RQ3：Analyze commit types:
+9. RQ3：Analyze commit types:
 ```
-python src/RQ3_analyze.py
+python src/analyze/RQ3_analyze.py
 ```
 
 ## CCS (System for classifying commits) in RQ3
