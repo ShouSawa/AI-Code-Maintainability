@@ -14,6 +14,10 @@ from dotenv import load_dotenv # .envファイルを読み込むためのライ�
 from tqdm import tqdm # プログレスバーを表示するためのライブラリ
 import time
 import base64 # Base64エンコード/デコードを行うためのライブラリ
+import sys
+
+# src ディレクトリをパスに追加
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 # componentsフォルダからインポート
 from components.AI_check import ai_check

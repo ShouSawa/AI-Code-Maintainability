@@ -22,4 +22,4 @@ import pandas as pd
 
 # PRデータを取得
 repo_df = pd.read_parquet("hf://datasets/hao-li/AIDev/repository.parquet")
-repo_df.to_parquet("../dataset/repository.parquet")
+repo_df.to_parquet("dataset/repository.parquet")
