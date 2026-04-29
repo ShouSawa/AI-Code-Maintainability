@@ -3,6 +3,7 @@ RQ1統合プログラム: AIコミット分析システム（GitHub API版）
 機能: リポジトリをクローンせずにGitHub APIで分析
 """
 
+import sys
 import os # ファイルパスを扱うためのライブラリ
 import pandas as pd # データフレームを扱うためのライブラリ
 from datetime import datetime, timedelta # 日付取得や時間の計算のためのライブラリ
@@ -14,7 +15,6 @@ from dotenv import load_dotenv # .envファイルを読み込むためのライ�
 from tqdm import tqdm # プログレスバーを表示するためのライブラリ
 import time
 import base64 # Base64エンコード/デコードを行うためのライブラリ
-import sys
 
 # src ディレクトリをパスに追加
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))

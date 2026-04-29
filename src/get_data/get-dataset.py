@@ -16,10 +16,6 @@ import pandas as pd
 # pr_commits_df = pd.read_parquet("hf://datasets/hao-li/AIDev/pr_commits.parquet")
 # pr_commits_df.to_parquet("../dataset/pr_commits_local.parquet")
 
-# コミットのデータを取得
-# pr_commit_details_df = pd.read_parquet("hf://datasets/hao-li/AIDev/pr_commit_details.parquet")
-# pr_commit_details_df.to_parquet("../data_list/pr_commit_details_local.parquet")
-
 # PRデータを取得
 repo_df = pd.read_parquet("hf://datasets/hao-li/AIDev/repository.parquet")
 repo_df.to_parquet("dataset/repository.parquet")
